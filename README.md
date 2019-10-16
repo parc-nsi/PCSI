@@ -1,2 +1,2 @@
 # PCSI
-Documents de TP pur l'Informatique pour tous en PCSI
+Documents de TP pour l'Informatique pour tous en PCSI
