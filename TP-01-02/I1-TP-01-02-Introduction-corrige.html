@@ -1,0 +1,973 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+ "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <meta name="author" content="Chenevois-Jouhet-Junier-Rebout" />
+  <title>Corrigé du TP 01-02 Découverte</title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+  </style>
+  <link rel="stylesheet" type="text/css" media="screen, projection, print"
+    href="http://www.w3.org/Talks/Tools/Slidy2/styles/slidy.css" />
+  <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+  <script src="http://www.w3.org/Talks/Tools/Slidy2/scripts/slidy.js"
+    charset="utf-8" type="text/javascript"></script>
+</head>
+<body>
+<div class="slide titlepage">
+  <h1 class="title">Corrigé du TP 01-02 Découverte</h1>
+  <p class="author">
+Chenevois-Jouhet-Junier-Rebout
+  </p>
+</div>
+<div class="slide section level2">
+
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"></code></pre></div>
+<p>Pour les scripts en Python 2 une directive précisant l'encodage du fichier source permet d'assurer la portabilité.</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">
+<span class="co"># -*- coding: utf-8 -*-</span></code></pre></div>
+</div>
+<div id="découverte-de-lécosystème" class="titleslide slide section level1"><h1>Découverte de l'écosystème</h1></div><div id="exercice-5" class="slide section level2">
+<h1>Exercice 5</h1>
+<ul>
+<li>On ouvre le fichier texte en mode écriture. Le fichier est créé s'il n'existe pas :</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">
+fichier <span class="op">=</span> <span class="bu">open</span>(<span class="st">&#39;exo5-TP1.txt&#39;</span>, <span class="st">&#39;w&#39;</span>)</code></pre></div>
+<ul>
+<li>On fait une boucle</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">
+<span class="cf">for</span> i <span class="op">in</span> <span class="bu">range</span>(<span class="dv">128</span>):
+    fichier.write(<span class="st">&#39;Si q  différent de 1 alors 1 + ...+\</span>
+<span class="st">    q^N=(1-q^(N+1))/(1-q) </span><span class="ch">\n</span><span class="st">&#39;</span>)
+    </code></pre></div>
+<ul>
+<li>On prend soin de fermer le fichier.</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">
+fichier.close()</code></pre></div>
+</div><div id="exercice-7" class="slide section level2">
+<h1>Exercice 7</h1>
+<p>On exécute dans la fenêtre interactive dans Python2. On copie dans le fichier <code>.py</code>, et on commente.</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">
+<span class="co">&quot;&quot;&quot;</span>
+<span class="co">&gt;&gt;&gt; 2+5</span>
+<span class="co">7</span>
+<span class="co">&gt;&gt;&gt; 2*5</span>
+<span class="co">10</span>
+<span class="co">&gt;&gt;&gt; 2**5</span>
+<span class="co">32</span>
+<span class="co">&gt;&gt;&gt; 2.1/3.5</span>
+<span class="co">0.6</span>
+<span class="co">&gt;&gt;&gt; 17.0/5.0</span>
+<span class="co">3.4</span>
+<span class="co">&gt;&gt;&gt; 17//5</span>
+<span class="co">3</span>
+<span class="co">&gt;&gt;&gt; 17/5</span>
+<span class="co">3</span>
+<span class="co">&gt;&gt;&gt; 17%5</span>
+<span class="co">2</span>
+<span class="co">&gt;&gt;&gt; -3//2</span>
+<span class="co">-2</span>
+<span class="co">&gt;&gt;&gt; 3//-2</span>
+<span class="co">-2</span>
+<span class="co">&gt;&gt;&gt; -(3//2)</span>
+<span class="co">-1</span>
+<span class="co">&gt;&gt;&gt; (-3)%2</span>
+<span class="co">1</span>
+<span class="co">&gt;&gt;&gt; 3%(-2)</span>
+<span class="co">-1</span>
+<span class="co">&gt;&gt;&gt; -(3%2)</span>
+<span class="co">-1</span>
+<span class="co">&quot;&quot;&quot;</span></code></pre></div>
+<p>Soit <code>a</code> et <code>b</code> deux entiers relatifs, sous Python2 et Python3 <code>a//b</code> et <code>a%b</code> retournent respectivement les entiers <code>q</code> et <code>r</code> tels que <code>a = b*q + r</code> avec <code>r</code> compris entre 0 et <code>b</code> (on peut avoir <code>q &lt; 0</code>).</p>
+<p>Si <code>a</code> et <code>b</code> sont positifs, <code>a//b</code> et <code>a%b</code> sont respectivment le quotient et le reste de la division euclidienne de <code>a</code> par <code>b</code>.</p>
+<p>ATTENTION, sous Python2 si <code>a</code> et <code>b</code> sont des entiers <code>a/b</code> retourne le meme entier que <code>a//b</code> ainsi <code>1/2</code> retourne 0 alors que sous Python3 <code>1/2</code> retourne un flottant 0.5 et on a toujours <code>1//2</code> qui retourne 0</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"></code></pre></div>
+</div><div id="exercice-10-boucles" class="slide section level2">
+<h1>Exercice 10, Boucles</h1>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">
+<span class="co">##  Boucle for Partie I</span>
+
+<span class="cf">for</span> i <span class="op">in</span> <span class="bu">range</span>(<span class="dv">2</span>,<span class="dv">5</span>):
+    <span class="bu">print</span>(i<span class="op">**</span><span class="dv">2</span>)
+    <span class="bu">print</span>(<span class="dv">5</span><span class="op">//</span><span class="dv">2</span>)
+
+<span class="co">&quot;&quot;&quot;</span>
+<span class="co">In [5]: (executing lines 94 to 96 of &quot;corrige-tp01-02-2016-2017.py&quot;)</span>
+<span class="co">4</span>
+<span class="co">2</span>
+<span class="co">9</span>
+<span class="co">2</span>
+<span class="co">16</span>
+<span class="co">2</span>
+<span class="co">&quot;&quot;&quot;</span>
+
+<span class="co">## Boucle for Partie II</span>
+
+<span class="cf">for</span> i <span class="op">in</span> <span class="bu">range</span>(<span class="dv">2</span>,<span class="dv">5</span>):
+    <span class="bu">print</span>(i<span class="op">**</span><span class="dv">2</span>)
+<span class="bu">print</span>(<span class="dv">5</span><span class="op">//</span><span class="dv">2</span>)
+
+<span class="co">&quot;&quot;&quot;</span>
+<span class="co">In [4]: (executing lines 108 to 110 of &quot;corrige-tp01-02-2016-2017.py&quot;)</span>
+<span class="co">4</span>
+<span class="co">9</span>
+<span class="co">16</span>
+<span class="co">2</span>
+<span class="co">&quot;&quot;&quot;</span>
+
+<span class="co">## Boucle while  Partie I</span>
+
+i <span class="op">=</span> <span class="dv">4</span>
+<span class="cf">while</span> i <span class="op">&gt;</span> <span class="dv">1</span>:
+    <span class="bu">print</span>(i<span class="op">**</span><span class="dv">2</span>)
+    i <span class="op">=</span> i <span class="op">-</span> <span class="dv">1</span>
+    <span class="bu">print</span>(<span class="dv">5</span><span class="op">/</span><span class="dv">2</span>)
+
+<span class="co">&quot;&quot;&quot;</span>
+<span class="co">In [6]: (executing cell &quot;Boucle while  Par...&quot; (line 125 of &quot;corrige-tp01-02-2016-2017.py&quot;))</span>
+<span class="co">16</span>
+<span class="co">2.5</span>
+<span class="co">9</span>
+<span class="co">2.5</span>
+<span class="co">4</span>
+<span class="co">2.5</span>
+<span class="co">&quot;&quot;&quot;</span>
+
+<span class="co">## Boucle while Partie II</span>
+
+i <span class="op">=</span> <span class="dv">2</span>
+<span class="cf">while</span> i <span class="op">&lt;</span> <span class="dv">5</span>:
+    <span class="bu">print</span>(i<span class="op">**</span><span class="dv">2</span>)
+    i <span class="op">=</span> i <span class="op">+</span> <span class="dv">1</span>
+<span class="bu">print</span>(<span class="dv">5</span><span class="op">/</span><span class="dv">2</span>)
+
+<span class="co">&quot;&quot;&quot;</span>
+<span class="co">In [1]: (executing cell &quot;Boucle while Part...&quot; (line 143 of &quot;corrige-tp01-02-2016-2017.py&quot;))</span>
+<span class="co">4</span>
+<span class="co">9</span>
+<span class="co">16</span>
+<span class="co">2.5</span>
+<span class="co">&quot;&quot;&quot;</span></code></pre></div>
+<p>Dans <code>range(a, b)</code> la variable de boucle varie entre <code>a</code> inclus et <code>b</code> exclu Sans indentation, <code>print(5/2)</code> s'exécute à chaque itération soit 5 - 2 = 3 fois</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"></code></pre></div>
+</div><div id="exercice-11" class="slide section level2">
+<h1>Exercice 11</h1>
+<p>Voir la remarque précédente sur la différence de comportement de l'opérateur <code>/</code> entre Python2 et Python3.</p>
+</div><div id="exercice-12" class="slide section level2">
+<h1>Exercice 12</h1>
+<p>Un script Python est un fichier texte qui peut être modifié par n'importe quel éditeur de texte (attention à l'encodage t exécuté par un interpréteur Python avec une version adéquate</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"></code></pre></div>
+</div>
+<div id="variables" class="titleslide slide section level1"><h1>Variables</h1></div><div id="exercice-13" class="slide section level2">
+<h1>Exercice 13</h1>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co">&quot;&quot;&quot;</span>
+<span class="co">&gt;&gt;&gt; x = 10  #mettre un espace avant et après le symbole = d&#39;affectation</span>
+<span class="co">&gt;&gt;&gt; y = x</span>
+<span class="co">&gt;&gt;&gt; x = 15</span>
+<span class="co">&gt;&gt;&gt; x, y</span>
+<span class="co">(15, 10)</span>
+<span class="co">&quot;&quot;&quot;</span></code></pre></div>
+</div><div id="exercice-14-echanger-les-valeurs-des-variables-x-et-y-...-mauvaise-manière" class="slide section level2">
+<h1>Exercice 14 Echanger les valeurs des variables x et y ... Mauvaise manière</h1>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co">&quot;&quot;&quot;</span>
+<span class="co">&gt;&gt;&gt; x = 42; y = 10; x = y; y = x</span>
+<span class="co">&gt;&gt;&gt; x, y</span>
+<span class="co">(10, 10)</span>
+<span class="co">&quot;&quot;&quot;</span></code></pre></div>
+</div><div id="exercice-15-echanger-les-valeurs-de-x-et-y-avec-une-variable-de-stockage-z" class="slide section level2">
+<h1>Exercice 15 Echanger les valeurs de x et y avec une variable de stockage z</h1>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co">&quot;&quot;&quot;</span>
+<span class="co">&gt;&gt;&gt; x = 42; y = 10; z = x; x = y; y = z</span>
+<span class="co">&gt;&gt;&gt; x, y</span>
+<span class="co">(42, 10)</span>
+<span class="co">&quot;&quot;&quot;</span></code></pre></div>
+</div><div id="exercice-16" class="slide section level2">
+<h1>Exercice 16</h1>
+<p>En décryptant le pseudo-langage d'assemblage, on remarque que l'interpréteur exécute bien la séquence d'instructions dans l'ordre :</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co">&quot;&quot;&quot;</span>
+<span class="co">&gt;&gt;&gt; a = 2; b = 3; a, b= b, a</span>
+<span class="co">&quot;&quot;&quot;</span></code></pre></div>
+<p>LOAD_CONST charge une constante au sommet de la pile STORE_NAME assigne un nom de variable à l'expression au sommet de la pile LOAD_NAME charge la valeur d'une variable au sommet de la pile ROT_TWO permute les deux expressions au sommet de la pile La séquence se termine par le chargement de la valeur None et son retour</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"></code></pre></div>
+<p>Permutation circulaire de 3 variables x,y et z sans affectation parallèle</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co">&quot;&quot;&quot;</span>
+<span class="co">&gt;&gt;&gt; x, y, z = 1, 2, 3   #on initialise</span>
+<span class="co">&gt;&gt;&gt; stock = z</span>
+<span class="co">&gt;&gt;&gt; z = y    #on remonte à l&#39;envers la chaine des modifications</span>
+<span class="co">&gt;&gt;&gt; y = x</span>
+<span class="co">&gt;&gt;&gt; x = stock</span>
+<span class="co">&gt;&gt;&gt; x, y, z</span>
+<span class="co">(3, 1, 2)</span>
+<span class="co">&quot;&quot;&quot;</span></code></pre></div>
+<p>Echange des valeurs de deux variables sans affectation parallèle et sans variable de stockage.</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co">&quot;&quot;&quot;</span>
+<span class="co">&gt;&gt;&gt; x, y = 4, 5</span>
+<span class="co">&gt;&gt;&gt; x = (x+y)/2.0</span>
+<span class="co">&gt;&gt;&gt; y = 2*x - y</span>
+<span class="co">&gt;&gt;&gt; x = 2*x - y</span>
+<span class="co">&gt;&gt;&gt; x, y</span>
+<span class="co">(5.0, 4.0)  #ici les valeurs sont échangées mais les types changent</span>
+<span class="co">&quot;&quot;&quot;</span>
+<span class="co">&quot;&quot;&quot;</span>
+<span class="co">&gt;&gt;&gt; x, y = 4, 5 </span>
+<span class="co">&gt;&gt;&gt; x = x + y</span>
+<span class="co">&gt;&gt;&gt; y = x - y</span>
+<span class="co">&gt;&gt;&gt; x = x - y</span>
+<span class="co">&gt;&gt;&gt; x, y</span>
+<span class="co">(5, 4)  #ici les valeurs sont échangées et les types conservés</span>
+<span class="co">&quot;&quot;&quot;</span></code></pre></div>
+<p>Idem pour une permutation circulaire sur 3 variables</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co">&quot;&quot;&quot;</span>
+<span class="co">&gt;&gt;&gt; x, y, z = 2, 4, 8</span>
+<span class="co">&gt;&gt;&gt; x = x + y + z</span>
+<span class="co">&gt;&gt;&gt; y = x - y - z</span>
+<span class="co">&gt;&gt;&gt; z = x - y - z</span>
+<span class="co">&gt;&gt;&gt; x = x - y - z</span>
+<span class="co">&gt;&gt;&gt; x, y, z</span>
+<span class="co">(8, 2, 4)</span>
+<span class="co">&quot;&quot;&quot;</span></code></pre></div>
+</div><div id="exercice-17" class="slide section level2">
+<h1>Exercice 17</h1>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co">&quot;&quot;&quot;</span>
+<span class="co">&gt;&gt;&gt; x, y, z</span>
+<span class="co">(15, 25, 25)</span>
+<span class="co">&quot;&quot;&quot;</span></code></pre></div>
+</div><div id="exercice-18-chaines-de-caractères" class="slide section level2">
+<h1>Exercice 18 Chaines de caractères</h1>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co">&quot;&quot;&quot;</span>
+<span class="co">&gt;&gt;&gt; x = &quot;truc&quot;</span>
+<span class="co">&gt;&gt;&gt; y = &quot;bidule&quot;</span>
+<span class="co">&gt;&gt;&gt; x[1]</span>
+<span class="co">&#39;r&#39;</span>
+<span class="co">&gt;&gt;&gt; x[1], y[2], x[-1]</span>
+<span class="co">(&#39;r&#39;, &#39;d&#39;, &#39;c&#39;)</span>
+<span class="co">&gt;&gt;&gt; x[4]</span>
+<span class="co">Traceback (most recent call last):</span>
+<span class="co">  File &quot;&lt;stdin&gt;&quot;, line 1, in &lt;module&gt;</span>
+<span class="co">IndexError: string index out of range</span>
+<span class="co">&gt;&gt;&gt; z = x + y #concaténation</span>
+<span class="co">&gt;&gt;&gt; z</span>
+<span class="co">&#39;trucbidule&#39;</span>
+<span class="co">&gt;&gt;&gt; t = x + &quot; &quot; + y</span>
+<span class="co">&gt;&gt;&gt; t</span>
+<span class="co">&#39;truc bidule&#39;</span>
+<span class="co">&gt;&gt;&gt; x[2] = &quot;z&quot;</span>
+<span class="co">Traceback (most recent call last):</span>
+<span class="co">  File &quot;&lt;stdin&gt;&quot;, line 1, in &lt;module&gt;</span>
+<span class="co">TypeError: &#39;str&#39; object does not support item assignment</span>
+<span class="co">&quot;&quot;&quot;</span></code></pre></div>
+</div><div id="exercice-21-listestableaux" class="slide section level2">
+<h1>Exercice 21 Listes/Tableaux</h1>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co">&quot;&quot;&quot;</span>
+<span class="co">&gt;&gt;&gt; t = [6, 12, &#39;a&#39;]</span>
+<span class="co">&gt;&gt;&gt; type(t)</span>
+<span class="co">&lt;class &#39;list&#39;&gt;</span>
+<span class="co">&gt;&gt;&gt; t[1]</span>
+<span class="co">12</span>
+<span class="co">&gt;&gt;&gt; t[3]</span>
+<span class="co">Traceback (most recent call last):</span>
+<span class="co">  File &quot;&lt;stdin&gt;&quot;, line 1, in &lt;module&gt;</span>
+<span class="co">IndexError: list index out of range</span>
+<span class="co">&gt;&gt;&gt; t[0]</span>
+<span class="co">6</span>
+<span class="co">&gt;&gt;&gt; t[-1]</span>
+<span class="co">&#39;a&#39;</span>
+<span class="co">&gt;&gt;&gt; len(t)</span>
+<span class="co">3</span>
+<span class="co">&gt;&gt;&gt; t[1] = 2</span>
+<span class="co">&gt;&gt;&gt; t</span>
+<span class="co">[6, 2, &#39;a&#39;]</span>
+<span class="co">&gt;&gt;&gt; t+t</span>
+<span class="co">[6, 2, &#39;a&#39;, 6, 2, &#39;a&#39;]</span>
+<span class="co">&quot;&quot;&quot;</span></code></pre></div>
+<ul>
+<li><p>Les <strong>listes</strong> et <strong>les chaines de caractères</strong> sont des structures de données composites car elles peuvent contenir plusieurs expressions de type simple.</p></li>
+<li><p>Une chaine de caractère contient un ou plusieurs caractères.</p></li>
+<li><p>Une liste est un tableau pouvant contenir des expressions de types hétérogènes (<code>float, int, bool</code>).</p></li>
+<li><p>Listes et chaines sont indexées à partir de 0.</p></li>
+<li><p>Les index varient entre 0 et <code>len(t) - 1</code> si on se réfère<br />
+au début de la liste ou entre <code>-1</code> et <code>-len(t)</code> si on se réfère à la fin .</p></li>
+<li><p>La manipulation des listes ressemble à celle des chaines de caractères, par exemple on peut les concaténer avec l'opérateur <code>+</code>.</p></li>
+<li><p>On verra qu'il s'agit de tableaux dynamiques (taille modulable). On dit que les listes sont des <strong>objets mutables</strong> : elles peuvent etre modifiées sur place.</p></li>
+<li><p>Les chaines de caractères au contraire ne sont pas mu- -tables. Les <strong>tuple</strong> sont l'équivalent des listes en objet non mutable. On les définit avec des parenthèses au lieu de crochets.</p></li>
+</ul>
+</div>
+<div id="premières-boucles-et-premiers-tests" class="titleslide slide section level1"><h1>Premières boucles et premiers tests</h1></div><div id="exercice-20" class="slide section level2">
+<h1>Exercice 20</h1>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="cf">for</span> i <span class="op">in</span> <span class="bu">range</span>(<span class="dv">10</span>, <span class="dv">15</span>):
+    <span class="bu">print</span>(<span class="st">&quot;bonjour&quot;</span>, i)
+    </code></pre></div>
+<p>Après exécution , on obtient l'affichage :</p>
+<pre><code>bonjour 10
+bonjour 11
+bonjour 12
+bonjour 13
+bonjour 14</code></pre>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co">&quot;&quot;&quot;</span>
+<span class="co">&gt;&gt;&gt; for i in range(10, 15):</span>
+<span class="co">...     print(&quot;bonjour&quot;+ i)</span>
+<span class="co">... </span>
+<span class="co">Traceback (most recent call last):</span>
+<span class="co">  File &quot;&lt;stdin&gt;&quot;, line 2, in &lt;module&gt;</span>
+<span class="co">TypeError: Can&#39;t convert &#39;int&#39; object to str implicitly</span>
+
+<span class="co">&gt;&gt;&gt; for i in range(10, 15):</span>
+<span class="co">...     print(&quot;bonjour&quot;+ str(i))</span>
+<span class="co">&quot;&quot;&quot;</span></code></pre></div>
+<p>Cette fois c'est bon car on a converti l'entier <code>i</code> en chaine avec <code>str(i)</code>.</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"></code></pre></div>
+</div><div id="exercice-21" class="slide section level2">
+<h1>Exercice 21</h1>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">
+somme <span class="op">=</span> <span class="dv">0</span>
+<span class="cf">for</span> i <span class="op">in</span> <span class="bu">range</span>(<span class="dv">10</span>, <span class="dv">15</span>):
+    somme <span class="op">=</span> somme <span class="op">+</span> i
+
+<span class="co">&quot;&quot;&quot;</span>
+<span class="co">&gt;&gt;&gt; i, somme</span>
+<span class="co">(4, 10)</span>
+<span class="co">&gt;&gt;&gt; sum(i for i in range(10, 15)) </span>
+<span class="co">10</span>
+<span class="co">&quot;&quot;&quot;</span></code></pre></div>
+</div><div id="exercice-22" class="slide section level2">
+<h1>Exercice 22</h1>
+<p>script 1 : paf, plof ; script 2 : plof ; script 3 : <rien>.</p>
+</div><div id="exercice-23" class="slide section level2">
+<h1>Exercice 23</h1>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">
+somme <span class="op">=</span> <span class="dv">0</span>
+<span class="cf">for</span> i <span class="op">in</span> <span class="bu">range</span>(<span class="dv">10</span>, <span class="dv">18</span>):
+    <span class="cf">if</span> i<span class="op">%</span><span class="dv">3</span> <span class="op">==</span> <span class="dv">0</span>:  <span class="co">#des espaces autour des opérateurs de comparaisons</span>
+        somme <span class="op">=</span> somme <span class="op">+</span> i
+<span class="co">&quot;&quot;&quot;      </span>
+<span class="co">&gt;&gt;&gt; somme</span>
+<span class="co">27</span>
+<span class="co">&gt;&gt;&gt; sum(i for i in range(10, 18) if i%3 == 0)</span>
+<span class="co">27</span>
+<span class="co">&quot;&quot;&quot;</span></code></pre></div>
+</div><div id="exercice-24-version-tri-par-insertion" class="slide section level2">
+<h1>Exercice 24 version tri par insertion</h1>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">a <span class="op">=</span> <span class="bu">float</span>(<span class="bu">input</span>(<span class="st">&#39;Entrez un réel a : &#39;</span>))
+b <span class="op">=</span> <span class="bu">float</span>(<span class="bu">input</span>(<span class="st">&#39;Entrez un réel b : &#39;</span>))
+c <span class="op">=</span> <span class="bu">float</span>(<span class="bu">input</span>(<span class="st">&#39;Entrez un réel c : &#39;</span>))
+<span class="co">#on prend le deuxième élément (b) et on l&#39;insère dans la liste</span>
+<span class="co">#déjà triée (a tout seul)</span>
+<span class="cf">if</span> a <span class="op">&gt;</span> b:
+   a, b <span class="op">=</span> b, a
+<span class="co">#on recommence avec en l&#39;insérant dans la liste a, b déjà triée</span>
+<span class="cf">if</span> a <span class="op">&lt;</span> c <span class="op">&lt;</span> b:
+   b, c<span class="op">=</span> c, b
+<span class="cf">elif</span> c <span class="op">&lt;</span> a <span class="op">&lt;</span> b:
+   a, b, c <span class="op">=</span> c, a, b
+<span class="bu">print</span>(a, b, c,sep<span class="op">=</span><span class="st">&#39;&lt;=&#39;</span>)</code></pre></div>
+</div><div id="exercice-24-version-tri-par-sélection-du-minimum" class="slide section level2">
+<h1>Exercice 24 version tri par sélection du minimum</h1>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">a <span class="op">=</span> <span class="bu">float</span>(<span class="bu">input</span>(<span class="st">&#39;Entrez un réel a : &#39;</span>))
+b <span class="op">=</span> <span class="bu">float</span>(<span class="bu">input</span>(<span class="st">&#39;Entrez un réel b : &#39;</span>))
+c <span class="op">=</span> <span class="bu">float</span>(<span class="bu">input</span>(<span class="st">&#39;Entrez un réel c : &#39;</span>)) 
+<span class="co">#on met dans a le minimum de a et b</span>
+<span class="cf">if</span> a <span class="op">&gt;</span> b:
+   a, b <span class="op">=</span> b, a
+<span class="co">#on met dans a le minimum de a et c</span>
+<span class="cf">if</span> a <span class="op">&gt;</span> c:
+   a, c <span class="op">=</span> c, a
+<span class="co">#desormais a contient le minimum de a, b et c</span>
+<span class="co">#on met dans b le minimum de b et c</span>
+<span class="cf">if</span> b <span class="op">&gt;</span> c:
+   b, c <span class="op">=</span> c, b</code></pre></div>
+</div><div id="exercice-25" class="slide section level2">
+<h1>Exercice 25</h1>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">npers <span class="op">=</span> <span class="bu">int</span>(<span class="bu">input</span>(<span class="st">&#39;Nombre de personnes ? &#39;</span>))
+<span class="co">#tableau des questions</span>
+questions <span class="op">=</span> [<span class="st">&#39;Age ? &#39;</span>, <span class="st">&#39;Etudes ? &#39;</span>, <span class="st">&#39;Celibataire ? &#39;</span>, <span class="st">&#39;Enfants ? &#39;</span>, <span class="st">&#39;Voiture ? &#39;</span>]
+nques <span class="op">=</span> <span class="bu">len</span>(questions)
+<span class="co">#tableau des cinq fonctions booléennes de test de réponse</span>
+criteres <span class="op">=</span> [<span class="kw">lambda</span> x : x <span class="op">&gt;=</span> <span class="dv">40</span>, <span class="kw">lambda</span> x : x <span class="op">&lt;=</span> <span class="dv">2</span>, <span class="kw">lambda</span> x : x <span class="op">==</span> <span class="dv">0</span>, 
+<span class="kw">lambda</span> x : x <span class="op">&gt;</span> <span class="dv">0</span>, <span class="kw">lambda</span> x : x <span class="op">==</span> <span class="dv">1</span>]
+<span class="cf">for</span> k <span class="op">in</span> <span class="bu">range</span>(npers):
+    <span class="co">#attibution de la note (de 0 à 5)</span>
+    <span class="co">#on peut aussi utiliser une série d&#39;input et de tests</span>
+    note <span class="op">=</span> <span class="dv">0</span>
+    <span class="cf">for</span> j <span class="op">in</span> <span class="bu">range</span>(nques):
+        rep <span class="op">=</span> <span class="bu">int</span>(<span class="bu">input</span>(questions[j]))
+        <span class="cf">if</span> criteres[j](rep):
+            note <span class="op">+=</span> <span class="dv">1</span>
+    <span class="cf">if</span> note <span class="op">==</span> <span class="dv">0</span>:
+        <span class="bu">print</span>(<span class="st">&quot;Client impossible.&quot;</span>)
+    <span class="cf">elif</span> note <span class="op">&lt;=</span> <span class="dv">2</span>:
+        <span class="bu">print</span>(<span class="st">&quot;Client peut probable&quot;</span>)
+    <span class="cf">elif</span> note <span class="op">&lt;=</span> <span class="dv">4</span>:
+        <span class="bu">print</span>(<span class="st">&quot;Client probable&quot;</span>)
+    <span class="cf">else</span>:
+        <span class="bu">print</span>(<span class="st">&quot;Client très probable&quot;</span>)</code></pre></div>
+</div><div id="exercice-26" class="slide section level2">
+<h1>Exercice 26</h1>
+<ul>
+<li>Simulation de la variable aléatoire X telle que P(X=-4)=0.2, P(X=1)=0.7, P(X=11)=0.1</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">
+<span class="im">import</span> random <span class="co">#on importe le module random</span>
+de <span class="op">=</span> random.random()
+<span class="cf">if</span> de <span class="op">&lt;=</span> <span class="fl">0.1</span>:
+    x <span class="op">=</span> <span class="dv">11</span>
+<span class="cf">elif</span> de <span class="op">&lt;=</span> <span class="fl">0.3</span>:
+    x <span class="op">=</span> <span class="op">-</span><span class="dv">4</span>
+<span class="cf">else</span>:
+    x <span class="op">=</span> <span class="dv">1</span></code></pre></div>
+<ul>
+<li>Approximation de l'espérance 1 avec la loi faible des grands nombres</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">
+n <span class="op">=</span> <span class="dv">10</span><span class="op">**</span><span class="dv">6</span>
+s <span class="op">=</span> <span class="dv">0</span>
+<span class="cf">for</span> i <span class="op">in</span> <span class="bu">range</span>(<span class="dv">10</span><span class="op">**</span><span class="dv">6</span>):
+    de <span class="op">=</span> random.random()
+    <span class="cf">if</span> de <span class="op">&lt;=</span> <span class="fl">0.1</span>:
+        s <span class="op">+=</span> <span class="dv">11</span>
+    <span class="cf">elif</span> de <span class="op">&lt;=</span> <span class="fl">0.3</span>:
+        s <span class="op">+=</span> <span class="op">-</span><span class="dv">4</span>
+    <span class="cf">else</span>:
+        s <span class="op">+=</span> <span class="dv">1</span>
+<span class="bu">print</span>(<span class="st">&#39;Fréquence observée {:.4f}&#39;</span>.<span class="bu">format</span>(s<span class="op">/</span>n))
+
+<span class="co">&quot;&quot;&quot;</span>
+<span class="co">&gt;&gt;&gt; (executing lines 342 to 352 of &quot;CorrigeTP1-2015.py&quot;)</span>
+<span class="co">Fréquence observée 0.9973</span>
+<span class="co">&quot;&quot;&quot;</span></code></pre></div>
+</div><div id="exercice-27" class="slide section level2">
+<h1>Exercice 27</h1>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="im">from</span> math <span class="im">import</span> sqrt <span class="co">#import de la fonction sqrt du module math</span>
+<span class="bu">print</span>(<span class="st">&#39;Résolution de l</span><span class="ch">\&#39;</span><span class="st">équation ax²+bx+c=0&#39;</span>)
+a <span class="op">=</span> <span class="bu">float</span>(<span class="bu">input</span>(<span class="st">&#39;Coefficient a : &#39;</span>))
+b <span class="op">=</span> <span class="bu">float</span>(<span class="bu">input</span>(<span class="st">&#39;Coefficient b : &#39;</span>))
+c <span class="op">=</span> <span class="bu">float</span>(<span class="bu">input</span>(<span class="st">&#39;Coefficient c : &#39;</span>))
+<span class="cf">if</span> a <span class="op">==</span> <span class="dv">0</span>:
+    <span class="bu">print</span>(<span class="st">&#39;Equation du premier degré&#39;</span>)
+    <span class="cf">if</span> b<span class="op">!=</span><span class="dv">0</span>:
+        <span class="bu">print</span>(<span class="st">&#39;Une solution </span><span class="sc">%.2f</span><span class="st">&#39;</span><span class="op">%</span>(<span class="op">-</span>c<span class="op">/</span>b))
+    <span class="cf">elif</span> c<span class="op">!=</span><span class="dv">0</span>:
+        <span class="bu">print</span>(<span class="st">&#39;Pas de solutions&#39;</span>)
+    <span class="cf">else</span>:
+        <span class="bu">print</span>(<span class="st">&#39;Infinité de solutions&#39;</span>)
+<span class="cf">else</span>:
+    delta <span class="op">=</span> b<span class="op">**</span><span class="dv">2-4</span><span class="op">*</span>a<span class="op">*</span>c
+    <span class="cf">if</span> delta <span class="op">&gt;</span> <span class="dv">0</span>:
+        <span class="bu">print</span>(<span class="st">&#39;Delta&gt;0&#39;</span>)
+        x,y <span class="op">=</span> (<span class="op">-</span>b<span class="op">+</span>sqrt(delta))<span class="op">/</span>(<span class="dv">2</span><span class="op">*</span>a),(<span class="op">-</span>b<span class="op">-</span>sqrt(delta))<span class="op">/</span>(<span class="dv">2</span><span class="op">*</span>a)
+        <span class="bu">print</span>(<span class="st">&#39;Deux solutions réelles :  </span><span class="sc">%.2f</span><span class="st"> et </span><span class="sc">%.2f</span><span class="st">&#39;</span><span class="op">%</span>(x, y))
+    <span class="cf">elif</span> delta <span class="op">&lt;</span> <span class="dv">0</span>:
+        <span class="bu">print</span>(<span class="st">&#39;Delta&lt;0&#39;</span>)
+        x <span class="op">=</span> <span class="bu">complex</span>(<span class="op">-</span>b<span class="op">/</span>(<span class="dv">2</span><span class="op">*</span>a),sqrt(<span class="op">-</span>delta)<span class="op">/</span>(<span class="dv">2</span><span class="op">*</span>a))
+        y <span class="op">=</span> x.conjugate()
+        <span class="bu">print</span>(<span class="st">&#39;Deux solutions complexes conjuguées :  </span><span class="sc">%s</span><span class="st"> et </span><span class="sc">%s</span><span class="st">&#39;</span><span class="op">%</span>(x, y))
+    <span class="cf">else</span>:
+        <span class="bu">print</span>(<span class="st">&#39;delta=0, une racine réelle double </span><span class="sc">%.3f</span><span class="st">&#39;</span><span class="op">%</span>(<span class="op">-</span>b<span class="op">/</span>(<span class="dv">2</span><span class="op">*</span>a)))</code></pre></div>
+</div><div id="exercice-28" class="slide section level2">
+<h1>Exercice 28</h1>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="im">from</span> math <span class="im">import</span> log10, sqrt 
+pKa <span class="op">=</span> <span class="bu">float</span>(<span class="bu">input</span>(<span class="st">&#39;Entrez le pKa du couple acide/base : &#39;</span>))
+c <span class="op">=</span> <span class="bu">float</span>(<span class="bu">input</span>(<span class="st">&quot;Entrez la concentration de l&#39;acide : &quot;</span>))
+h <span class="op">=</span> (<span class="op">-</span><span class="dv">10</span><span class="op">**</span>(<span class="op">-</span>pKa) <span class="op">+</span> sqrt(<span class="dv">10</span><span class="op">**</span>(<span class="op">-</span><span class="dv">2</span><span class="op">*</span>pKa)<span class="op">+</span><span class="dv">4</span><span class="op">*</span><span class="dv">10</span><span class="op">**</span>(<span class="op">-</span>pKa)<span class="op">*</span>c))<span class="op">/</span><span class="dv">2</span>
+ph <span class="op">=</span> <span class="op">-</span>log10(h)
+tau <span class="op">=</span> h<span class="op">/</span>c
+Rep <span class="op">=</span> <span class="st">&quot;Concentration = &quot;</span><span class="op">+</span><span class="bu">str</span>(c)<span class="op">+</span><span class="st">&quot; mol/L,</span><span class="ch">\t</span><span class="st">pH = &quot;</span><span class="op">+</span><span class="bu">str</span>(ph)<span class="op">+</span><span class="st">&quot;,</span><span class="ch">\t</span><span class="st">&quot;</span><span class="op">+</span><span class="st">&quot;Tau = &quot;</span><span class="op">+</span><span class="bu">str</span>(tau)
+<span class="bu">print</span>(Rep)
+
+<span class="bu">print</span>(<span class="st">&quot;-&quot;</span><span class="op">*</span><span class="dv">50</span>)
+
+pKa<span class="op">=</span><span class="bu">float</span>(<span class="bu">input</span>(<span class="st">&#39;Entrez le pKa du couple acide/base : &#39;</span>))
+pcmin<span class="op">=</span><span class="bu">float</span>(<span class="bu">input</span>(<span class="st">&quot;Entrez pcmin de l&#39;acide : &quot;</span>))
+N<span class="op">=</span><span class="bu">int</span>(<span class="bu">input</span>(<span class="st">&#39;Entrez le nombre de valeurs a calculer : &#39;</span>)) 
+pas <span class="op">=</span> <span class="bu">float</span>(pcmin)<span class="op">/</span>(N<span class="dv">-1</span>)
+<span class="cf">for</span> i <span class="op">in</span> <span class="bu">range</span>(<span class="dv">0</span>,N):
+    c <span class="op">=</span> <span class="dv">10</span><span class="op">**</span>(<span class="op">-</span>pas<span class="op">*</span>i)
+    h <span class="op">=</span> (<span class="op">-</span><span class="dv">10</span><span class="op">**</span>(<span class="op">-</span>pKa)<span class="op">+</span> sqrt(<span class="dv">10</span><span class="op">**</span>(<span class="op">-</span><span class="dv">2</span><span class="op">*</span>pKa)<span class="op">+</span><span class="dv">4</span><span class="op">*</span><span class="dv">10</span><span class="op">**</span>(<span class="op">-</span>pKa)<span class="op">*</span>c))<span class="op">/</span><span class="dv">2</span>
+    ph <span class="op">=</span> <span class="op">-</span>log10(h)
+    tau <span class="op">=</span> h<span class="op">/</span>c
+    Rep <span class="op">=</span> <span class="st">&quot;Concentration = &quot;</span><span class="op">+</span><span class="bu">str</span>(c)<span class="op">+</span><span class="st">&quot; mol/L,</span><span class="ch">\t</span><span class="st">pH = &quot;</span><span class="op">+</span><span class="bu">str</span>(ph)<span class="op">+</span><span class="st">&quot;,</span><span class="ch">\t</span><span class="st">&quot;</span><span class="op">+</span><span class="st">&quot;Tau = &quot;</span><span class="op">+</span><span class="bu">str</span>(tau)
+    <span class="bu">print</span>(Rep)
+
+<span class="co">&quot;&quot;&quot;</span>
+<span class="co"> Entrez le pKa du couple acide/base : 6</span>
+<span class="co"> Entrez la concentration de l&#39;acide : 0.1</span>
+<span class="co"> Concentration = 0.1 mol/L, pH = 3.500686679582912, Tau = 0.00315728161</span>
+<span class="co"> --------------------------------------------------</span>
+<span class="co"> Entrez le pKa du couple acide/base : 6</span>
+<span class="co"> Entrez pcmin de l&#39;acide : 6.8</span>
+<span class="co"> Entrez le nombre de valeurs a calculer : 5</span>
+<span class="co"> Concentration = 1.0 mol/L, pH = 3.0002171, Tau = 0.0009995001</span>
+<span class="co"> Concentration = 0.0199526 mol/L,   pH = 3.85153728,    Tau = 0.00705444</span>
+<span class="co"> Concentration = 0.0003981075 mol/L,    pH = 4.710882003769246, Tau = 0.0488</span>
+<span class="co"> Concentration = 7.9432823e-06 mol/L,   pH = 5.626648,  Tau = 0.297407408</span>
+<span class="co"> Concentration = 1.5848931e-07 mol/L,   pH = 6.856573,  Tau = 0.87786162</span>
+<span class="co">&quot;&quot;&quot;</span></code></pre></div>
+</div><div id="exercice-29" class="slide section level2">
+<h1>Exercice 29</h1>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">
+<span class="co">#Triplement des voyelles</span>
+chaine <span class="op">=</span> <span class="bu">input</span>(<span class="st">&#39;Entrez une chaine de caractères :</span><span class="ch">\n</span><span class="st">&#39;</span>)
+chaine <span class="op">=</span> chaine.lower() <span class="co">#on convertit la chaine en minuscules</span>
+voyelles <span class="op">=</span> [<span class="st">&#39;a&#39;</span>,<span class="st">&#39;o&#39;</span>,<span class="st">&#39;i&#39;</span>,<span class="st">&#39;u&#39;</span>,<span class="st">&#39;e&#39;</span>,<span class="st">&#39;y&#39;</span>,<span class="st">&#39;é&#39;</span>,<span class="st">&#39;ë&#39;</span>,<span class="st">&#39;è&#39;</span>,<span class="st">&#39;ä&#39;</span>,<span class="st">&#39;à&#39;</span>,<span class="st">&#39;î&#39;</span>,<span class="st">&#39;ù&#39;</span>]
+newchaine <span class="op">=</span> <span class="st">&#39;&#39;</span>
+<span class="cf">for</span> lettre <span class="op">in</span> chaine:
+    <span class="cf">if</span> lettre <span class="op">in</span> voyelles:
+        newchaine <span class="op">+=</span> <span class="dv">3</span><span class="op">*</span>lettre
+    <span class="cf">else</span>:
+        newchaine <span class="op">+=</span> lettre
+
+<span class="co">&quot;&quot;&quot;</span>
+<span class="co">Entrez une chaine de caractères :</span>
+<span class="co">Liberté Égalité Fraternité</span>
+<span class="co">&gt;&gt;&gt; newchaine</span>
+<span class="co">&#39;liiibeeertééé ééégaaaliiitééé fraaateeerniiitééé&#39;</span>
+<span class="co">&quot;&quot;&quot;</span>
+
+<span class="co">#Inversion d&#39;une chaine de caractères et test de palindrome</span>
+chaine <span class="op">=</span> <span class="bu">input</span>(<span class="st">&#39;Entrez une chaine de caractères :</span><span class="ch">\n</span><span class="st">&#39;</span>)
+invchaine <span class="op">=</span> <span class="st">&#39;&#39;</span>
+<span class="cf">for</span> lettre <span class="op">in</span> chaine:
+    invchaine <span class="op">=</span> lettre <span class="op">+</span> invchaine
+<span class="cf">if</span> invchaine <span class="op">==</span> chaine:
+    <span class="bu">print</span>(<span class="st">&#39;Palindrome&#39;</span>)
+<span class="cf">else</span>:
+    <span class="bu">print</span>(<span class="st">&quot;Ce n&#39;est pas un palindrome&quot;</span>)</code></pre></div>
+</div><div id="exercice-30-rurple-copiercoller-le-code-dans-léditeur-de-rurple" class="slide section level2">
+<h1>Exercice 30 Rurple (Copier/Coller le code dans l'éditeur de Rurple)</h1>
+<p><a href="http://dichotomies.fr/2011/infomath/guides/python/installation-rurple/" class="uri">http://dichotomies.fr/2011/infomath/guides/python/installation-rurple/</a></p>
+<ul>
+<li>Récolte en ligne version 1</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co">&quot;&quot;&quot;</span>
+<span class="co">while bille_au_sol():</span>
+<span class="co">    prends()</span>
+<span class="co">while not mur_devant():</span>
+<span class="co">    avance()</span>
+<span class="co">    while bille_au_sol():</span>
+<span class="co">        prends()</span>
+<span class="co">&quot;&quot;&quot;</span></code></pre></div>
+<ul>
+<li>Récolte en ligne version 2</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co">&quot;&quot;&quot;</span>
+<span class="co">while bille_au_sol() or not mur_devant():</span>
+<span class="co">    if bille_au_sol():</span>
+<span class="co">        prends()</span>
+<span class="co">    elif not mur_devant():</span>
+<span class="co">        avance()</span>
+<span class="co">&quot;&quot;&quot;</span></code></pre></div>
+<ul>
+<li>Récolte en ligne version 3</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co">&quot;&quot;&quot;</span>
+<span class="co">while True:</span>
+<span class="co">    if bille_au_sol():</span>
+<span class="co">        prends()</span>
+<span class="co">    elif not mur_devant():</span>
+<span class="co">        avance()</span>
+<span class="co">    else:</span>
+<span class="co">        break</span>
+<span class="co">&quot;&quot;&quot;</span></code></pre></div>
+<ul>
+<li>Deposer aux quatre coins</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co">&quot;&quot;&quot;</span>
+<span class="co">for k in range(4):</span>
+<span class="co">    depose()</span>
+<span class="co">    while not mur_devant():</span>
+<span class="co">        avance()</span>
+<span class="co">    gauche()</span>
+<span class="co">&quot;&quot;&quot;</span></code></pre></div>
+<ul>
+<li>Parcours en spirale d'un damier <span class="math inline">\((2m+1)\times(2m+1)\)</span>.</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co">&quot;&quot;&quot;</span>
+<span class="co">n = 11</span>
+<span class="co">for k in range(n//2):</span>
+<span class="co">    for cote in range(4):</span>
+<span class="co">        nbcols = n - 2*k </span>
+<span class="co">        if cote &lt; 3:</span>
+<span class="co">            for colonne in range(nbcols-1):</span>
+<span class="co">                avance()</span>
+<span class="co">            gauche()</span>
+<span class="co">        else:</span>
+<span class="co">            for colonne in range(nbcols-2):</span>
+<span class="co">                avance()</span>
+<span class="co">            gauche()</span>
+<span class="co">            avance()</span>
+<span class="co">&quot;&quot;&quot;</span></code></pre></div>
+</div><div id="exercice-31" class="slide section level2">
+<h1>Exercice 31</h1>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">somme <span class="op">=</span> <span class="dv">0</span>
+<span class="cf">for</span> k <span class="op">in</span> <span class="bu">range</span>(<span class="dv">10</span>, <span class="dv">101</span>):
+    somme <span class="op">+=</span> k<span class="op">**</span><span class="dv">2</span>
+<span class="co">&quot;&quot;&quot;</span>
+<span class="co">&gt;&gt;&gt; somme</span>
+<span class="co">338065</span>
+<span class="co"> &gt;&gt;&gt; sum(k**2 for k in range(10, 101))</span>
+<span class="co"> 338065</span>
+<span class="co">&quot;&quot;&quot;</span></code></pre></div>
+</div><div id="exercice-32" class="slide section level2">
+<h1>Exercice 32</h1>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">n <span class="op">=</span> <span class="bu">int</span>(<span class="bu">input</span>(<span class="st">&#39;Entrez un entier n : &#39;</span>))
+p, puissance <span class="op">=</span> <span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>
+<span class="cf">while</span> puissance <span class="op">&lt;=</span> n:
+    puissance <span class="op">*=</span> <span class="dv">2</span>
+    p <span class="op">+=</span> <span class="dv">1</span>
+<span class="co">&quot;&quot;&quot;</span>
+<span class="co">Entrez un entier n : 15</span>
+<span class="co">&gt;&gt;&gt; p, puissance</span>
+<span class="co">(3, 16)</span>
+<span class="co">&gt;&gt;&gt; 2**p &lt;= n &lt; 2**(p+1)</span>
+<span class="co">True</span>
+<span class="co">&quot;&quot;&quot;</span></code></pre></div>
+<p>p est la partie entière de <span class="math inline">\(\ln(n)/\ln(2)\)</span>, c'est le <strong>logarithme binaire</strong> de <span class="math inline">\(n\)</span>.</p>
+</div><div id="exercice-33" class="slide section level2">
+<h1>Exercice 33</h1>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">u <span class="op">=</span> <span class="dv">1</span>
+n <span class="op">=</span> <span class="bu">int</span>(<span class="bu">input</span>(<span class="st">&#39;Entrez un entier n : &#39;</span>))
+<span class="cf">for</span> k <span class="op">in</span> <span class="bu">range</span>(n):
+    <span class="bu">print</span>(u, end<span class="op">=</span><span class="st">&#39;-&gt;&#39;</span>)
+    u <span class="op">=</span> <span class="dv">2</span><span class="op">*</span>u <span class="op">+</span> k
+<span class="bu">print</span>(u)
+<span class="co">&quot;&quot;&quot;</span>
+<span class="co">Entrez un entier n : 4</span>
+<span class="co">1-&gt;2-&gt;5-&gt;12-&gt;27</span>
+<span class="co">&quot;&quot;&quot;</span></code></pre></div>
+</div><div id="exercice-34" class="slide section level2">
+<h1>Exercice 34</h1>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="im">from</span> math <span class="im">import</span> sqrt
+n <span class="op">=</span> <span class="bu">int</span>(<span class="bu">input</span>(<span class="st">&#39;Entrez un entier n : &#39;</span>))
+decomp <span class="op">=</span> <span class="dv">0</span>
+a <span class="op">=</span> <span class="dv">1</span>
+<span class="cf">while</span> a <span class="op">&lt;=</span> sqrt(n<span class="op">/</span><span class="dv">2</span>.):
+    b <span class="op">=</span> sqrt(n <span class="op">-</span> a<span class="op">**</span><span class="dv">2</span>)
+    <span class="cf">if</span> b <span class="op">==</span> <span class="bu">int</span>(b):
+        decomp <span class="op">+=</span> <span class="dv">1</span>
+        <span class="bu">print</span>(<span class="st">&#39;</span><span class="sc">%d</span><span class="st"> = </span><span class="sc">%d</span><span class="st">**2 + </span><span class="sc">%d</span><span class="st">**2&#39;</span><span class="op">%</span>(n, a, b))
+    a <span class="op">+=</span> <span class="dv">1</span>
+<span class="bu">print</span>(<span class="st">&#39;</span><span class="sc">%d</span><span class="st"> a </span><span class="sc">%d</span><span class="st"> décompositions&#39;</span><span class="op">%</span>(n, decomp))
+
+<span class="co">&quot;&quot;&quot;</span>
+<span class="co">Entrez un entier n : 50</span>
+<span class="co">50 = 1**2 + 7**2</span>
+<span class="co">50 = 5**2 + 5**2</span>
+<span class="co">50 a 2 décompositions</span>
+<span class="co">&quot;&quot;&quot;</span></code></pre></div>
+</div><div id="exercice-35-projet-euler-problème-1" class="slide section level2">
+<h1>Exercice 35 Projet Euler problème 1</h1>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">somme <span class="op">=</span> <span class="dv">0</span>
+<span class="cf">for</span> k <span class="op">in</span> <span class="bu">range</span>(<span class="dv">3</span>, <span class="dv">1000</span>):
+    <span class="cf">if</span> k<span class="op">%</span><span class="dv">3</span> <span class="op">==</span> <span class="dv">0</span> <span class="op">or</span> k<span class="op">%</span><span class="dv">5</span> <span class="op">==</span> <span class="dv">0</span>:
+        somme <span class="op">+=</span> k
+<span class="co">&quot;&quot;&quot;</span>
+<span class="co">&gt;&gt;&gt; somme</span>
+<span class="co">233168</span>
+<span class="co">&quot;&quot;&quot;</span></code></pre></div>
+</div><div id="exercice-36" class="slide section level2">
+<h1>Exercice 36</h1>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">sommecarre, somme <span class="op">=</span> <span class="dv">0</span>, <span class="dv">0</span>
+<span class="cf">for</span> k <span class="op">in</span> <span class="bu">range</span>(<span class="dv">1</span>, <span class="dv">101</span>):
+    somme <span class="op">+=</span> k
+    sommecarre <span class="op">+=</span> k<span class="op">**</span><span class="dv">2</span>
+difference <span class="op">=</span> sommecarre <span class="op">-</span> somme<span class="op">**</span><span class="dv">2</span>
+<span class="co">&quot;&quot;&quot;</span>
+<span class="co">&gt;&gt;&gt; somme, sommecarre</span>
+<span class="co">(338350, 5050)</span>
+<span class="co">&gt;&gt;&gt; difference</span>
+<span class="co">25164150</span>
+<span class="co">Vérfication avec les formules du cours de maths</span>
+<span class="co">&gt;&gt;&gt; (100*101/2)**2 - 100*101*201/6</span>
+<span class="co">25164150.0</span>
+<span class="co">&quot;&quot;&quot;</span></code></pre></div>
+</div><div id="exercice-37" class="slide section level2">
+<h1>Exercice 37</h1>
+<ul>
+<li>Triangle 1</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">chaine <span class="op">=</span> <span class="st">&#39;&#39;</span>
+<span class="cf">for</span> k <span class="op">in</span> <span class="bu">range</span>(<span class="dv">10</span>):
+    chaine <span class="op">=</span> chaine <span class="op">+</span> <span class="bu">str</span>(k)
+    <span class="bu">print</span>(chaine)
+<span class="co">&quot;&quot;&quot;</span>
+<span class="co"> In [19]: (executing lines 544 to 547 of &quot;CorrigeTP1-2015.py&quot;)</span>
+<span class="co"> 0</span>
+<span class="co"> 01</span>
+<span class="co"> 012</span>
+<span class="co"> 0123</span>
+<span class="co"> 01234</span>
+<span class="co"> 012345</span>
+<span class="co"> 0123456</span>
+<span class="co"> 01234567</span>
+<span class="co"> 012345678</span>
+<span class="co"> 0123456789</span>
+<span class="co">&quot;&quot;&quot;</span></code></pre></div>
+<ul>
+<li>Triangle 2</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">fin <span class="op">=</span> <span class="st">&#39;&#39;</span>
+<span class="cf">for</span> k <span class="op">in</span> <span class="bu">range</span>(<span class="dv">10</span>):
+    fin <span class="op">=</span> fin <span class="op">+</span> <span class="bu">str</span>(k)
+    <span class="bu">print</span>(<span class="st">&#39; &#39;</span><span class="op">*</span>(<span class="dv">9</span> <span class="op">-</span> k), fin)
+<span class="co">&quot;&quot;&quot;</span>
+<span class="co"> In [19]: (executing lines 544 to 547 of &quot;CorrigeTP1-2015.py&quot;)</span>
+<span class="co"> 0</span>
+<span class="co"> 01</span>
+<span class="co"> 012</span>
+<span class="co"> 0123</span>
+<span class="co"> 01234</span>
+<span class="co"> 012345</span>
+<span class="co"> 0123456</span>
+<span class="co"> 01234567</span>
+<span class="co"> 012345678</span>
+<span class="co"> 0123456789</span>
+<span class="co">&quot;&quot;&quot;</span></code></pre></div>
+<ul>
+<li>Triangle 3</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">nligne <span class="op">=</span> <span class="dv">6</span>
+milieu <span class="op">=</span> <span class="st">&#39;*&#39;</span>
+cote <span class="op">=</span> nligne<span class="op">*</span><span class="st">&#39; &#39;</span>
+<span class="bu">print</span>(cote, milieu, cote)
+<span class="cf">for</span> k <span class="op">in</span> <span class="bu">range</span>(nligne<span class="dv">-1</span>, <span class="dv">0</span>, <span class="op">-</span><span class="dv">1</span>):
+    milieu <span class="op">=</span> milieu <span class="op">+</span> <span class="st">&#39;**&#39;</span>
+    cote <span class="op">=</span> k<span class="op">*</span><span class="st">&#39; &#39;</span>
+    <span class="bu">print</span>(cote, milieu, cote)
+<span class="co">&quot;&quot;&quot;</span>
+<span class="co"> In [22]: (executing lines 556 to 563 of &quot;CorrigeTP1-2015.py&quot;)</span>
+<span class="co">        *       </span>
+<span class="co">       ***      </span>
+<span class="co">      *****     </span>
+<span class="co">     *******    </span>
+<span class="co">    *********   </span>
+<span class="co">   ***********</span>
+<span class="co">&quot;&quot;&quot;</span></code></pre></div>
+</div><div id="exercice-38" class="slide section level2">
+<h1>Exercice 38</h1>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="im">from</span> math <span class="im">import</span> cos, sin
+somme <span class="op">=</span> <span class="dv">0</span>
+<span class="cf">for</span> k <span class="op">in</span> <span class="bu">range</span>(<span class="dv">843</span>,<span class="dv">1790</span>):
+    somme <span class="op">=</span> somme<span class="op">+</span>cos(k)
+
+theorique <span class="op">=</span> cos(<span class="dv">843</span><span class="op">+</span>(<span class="dv">1789</span> <span class="op">-</span> <span class="dv">843</span>)<span class="op">/</span><span class="dv">2</span>.)<span class="op">*</span>sin((<span class="dv">1789</span> <span class="op">-</span> <span class="dv">843</span> <span class="op">+</span> <span class="dv">1</span>)<span class="op">/</span><span class="dv">2</span>.)<span class="op">/</span>sin(<span class="fl">0.5</span>)
+<span class="bu">print</span>(<span class="st">&#39;Somme calculée  = </span><span class="sc">%1.8f</span><span class="st"> et Somme théorique = </span><span class="sc">%1.8f</span><span class="st">&#39;</span><span class="op">%</span>(somme, theorique))</code></pre></div>
+<p>Somme calculée = -1.52289307 et Somme théorique = -1.52289307</p>
+</div><div id="exercice-39" class="slide section level2">
+<h1>Exercice 39</h1>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="im">from</span> math <span class="im">import</span> log
+n <span class="op">=</span> <span class="bu">int</span>(<span class="bu">input</span>(<span class="st">&#39;Entrez un entier n : &#39;</span>))
+signe <span class="op">=</span> <span class="op">-</span><span class="dv">1</span>
+somme <span class="op">=</span> <span class="dv">0</span>
+<span class="cf">for</span> k <span class="op">in</span> <span class="bu">range</span>(<span class="dv">1</span>, n<span class="dv">+1</span>):
+    signe <span class="op">*=</span> <span class="op">-</span><span class="dv">1</span>.
+    somme <span class="op">+=</span> signe<span class="op">/</span>k
+
+<span class="co">&quot;&quot;&quot;</span>
+<span class="co">Entrez un entier n : 100</span>
+<span class="co">&gt;&gt;&gt; somme</span>
+<span class="co">0.688172179310195</span>
+<span class="co">&gt;&gt;&gt; log(2)</span>
+<span class="co">0.6931471805599453</span>
+<span class="co">&quot;&quot;&quot;</span></code></pre></div>
+</div><div id="exercice-40" class="slide section level2">
+<h1>Exercice 40</h1>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">somme <span class="op">=</span> <span class="dv">0</span>
+<span class="cf">for</span> i <span class="op">in</span> <span class="bu">range</span>(<span class="dv">1001</span>):
+    j <span class="op">=</span> <span class="dv">1000</span> <span class="op">-</span> i
+    somme <span class="op">+=</span> (i<span class="op">**</span><span class="dv">2</span> <span class="op">+</span> j)<span class="op">*</span>(i <span class="op">+</span> j<span class="op">**</span><span class="dv">2</span>)
+<span class="co">&quot;&quot;&quot;</span>
+<span class="co">&gt;&gt;&gt; somme</span>
+<span class="co">33834500499800</span>
+<span class="co">&quot;&quot;&quot;</span></code></pre></div>
+</div><div id="exercice-41" class="slide section level2">
+<h1>Exercice 41</h1>
+<ul>
+<li>Première sommation</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">somme1 <span class="op">=</span> <span class="dv">0</span>
+<span class="cf">for</span> i <span class="op">in</span> <span class="bu">range</span>(<span class="dv">1</span>, <span class="dv">5001</span>):
+    <span class="cf">for</span> j <span class="op">in</span> <span class="bu">range</span>(i, <span class="dv">5001</span>):
+        somme1 <span class="op">+=</span> (i <span class="op">-</span> j)<span class="op">**</span><span class="dv">3</span></code></pre></div>
+<ul>
+<li><strong>Complexité en <span class="math inline">\(n^{2}\)</span></strong> pour cet algorithme avec 2 boucles imbriquées</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co">&quot;&quot;&quot;</span>
+<span class="co"> In [1]: %timeit sum((i - j)**3 for i in range(1, 5001) for j in range(i, 5001))</span>
+<span class="co"> 1 loops, best of 3: 5.92 s per loop</span>
+<span class="co">&quot;&quot;&quot;</span></code></pre></div>
+<ul>
+<li>Seconde sommation</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">somme2 <span class="op">=</span> <span class="dv">0</span>
+<span class="cf">for</span> j <span class="op">in</span> <span class="bu">range</span>(<span class="dv">1</span>, <span class="dv">5001</span>):
+    <span class="cf">for</span> i <span class="op">in</span> <span class="bu">range</span>(<span class="dv">1</span>, j):
+        somme2 <span class="op">+=</span> (i <span class="op">-</span> j)<span class="op">**</span><span class="dv">3</span></code></pre></div>
+<ul>
+<li><strong>Complexité en <span class="math inline">\(n^{2}\)</span></strong> pour cet algorithme avec 2 boucles imbriquées</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co">&quot;&quot;&quot;</span>
+<span class="co"> In [2]: %timeit sum((i - j)**3 for j in range(1, 5001) for i in range(1, j+1))</span>
+<span class="co"> 1 loops, best of 3: 5.83 s per loop</span>
+<span class="co">&quot;&quot;&quot;</span></code></pre></div>
+<ul>
+<li>Troisième sommation</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">somme3 <span class="op">=</span> <span class="dv">0</span>
+<span class="cf">for</span> difference <span class="op">in</span> <span class="bu">range</span>(<span class="dv">5000</span>):
+    termes <span class="op">=</span> <span class="dv">5000</span> <span class="op">-</span> difference
+    somme3 <span class="op">+=</span> termes<span class="op">*</span>difference<span class="op">**</span><span class="dv">3</span>
+
+<span class="bu">print</span>(<span class="st">&#39;Somme1 = </span><span class="sc">%d</span><span class="st">, Somme2 = </span><span class="sc">%d</span><span class="st"> et Somme3 = </span><span class="sc">%d</span><span class="st">&#39;</span><span class="op">%</span>(somme1, somme2, somme3))</code></pre></div>
+<ul>
+<li><strong>Complexité linéaire</strong> pour cet algorithme avec une seule boucle.</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co">&quot;&quot;&quot;</span>
+<span class="co"> In [3]: %timeit sum((-k)**3*(5000 - k) for k in range(1, 5000))</span>
+<span class="co"> 100 loops, best of 3: 2.89 ms per loop</span>
+<span class="co">&quot;&quot;&quot;</span></code></pre></div>
+</div><div id="exercice-42" class="slide section level2">
+<h1>Exercice 42</h1>
+<ul>
+<li>Figure 1</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">n <span class="op">=</span> <span class="op">-</span><span class="dv">1</span>
+<span class="cf">while</span> n <span class="op">&lt;</span> <span class="dv">0</span> <span class="op">or</span> n <span class="op">&gt;</span> <span class="dv">26</span>:
+    n <span class="op">=</span> <span class="bu">int</span>(<span class="bu">input</span>(<span class="st">&#39;n = &#39;</span>))
+<span class="cf">for</span> y <span class="op">in</span> <span class="bu">range</span>(n):
+    <span class="cf">for</span> x <span class="op">in</span> <span class="bu">range</span>(n):
+        shift <span class="op">=</span> <span class="bu">min</span>(x,y)
+        <span class="cf">if</span> x  <span class="op">&lt;</span> n <span class="op">-</span> <span class="dv">1</span>:
+            <span class="bu">print</span>(<span class="bu">chr</span>(<span class="bu">ord</span>(<span class="st">&#39;a&#39;</span>) <span class="op">+</span> shift), end<span class="op">=</span><span class="st">&#39;&#39;</span>)
+        <span class="cf">else</span>:
+            <span class="bu">print</span>(<span class="bu">chr</span>(<span class="bu">ord</span>(<span class="st">&#39;a&#39;</span>) <span class="op">+</span> shift), end<span class="op">=</span><span class="st">&#39;</span><span class="ch">\n</span><span class="st">&#39;</span>)</code></pre></div>
+<ul>
+<li>Figure 2</li>
+</ul>
+<p>On reprend le code de de la figure 1 en utilisant les deux symétries axiales par rapport aux médiatrices des côtés du carré.</p>
+<p>Le symétrique de x par rapport à c est 2*c - x.</p>
+<p>Attention aux décalages alphabétiques qui commencent par 0.</p>
+<p>Le milieu d'une ligne/colonne de longueur 2*n-1 correspond à un décalage de n - 1. Redondance de code, on pourrait utiliser une fonction</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">
+n <span class="op">=</span> <span class="op">-</span><span class="dv">1</span>
+<span class="cf">while</span> n <span class="op">&lt;</span> <span class="dv">0</span> <span class="op">or</span> n <span class="op">&gt;</span> <span class="dv">26</span>:
+    n <span class="op">=</span> <span class="bu">int</span>(<span class="bu">input</span>(<span class="st">&#39;n = &#39;</span>))
+<span class="cf">for</span> y <span class="op">in</span> <span class="bu">range</span>(<span class="dv">2</span><span class="op">*</span>n<span class="dv">-1</span>):
+    <span class="cf">if</span> y <span class="op">&lt;=</span> n <span class="op">-</span> <span class="dv">1</span>:
+        <span class="cf">for</span> x <span class="op">in</span> <span class="bu">range</span>(<span class="dv">2</span><span class="op">*</span>n<span class="dv">-1</span>):
+            <span class="cf">if</span> x  <span class="op">&lt;=</span> n <span class="op">-</span> <span class="dv">1</span>:
+                shift <span class="op">=</span> <span class="bu">min</span>(x,y)
+                <span class="bu">print</span>(<span class="bu">chr</span>(<span class="bu">ord</span>(<span class="st">&#39;a&#39;</span>) <span class="op">+</span> shift), end<span class="op">=</span><span class="st">&#39;&#39;</span>)
+            <span class="cf">else</span>:
+                shift <span class="op">=</span> <span class="bu">min</span>(<span class="dv">2</span><span class="op">*</span>(n<span class="dv">-1</span>)<span class="op">-</span>x, y)
+                <span class="cf">if</span> x <span class="op">&lt;</span> <span class="dv">2</span><span class="op">*</span>n <span class="op">-</span> <span class="dv">2</span>:
+                    <span class="bu">print</span>(<span class="bu">chr</span>(<span class="bu">ord</span>(<span class="st">&#39;a&#39;</span>) <span class="op">+</span> shift), end<span class="op">=</span><span class="st">&#39;&#39;</span>)
+                <span class="cf">else</span>:
+                    <span class="bu">print</span>(<span class="bu">chr</span>(<span class="bu">ord</span>(<span class="st">&#39;a&#39;</span>) <span class="op">+</span> shift), end<span class="op">=</span><span class="st">&#39;</span><span class="ch">\n</span><span class="st">&#39;</span>)
+    <span class="cf">else</span>:
+        <span class="cf">for</span> x <span class="op">in</span> <span class="bu">range</span>(<span class="dv">2</span><span class="op">*</span>n<span class="dv">-1</span>):
+            <span class="cf">if</span> x  <span class="op">&lt;=</span> n <span class="op">-</span> <span class="dv">1</span>:
+                shift <span class="op">=</span> <span class="bu">min</span>(x,<span class="dv">2</span><span class="op">*</span>(n<span class="dv">-1</span>)<span class="op">-</span>y)
+                <span class="bu">print</span>(<span class="bu">chr</span>(<span class="bu">ord</span>(<span class="st">&#39;a&#39;</span>) <span class="op">+</span> shift), end<span class="op">=</span><span class="st">&#39;&#39;</span>)
+            <span class="cf">else</span>:
+                shift <span class="op">=</span> <span class="bu">min</span>(<span class="dv">2</span><span class="op">*</span>(n<span class="dv">-1</span>)<span class="op">-</span>x, <span class="dv">2</span><span class="op">*</span>(n<span class="dv">-1</span>)<span class="op">-</span>y)
+                <span class="cf">if</span> x <span class="op">&lt;</span> <span class="dv">2</span><span class="op">*</span>n <span class="op">-</span> <span class="dv">2</span>:
+                    <span class="bu">print</span>(<span class="bu">chr</span>(<span class="bu">ord</span>(<span class="st">&#39;a&#39;</span>) <span class="op">+</span> shift), end<span class="op">=</span><span class="st">&#39;&#39;</span>)
+                <span class="cf">else</span>:
+                    <span class="bu">print</span>(<span class="bu">chr</span>(<span class="bu">ord</span>(<span class="st">&#39;a&#39;</span>) <span class="op">+</span> shift), end<span class="op">=</span><span class="st">&#39;</span><span class="ch">\n</span><span class="st">&#39;</span>)
+
+<span class="co">&quot;&quot;&quot;               </span>
+<span class="co"> In [12]: (executing lines 630 to 655 of &quot;CorrigeTP1-2015.py&quot;)</span>
+<span class="co"> n = 4</span>
+<span class="co"> aaaaaaa</span>
+<span class="co"> abbbbba</span>
+<span class="co"> abcccba</span>
+<span class="co"> abcdcba</span>
+<span class="co"> abcccba</span>
+<span class="co"> abbbbba</span>
+<span class="co"> aaaaaaa</span>
+<span class="co">&quot;&quot;&quot;</span></code></pre></div>
+<ul>
+<li>Figure 3 Pour obtenir la figure ci-dessous on reprend le code générateur de la figure 2 mais avec un décalage décroissant par rapport à d par exemple au lieu de shift = min(x,y) on écrit shift = n - 1 - min(x,y).</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co">&quot;&quot;&quot;</span>
+<span class="co"> n = 4</span>
+<span class="co"> ddddddd</span>
+<span class="co"> dcccccd</span>
+<span class="co"> dcbbbcd</span>
+<span class="co"> dcbabcd</span>
+<span class="co"> dcbbbcd</span>
+<span class="co"> dcccccd</span>
+<span class="co"> ddddddd</span>
+<span class="co">&quot;&quot;&quot;</span></code></pre></div>
+<ul>
+<li>Figure 4</li>
+</ul>
+<p>Dans le code générateur de de la figure 2, il suffit de remplacer toutes les occurences de min par max.</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co">&quot;&quot;&quot;</span>
+<span class="co"> In [18]: (executing lines 688 to 713 of &quot;CorrigeTP1-2015.py&quot;)</span>
+<span class="co"> n = 4</span>
+<span class="co"> abcdcba</span>
+<span class="co"> bbcdcbb</span>
+<span class="co"> cccdccc</span>
+<span class="co"> ddddddd</span>
+<span class="co"> cccdccc</span>
+<span class="co"> bbcdcbb</span>
+<span class="co"> abcdcba</span>
+<span class="co">&quot;&quot;&quot;</span>                </code></pre></div>
+</div><div id="exercice-43-projet-euler-63" class="slide section level2">
+<h1>Exercice 43 Projet Euler 63</h1>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">n <span class="op">=</span> <span class="dv">0</span>
+<span class="cf">for</span> a <span class="op">in</span> <span class="bu">range</span>(<span class="dv">1</span>, <span class="dv">10</span>):
+    pd <span class="op">=</span> <span class="dv">1</span>
+    pa <span class="op">=</span> a
+    <span class="cf">while</span> pd <span class="op">&lt;=</span> pa:
+        n <span class="op">+=</span> <span class="dv">1</span>
+        pd <span class="op">*=</span> <span class="dv">10</span>
+        pa <span class="op">*=</span> a
+<span class="bu">print</span>(n)
+<span class="co">#réponse : 49</span></code></pre></div>
+</div>
+</body>
+</html>
