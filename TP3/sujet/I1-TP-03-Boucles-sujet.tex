@@ -1,0 +1,1025 @@
+\documentclass[a4paper,10pt]{article}
+
+%Lorsqu'on utilise le moteur eTeX, certaines de ces fonctionnalités sont automatiquement accessibles (c'est le cas de \middle, \numexpr, etc.), mais pas d'autres (c'est le cas des compteurs supplémentaires). Pour activer ces fonctionnalités manquantes, on peut charger le package etex.sty. Ainsi, l'utilisation d'etex.sty est une solution courante au problème d'avoir trop de compteurs définis (c'est le cas si on charge ensemble trop de packages du type tikz, pstricks, xymatrix, ...)
+
+\usepackage{etex}
+
+%%%%Pour la francisation (package Babel appelé  à la fin du préambule)%%%
+\usepackage[utf8]{inputenc} %choix de l'encodage Latin1 ou UTf-8
+\usepackage[T1]{fontenc}
+
+%%%%%%%%%Géométrie de la page, Mise en page %%%%%%%%%%
+\usepackage[a4paper,hmargin=1 cm,bottom=2cm,top=2cm,headheight=15pt]{geometry}
+\usepackage{fancyhdr}
+%%Pour la numerotation des bas de pages avec le compteur lastpage%%%
+\usepackage{lastpage}
+
+%%%%%%%%%%%%%%%%%%¨Puce, Listess%%%%%%%%%%%%%%
+\usepackage{enumerate}
+\usepackage{enumitem}
+%Pour changer la puce de liste dans tout le document :
+%AtBeginDocument{\renewcommand{\labelitemi}{\textbullet}}
+
+%%%%%%%%%%%%%%Fontes et Symboles, Mise en forme%%%%%%%%%%%
+
+%%Divers%%%%
+\usepackage{eurosym}  %pour le symbole de l'euro
+\usepackage{lmodern}
+\usepackage{url} %pour la gestion des adresses web avec la commande \url{}
+\usepackage[np]{numprint}
+%%%%%%%%%%%%Là encore il y a de grosses différences entre le monde anglo-saxon et les francophones.Le séparateur des décimales est un point en anglais et une virgule en français. Leséparateur des milliers est une virgule en anglais et une espace insécable en français. Ilest préférable dutiliser le package numprint (\usepackage{numprint}) qui associé àfrenchb produira la bonne typographie.
+%123456789 = 123456789 \numprint{123456789} = 123 456 789  \numprint{3,1415926535897932384626} = 3,141 592 653 589 793 238 462 6  \numprint{12.34} = 12,34  En plus tu peux préciser les unités de cette façon : \numprint[kg]{12.34} = 12,34 kg ou encore \numprint[\degres C]{22} = 22°C Si tu veux utiliser le raccourci \np{} au lieu de \numprint{}, il te faut charger le package de cette façon : \usepackage[np]{numprint}
+%%%%%%%%%%%
+
+\usepackage{pifont,fourier}
+\usepackage[normalem]{ulem}
+%Commmandes \uuline{} pour un soulignement double
+%\uwave{} pour un soulignement  avec des vagues
+% \sout[} pour barrer et \xout{} pour hachurer
+\usepackage{cancel} %Commande \cancel{} pour barrer en oblique
+
+%%%%%Environnements et symboles spéciaux pour faire joli%%%%%%
+%%%Pour des environnements + jolis avec insertion de logo%%%%
+\usepackage[tikz]{bclogo}
+
+\usepackage{framed}  %Le package « framed» Crée 3 nouveaux environnements, qui se comportent comme des minipage de largeur \linewidth, mais permettant en plus de se casser entre plusieurs pages.     * framed : avec un cadre autour;     * shaded : avec un fonc coloré (il faut définir la couleur shadecolor);     * leftbar : avec une barre le long du côté gauche.
+%%%dont PAckages utilisés par David Robert%%%%%%
+
+\usepackage{xcolor}
+% options : rgb,cmyk,gray,hsb,html pour transformer automatiquement toutes les couleurs du docuement dans le mode choisi
+%\definecolor{mauve}{rgb}{0.7,0,0.43}
+%\color{couleur} bascule
+%\textcolor{couleur}{texte}
+%\pagecolor{couleur}
+%\colorbox{couleur}
+%\fcolorbox{couleur}
+
+
+\usepackage{fancybox}
+
+
+
+%%%%%PAckages pour les Maths%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage[]{amsmath,amsfonts,theorem,amssymb,stmaryrd}
+\usepackage{amscd}
+
+%%%%%%%%%%%%Graphiques%%%%%%%%%%%%%%
+\usepackage{graphicx}		
+%\rotatebox[origin=x0x1]{angle}{texte} avec xox1 parmi t (top) l (left) r (right) B (ligne de base) et b (bottomm)
+%\resizebox{largeur}{hauteur}{texte} pour faire rentrer u nelement encombrant dans une boite					
+%\usepackage{pstricks,pst-plot,pst-text,pst-tree,pst-eps,pst-fill,pst-node,pst-math,pstricks-add,pst-xkey,pst-circ}
+%\begin{picture}(0,0) permet d'insérer n'importe quoi, n'importe où sans prendre de place (utilie pour annoter une figure en eps)
+%Une autre technique est \makebox[0cm][alignement]{texte}
+%Exemple:
+%\includegraphics[scale=1]{singe.eps}
+%\begin{picture}(0,0)
+%\put(-27,10){$\sqrt[3]{8}$}
+%\end{picture}
+\usepackage{pgf,tikz}
+\usetikzlibrary{arrows}
+\usetikzlibrary{shapes.geometric}
+\usetikzlibrary{petri}
+\usetikzlibrary{decorations}
+\usetikzlibrary{arrows}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%Tableaux%%%%%%%%%%%
+\usepackage{tabularx}
+
+\usepackage{multicol}
+%\begin{multicols}[titre]{nb colonnes}
+\setlength{\columnseprule}{0.25pt}
+
+%%%%%%%% Faire de l'air autour d'une fraction (surtout ds un tableau)
+\newcommand{\delair}[1]{\setlength{\fboxrule}{0mm} \fbox{#1}}
+
+
+
+%%%%%%%%%%%%%%%Ecriture d'algorithmes Insertion de code source %%%%%%%%%%%
+
+%%%%%Package verbatim%%%%
+
+\usepackage{verbatim} 
+%LE package verbatim améliore la présentation des verbatim
+% Il  fournit un environnement {comment} pour insérerer des commentaires
+%dans le fichier source sans faire précéder toutes les lignes de %
+
+%%Pour améliorer envore la présentation des verbatim%%%%
+\usepackage{fancyvrb}
+
+%%%%%Package listings%%%%%%%%%%%%
+
+\usepackage{listings}
+%On utilise l?environnement lstlisting pour insérer
+%un code source.
+%En plus de l?environnement lstlisting, on peut également utiliser la
+%commande \lstinline qui fonctionne comme la commande \verb, en ce
+%sens qu?on peut utiliser n?importe quel caractère comme délimiteur. Enfin,
+%la commande \lstinputlisting permet de charger un code source depuis
+%un fichier externe.
+%Il y a deux manières de préciser des options : soit via l?option de l?envi-
+%ronnement ou de la commande, soit en utilisant la commande \lstset
+%qui permet de définir des options de manière globale.
+
+\lstset{ %
+  language=Python,                % the language of the code
+  basicstyle=\normalfont\ttfamily,           % the size of the fonts that are used for the code
+  numbers=left,                   % where to put the line-numbers
+  numberstyle=\tiny,  % the style that is used for the line-numbers
+  %stepnumber=2,                   % the step between two line-numbers. If it's 1, each line 
+                                  % will be numbered
+  %numbersep=5pt,                  % how far the line-numbers are from the code
+  backgroundcolor=\color{white},      % choose the background color. You must add \usepackage{color}
+  showspaces=false,               % show spaces adding particular underscores
+  showstringspaces=false,         % underline spaces within strings
+  showtabs=false,                 % show tabs within strings adding particular underscores
+  %frame=single,                   % adds a frame around the code
+  rulecolor=\color{black},        % if not set, the frame-color may be changed on line-breaks within not-black text (e.g. comments (green here))
+  tabsize=4,                      % sets default tabsize to 2 spaces
+  captionpos=b,                   % sets the caption-position to bottom
+  breaklines=true,                % sets automatic line breaking
+  breakatwhitespace=false,        % sets if automatic breaks should only happen at whitespace
+  %title=\lstname,                   % show the filename of files included with \lstinputlisting;
+                                  % also try caption instead of title
+  breakindent=1cm,
+  keywordstyle=\color{blue},          % keyword style
+  commentstyle=\color{red},       % comment style
+  %stringstyle=\ttfamily\color{green},         % string literal style
+  escapeinside={\%*}{*)},            % if you want to add LaTeX within your code
+  morekeywords={*,...},              % if you want to add more keywords to the set
+  deletekeywords={...}              % if you want to delete keywords from the given language
+  upquote=true,columns=flexible,
+  frame=lines,
+  extendedchars=true,
+xleftmargin=1cm,xrightmargin=1cm
+}
+
+\usepackage[french,vlined]{algorithm2e}
+
+%%%Macros Stephane Gonnord%%%
+%% mes macros à moi, version latex2e
+%% d'apres SG, NH, MM etc.
+
+
+\newenvironment{proof}{{\sc Preuve :}\begin{rm}}{\end{rm}\cqfd}
+\newenvironment{solut}{{\sc Solution :}\begin{rm}}{\end{rm}}
+\newenvironment{rappel}{{\sc Rappel :}\begin{rm}}{\end{rm}}
+
+\newenvironment{fait}{{\sc Fait :}\begin{rm}}{\end{rm}}
+\newenvironment{coro}{{\sc Corollaire :}\begin{rm}}{\end{rm}}
+\newenvironment{propri}{{\sc Propri\'et\'e :}\begin{rm}}{\end{rm}}
+\newenvironment{propris}{{\sc Propri\'et\'es :}\begin{rm}}{\end{rm}}
+
+
+%\newtheorem{exple}{\sc Exemple}[chapter]
+\newtheorem{exple}{\sc Exemple}
+{\theoremstyle{break}
+\newtheorem{exples}[exple]{\sc Exemples}
+}
+%\newtheorem{theo}{\sc Th\'eor\`eme}
+\newtheorem{lemma}{\sc Lemme}
+%\newtheorem{lemma}{\sc Lemme}[chapter]
+\newtheorem{propo}{\sc Proposition}
+{\theorembodyfont{\rmfamily}
+\newtheorem{rema}{\sc Remarque}
+\theoremstyle{break}\newtheorem{remas}[rema]{\sc Remarques}
+}
+
+%{\theoremstyle{break}
+\newtheorem{exo}{\sc Exercice}
+{\theorembodyfont{\rmfamily}\newtheorem{exo-f}{\sc Exercice}}
+%}
+
+%\newtheorem{exo-f}{\sc Exercice}
+
+\newtheorem{theo}{\sc Th\'eor\`eme}
+\newcounter{theocmpt}
+\setcounter{theocmpt}{1}
+\renewenvironment{theo}[1]{
+    \begin{center}
+    \begin{minipage}{15cm}
+{\flushleft\sc Th\'eor\`eme~\thetheocmpt} --- {\it #1}
+
+\vspace{0.2cm}
+%\em
+\begin{tabular}{|l}
+\begin{minipage}{14.5cm}
+}
+{
+\end{minipage}\end{tabular}
+\stepcounter{theocmpt}
+\end{minipage}
+\end{center}
+}
+
+% \newtheorem{exo-p}
+% \newcounter{exocmpt}
+% \setcounter{exocmpt}{1}
+% \renewenvironment{exo-p}[1]{
+%     \begin{center}
+%     \begin{minipage}{15cm}
+% {\flushleft\sc Exercice~\exocmpt} --- {\it #1}
+
+% \vspace{0.2cm}
+% %\em
+% \begin{tabular}{|l}
+% \begin{minipage}{14.5cm}
+% }
+% {
+% \end{minipage}\end{tabular}
+% \stepcounter{exocmpt}
+% \end{minipage}
+% \end{center}
+% }
+
+
+\newtheorem{defi}{\sc D\'efinition}
+\newcounter{defcmpt}
+\setcounter{defcmpt}{1}
+\renewenvironment{defi}[1]{
+    \begin{center}
+    \begin{minipage}{15cm}
+{\flushleft\sc D\'efinition~\thedefcmpt} --- {\it #1}
+
+\vspace{0.2cm}
+%\em
+\begin{tabular}{||l}
+\begin{minipage}{14.5cm}
+}
+{
+\end{minipage}\end{tabular}
+\stepcounter{defcmpt}
+\end{minipage}
+\end{center}
+}
+
+
+%%%% PASSAGE LATEX %%% 
+\newcommand{\dis}{\displaystyle}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\B}{\mathbb{B}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\K}{\mathbb{K}}
+\newcommand{\U}{\mathbb{U}}
+
+
+\renewcommand{\AA}{{\cal A}}
+\newcommand{\BB}{{\cal B}}
+\newcommand{\CC}{{\cal C}}
+\newcommand{\DD}{{\cal D}}
+\newcommand{\EE}{{\cal E}}
+\newcommand{\FF}{{\cal F}}
+\newcommand{\GG}{{\cal G}}
+\newcommand{\HH}{{\cal H}}
+\newcommand{\II}{{\cal I}}
+\newcommand{\KK}{{\cal K}}
+\newcommand{\LL}{{\cal L}}
+\newcommand{\MM}{{\cal M}}
+\newcommand{\NN}{{\cal N}}
+\newcommand{\PP}{{\cal P}}
+\newcommand{\RR}{{\cal R}}
+\renewcommand{\SS}{{\cal S}}
+\newcommand{\TT}{{\cal T}}
+\newcommand{\UU}{{\cal U}}
+\newcommand{\VV}{{\cal V}}
+
+\newcommand{\si}{{\rm si}}
+\newcommand{\sinon}{{\rm sinon}}
+
+
+\renewcommand{\[}{[\![}
+\renewcommand{\]}{]\!]}
+
+
+
+
+
+\renewcommand{\geq}{\geqslant}
+\renewcommand{\leq}{\leqslant}
+
+\newcommand{\dsum}{\sum\limits}
+\newcommand{\dprod}{\prod\limits}
+
+\newcommand{\vect}[1]{\overrightarrow{#1}}
+\newcommand{\vphi}{\varphi}
+\newcommand{\ie}{{\it i.e.\/}\ }
+\newcommand{\etc}{{\it etc.}}
+\newcommand{\eps}{\varepsilon}
+\newcommand{\norme}[1]{\left\|{#1}\right\|}
+\newcommand{\normet}[1]{\left|\!\left|\!\left|#1\right|\!\right|\!\right|}
+\newcommand{\vabs}[1]{\left|{#1}\right|}
+\newcommand{\Frac}[2]{\dis{#1\over#2}}
+
+
+\newcommand{\Ker}{{\rm Ker\,}}
+\renewcommand{\Im}{{\rm Im\,}}
+\newcommand{\Diag}{{\rm Diag}}
+\newcommand{\tr}{\mathop{\rm tr}}
+\newcommand{\GL}{\mathop{\rm GL}}
+\newcommand{\Sp}{\mathop{\rm Sp}}
+\newcommand{\Mat}{\displaystyle\mathop{\rm Mat}}
+\newcommand{\Vect}{\displaystyle\mathop{\rm Vect}}
+\newcommand{\e}{\textup{e}}
+\newcommand{\re}{\textrm{Re}}
+\newcommand{\Pas}{\displaystyle\mathop{\rm Pas}}
+\newcommand{\rg}{{\displaystyle\mathop{\rm rg}}}
+
+\newcommand{\floor}[1]{\lfloor#1\rfloor}
+\newcommand{\ceil}[1]{\lceil#1\rceil}
+\newcommand{\scal}[2]{<\!\!#1|#2\!\!>}
+\newcommand{\scalvide}{<\!\!\cdot|\cdot\!\!>}
+\newcommand{\pa}[1]{\left({#1}\right)}
+
+\renewcommand{\choose}[2]{\binom{#1}{#2}}
+
+
+\newcommand{\Tend}[2]{\mathop{\longrightarrow}\limits_{#1\rightarrow#2}}
+\newcommand{\tend}[1]{{\displaystyle\mathop{\longrightarrow}_{#1}}}
+
+\renewcommand{\=}{\mathop{=}\limits}
+\newcommand{\limenn}{\mathop{\longrightarrow}\limits_{n\rightarrow+\infty}}
+\newcommand{\cvs}{\mathop{\longrightarrow}\limits_{n\rightarrow+\infty}^{cv.s.}}
+\newcommand{\cvu}{\mathop{\longrightarrow}\limits_{n\rightarrow+\infty}^{cv.u.}}
+\newcommand{\Lim}[2]{{\dis\lim_{#1\to#2}}}
+\newcommand{\simlim}{\mathop{\sim}\limits}
+
+\newcommand{\aff}{\leftarrow}
+
+\newcommand\un{{\bf 1}}
+
+
+\newcommand{\conj}[1]{\overline{#1}}
+\newcommand{\Max}[1]{\mathop{\rm Max}\limits_{#1}}
+\newcommand{\Min}[1]{\mathop{\rm Min}\limits_{#1}}
+\newcommand{\Sup}[1]{\mathop{\rm Sup}\limits_{#1}}
+\newcommand{\Inf}[1]{\mathop{\rm Inf}\limits_{#1}}
+
+\renewcommand{\arccos}{{\rm Arccos}}
+\newcommand{\argsh}{{\rm Argsh}}
+\newcommand{\argth}{{\rm Argth}}
+\newcommand{\cotan}{{\rm cotan}}
+
+
+\newcommand{\appli}[5]{{#1}\left|\!\left|\begin{matrix}{#2}&\longrightarrow&{#3\qquad\ }\\{#4}&\longmapsto&{#5}\end{matrix}\right.\right.}
+
+\newcommand{\cqfd}
+{\mbox{}
+\nolinebreak
+\hfill
+\rule{2mm}{2mm}
+\medbreak
+\par}
+
+%%find macros_moi
+
+
+%% guillemets francais
+
+%\newcommand{\g}[1]{\og #1\fg}
+
+\newcommand{\Id}{\mbox{\rm Id}}
+%%%%%%% Fin des Macros de Stéphane Gonnord %%%
+
+
+%%%%%Macros mathématiques complémentaires %%%%
+
+%%%%%%%%%%%Suites%%%%%%%%%%%%
+\newcommand{\suite}[1]{\ensuremath{\left(#1_{n}\right)}}
+\newcommand{\Suite}[2]{\ensuremath{\left(#1\right)_{#2}}}
+%
+
+%%%%%%%%%%Systemes%%%%%%%%%%%
+\newcommand{\sys}[2]{
+\left\lbrace
+ \begin{array}{l}
+  \negthickspace\negthickspace #1\\
+  \negthickspace\negthickspace #2\\
+ \end{array}
+\right.\negthickspace\negthickspace}
+\newcommand{\Sys}[3]{
+\left\lbrace
+ \begin{array}{l}
+  #1\\
+  #2\\
+  #3\\
+ \end{array}
+\right.}
+\newcommand{\Sysq}[4]{
+\left\lbrace
+ \begin{array}{l}
+  #1\\
+  #2\\
+  #3\\
+  #4\\
+ \end{array}
+\right.}
+%
+
+
+%%%%Fin Macros Maths complémentaires%%%%%
+
+
+
+
+%%%%%%%%%%%%%%%Francisation%%%%%%%%%%%%%%
+\usepackage[french]{babel}
+\frenchbsetup{StandardLists=true}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%Flottants%%%%
+%packages qui doivent etre chargés après le package babel
+%car ils utilsient le package caption
+\usepackage{float,afterpage}
+%Deux types de flottants par défaut : figure et table
+%\begin{figure}[préférences de placement dans l'orde de gauche à droite: t,,b,h,p,h!,H]
+%\caption[texte court pour la liste]{légende}
+%Liste des flottants ; \listoffigures ou \listoftables ou  \listeof{flottant}{titre}
+%Placements par défaut pour tout le document: \floatplacement{figure}{t}
+%Légende avec \caption{Légende} suivie de \label{Etiquette}
+%Quand un flottant passe en mode p aucun autre flottant ne peut etre inséré
+%tant qu'une page entire de flottants n'a pas été composée
+%Pour vider le stocke de flottants on utilise la commande \clearpage
+%\clearpage force u nsaut de page et réserve la page suivante aux flottants
+% Pour finir la page en cours, utiliser \afterpage{\clearpage} 
+
+%Défintion de nouveaux flottants
+%\newfloat{nom}{positionnement}{extension du fichier de liste}[compteur d'appui]
+%\newfloat{ex}{hb}{loex}[chapter]
+%\floatname{ex}{\textit{Exemple}} nom dans la légende du flottant
+%\floatstyle{boxed}
+%\listof{ex}{Liste des exemples de code}
+
+\usepackage[section]{placeins}
+%pour que les flottants soient bien inclus dans la section à laquelle ils appartiennent
+
+\begin{document}
+
+
+
+{\bf\noindent Sup 843 - Lycée du parc\hfill TP Python}
+\vskip 2mm
+
+\begin{center}
+\Large
+\Ovalbox{\vbox{Boucles et tests}}
+\vskip 3mm\small D'après un TP de Stéphane Gonnord 
+\end{center}
+
+
+\subsection*{Buts du TP}
+\begin{itemize}
+\item Continuer à dompter l'environnement.
+\item Écrire encore et encore des boucles simples et des tests.
+%\item Essayer de comprendre des programmes qu'on vous fournit.
+\end{itemize}
+\medskip
+
+
+
+\begin{exo}
+  Créer (au bon endroit) un dossier associé à ce TP. Dans ce dossier,
+  placer une copie du
+  fichier \verb+cadeau-tp-boucles.py+ fourni dans le dossier
+  partagé de la classe (ou sur le web).
+
+  Lancer Pyzo, sauvegarder immédiatement le fichier du jour au bon
+  endroit. Écrire une commande absurde, de type \verb+print(5*3)+ dans
+  l'éditeur; sauvegarder et exécuter.
+\end{exo}
+
+\section{Quelques boucles}
+
+\begin{minipage}[t]{0.5\linewidth}
+\begin{exo}
+  Calculer $\dsum_{k=831}^{944}k^{10}$, si possible sans regarder le
+  corrigé du tp précédent... mais en le consultant tout de même  si la
+  difficulté  vous semble insurmontable ! 
+  
+ \end{exo}
+
+Le résultat sera copié collé de l'interpréteur vers
+ le fichier \verb+.py+, et commenté.
+À ce moment du TP, votre feuille de travail dans l'éditeur doit
+contenir quelque chose comme ci-contre :
+
+
+On continue par des boucles basiques pour calculer $a^b$ et $n!$
+
+
+
+
+\end{minipage}\hfill
+\begin{minipage}[t]{0.45\linewidth}
+\begin{verbatim}
+# -*- coding: utf-8 -*-
+
+# Exo 1 : Fait !
+
+# Exo 2 :
+somme = 0
+...
+# >>> somme
+# 36724191150365100572161020220825L
+
+\end{verbatim}
+\end{minipage}
+
+\begin{exo}
+  Calculer $3^{843}$ en appliquant l'algorithme basique suivant :
+
+\begin{algorithm}[H]
+$res\aff1$\\
+\Pour{$i$ de $1$ à $843$}{
+  $res\aff res\times 3$
+   }
+\Res{$res$}
+\end{algorithm}
+Comparer avec le résultat de \verb+3**843+
+\end{exo}
+
+\begin{exo}
+  Calculer $100!$ en appliquant l'algorithme suivant :
+
+\begin{algorithm}[H]
+$res\aff1$\\
+\Pour{$i$ de $2$ à $100$}{
+  $res\aff res\times i$
+   }
+\Res{$res$}
+\end{algorithm}
+
+\medskip
+
+Comparer avec le résultat fourni par la fonction \verb+factorial+ de
+la bibliothèque \verb+math+ :
+
+\medskip
+
+\begin{tabular}{cc@{ ou }ccc@{ ou }cc}
+\begin{minipage}{0.3\linewidth}
+\begin{verbatim}
+>>> import math
+>>> math.factorial(...)
+\end{verbatim}
+\end{minipage}
+&
+&
+&
+\begin{minipage}{0.3\linewidth}
+\begin{verbatim}
+>>> from math import factorial
+>>> factorial(...)
+\end{verbatim}
+\end{minipage}
+&
+&
+&
+\begin{minipage}{0.3\linewidth}
+\begin{verbatim}
+>>> from math import *
+>>> factorial(...)
+\end{verbatim}
+\end{minipage}
+\end{tabular}
+
+\end{exo}
+
+
+\begin{exo}
+
+\begin{enumerate}
+\item On considère la suite $\suite{u}$ définie par $\sys{u_{0}=3}{u_{n+1}=3u_{n}+n}$.
+
+Ecrire un script Python  qui prend en entrée un entier $n$ et qui retourne le terme de rang $n$ de la suite $\suite{u}$. Attention ! Il faudra adapter la formule, cf. correction.
+
+\item On admet que la suite $\suite{v}$ définie par $\sys{v_{0}=1}{v_{n+1}=1+\frac{2}{v_n}}$ est définie pour tout $n \in \N$ et converge vers 2.
+
+Ecrire un script  qui détermine le plus petit entier $p$ tel que $\left |v_{p}-2 \right |<10^{-6}$.
+\end{enumerate}
+
+\end{exo}
+
+\begin{exo}
+Dans l'exercice suivant, on va calculer la somme des chiffres d'un
+gros entier. Si $\vphi(n)$ désigne la somme des chiffres de $n$ (dans
+son écriture décimale...), on a par exemple $\vphi(843)=15$. 
+%On peut voir ça comme $1+\vphi(84)$. 
+Pour calculer 
+$\vphi(1234567654398)$, on
+peut prendre une variable \verb+somme+ dans laquelle on va sommer les
+décimales, en les faisant parallèlement disparaître du nombre
+initial. Par exemple, $n=1234567654398$ et $somme=0$ au départ. Après
+une étape, $n=123456765439$ et $somme=8$; après deux étapes, 
+$n=12345676543$ et $somme=17$... et après $13$ étapes, $n=0$ et $s=63$
+: la somme vaut $63$. L'idée est, à chaque étape, de faire passer la
+dernière décimale de $n$ dans la somme, \emph{puis} de la faire
+disparaître de $n$.
+
+\emph{Project Euler, problème numéro 20}\\
+  Calculer la somme des décimales de $100!$ de la façon suivante :
+
+\begin{algorithm}[H]
+$somme\aff0$\\ $n\aff100!$\\
+\Tq{$n>0$}{
+  $somme\aff somme+(n\%10)$\\$n\aff n//10$
+   }
+\Res{$somme$}
+\end{algorithm}
+\end{exo}
+
+%\newpage
+
+\begin{exo}
+Pour chaque script déterminer le nombre d'étoiles affichées :
+
+\begin{tabular}{|*{2}{p{0.45\linewidth}|}}
+\hline
+\begin{verbatim}
+#Script 1
+i, j = 100, 100
+while i> 0:
+    i = i-1
+    print('*')
+    while j>0:
+        j = j-1
+        print('*')    
+\end{verbatim}
+
+&
+
+\begin{verbatim}
+#Script 2
+i = 100    
+while i> 0:
+    i = i-1
+    print('*')
+    j = 100
+    while j>0:
+        j = j-1
+        print('*')        
+\end{verbatim}
+
+\\
+\hline
+\begin{verbatim}
+#Script 3
+i = 100    
+while i> 0:
+    i = i-1
+    j = 100
+    while j>0:
+        j = j-1
+        print('*')       
+\end{verbatim}
+
+&
+
+\begin{verbatim}
+#Script 4
+i, j = 100, 50    
+while i>j:
+    i = i-1
+    print('*')
+    while j>0:
+        j = j-1
+        print('*')
+    j = 50
+\end{verbatim}
+\\
+\hline
+\end{tabular}
+\end{exo}
+
+
+
+
+
+\begin{exo}\label{fibo} \emph{Suite de Fibonacci.}\\
+La suite de Fibonacci est définie par $f_0=0$, $f_1=1$ et pour tout
+$n\in\N$, $f_{n+2}=f_n+f_{n+1}$.
+\begin{multicols}{2}
+\begin{itemize}
+\item Calculer $f_n$ à la main, pour $n\leq10$.
+\item Écrire un algorithme permettant de calculer $f_{100}$.
+\item Programmer cet algorithme en Python.
+\item Que vaut finalement $f_{100}$ ? Et $f_{1000}$ ?
+\end{itemize}
+\end{multicols}
+Pour ceux qui sèchent, un algorithme est proposé en dernière
+  partie de TP.
+\end{exo}
+
+
+
+\begin{exo} \emph{Algorithme d'Euclide}
+
+
+
+\begin{enumerate}
+
+\item L'algorithme  des différences permet de déterminer le PGCD de deux entiers.
+
+Le tableau ci-dessous donne un exemple d'exécution pour déterminer le PGCD noté  $a \wedge b$ des entiers $a=75$ et $b=30$.
+
+\begin{center}
+\begin{tabular}{|c|c|c|}
+\hline 
+a & b & différence \\ 
+\hline 
+$75$ & $30$ & $45$ \\ 
+\hline 
+$45$ & $30$ & $15$ \\ 
+\hline 
+$30$ & $15$ & $15$ \\ 
+\hline 
+$15$ & $15$ & $0$ \\ 
+\hline 
+\end{tabular} 
+\end{center}
+
+
+Écrire un programme en Python implémentant ce premier  algorithme de calcul du PGCD de deux entiers.
+
+\item Un autre algorithme connu pour déterminer le PGCD utilise la propriété arithmétique suivante de la division euclidienne : 
+
+si $a=qb + r$ avec $0 \leqslant r < b$ alors  $a \wedge b = b \wedge r$.
+
+Écrire un programme en Python implémentant ce second algorithme de calcul du PGCD de deux entiers.
+ 
+\end{enumerate}
+
+
+\end{exo}
+
+%\begin{exo}\label{recurrente2}
+
+%On considère la suite $\suite{u}$ définie par $\sys{u_{0}=1, \, u_{1}=2}{u_{n+2}=u_{n+1}\times\sqrt{n+1} + \text{min}\left(u_{n},n\right)}$.
+%
+%\begin{enumerate}
+%\item Ecrire un script Python qui calcule le terme de rang $n$ de la suite.
+%\item On admet que $\suite{u}$ diverge vers $+\infty$. 
+%Ecrire un script qui détermine le plus petit entier $p$ tel que $u_p > 10^{6}$.
+%\end{enumerate}
+
+%\end{exo}
+
+\begin{exo} \emph{Project  Euler problem 9}
+
+
+
+A Pythagorean triplet is a set of three natural numbers, $a < b < c$, for which,
+$a^2 + b^2 = c^2$
+
+For example, $3^2 + 4^2 = 9 + 16 = 25 = 5^2$.
+
+There exists exactly one Pythagorean triplet for which $a + b + c = 1000$.
+
+Find the product $abc$.
+
+\end{exo}
+
+
+
+
+\section{Autour des nombres premiers}
+\begin{exo}
+  Importer la fonction \verb+est_premier+ du fichier
+  \verb+cadeau_tp_boucles.py+ et exécuter :
+\begin{verbatim}
+from cadeau_tp_boucles import est_premier
+
+for n in range(20):
+    if est_premier(n):
+        print(n)
+\end{verbatim}
+\end{exo}
+
+\begin{exo} \emph{Un peu de complexité}\\
+Lire le code de la fonction \verb+est_premier+ : combien
+réalise-t-elle d'«~opérations élémentaires~» lorsqu'elle est exécutée
+avec en entrée un entier pair ? Et un entier premier ?
+\end{exo}
+
+
+\begin{exo} \emph{Complexité à la louche (difficile)}
+
+  Sachant que «à la louche, la proportion d'entiers $\leq N$ qui sont
+  premiers est de l'ordre de $\frac{1}{\ln N}$~», évaluer le nombre
+  d'opérations élémentaires 
+  nécessaires pour tester la primalité des entiers $\leq N$.
+
+  Pour $N=10^6$, le calcul va-t-il prendre un temps de l'ordre du
+  pouillème de seconde, de la minute, ou de la journée ? 
+\end{exo}
+
+
+
+
+\begin{multicols}{2}
+
+\begin{exo}
+
+  Combien il y a-t-il d'entiers plus petits que $100$ qui sont
+  premiers ? Même 
+  chose pour les entiers majorés par $10^4$ puis $10^6$.
+\end{exo}
+
+
+\begin{exo}
+
+  Combien existe-t-il de $n\leq10^6$ tels que $n$ et $n+2$
+  sont premiers ?
+\end{exo}
+
+
+
+\columnbreak
+
+
+\begin{algorithm}[H]
+$cpt\aff0$\\
+\Pour{$n$ allant de $1$ à ...}{
+  \Si{$n$ est premier}{$cpt\aff cpt+1$}
+   }
+\Res{$cpt$}
+\end{algorithm}
+
+\end{multicols}
+
+\begin{exo}
+
+  Trouver le plus petit entier $n$ supérieur à $10^{10}$ tel que 
+ $n$ et  $n+2$ sont premiers.
+\end{exo}
+
+\begin{exo} %\emph{Seulement pour ceux qui ont de l'avance !}
+  Compter précisément
+  le nombre de divisions euclidiennes effectuées pour tester
+  la primalité des entiers majorés par $10^6$.
+\end{exo}
+
+\section{Observons une suite d'entiers}
+On s'intéresse ici à la suite définie par son premier terme $u_0=42$
+puis la relation de récurrence $u_{n+1}=15091u_n\mod64007$ pour tout
+$n\in\N$.
+\begin{exo}\label{suite}
+  Que vaut $u_1$ ? Et $u_{10}$ ? Et $u_{10^6}$ ?
+\end{exo}
+
+\begin{exo}\label{suitebis}
+  Compter le nombre de $n\leq10^{7}$ vérifiant les conditions
+  suivantes :
+  \begin{multicols}{3}
+  \begin{enumerate}
+  \item $u_n$ est pair;
+  \item $u_n$ est premier;
+  \item $u_n\mod 3=1$;
+  \item $u_n\mod 3=1$ et $u_n$ est premier;
+  \item $u_n$ est pair et $u_n$ est premier;
+  \item $n$ est pair et $u_n$ est premier.
+  \end{enumerate}
+  \end{multicols}
+\end{exo}
+
+\section{Autour de la multiplication et l'exponentiation modulaire}
+\begin{exo}
+  Sans calculatrice : quelle est la dernière décimale de $17\times923$
+  ?\\
+  Quelle est la dernière décimale de 
+$123345678987654\times 836548971236$ ?
+\end{exo}
+Donc finalement : \emph{pour connaître $ab\mod10$, on
+  fait le produit de $a\mod 10$ par $b\mod 10$, et on regarde ce
+  produit modulo $10$.}
+
+On montrerait sans problème que ce résultat reste valable modulo
+n'importe quel entier. De même, pour calculer $a^b\mod c$, on peut
+faire $b$ multiplications par $a$ et réduire modulo $c$ à chaque
+étape.
+
+\begin{algorithm}[H] 
+$res\aff1$\\
+\Pour{$i$ de $1$ à $b$}{
+  $res\aff res\times a \mod c$
+   }
+\Res{$res$}
+\end{algorithm}
+\begin{exo}\label{puis}
+  Expliquer l'intérêt de cette façon de procéder par rapport à la
+  version «on calcule $a^b$, puis on réduit le résultat modulo $c$».
+  Calculer ainsi $123456^{654321}\mod1234567$.
+\end{exo}
+
+
+\begin{exo}\label{p48} \emph{Project Euler : problem 48}\\
+  The series, $1^1 + 2^2 + 3^3 + \cdots + 10^{10} = 10405071317$.
+Find the last ten digits of the series, 
+$1^1 + 2^2 + 3^3 + \cdots + 1000^{1000}.$
+
+\end{exo}
+
+
+
+\section{Pour ceux qui s'ennuient}
+%\begin{exo}\label{wilson}
+%  Vérifier le théorème de \emph{Wilson}, pour $p\leq10^4$ : \emph{Un entier $p$ est premier si et seulement si $p$ divise $(p-1)!+1$.}
+%\end{exo}
+%
+
+
+
+\begin{exo} \label{tombola}
+
+Pour une tombola, on a vendu tous les billets numérotés $1, 2, 3, \ldots , n$ où $n$ est un entier supérieur ou égal à $\np{2016}$.
+
+On détermine les numéros des billets gagnants de la façon suivante : on écrit de gauche à droite la liste des entiers
+de $1$ à $n$ sur un tableau puis on passe en revue cette liste dans l'ordre croissant en effaçant les entiers qui sont les triples des nombres non effacés. On obtient donc la liste dont les premiers nombres sont :
+$
+1, \, 2, \, 4,  \, 5,\, 7,\, 8,\, 9, \,10, 11, \,13, \,14, \,16, \,17, \,18, \ldots
+$.
+On décide que les numéros effacés sont les gagnants. Les autres sont perdants.
+\begin{enumerate}
+\item Justifier que le numéro $100$ est perdant. En déduire que $300$ est gagnant.Le numéro $\np{2016}$ est-il perdant ou gagnant ?
+
+Démontrer que si le numéro $a$ est perdant alors le numéro $9a$ l'est également.Le numéro $729$ est-il gagnant ou perdant ?
+
+Parmi les numéros qui sont des puissances de $3$, lesquels sont perdants ?
+
+\item  Écrire en Python une fonction \verb+gagnant(m)+ qui retourne \verb+True+ si l'entier $m\geqslant 1$ est gagnant et \verb+False+ sinon. 
+
+\item Écrire en Python une fonction \verb+nombre_gagnant(n)+ qui retourne le nombre de gagnants parmi les entiers $m$ tels que $1 \leqslant m \leqslant n$.
+
+Si le temps d'exécution dépasse dix secondes pour $m = 10^{9}$, il faut revoir l'algorithme utilisé \ldots
+
+\begin{verbatim}
+>>> nombre_gagnant(2016), nombre_gagnant(10**9)
+504, 249999999
+\end{verbatim}
+
+\end{enumerate}
+
+\end{exo}
+
+\begin{exo} \label{projetEuler39} \emph{Project Euler : problem 39} 
+
+If p is the perimeter of a right angle triangle with integral length sides, \{a,b,c\}, there are exactly three solutions for p = 120.
+
+\{20,48,52\}, \{24,45,51\}, \{30,40,50\} For which value of p $\leqslant$ 1000, is the number of solutions maximised?
+
+\end{exo}
+
+\section{Besoin d'indications ?}
+\begin{itemize}
+
+
+\item Exercice \ref{fibo}. On calcule les valeurs du couple
+  $(f_k,f_{k+1})$ pour $k$ allant de $0$ à $99$. L'idée est que si
+  $(f_k,f_{k+1})=(a,b)$, alors au rang suivant : 
+  $(f_{k+1},f_{k+2})=(b,a+b)$, ce qui donne un algorithme assez simple
+  :
+
+\begin{algorithm}[H]
+$(a,b)\aff(0,1)$\\
+\Pour{$k$ de $1$ à $99$}{\# À l'entrée $(a,b)=(f_{k-1},f_k)$\\
+  $(a,b) \aff (b,a+b)$ \# Et à la sortie $(a,b)=(f_k,f_{k+1})$
+   }
+\Res{$b$}
+\end{algorithm}
+On trouvera $f_{100}=354224848179261915075$ et 
+$f_{1000}=434665...849228875$.
+\item Exercice \ref{suite}. On a $u_1=57750$, 
+$u_{10}=52866$ et $u_{10^6}=14919$.
+\item Exercice \ref{suitebis}. On calcule les termes de proche en
+  proche, en mettant à jour $6$ compteurs :
+
+\begin{algorithm}[H]
+$(c_1,c_2,....,c_6)\aff(0,0,...,0)$\\
+$x\aff42$ \# $x$ va représenter le terme courant $u_n$\\
+\Pour{$n$ de $0$ à $10^6$}
+{\# On traite ici $u_n$\\
+\Si{$x\mod 2 = 0$}{$c_1\aff c_1+1$}
+\Si{...}{...}
+...\\
+\Si{...}{$c_6\aff c_6+1$}
+$x\aff15091 x\mod64007$  \# Calcul du terme suivant
+   }
+\Res{$(c_1,...,c_6)$}
+\end{algorithm}
+%\item Exercice \ref{puis}. On trouvera $1075259$.
+\item Exercice \ref{p48}. Il s'agit de calculer cette somme (mais
+  aussi chaque terme) modulo $10^{10}$.
+%\item Exercice \ref{wilson}. On calcule $(p-1)!$ directement modulo
+%  $p$.
+
+\item Exercice \ref{tombola}. Pour chaque puissance impaire de $3$ inférieure ou égale à $m$, on dénombre les entiers $3^{2k+1}\times a$ avec $a$ non divisible par $3$. 
+
+\item Exercice \ref{projetEuler39} Mémoizer dans un tableau/liste  les décompositions déjà trouvées.
+
+\end{itemize}
+
+\end{document}
+

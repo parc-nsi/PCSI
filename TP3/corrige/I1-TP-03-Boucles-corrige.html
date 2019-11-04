@@ -1,0 +1,515 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+ "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <meta name="author" content="Chenevois-Jouhet-Junier-Rebout" />
+  <title>Corrigé du TP 03 Boucle</title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+  </style>
+  <link rel="stylesheet" type="text/css" media="screen, projection, print"
+    href="http://www.w3.org/Talks/Tools/Slidy2/styles/slidy.css" />
+  <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_CHTML-full" type="text/javascript"></script>
+  <script src="http://www.w3.org/Talks/Tools/Slidy2/scripts/slidy.js"
+    charset="utf-8" type="text/javascript"></script>
+</head>
+<body>
+<div class="slide titlepage">
+  <h1 class="title">Corrigé du TP 03 Boucle</h1>
+  <p class="author">
+Chenevois-Jouhet-Junier-Rebout
+  </p>
+</div>
+<div class="slide section level2">
+
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"></code></pre></div>
+</div>
+<div id="quelques-boucles" class="titleslide slide section level1"><h1>Quelques boucles</h1></div><div id="import-de-bibliothèquesmodules" class="slide section level2">
+<h2>Import de bibliothèques/modules</h2>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="im">import</span> math</code></pre></div>
+</div><div id="exercice-2" class="slide section level2">
+<h2>Exercice 2</h2>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">s <span class="op">=</span> <span class="dv">0</span>
+<span class="cf">for</span> k <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">831</span>, <span class="dv">945</span>):
+    s <span class="op">+=</span> k<span class="op">**</span><span class="dv">10</span> <span class="co">#ou s = s + k**10</span>
+    
+<span class="co">&quot;&quot;&quot;</span>
+<span class="co">&gt;&gt;&gt; s</span>
+<span class="co">36724191150365100572161020220825</span>
+<span class="co">&quot;&quot;&quot;</span></code></pre></div>
+</div><div id="exercice-3" class="slide section level2">
+<h2>Exercice 3</h2>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">res <span class="op">=</span> <span class="dv">1</span>
+<span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, <span class="dv">844</span>):
+    res <span class="op">=</span> res <span class="op">*</span> <span class="dv">3</span>
+    
+<span class="co">&quot;&quot;&quot;</span>
+<span class="co">&gt;&gt;&gt; res-3**843</span>
+<span class="co">0</span>
+<span class="co">&quot;&quot;&quot;</span></code></pre></div>
+</div><div id="exercice-4" class="slide section level2">
+<h2>Exercice 4</h2>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">facto100 <span class="op">=</span> <span class="dv">1</span>
+<span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">2</span>, <span class="dv">101</span>):
+    facto100 <span class="op">=</span> facto100 <span class="op">*</span> i
+<span class="co">&quot;&quot;&quot;</span>
+<span class="co">&gt;&gt;&gt; facto100</span>
+<span class="co">933262154439....16864000000000000000000000000</span>
+<span class="co">&gt;&gt;&gt; import math</span>
+<span class="co">&gt;&gt;&gt; facto100 - math.factorial(100)</span>
+<span class="co">0</span>
+<span class="co">&quot;&quot;&quot;</span></code></pre></div>
+<h3 id="exercice-5">Exercice 5</h3>
+<p>Calcul du terme de rang <span class="math inline">\(n\)</span> de <span class="math inline">\(u(0)=3\)</span> et <span class="math inline">\(u(n+1)=3\times u(n)+n\)</span>. On trouve <span class="math inline">\(u(0)=3\)</span>, <span class="math inline">\(u(1)=9\)</span>, <span class="math inline">\(u(2)=28\)</span> </p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">n <span class="op">=</span> <span class="bu">int</span>(<span class="bu">input</span>(<span class="st">&#39;Entrez un entier n : &#39;</span>))
+u <span class="op">=</span> <span class="dv">3</span>
+<span class="cf">for</span> k <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, n<span class="op">+</span><span class="dv">1</span>):
+    u <span class="op">=</span> <span class="dv">3</span><span class="op">*</span>u <span class="op">+</span> k <span class="op">-</span> <span class="dv">1</span>
+<span class="bu">print</span>(<span class="st">&#39;u(</span><span class="sc">{:d}</span><span class="st">)=</span><span class="sc">{:d}</span><span class="st">&#39;</span>.<span class="bu">format</span>(n, u))</code></pre></div>
+<p>Soit la suite <span class="math inline">\(\left(v_{n}\right)\)</span> définie par <span class="math inline">\(v(0) = 1\)</span> et pour tout entier <span class="math inline">\(n \geqslant 0\)</span>, <span class="math inline">\(v(n+1)=1+2/v(n)\)</span>. Algorithme de seuil pour déterminer le plus petit indice <span class="math inline">\(p\)</span> tel que <span class="math inline">\(\left|v(p) - 2 \right| &lt; 10^{-6}\)</span>.</p>
+<p>On trouve <span class="math inline">\(v(21)=2,00000072\)</span></p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">n <span class="op">=</span> <span class="dv">0</span>
+v <span class="op">=</span> <span class="dv">1</span>
+<span class="cf">while</span> <span class="bu">abs</span>(v <span class="op">-</span> <span class="dv">2</span>) <span class="op">&gt;=</span> <span class="fl">1e-6</span>:
+    n <span class="op">+=</span> <span class="dv">1</span>
+    v <span class="op">=</span> <span class="dv">1</span> <span class="op">+</span> <span class="fl">2.0</span><span class="op">/</span>v
+<span class="bu">print</span>(<span class="st">&#39;v(</span><span class="sc">{:d}</span><span class="st">)=</span><span class="sc">{:1.8f}</span><span class="st">&#39;</span>.<span class="bu">format</span>(n,v))</code></pre></div>
+</div><div id="exercice-6-projet-euler-problème-20" class="slide section level2">
+<h2>Exercice 6 Projet Euler Problème 20</h2>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">
+somme_dec <span class="op">=</span> <span class="dv">0</span>
+n <span class="op">=</span> math.factorial(<span class="dv">100</span>)
+<span class="cf">while</span> n <span class="op">&gt;</span> <span class="dv">0</span>:
+    somme_dec <span class="op">+=</span> n<span class="op">%</span><span class="dv">10</span>
+    n <span class="op">=</span> n<span class="op">//</span><span class="dv">10</span>
+<span class="bu">print</span>(somme_dec)
+
+<span class="co">&quot;&quot;&quot;</span>
+<span class="co">&gt;&gt;&gt; somme_dec</span>
+<span class="co">648</span>
+<span class="co">&quot;&quot;&quot;</span></code></pre></div>
+</div><div id="exercice-7" class="slide section level2">
+<h2>Exercice 7</h2>
+<ul>
+<li><p>Script 1 : la boucle externe est exécutée <span class="math inline">\(100\)</span> fois, à chaque itération elle affiche une <code>*</code> et la boucle interne est exécutée une seule fois où elle affiche <span class="math inline">\(100\)</span> '*' soit un total de <span class="math inline">\(200\)</span> <code>*</code></p></li>
+<li><p>Script 2 : la boucle externe est exécutée <span class="math inline">\(100\)</span> fois, à chaque itération elle affiche une <code>*</code> et la boucle interne est exécutée <span class="math inline">\(100\)</span> fois et à chaque itération de la boucle externe elle affiche <span class="math inline">\(100\)</span> <code>*</code> soit un total de <span class="math inline">\(100+100 \times 100 = 101 \times 100\)</span> <code>*</code></p></li>
+<li><p>Script 3: la boucle externe est exécutée <span class="math inline">\(100\)</span> fois, à chaque itération elle n'affiche aucune <code>*</code> et la boucle interne est exécutée <span class="math inline">\(100\)</span> fois à chaque itération de la boucle externe elle affiche <span class="math inline">\(100\)</span> <code>*</code> soit un total de <span class="math inline">\(100 \times 100\)</span> <code>*</code></p></li>
+<li><p>Script 4: la boucle externe est exécutée <span class="math inline">\(50\)</span> fois, à chaque itération elle affiche une <code>*</code> et la boucle interne est exécutée <span class="math inline">\(50\)</span> fois à chaque itération de la boucle externe elle affiche 50 <code>*</code> soit un total de <span class="math inline">\(50 \times (1+50)\)</span> <code>*</code></p></li>
+</ul>
+</div><div id="exercice-8" class="slide section level2">
+<h2>Exercice 8</h2>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">
+n <span class="op">=</span> <span class="bu">int</span>(<span class="bu">input</span>(<span class="st">&#39;Entre le rang n : &#39;</span>))
+f0, f1 <span class="op">=</span> <span class="dv">0</span>, <span class="dv">1</span>
+<span class="cf">for</span> k <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, n<span class="op">+</span><span class="dv">1</span>):
+    f0, f1 <span class="op">=</span> f1, f0<span class="op">+</span>f1
+<span class="bu">print</span>(<span class="st">&#39;fibo(</span><span class="sc">{:d}</span><span class="st">)=</span><span class="sc">{:d}</span><span class="st">&#39;</span>.<span class="bu">format</span>(k,f0))
+
+<span class="co">&quot;&quot;&quot;</span>
+<span class="co">&gt;&gt;&gt; (executing cell &quot;EXO 8 #########&quot; (line 92 of &quot;tp-python-sup-2015-03.py&quot;))</span>
+<span class="co">Entre le rang n : 0</span>
+<span class="co">fibo(0)=0</span>
+
+<span class="co">&gt;&gt;&gt; (executing cell &quot;EXO 8 #########&quot; (line 92 of &quot;tp-python-sup-2015-03.py&quot;))</span>
+<span class="co">Entre le rang n : 100</span>
+<span class="co">fibo(100)=354224848179261915075</span>
+
+<span class="co">&gt;&gt;&gt; (executing cell &quot;EXO 8 #########&quot; (line 92 of &quot;tp-python-sup-2015-03.py&quot;))</span>
+<span class="co">Entre le rang n : 1000</span>
+<span class="co">fibo(1000)=43466557686937456435...5166849228875</span>
+<span class="co">&quot;&quot;&quot;</span></code></pre></div>
+</div><div id="exercice-9-algorithme-deuclide" class="slide section level2">
+<h2>Exercice 9 : algorithme d'Euclide</h2>
+<ul>
+<li>Algorithme des différences</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">
+<span class="kw">def</span> euclide_difference(a, b):
+    <span class="cf">while</span> a <span class="op">!=</span> b:
+        <span class="cf">if</span> b <span class="op">&gt;</span> a: <span class="co">#on doit avoir a &gt;= b pour que a - b &gt;= 0</span>
+            a, b <span class="op">=</span> b, a
+        a, b <span class="op">=</span> b, a <span class="op">-</span> b
+    <span class="cf">return</span> a
+
+<span class="co">&quot;&quot;&quot;</span>
+<span class="co">In [10]: [euclide_difference(30, k) for k in range(1, 20)]</span>
+<span class="co">Out[10]: [1, 2, 3, 2, 5, 6, 1, 2, 3, 10, 1, 6, 1, 2, 15, 2, 1, 6, 1]</span>
+<span class="co">&quot;&quot;&quot;</span></code></pre></div>
+<ul>
+<li>Algorithme classique</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">
+<span class="kw">def</span> euclide_classique(a, b):
+    <span class="cf">while</span> b <span class="op">!=</span> <span class="dv">0</span>:
+        a, b <span class="op">=</span> b, a<span class="op">%</span>b
+    <span class="cf">return</span> a
+
+<span class="co">&quot;&quot;&quot;</span>
+<span class="co">In [13]: [euclide_classique(30, k) for k in range(1, 20)]</span>
+<span class="co">Out[13]: [1, 2, 3, 2, 5, 6, 1, 2, 3, 10, 1, 6, 1, 2, 15, 2, 1, 6, 1]</span>
+<span class="co">&quot;&quot;&quot;</span></code></pre></div>
+</div><div id="exercice-10-projet-euler-problème-9" class="slide section level2">
+<h2>Exercice 10 : Projet Euler problème 9</h2>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">a, trouve <span class="op">=</span> <span class="dv">1</span>, <span class="va">False</span>
+
+<span class="co">#a&lt;b&lt;c et a+b+c=1000 donc a&lt;1000//3 et 1000 - (a+b) &gt; b</span>
+
+<span class="cf">while</span> <span class="kw">not</span> trouve <span class="kw">and</span> a <span class="op">&lt;</span> <span class="dv">1000</span><span class="op">//</span><span class="dv">3</span>:
+    b <span class="op">=</span> a<span class="op">+</span><span class="dv">1</span>    
+    <span class="cf">while</span> <span class="kw">not</span> trouve <span class="kw">and</span> b <span class="op">&lt;</span> (<span class="dv">1000</span> <span class="op">-</span> a)<span class="op">//</span><span class="dv">2</span>:
+        c <span class="op">=</span> <span class="dv">1000</span> <span class="op">-</span> a <span class="op">-</span> b
+        <span class="cf">if</span> c<span class="op">**</span><span class="dv">2</span> <span class="op">==</span> a<span class="op">**</span><span class="dv">2</span> <span class="op">+</span> b<span class="op">**</span><span class="dv">2</span>:
+            trouve <span class="op">=</span> <span class="va">True</span>
+            produit <span class="op">=</span> a<span class="op">*</span>b<span class="op">*</span>c
+        b <span class="op">+=</span> <span class="dv">1</span>
+    a <span class="op">+=</span> <span class="dv">1</span>
+<span class="bu">print</span>(<span class="st">&#39;</span><span class="sc">{0:}</span><span class="st"> + </span><span class="sc">{1:}</span><span class="st">+ </span><span class="sc">{2:}</span><span class="st"> = 1000 et </span><span class="sc">{0:}</span><span class="st">**2 + </span><span class="sc">{1:}</span><span class="st">**2 = </span><span class="sc">{2:}</span><span class="st">**2 \</span>
+<span class="st">et produit = </span><span class="sc">{3:}</span><span class="st">&#39;</span>.<span class="bu">format</span>(a<span class="dv">-1</span> , b<span class="dv">-1</span> , c, produit))
+
+<span class="co">#200 + 375+ 425 = 1000 et 200**2 + 375**2 = 425**2 et produit = 31875000</span></code></pre></div>
+</div>
+<div id="autour-des-nombres-premiers" class="titleslide slide section level1"><h1>Autour des nombres premiers</h1></div><div id="exercice-11" class="slide section level2">
+<h2>Exercice 11</h2>
+<p>Dans une fonction si chaque clause se termine par un <code>return</code> on n'a pas besoin d'une structure <code>if elif else</code>. Si une clause est réalisée, le <code>return</code> fait sortir de la fonction et ce qui suit n'est pas exécuté.</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="im">from</span> math <span class="im">import</span> sqrt
+
+<span class="kw">def</span> est_premier(n):
+    <span class="co">&#39;&#39;&#39;test de primalité&#39;&#39;&#39;</span>
+    <span class="cf">if</span> n <span class="op">&lt;=</span> <span class="dv">1</span>:
+        <span class="cf">return</span> <span class="va">False</span>
+    <span class="cf">for</span> d <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">2</span>, <span class="bu">int</span>(sqrt(n)) <span class="op">+</span> <span class="dv">1</span>):
+        <span class="cf">if</span> n<span class="op">%</span>d <span class="op">==</span> <span class="dv">0</span>:
+            <span class="cf">return</span> <span class="va">False</span>
+    <span class="cf">return</span> <span class="va">True</span>
+
+<span class="cf">for</span> n <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">20</span>):
+    <span class="cf">if</span> est_premier(n):
+        <span class="bu">print</span>(n, end<span class="op">=</span><span class="st">&#39;,&#39;</span>)</code></pre></div>
+</div><div id="exercice-12" class="slide section level2">
+<h2>Exercice 12</h2>
+<ul>
+<li><p>Si <span class="math inline">\(n\)</span> est pair, un ou deux tests sont effectués et une division euclidienne.</p></li>
+<li><p>Si <span class="math inline">\(n\)</span> est premier, environ <span class="math inline">\(\lfloor \sqrt{n} \rfloor\)</span> tests et divisions euclidiennes sont effectués.</p></li>
+</ul>
+</div><div id="exercice-13" class="slide section level2">
+<h2>Exercice 13</h2>
+<ul>
+<li><p>Pour les entiers premiers, le coût de traitement sera de l'ordre de : <span class="math inline">\(N/(\ln(N))\times \sqrt{N}\)</span>, soit <span class="math inline">\(10^{9}/(6\ln(10))\)</span> pour <span class="math inline">\(N=10^{6}\)</span> : c'est acceptable. Un microprocesseur à 2,5 GHz peut réaliser un milliard de cycles par seconde donc si un cycle peut réaliser 4 unités de calculs en virgule flottantes, il peut réaliser 10 milliards de ces opérations par secondes soit 10 <strong>gigaflops</strong>. La puissance de calcul peut être estimée grossièrement par la formule <em>puissance = fréquence <span class="math inline">\(\times\)</span> nombre d’opérations simultanées <span class="math inline">\(\times\)</span> nombre de coeurs</em> Voir <a href="https://interstices.info/idee-recue-comparer-la-puissance-de-deux-ordinateurs-cest-facile/" class="uri">https://interstices.info/idee-recue-comparer-la-puissance-de-deux-ordinateurs-cest-facile/</a> pour plus de détails.</p></li>
+<li><p>C'est plus difficile à évaluer pour les composés : certains auront un coût proche de <span class="math inline">\(\sqrt{N}\)</span>, mais ils seront peu nombreux. La plupart auront un premier diviseur faible, donc on peut espérer un coût qui soit plus proche de <span class="math inline">\(N\)</span> ou <span class="math inline">\(N\ln(N)\)</span> que de <span class="math inline">\(N^{3/2}\)</span>. Finalement le terme dominant dans la complexité est représenté par les entiers premiers.</p></li>
+</ul>
+</div><div id="exercice-14" class="slide section level2">
+<h2>Exercice 14</h2>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="cf">for</span> nmax <span class="kw">in</span> [<span class="dv">10</span><span class="op">**</span><span class="dv">2</span>, <span class="dv">10</span><span class="op">**</span><span class="dv">4</span>, <span class="dv">10</span><span class="op">**</span><span class="dv">6</span>]:
+    cpt <span class="op">=</span> <span class="dv">0</span>
+    <span class="cf">for</span> n <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>,nmax<span class="op">+</span><span class="dv">1</span>):
+        <span class="cf">if</span> est_premier(n):
+            cpt <span class="op">+=</span> <span class="dv">1</span>
+    <span class="bu">print</span>(<span class="st">&#39; </span><span class="sc">{:d}</span><span class="st"> entiers premiers &lt;= </span><span class="sc">{:d}</span><span class="st">&#39;</span>.<span class="bu">format</span>(cpt, nmax))</code></pre></div>
+<ul>
+<li>25 entiers premiers <span class="math inline">\(\leqslant\)</span> 100</li>
+<li>1229 entiers premiers <span class="math inline">\(\leqslant\)</span> 10000</li>
+<li>78498 entiers premiers <span class="math inline">\(\leqslant\)</span> 1000000</li>
+</ul>
+</div><div id="exercice-15" class="slide section level2">
+<h2>Exercice 15</h2>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">
+cpt <span class="op">=</span> <span class="dv">0</span>
+<span class="cf">for</span> n <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">2</span>, <span class="dv">10</span><span class="op">**</span><span class="dv">6-1</span>):
+    <span class="cf">if</span> est_premier(n) <span class="kw">and</span> est_premier(n<span class="op">+</span><span class="dv">2</span>):
+        cpt <span class="op">+=</span> <span class="dv">1</span>
+<span class="bu">print</span>(cpt)</code></pre></div>
+<p>8169 couples de premiers jumeaux inférieurs à 10**6</p>
+</div><div id="exercice-16" class="slide section level2">
+<h2>Exercice 16</h2>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">
+n <span class="op">=</span> <span class="dv">10</span><span class="op">**</span><span class="dv">10</span><span class="op">+</span><span class="dv">1</span>
+<span class="cf">while</span> <span class="kw">not</span> est_premier(n) <span class="kw">or</span> <span class="kw">not</span> est_premier(n<span class="op">+</span><span class="dv">2</span>):
+    n <span class="op">+=</span> <span class="dv">1</span>
+<span class="bu">print</span>(<span class="st">&quot;Le plus petit couple d&#39;entiers premiers jumeaux \</span>
+<span class="st">supérieurs à 10**10 est &quot;</span>,(n,n<span class="op">+</span><span class="dv">2</span>))</code></pre></div>
+<p>Le plus petit couple d'entiers premiers jumeaux supérieurs à <span class="math inline">\(10^{10}\)</span> est <span class="math inline">\((10000000277, 10000000279)\)</span>.</p>
+</div><div id="exercice-17" class="slide section level2">
+<h2>Exercice 17</h2>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="kw">def</span> est_premier2(n):
+    <span class="co">&#39;&#39;&#39;test de primalité&#39;&#39;&#39;</span>
+    <span class="kw">global</span> div  <span class="co">#compteur de divisions, variable globale pour l&#39;exo 17     </span>
+    <span class="cf">if</span> n <span class="op">&lt;=</span> <span class="dv">1</span>:
+        <span class="cf">return</span> <span class="va">False</span>
+    <span class="cf">if</span> n <span class="op">&lt;=</span> <span class="dv">3</span>:
+        <span class="cf">return</span> <span class="va">True</span>
+    <span class="cf">for</span> d <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">2</span>, <span class="bu">int</span>(n<span class="op">**</span>(<span class="dv">1</span><span class="op">/</span><span class="dv">2</span>))<span class="op">+</span><span class="dv">1</span>):
+        div <span class="op">+=</span> <span class="dv">1</span>
+        <span class="cf">if</span> n<span class="op">%</span>d <span class="op">==</span> <span class="dv">0</span>:
+            <span class="cf">return</span> <span class="va">False</span>        
+    <span class="cf">return</span> <span class="va">True</span>
+
+cpt <span class="op">=</span> <span class="dv">0</span> <span class="co">#compteur de couples de premiers jumeaux</span>
+div <span class="op">=</span> <span class="dv">0</span> <span class="co">#compteur de divisions</span>
+<span class="cf">for</span> n <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">2</span>,<span class="dv">10</span><span class="op">**</span><span class="dv">6</span>):
+    <span class="cf">if</span> est_premier2(n):
+        cpt <span class="op">+=</span> <span class="dv">1</span>
+<span class="bu">print</span>(<span class="st">&#39;Il y a </span><span class="sc">{}</span><span class="st"> entiers  premiers  inférieurs à 10**6&#39;</span>.<span class="bu">format</span>(cpt))
+<span class="bu">print</span>(div,<span class="st">&#39;divisions ont été effectuées.&#39;</span>)</code></pre></div>
+<p>Il y a <span class="math inline">\(78498\)</span> entiers premiers inférieurs à <span class="math inline">\(10^6\)</span> et <span class="math inline">\(67740403\)</span> divisions ont été effectuées.</p>
+</div>
+<div id="observons-une-suite-dentiers" class="titleslide slide section level1"><h1>Observons une suite d'entiers</h1></div><div id="exercice-18" class="slide section level2">
+<h2>Exercice 18</h2>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="kw">def</span> u(n):
+    u <span class="op">=</span> <span class="dv">42</span>
+    <span class="cf">for</span> k <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, n<span class="op">+</span><span class="dv">1</span>):
+        u <span class="op">=</span> (<span class="dv">15091</span><span class="op">*</span>u) <span class="op">%</span> <span class="dv">64007</span>
+    <span class="cf">return</span> u
+
+
+<span class="cf">for</span> n <span class="kw">in</span> [<span class="dv">1</span>, <span class="dv">10</span>, <span class="dv">10</span><span class="op">**</span><span class="dv">6</span>]:
+    <span class="bu">print</span>(<span class="st">&#39;u(</span><span class="sc">%s</span><span class="st">)=</span><span class="sc">%s</span><span class="st">&#39;</span><span class="op">%</span>(n,u(n)))</code></pre></div>
+<p>u(1)=57759 , u(10)=15421 et u(1000000)=14918.</p>
+</div><div id="exercice-19" class="slide section level2">
+<h2>Exercice 19</h2>
+<p>Pour éviter de répéter les memes calculs mieux vaut dresser une table de tous les premiers inférieurs à <span class="math inline">\(64007\)</span> plutot que faire <span class="math inline">\(10^{7}\)</span> tests de primalité. Quand on doit utiliser les mêmes données un grand nombre de fois dans une boucle, mieux vaut calculer ces données une seule fois en dehors de la boucle.</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">
+premier <span class="op">=</span> [est_premier(k) <span class="cf">for</span> k <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">64007</span>)] 
+
+<span class="co">&quot;&quot;&quot;</span>
+<span class="co">&gt;&gt;&gt; print(premier[:8])</span>
+<span class="co">[False, False, True, True, False, True, False, True]</span>
+<span class="co">&quot;&quot;&quot;</span>
+
+c <span class="op">=</span> [<span class="dv">0</span>]<span class="op">*</span><span class="dv">6</span>  <span class="co">#compteurs des six conditions</span>
+u <span class="op">=</span> <span class="dv">42</span>
+<span class="cf">for</span> n <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, <span class="dv">10</span><span class="op">**</span><span class="dv">7</span><span class="op">+</span><span class="dv">1</span>):
+    u <span class="op">=</span> (<span class="dv">15091</span><span class="op">*</span>u)<span class="op">%</span><span class="dv">64007</span>
+    <span class="cf">if</span> u<span class="op">%</span><span class="dv">2</span> <span class="op">==</span> <span class="dv">0</span>:
+        c[<span class="dv">0</span>] <span class="op">+=</span> <span class="dv">1</span>
+    <span class="cf">if</span> premier[u]:
+        c[<span class="dv">1</span>] <span class="op">+=</span> <span class="dv">1</span>
+    <span class="cf">if</span> u<span class="op">%</span><span class="dv">3</span> <span class="op">==</span> <span class="dv">1</span>:
+        c[<span class="dv">2</span>] <span class="op">+=</span> <span class="dv">1</span>
+    <span class="cf">if</span> u<span class="op">%</span><span class="dv">3</span> <span class="op">==</span> <span class="dv">1</span> <span class="kw">and</span> premier[u]:
+        c[<span class="dv">3</span>] <span class="op">+=</span> <span class="dv">1</span>
+    <span class="cf">if</span> u<span class="op">%</span><span class="dv">2</span> <span class="op">==</span> <span class="dv">0</span> <span class="kw">and</span> premier[u]:
+        c[<span class="dv">4</span>] <span class="op">+=</span> <span class="dv">1</span>
+    <span class="cf">if</span> n<span class="op">%</span><span class="dv">2</span> <span class="op">==</span> <span class="dv">0</span> <span class="kw">and</span> premier[u]:
+        c[<span class="dv">5</span>] <span class="op">+=</span> <span class="dv">1</span>   
+<span class="bu">print</span>(c)
+
+<span class="co">&quot;&quot;&quot;</span>
+<span class="co">[4999968, 1001923, 3333434, 499050, 156, 493240]</span>
+<span class="co">&quot;&quot;&quot;</span></code></pre></div>
+<p>On n'a pas utilisé de <code>if elif else</code> car les clauses ne sont pas exclusives.</p>
+</div><div id="exercice-20" class="slide section level2">
+<h2>Exercice 20</h2>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co">&quot;&quot;&quot;</span>
+<span class="co">&gt;&gt;&gt; ((17%10)*(923%10))%10</span>
+<span class="co">1</span>
+<span class="co">&gt;&gt;&gt; ((123345678987654%10)*(836548971236%10))%10</span>
+<span class="co">4</span>
+<span class="co">&quot;&quot;&quot;</span></code></pre></div>
+</div><div id="exercice-21" class="slide section level2">
+<h2>Exercice 21</h2>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">res <span class="op">=</span> <span class="dv">1</span>
+a <span class="op">=</span> <span class="dv">123456</span>
+c <span class="op">=</span> <span class="dv">1234567</span>
+<span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, <span class="dv">654322</span>):
+    res <span class="op">=</span> (res<span class="op">*</span>a)<span class="op">%</span>c
+<span class="bu">print</span>(res)
+<span class="co">&quot;&quot;&quot;</span>
+<span class="co">1075259</span>
+<span class="co">&quot;&quot;&quot;</span>
+
+<span class="bu">print</span>(<span class="st">&quot;</span><span class="sc">{:d}</span><span class="st"> est plus rapide à calculer que </span><span class="sc">{:d}</span><span class="st">&quot;</span>.<span class="bu">format</span>(res,(<span class="dv">123456</span><span class="op">**</span><span class="dv">654321</span>)<span class="op">%</span><span class="dv">1234567</span>)))</code></pre></div>
+<p><span class="math inline">\(1075259\)</span> est plus rapide à calculer que <span class="math inline">\(1075259\)</span>.</p>
+</div><div id="exercice-22-projet-euler-problème-48" class="slide section level2">
+<h2>Exercice 22 : Projet Euler problème 48</h2>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">series, m  <span class="op">=</span> <span class="dv">0</span>, <span class="dv">10</span><span class="op">**</span><span class="dv">10</span>
+<span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>,<span class="dv">1001</span>):
+    res <span class="op">=</span> <span class="dv">1</span>
+    <span class="cf">for</span> k <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, i<span class="op">+</span><span class="dv">1</span>):
+        res <span class="op">=</span> (res<span class="op">*</span>i)<span class="op">%</span>m
+    series <span class="op">=</span> (series<span class="op">+</span>res)<span class="op">%</span>m
+<span class="bu">print</span>(series)</code></pre></div>
+<p>Réponse : <span class="math inline">\(9110846700\)</span></p>
+</div>
+<div id="pour-ceux-qui-sennuient" class="titleslide slide section level1"><h1>Pour ceux qui s'ennuient</h1></div><div id="exercice-23-tombola" class="slide section level2">
+<h2>Exercice 23 Tombola</h2>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="kw">def</span> gagnant(m):
+    <span class="cf">while</span> m<span class="op">%</span><span class="dv">9</span> <span class="op">==</span> <span class="dv">0</span>:
+        m <span class="op">=</span> m <span class="op">//</span> <span class="dv">9</span>
+    <span class="cf">return</span> m<span class="op">%</span><span class="dv">3</span> <span class="op">==</span> <span class="dv">0</span>
+    
+<span class="co">&quot;&quot;&quot;</span>
+<span class="co">&gt;&gt;&gt; list(map(gagnant, [100,300,729,2016]))</span>
+<span class="co">[False, True, False, False]</span>
+<span class="co">&quot;&quot;&quot;</span>
+
+<span class="kw">def</span> nombre_gagnant(n):
+    <span class="co">&#39;&#39;&#39;Retour le nombre d&#39;entiers gagnants parmi</span>
+<span class="co">    les entiers entre 1 et n&#39;&#39;&#39;</span>
+    <span class="co"># on détermine d&#39;abord le plus grand entier k tel que 3**k &lt;= m</span>
+    p <span class="op">=</span> <span class="dv">1</span>
+    e <span class="op">=</span> <span class="dv">0</span>
+    <span class="cf">while</span> p <span class="op">&lt;=</span> n:
+        p <span class="op">*=</span> <span class="dv">3</span>
+        e <span class="op">+=</span> <span class="dv">1</span>
+    e <span class="op">=</span> e <span class="op">-</span> <span class="dv">1</span>  <span class="co">#3**e &lt;= m et 3**(e+1)&gt;m</span>
+    gagnant <span class="op">=</span> <span class="dv">0</span>  <span class="co">#compteur de gagnant</span>
+    <span class="cf">for</span> k <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, e <span class="op">+</span> <span class="dv">1</span>):
+        <span class="co">#pour les 3**k avec k impair</span>
+        <span class="co">#on rajoute le nombre de multiples de 3**k &lt;= m</span>
+        <span class="co"># de la forme a*3**k avec a pas divisible par 3</span>
+        <span class="cf">if</span> k<span class="op">%</span><span class="dv">2</span> <span class="op">==</span> <span class="dv">1</span>:
+            q <span class="op">=</span> n<span class="op">//</span><span class="dv">3</span><span class="op">**</span>k  
+            gagnant <span class="op">+=</span> q <span class="op">-</span> q<span class="op">//</span><span class="dv">3</span>
+    <span class="cf">return</span> gagnant
+    
+<span class="kw">def</span> nombre_gagnant2(m):
+    <span class="co">&#39;&#39;&#39;Plus court mais plus long car complexité cachée&#39;&#39;&#39;</span>
+    <span class="cf">return</span> <span class="bu">len</span>([m  <span class="cf">for</span> n <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span> , m <span class="op">+</span> <span class="dv">1</span>) <span class="cf">if</span> gagnant(m)])
+    
+
+<span class="im">from</span> timeit <span class="im">import</span> timeit
+<span class="im">from</span> math <span class="im">import</span> log</code></pre></div>
+<p>La fonction <code>timeit</code> du module <code>timeit</code> affiche le temps cumulé d'exécution d'une commande pour un nombre fixé d'exécutions.</p>
+<p>On observe ci-dessous que le temps d'exécution de <code>nombre_gagnant(n)</code> semble proportionnel à <span class="math inline">\(\log(n)/\log(3)\)</span> et que celui de <code>nombre_gagnant2(n)</code> semble proportionnel à <code>n</code>.</p>
+<p>On peut conjecturer une <strong>complexité temporelle</strong> logarithmique pour <code>nombre_gagnant</code> et linéaire pour <code>nombre_gagnant2</code>.</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">
+bench <span class="op">=</span> [<span class="dv">10</span><span class="op">**</span><span class="dv">2</span>, <span class="dv">10</span><span class="op">**</span><span class="dv">3</span>, <span class="dv">10</span><span class="op">**</span><span class="dv">4</span>, <span class="dv">10</span><span class="op">**</span><span class="dv">5</span>, <span class="dv">10</span><span class="op">**</span><span class="dv">6</span>, <span class="dv">10</span><span class="op">**</span><span class="dv">7</span>, <span class="dv">10</span><span class="op">**</span><span class="dv">8</span>, <span class="dv">10</span><span class="op">**</span><span class="dv">9</span>]
+<span class="cf">for</span> n <span class="kw">in</span> bench:
+    temps <span class="op">=</span> timeit(<span class="st">&#39;nombre_gagnant(</span><span class="sc">{}</span><span class="st">)&#39;</span>.<span class="bu">format</span>(n),
+                    <span class="st">&#39;from __main__  import nombre_gagnant&#39;</span>,number <span class="op">=</span> <span class="dv">10000</span>)
+    <span class="bu">print</span>(log(n,<span class="dv">3</span>)<span class="op">/</span>temps)
+    
+<span class="co">&quot;&quot;&quot;</span>
+<span class="co">130.16506757074666</span>
+<span class="co">158.44562663545946</span>
+<span class="co">157.35055637870508</span>
+<span class="co">169.62033933138346</span>
+<span class="co">167.83313335771103</span>
+<span class="co">162.74572022382512</span>
+<span class="co">168.88623818133289</span>
+<span class="co">161.82620193271757</span>
+<span class="co">&quot;&quot;&quot;</span>
+
+bench <span class="op">=</span> [<span class="dv">10</span><span class="op">**</span><span class="dv">2</span>, <span class="dv">10</span><span class="op">**</span><span class="dv">3</span>, <span class="dv">10</span><span class="op">**</span><span class="dv">4</span>]
+<span class="cf">for</span> n <span class="kw">in</span> bench:
+    temps <span class="op">=</span> timeit(<span class="st">&#39;nombre_gagnant2(</span><span class="sc">{}</span><span class="st">)&#39;</span>.<span class="bu">format</span>(n),
+                      <span class="st">&#39;from __main__  import nombre_gagnant2&#39;</span>,number <span class="op">=</span> <span class="dv">10000</span>)
+    <span class="bu">print</span>(n<span class="op">/</span>temps)
+    
+<span class="co">&quot;&quot;&quot;</span>
+<span class="co">259.88979357801304</span>
+<span class="co">254.6282087040769</span>
+<span class="co">&quot;&quot;&quot;</span></code></pre></div>
+</div><div id="exercice-24-projet-euler-problème-39" class="slide section level2">
+<h2>Exercice 24 : Projet Euler problème 39</h2>
+<p>On recherche le nombre maximal de configurations de triangles rectangles de périmètre donné parmi tous les périmètres inférieur ou égal à <span class="math inline">\(n\)</span>.</p>
+<ul>
+<li><p>Algorithme 1 :</p>
+<p>3 boucles imbriquées : sur le perimetre puis sur les côtés <span class="math inline">\(a, b\)</span> et <span class="math inline">\(c\)</span> avec <span class="math inline">\(a \leqslant b \leqslant c\)</span> où <span class="math inline">\(c = p - a - b\)</span>.</p>
+<p>La complexité est <strong>cubique</strong> en <span class="math inline">\(O(n^{3})\)</span>.</p></li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">
+<span class="kw">def</span> euler39_cubique(n):
+    pmax, nbsolmax <span class="op">=</span> <span class="dv">0</span>, <span class="dv">0</span>
+    <span class="cf">for</span> p <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">4</span>, n <span class="op">+</span> <span class="dv">1</span>):
+        nbsol <span class="op">=</span> <span class="dv">0</span>
+        <span class="cf">for</span> a <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, p<span class="op">//</span><span class="dv">3</span> <span class="op">+</span> <span class="dv">1</span>):
+            <span class="cf">for</span> b <span class="kw">in</span> <span class="bu">range</span>(a, <span class="dv">2</span><span class="op">*</span>p<span class="op">//</span><span class="dv">3</span> <span class="op">+</span> <span class="dv">1</span>):
+                <span class="cf">if</span> (p <span class="op">-</span> a <span class="op">-</span>b)<span class="op">**</span><span class="dv">2</span> <span class="op">==</span> a<span class="op">**</span><span class="dv">2</span> <span class="op">+</span> b<span class="op">**</span><span class="dv">2</span>:
+                    nbsol <span class="op">+=</span> <span class="dv">1</span>
+        <span class="cf">if</span> nbsol <span class="op">&gt;</span> nbsolmax:
+            nbsolmax, pmax <span class="op">=</span> nbsol,p
+    <span class="cf">return</span> pmax, nbsolmax
+
+<span class="kw">def</span> euler39_cubique2(n):
+    pmax, nbsolmax <span class="op">=</span> <span class="dv">0</span>, <span class="dv">0</span>
+    <span class="cf">for</span> p <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">3</span>, <span class="dv">1001</span>):
+        nbsol <span class="op">=</span> <span class="dv">0</span>
+        <span class="cf">for</span> c <span class="kw">in</span> <span class="bu">range</span>(p<span class="op">//</span><span class="dv">3</span>, p):
+            b <span class="op">=</span> <span class="bu">int</span>(c<span class="op">/</span><span class="dv">2</span><span class="op">**</span><span class="fl">0.5</span>)
+            <span class="cf">while</span> b <span class="op">&lt;</span> c <span class="kw">and</span> p <span class="op">&gt;</span> b <span class="op">+</span> c:
+                a <span class="op">=</span> p <span class="op">-</span> c <span class="op">-</span> b
+                <span class="cf">if</span> a<span class="op">**</span><span class="dv">2</span> <span class="op">+</span> b<span class="op">**</span><span class="dv">2</span> <span class="op">==</span> c<span class="op">**</span><span class="dv">2</span>:
+                    nbsol <span class="op">+=</span> <span class="dv">1</span>
+                b <span class="op">+=</span> <span class="dv">1</span>
+        <span class="cf">if</span> nbsol <span class="op">&gt;</span> nbsolmax:
+            pmax, nbsolmax <span class="op">=</span> p, nbsol
+    <span class="cf">return</span> pmax, nbsolmax</code></pre></div>
+<ul>
+<li><p>Algorithme 2 :</p>
+<p>On crée un tableau des nombres de solutions pour les <span class="math inline">\(n\)</span> périmètres. On le crible avec deux boucles imbriquées qui parcourent tous les couples avec <span class="math inline">\(a \leqslant b \leqslant 2n/3\)</span> tels que <span class="math inline">\(\sqrt{a^{2}+b^{2}}\)</span> est un entier inférieur ou égal à <span class="math inline">\(n\)</span>.</p>
+<p>La complexité est <strong>quadratique</strong> en <span class="math inline">\(O(n^{2})\)</span>.</p></li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">
+<span class="kw">def</span> euler39_quadratique(n):
+    <span class="co">#cribleperi[p] devra contenir le nombre de solutions pour le périmètre p</span>
+    cribleperi <span class="op">=</span> [<span class="dv">0</span>]<span class="op">*</span>(n<span class="op">+</span><span class="dv">1</span>) 
+    <span class="cf">for</span> a <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, n<span class="op">//</span><span class="dv">3</span> <span class="op">+</span> <span class="dv">1</span>):
+        <span class="cf">for</span> b <span class="kw">in</span> <span class="bu">range</span>(a, <span class="dv">2</span><span class="op">*</span>n<span class="op">//</span><span class="dv">3</span> <span class="op">+</span> <span class="dv">1</span>):
+            c <span class="op">=</span> (a<span class="op">**</span><span class="dv">2</span> <span class="op">+</span> b<span class="op">**</span><span class="dv">2</span>)<span class="op">**</span>(<span class="dv">1</span><span class="op">/</span><span class="dv">2</span>)
+            <span class="cf">if</span> c <span class="op">==</span> <span class="bu">int</span>(c):
+                p <span class="op">=</span> a <span class="op">+</span> b <span class="op">+</span> <span class="bu">int</span>(c)
+                <span class="cf">if</span> p <span class="op">&lt;=</span> n:
+                    cribleperi[p] <span class="op">+=</span> <span class="dv">1</span>
+    <span class="cf">return</span> <span class="bu">max</span>(<span class="bu">enumerate</span>(cribleperi), key <span class="op">=</span> <span class="kw">lambda</span> couple : couple[<span class="dv">1</span>])
+
+<span class="co">&quot;&quot;&quot;</span>
+<span class="co">In [1]: euler39_cubique(1000)</span>
+<span class="co">Out[1]: (840, 8)</span>
+
+<span class="co">In [2]: euler39_quadratique(1000)</span>
+<span class="co">Out[2]: (840, 8)</span>
+
+<span class="co">In [3]: %timeit euler39_quadratique(1000)</span>
+<span class="co">10 loops, best of 3: 184 ms per loop</span>
+
+<span class="co">In [4]: %timeit euler39_cubique(1000)</span>
+<span class="co">1 loops, best of 3: 53.4 s per loop</span>
+
+<span class="co">In [5]: 52.4/184e-3</span>
+<span class="co">Out[5]: 284.7826086956522</span>
+<span class="co">&quot;&quot;&quot;</span></code></pre></div>
+<p>On a vérifié ci-dessus que le rapport de temps entre les deux algorithmes était de l'ordre de grandeur de <span class="math inline">\(n\)</span> (ici <span class="math inline">\(1000\)</span>) à une constante près.</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"></code></pre></div>
+</div>
+</body>
+</html>
