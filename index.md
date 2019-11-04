@@ -28,7 +28,7 @@ Sujets réalisés par Stéphane Gonnord/Laurent Jouhet/Frédéric Junier/Stépha
   - [corrigé python](TP-01-02/I1-TP-01-02-Introduction-corrige.py)
 
 * TP3 :
-  - [énoncé](TP3/sujet/I1-TP-03-Boucles-sujet)
+  - [énoncé](TP3/sujet/I1-TP-03-Boucles-sujet.pdf)
   - [corrigé HTML](TP3/corrige/I1-TP-03-Boucles-corrige.html)
   - [corrigé pdf](TP3/corrige/I1-TP-03-Boucles-corrige.pdf)
   - [corrigé python](TP3/corrige/I1-TP-03-Boucles-corrige.py)
