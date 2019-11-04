@@ -21,8 +21,14 @@ Sujets réalisés par Stéphane Gonnord/Laurent Jouhet/Frédéric Junier/Stépha
 
 ## TP
 
-* TP1 :
+* TP 1 et 2 (séance double):
   - [énoncé](TP-01-02/I1-TP-01-02-Introduction-sujet.pdf)
   - [corrigé HTML](TP-01-02/I1-TP-01-02-Introduction-corrige.html)
   - [corrigé pdf](TP-01-02/I1-TP-01-02-Introduction-corrige.pdf)
   - [corrigé python](TP-01-02/I1-TP-01-02-Introduction-corrige.py)
+
+* TP3 :
+  - [énoncé](TP3/sujet/I1-TP-03-Boucles-sujet)
+  - [corrigé HTML](TP3/corrige/I1-TP-03-Boucles-corrige.html)
+  - [corrigé pdf](TP3/corrige/I1-TP-03-Boucles-corrige.pdf)
+  - [corrigé python](TP3/corrige/I1-TP-03-Boucles-corrige.py)
