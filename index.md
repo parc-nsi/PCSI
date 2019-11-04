@@ -1,4 +1,4 @@
-# PCSI 842 TP 2019/20
+# PCSI 842 TP 2019/2020
 
 Documents et ressources TP d'Informatique pour tous en PCSI au lycée du Parc année scolaire 2019/2020.
 
