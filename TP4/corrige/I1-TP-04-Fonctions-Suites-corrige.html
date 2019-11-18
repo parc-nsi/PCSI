@@ -1,0 +1,841 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+ "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <meta name="author" content="Chenevois-Jouhet-Junier-Rebout" />
+  <title>Corrigé du TP 04 Fonctions</title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+  </style>
+  <link rel="stylesheet" type="text/css" media="screen, projection, print"
+    href="http://www.w3.org/Talks/Tools/Slidy2/styles/slidy.css" />
+  <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_CHTML-full" type="text/javascript"></script>
+  <script src="http://www.w3.org/Talks/Tools/Slidy2/scripts/slidy.js"
+    charset="utf-8" type="text/javascript"></script>
+</head>
+<body>
+<div class="slide titlepage">
+  <h1 class="title">Corrigé du TP 04 Fonctions</h1>
+  <p class="author">
+Chenevois-Jouhet-Junier-Rebout
+  </p>
+</div>
+<div class="slide section level2">
+
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"></code></pre></div>
+</div>
+<div id="écrire-une-fonction" class="titleslide slide section level1"><h1>Écrire une fonction</h1></div><div id="exercice-1" class="slide section level2">
+<h2>Exercice 1</h2>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="kw">def</span> puissance(x,n):
+    <span class="co">&#39;&#39;&#39;retourne x**n sans l&#39;opérateur **&#39;&#39;&#39;</span>
+    p, pas <span class="op">=</span> <span class="dv">1</span>, <span class="dv">1</span>
+    <span class="cf">if</span> n <span class="op">&lt;</span> <span class="dv">0</span>:
+        x, pas <span class="op">=</span> <span class="fl">1.</span><span class="op">/</span>x, <span class="dv">-1</span>
+    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">0</span>, n, pas):
+        p <span class="op">*=</span> x
+    <span class="cf">return</span> p
+<span class="co">&quot;&quot;&quot;</span>
+<span class="co">In [9]: [puissance(2, i) for i in range(-2, 3)]</span>
+<span class="co">Out[9]: [0.25, 0.5, 1, 2, 4]</span>
+<span class="co">&quot;&quot;&quot;</span></code></pre></div>
+</div><div id="exercice-2" class="slide section level2">
+<h2>Exercice 2</h2>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">
+<span class="kw">def</span> factorielle(n):
+    <span class="co">&#39;&#39;&#39;retourne 1x2x3x...x(n-1)xn&#39;&#39;&#39;</span>
+    <span class="cf">if</span> n <span class="op">&lt;</span> <span class="dv">0</span>:
+        <span class="cf">return</span> <span class="va">None</span>
+    f <span class="op">=</span> <span class="dv">1</span>
+    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">2</span>,n<span class="op">+</span><span class="dv">1</span>):
+        f <span class="op">*=</span> i
+    <span class="cf">return</span> f
+
+<span class="co">&quot;&quot;&quot;</span>
+<span class="co">In [19]: [factorielle(i) for i in range(-1, 6)]</span>
+<span class="co">Out[19]: [None, 1, 1, 2, 6, 24, 120]</span>
+<span class="co">&quot;&quot;&quot;</span></code></pre></div>
+</div><div id="exercice-3" class="slide section level2">
+<h2>Exercice 3</h2>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="kw">def</span> somme_exo3(a,b):
+    <span class="co">&#39;&#39;&#39;retourne la somme des puissances de 5 des entiers entre a et b&#39;&#39;&#39;</span>
+    <span class="cf">if</span> b <span class="op">&lt;</span> a:
+        a, b <span class="op">=</span> b, a 
+    s <span class="op">=</span> <span class="dv">0</span>
+    <span class="cf">for</span> k <span class="kw">in</span> <span class="bu">range</span>(a, b<span class="op">+</span><span class="dv">1</span>):
+        s <span class="op">+=</span> k<span class="op">**</span><span class="dv">5</span>
+    <span class="cf">return</span> s
+
+<span class="co">&quot;&quot;&quot;</span>
+<span class="co">In [26]: somme_exo3(831, 944), somme_exo3(944, 831)</span>
+<span class="co">Out[26]: (63633265760661375, 63633265760661375)</span>
+<span class="co">&quot;&quot;&quot;</span></code></pre></div>
+</div><div id="exercice-4" class="slide section level2">
+<h2>Exercice 4</h2>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="kw">def</span> somme_exo4(a, b, f):
+    <span class="co">&#39;&#39;&#39;retourne la somme des f(k) avec k entier entre a et b.</span>
+<span class="co">    a et b de type entier et f de type fonction&#39;&#39;&#39;</span>
+    <span class="cf">if</span> b <span class="op">&lt;</span> a:
+        a, b <span class="op">=</span> b, a 
+    s <span class="op">=</span> <span class="dv">0</span>
+    <span class="cf">for</span> k <span class="kw">in</span> <span class="bu">range</span>(a, b<span class="op">+</span><span class="dv">1</span>):
+        s <span class="op">+=</span> f(k)
+    <span class="cf">return</span> s
+
+<span class="co">&quot;&quot;&quot;</span>
+<span class="co">In [28]: somme_exo4(1, 100), 100*101/2</span>
+<span class="co">Out[28]: (5050, 5050.0)</span>
+<span class="co">In [32]: somme_exo4(831, 944, lambda x : x**10)</span>
+<span class="co">Out[32]: 36724191150365100572161020220825</span>
+<span class="co">In [33]: sum(map(lambda x : x**10, range(831, 945)))</span>
+<span class="co">Out[33]: 36724191150365100572161020220825</span>
+<span class="co">&quot;&quot;&quot;</span></code></pre></div>
+<p>Sous Python2 l'entier obtenu dépasse 2**31 - 1, il est de type 'entier long'</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co">&quot;&quot;&quot;</span>
+<span class="co">&gt;&gt;&gt; somme_exo4(831, 944, lambda x : x**10)</span>
+<span class="co">36724191150365100572161020220825L</span>
+<span class="co">&gt;&gt;&gt; type(_)</span>
+<span class="co">&lt;type &#39;long&#39;&gt;</span>
+<span class="co">&quot;&quot;&quot;</span></code></pre></div>
+<p>En Python, pas de condition de type sur les paramètres de la fonction, c'est au développeur d'utiliser des arguments dont le type est attendu, d'où l'importance des <code>docstrings</code>.</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co">&quot;&quot;&quot;</span>
+<span class="co">In [6]: somme_exo4(lambda x : x**10, 831, 944)</span>
+<span class="co">---------------------------------------------------------------------------</span>
+<span class="co">TypeError                                 Traceback (most recent call last)</span>
+<span class="co">&lt;ipython-input-6-59c0682f09a0&gt; in &lt;module&gt;()</span>
+<span class="co">----&gt; 1 somme_exo4(lambda x : x**10, 831, 944)</span>
+<span class="co">......................</span>
+<span class="co">----&gt; 4     if b &lt; a:</span>
+<span class="co">      5         a, b = b, a</span>
+<span class="co">      6     s = 0</span>
+
+<span class="co">TypeError: unorderable types: int() &lt; function()</span>
+<span class="co">&quot;&quot;&quot;</span></code></pre></div>
+</div><div id="exercices-5-et-6" class="slide section level2">
+<h2>Exercices 5 et 6</h2>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">
+<span class="kw">def</span> max2(a, b):
+    <span class="co">&#39;&#39;&#39;retourne le maximum de deuxs entiers a et b&#39;&#39;&#39;</span>
+    <span class="cf">if</span> a <span class="op">&gt;=</span> b:
+        <span class="cf">return</span> a
+    <span class="cf">return</span> b
+
+<span class="kw">def</span> max3(a, b, c):
+    <span class="co">&#39;&#39;&#39;retourne le maximum de trois entiers a et b&#39;&#39;&#39;</span>
+    <span class="cf">return</span> max2(max2(a,b),c)
+
+<span class="co">&quot;&quot;&quot;</span>
+<span class="co">In [39]: max3(10,30,40),max3(30,40,10),max3(40,30,10),max3(10,10,10)</span>
+<span class="co">Out[39]: (40, 40, 40, 10)</span>
+<span class="co">&quot;&quot;&quot;</span></code></pre></div>
+</div><div id="exercice-7" class="slide section level2">
+<h2>Exercice 7</h2>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="kw">def</span> monotone(x, y, z):
+    <span class="cf">return</span> x <span class="op">&lt;=</span> y <span class="op">&lt;=</span> z <span class="kw">or</span> z<span class="op">&lt;=</span> y <span class="op">&lt;=</span> x
+
+<span class="co">&quot;&quot;&quot;</span>
+<span class="co">In [41]: monotone(10, 15, 20), monotone(15, 10, 20), monotone(20, 15, 15)</span>
+<span class="co">Out[41]: (True, False, True)</span>
+<span class="co">&quot;&quot;&quot;</span></code></pre></div>
+</div><div id="exercices-8-et-9" class="slide section level2">
+<h2>Exercices 8 et 9</h2>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">
+<span class="kw">def</span> premier_plus_grand(M):
+    <span class="co">&#39;&#39;&#39;retourne le plus petit entier n tel que n**4-5*n**3+4 &gt;= M&#39;&#39;&#39;</span>
+    n <span class="op">=</span> <span class="dv">0</span>
+    <span class="cf">while</span> n<span class="op">**</span><span class="dv">4-5</span><span class="op">*</span>n<span class="op">**</span><span class="dv">3</span><span class="op">+</span><span class="dv">4</span> <span class="op">&lt;</span> M:
+        n <span class="op">+=</span> <span class="dv">1</span>
+    <span class="cf">return</span> n
+
+
+<span class="kw">def</span> premier_plus_grand_bis(f, M): 
+    <span class="co">&#39;&#39;&#39;prend en entrée une fonction f et un réel M et retourne le plus petit</span>
+<span class="co">    entier n tel que f(n)&gt;=M. Boucle infinie si un tel entier n&#39;existe pas. &#39;&#39;&#39;</span>
+    n <span class="op">=</span> <span class="dv">0</span>
+    <span class="cf">while</span> f(n) <span class="op">&lt;</span> M :
+        n <span class="op">+=</span> <span class="dv">1</span>
+    <span class="cf">return</span> n
+
+<span class="co">&quot;&quot;&quot;</span>
+<span class="co">In [43]: g = lambda x : x**2</span>
+<span class="co">In [44]: premier_plus_grand_bis(g,10),premier_plus_grand_bis(g,100),</span>
+<span class="co">premier_plus_grand_bis(g,1000)</span>
+<span class="co">Out[44]: (4, 10, 32)</span>
+<span class="co">&quot;&quot;&quot;</span></code></pre></div>
+</div><div id="exercice-10" class="slide section level2">
+<h2>Exercice 10</h2>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="kw">def</span> somme_dec(n):
+    <span class="co">&#39;&#39;&#39;retourne la somme des décimales de n&#39;&#39;&#39;</span>
+    s <span class="op">=</span> <span class="dv">0</span>
+    <span class="cf">while</span> n <span class="op">&gt;</span> <span class="dv">0</span>:
+        decimale <span class="op">=</span> n<span class="op">%</span><span class="dv">10</span>
+        s <span class="op">+=</span> decimale
+        n <span class="op">=</span> n<span class="op">//</span><span class="dv">10</span>
+    <span class="cf">return</span> s
+
+<span class="kw">def</span> persistance_additive(n):
+    iteration <span class="op">=</span> <span class="dv">0</span>
+    s <span class="op">=</span> somme_dec(n)
+    <span class="cf">while</span> s <span class="op">!=</span> n:
+        n <span class="op">=</span> s
+        s <span class="op">=</span> somme_dec(n)    
+        iteration <span class="op">=</span> iteration <span class="op">+</span> <span class="dv">1</span>
+    <span class="cf">return</span> iteration       
+
+
+
+n <span class="op">=</span> <span class="dv">1</span>
+<span class="cf">while</span>  persistance_additive(n) <span class="op">!=</span> <span class="dv">3</span>:
+    n <span class="op">=</span> n <span class="op">+</span> <span class="dv">1</span>
+<span class="bu">print</span>(n)</code></pre></div>
+<p>Le plus petit entier dont la persistance additive est 3 est 199. A propos des persistances additives et multiplicatives on pourra consulter <a href="http://villemin.gerard.free.fr/Wwwgvmm/Addition/RAcNum.htm" class="uri">http://villemin.gerard.free.fr/Wwwgvmm/Addition/RAcNum.htm</a></p>
+</div><div id="exercice-11" class="slide section level2">
+<h2>Exercice 11</h2>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="kw">def</span> intersection_intervalle(a, b, c, d):
+    <span class="co">&#39;&#39;&#39;Caractérise l&#39;intersection de [a,b] et [c,d]&#39;&#39;&#39;</span>
+    <span class="cf">return</span> b <span class="op">&gt;=</span> c <span class="kw">and</span>  a <span class="op">&lt;=</span> d
+
+<span class="kw">def</span> intersection_rectangle(xmin1, xmax1, ymin1, ymax1,
+xmin2, xmax2, ymin2, ymax2):
+    <span class="co">&#39;&#39;&#39;Caractérise l&#39;intersection de deux rectangles à partir de </span>
+<span class="co">    leurs abscisses et ordonnées minimales et maximales&#39;&#39;&#39;</span>
+    <span class="cf">return</span> intersection_intervalle(xmin1, xmax1, xmin2, xmax2) <span class="kw">and</span> <span class="op">\</span>
+    intersection_intervalle(ymin1, ymax1, ymin2, ymax2)</code></pre></div>
+</div><div id="exercice-12" class="slide section level2">
+<h2>Exercice 12</h2>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="kw">def</span> bissextile(a):
+    <span class="cf">return</span>  (a<span class="op">%</span><span class="dv">100</span> <span class="op">!=</span> <span class="dv">0</span> <span class="kw">and</span> a<span class="op">%</span><span class="dv">4</span> <span class="op">==</span> <span class="dv">0</span>) <span class="kw">or</span> (a<span class="op">%</span><span class="dv">400</span> <span class="op">==</span> <span class="dv">0</span>)
+
+<span class="co">&quot;&quot;&quot;</span>
+<span class="co">In [46]: bissextile(2100), bissextile(2400)</span>
+<span class="co">Out[46]: (False, True)</span>
+<span class="co">&quot;&quot;&quot;</span></code></pre></div>
+</div><div id="exercice-13" class="slide section level2">
+<h2>Exercice 13</h2>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="kw">def</span> est_premier(n):
+    <span class="co">&#39;&#39;&#39;Test de primalité&#39;&#39;&#39;</span>
+    <span class="cf">if</span> n <span class="op">&lt;=</span> <span class="dv">1</span>:
+        <span class="cf">return</span> <span class="va">False</span>
+    d <span class="op">=</span> <span class="dv">2</span>
+    bsup <span class="op">=</span> math.sqrt(n)
+    <span class="cf">while</span> d <span class="op">&lt;=</span> bsup:
+        <span class="cf">if</span> n<span class="op">%</span>d <span class="op">==</span> <span class="dv">0</span>:
+            <span class="cf">return</span> <span class="va">False</span>
+        d <span class="op">+=</span> <span class="dv">1</span>
+    <span class="cf">return</span> <span class="va">True</span>
+
+<span class="co">&quot;&quot;&quot;</span>
+<span class="co">In [49]: list(map(est_premier, [-1, 1, 2, 3, 5, 91, 2013, 10000000277]))</span>
+<span class="co">Out[49]: [False, False, True, True, True, False, False, True]</span>
+<span class="co">&quot;&quot;&quot;</span></code></pre></div>
+</div>
+<div id="prévoir-le-résultat-dune-fonction" class="titleslide slide section level1"><h1>Prévoir le résultat d'une fonction</h1></div><div id="exercice-14" class="slide section level2">
+<h2>Exercice 14</h2>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="kw">def</span> mystere1(x):
+    <span class="co">&#39;&#39;&#39;fonction mystere qui retourne x**2+4*x</span>
+<span class="co">    mystere1(10)==140&#39;&#39;&#39;</span>
+    y <span class="op">=</span> x
+    z <span class="op">=</span> y<span class="op">*</span>x
+    y <span class="op">=</span> x<span class="op">+</span>y<span class="op">+</span>z
+    z <span class="op">=</span> z<span class="op">-</span>y 
+    <span class="cf">return</span> y<span class="op">-</span>z</code></pre></div>
+</div><div id="exercice-15" class="slide section level2">
+<h2>Exercice 15</h2>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="kw">def</span> mystere2(x,y):
+    <span class="co">&#39;&#39;&#39;mystere2(6,12)==1 car 30&gt;12</span>
+<span class="co">    mystere2(15,7)== -1 car 29&lt;30</span>
+<span class="co">    retourne 1 si 2y&gt;x et -1 sinon &#39;&#39;&#39;</span>
+    z <span class="op">=</span> x<span class="op">+</span>y
+    <span class="cf">if</span> z<span class="op">+</span>y<span class="op">&gt;</span><span class="dv">2</span><span class="op">*</span>x:
+        <span class="cf">return</span> <span class="dv">1</span>
+    <span class="cf">else</span>:
+        <span class="cf">return</span> <span class="dv">-1</span></code></pre></div>
+</div><div id="exercice-16" class="slide section level2">
+<h2>Exercice 16</h2>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="kw">def</span> mystere3(x,y):
+    <span class="co">&#39;&#39;&#39;Valeur retournée :</span>
+<span class="co">    1er cas x&gt;0 : si x&gt;=0 et y&gt;=-831-x retourne -x</span>
+<span class="co">                  sinon retourne None</span>
+<span class="co">    2ème cas x&lt;=0 : si -2x&lt;=841 retourne -x sinon retourne None</span>
+<span class="co">    &#39;&#39;&#39;</span>
+    z <span class="op">=</span> x<span class="op">+</span>y
+    <span class="cf">if</span> z<span class="op">&gt;</span>y<span class="op">-</span>x: <span class="co">#équivaut à if x&gt;0</span>
+        w <span class="op">=</span> <span class="dv">10</span>
+    <span class="cf">else</span>:
+        w <span class="op">=</span> y<span class="op">-</span>x
+    t <span class="op">=</span> w<span class="op">-</span>z <span class="co"># t==10-x-y si x&gt;0 ou t==-2x si x&lt;=0</span>
+    <span class="cf">if</span> t<span class="op">&lt;=</span> <span class="dv">841</span>:
+        <span class="cf">return</span> y<span class="op">-</span>z
+        
+<span class="co">&quot;&quot;&quot;</span>
+<span class="co">&gt;&gt;&gt; mystere3(-400,10),mystere3(-430,50),mystere3(20,1000),mystere3(20,-1000)</span>
+<span class="co">(400, None, -20, None)</span>
+<span class="co">&quot;&quot;&quot;</span>
+</code></pre></div>
+</div>
+<div id="programmer-une-suite-récurrente" class="titleslide slide section level1"><h1>Programmer une suite récurrente</h1></div><div id="exercice-17" class="slide section level2">
+<h2>Exercice 17</h2>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="kw">def</span> suite_exo17(n):
+    <span class="co">&#39;&#39;&#39;Calcule le terme de rang n de la suite</span>
+<span class="co">    définie par u(0)=1 et u(n)=sqrt(u(n-1)**2+1/2**(n-1)))&#39;&#39;&#39;</span>
+    <span class="cf">if</span> n <span class="op">&lt;</span> <span class="dv">0</span>:
+        <span class="cf">return</span> <span class="va">None</span>
+    u, p <span class="op">=</span> <span class="dv">1</span>, <span class="dv">2</span>
+    <span class="cf">for</span> k <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, n<span class="op">+</span><span class="dv">1</span>):
+        p <span class="op">*=</span> <span class="dv">1</span><span class="op">/</span><span class="dv">2</span> <span class="co">#mise à jour de 1/2**(k-1)</span>
+        u <span class="op">=</span> math.sqrt(u<span class="op">**</span><span class="dv">2</span><span class="op">+</span>p)
+    <span class="cf">return</span> u
+
+<span class="co">&quot;&quot;&quot;</span>
+<span class="co">In [55]: [suite_exo17(k) for k in [10, 100, 1000]] </span>
+<span class="co">Out[55]: [1.7314868971493835, 1.7320508075688763, 1.7320508075688763]</span>
+
+<span class="co">In [56]: list(map(lambda x : x**2, _))</span>
+<span class="co">Out[56]: [2.998046875, 2.9999999999999964, 2.9999999999999964]</span>
+
+<span class="co">On  peut conjecturer que la suite u(n)</span>
+<span class="co">converge vers sqrt(3)</span>
+<span class="co">&quot;&quot;&quot;</span>
+
+<span class="kw">def</span> seuil_exo17( epsilon):
+    <span class="co">&#39;&#39;&#39;Retourne le plus petit entier n</span>
+<span class="co">    pour lequel abs(u(n) - sqrt(3)) &lt;= epsilon. u(n) converge vers sqrt(3)&#39;&#39;&#39;</span>
+    u, n, p <span class="op">=</span> <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">2</span>
+    limite <span class="op">=</span> math.sqrt(<span class="dv">3</span>)
+    <span class="cf">while</span> <span class="bu">abs</span>(u <span class="op">-</span> limite) <span class="op">&gt;</span> epsilon:
+        p <span class="op">*=</span> <span class="dv">1</span><span class="op">/</span><span class="dv">2</span> <span class="co">#mise à jour de 1/2**(k-1)</span>
+        n <span class="op">+=</span> <span class="dv">1</span>
+        u <span class="op">=</span> math.sqrt(u<span class="op">**</span><span class="dv">2</span><span class="op">+</span>p)
+    <span class="cf">return</span> n
+
+<span class="co">&quot;&quot;&quot;</span>
+<span class="co">In [58]: seuil_exo17(0.1)</span>
+<span class="co">Out[58]: 3</span>
+<span class="co">In [60]: abs(suite_exo17(2) - math.sqrt(3)), abs(suite_exo17(3) - math.sqrt(3))</span>
+<span class="co">Out[60]: (0.15091197748468743, 0.07373841239117707)</span>
+<span class="co">&quot;&quot;&quot;</span></code></pre></div>
+</div><div id="exercice-18" class="slide section level2">
+<h2>Exercice 18</h2>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="kw">def</span> fibonacci(n):
+    <span class="co">&#39;&#39;&#39;retourne le terme de rang n de la suite de fibonacci&#39;&#39;&#39;</span>
+    <span class="cf">if</span> n <span class="op">&lt;</span> <span class="dv">0</span>:
+        <span class="cf">return</span> <span class="va">None</span>
+    t <span class="op">=</span> [<span class="dv">0</span>, <span class="dv">1</span>]
+    <span class="cf">for</span> k <span class="kw">in</span> <span class="bu">range</span>(n):
+             t[<span class="dv">0</span>], t[<span class="dv">1</span>] <span class="op">=</span> t[<span class="dv">1</span>], t[<span class="dv">0</span>] <span class="op">+</span> t[<span class="dv">1</span>]
+    <span class="cf">return</span> t[<span class="dv">0</span>]
+
+<span class="co"># In [17]: [fibonacci(i) for i in range(-1, 6)]</span>
+<span class="co"># Out[17]: [None, 0, 1, 1, 2, 3, 5]</span></code></pre></div>
+</div><div id="exercice-19" class="slide section level2">
+<h2>Exercice 19</h2>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">
+<span class="kw">def</span> suite_exo19(n):
+    <span class="cf">assert</span> n <span class="op">&gt;=</span> <span class="dv">0</span>, <span class="st">&#39;n doit être positif&#39;</span>
+    t <span class="op">=</span> [<span class="dv">8</span>, <span class="dv">4</span>, <span class="dv">3</span>]
+    <span class="cf">for</span> k <span class="kw">in</span> <span class="bu">range</span>(n):
+        t[<span class="dv">0</span>], t[<span class="dv">1</span>], t[<span class="dv">2</span>] <span class="op">=</span> t[<span class="dv">1</span>], t[<span class="dv">2</span>], t[<span class="dv">0</span>]<span class="op">*</span>t[<span class="dv">1</span>] <span class="op">+</span> (k <span class="op">-</span> <span class="dv">1</span>)<span class="op">*</span>t[<span class="dv">2</span>]
+    <span class="cf">return</span> t[<span class="dv">0</span>]
+
+<span class="co">&quot;&quot;&quot;</span>
+<span class="co">Un exemple d&#39;utilisation d&#39;une assertion :</span>
+<span class="co">In [65]: assert 0.3 == 3*0.1, &#39;Python ne sait pas compter&#39;</span>
+<span class="co">---------------------------------------------------------------------------</span>
+<span class="co">AssertionError                            Traceback (most recent call last)</span>
+<span class="co">&lt;ipython-input-65-5a76c83276b5&gt; in &lt;module&gt;()</span>
+<span class="co">----&gt; 1 assert 0.3 == 3*0.1, &#39;Python ne sait pas compter&#39;</span>
+<span class="co">AssertionError: Python ne sait pas compter</span>
+
+<span class="co">In [67]: [suite_exo18(n) for n in range(5)]</span>
+<span class="co">Out[67]: [8, 4, 3, 29, 12]</span>
+<span class="co">&quot;&quot;&quot;</span></code></pre></div>
+</div><div id="exercice-20" class="slide section level2">
+<h2>Exercice 20</h2>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">
+<span class="kw">def</span> suite_exo20(n, x, y):
+    <span class="cf">assert</span> n <span class="op">&gt;=</span> <span class="dv">0</span>, <span class="st">&#39;n doit être positif&#39;</span>
+    t <span class="op">=</span> [x, y]
+    <span class="cf">for</span> k <span class="kw">in</span> <span class="bu">range</span>(n):
+        t[<span class="dv">0</span>], t[<span class="dv">1</span>] <span class="op">=</span> (t[<span class="dv">0</span>] <span class="op">+</span> t[<span class="dv">1</span>])<span class="op">/</span><span class="fl">2.</span>, (t[<span class="dv">0</span>]<span class="op">*</span>t[<span class="dv">1</span>])<span class="op">**</span>(<span class="dv">1</span><span class="op">/</span><span class="fl">2.</span>)
+    <span class="cf">return</span> t
+
+<span class="kw">def</span> suite_exo20_approx(x, y, epsilon):
+    a, b <span class="op">=</span> x, y
+    <span class="cf">while</span> <span class="bu">abs</span>(a <span class="op">-</span> b) <span class="op">&gt;=</span> epsilon:
+         a, b <span class="op">=</span> (a<span class="op">+</span>b)<span class="op">/</span><span class="fl">2.</span>, (a<span class="op">*</span>b)<span class="op">**</span>(<span class="dv">1</span><span class="op">/</span><span class="fl">2.</span>)
+    <span class="cf">return</span> a, b
+
+<span class="kw">def</span> approx_pi(n):
+    <span class="co">&#39;&#39;&#39;Approximation de pi avec la formule de Brent-Salamin&#39;&#39;&#39;</span>
+    a, b <span class="op">=</span> <span class="dv">1</span>, <span class="dv">1</span><span class="op">/</span><span class="dv">2</span><span class="op">**</span>(<span class="dv">1</span><span class="op">/</span><span class="fl">2.</span>)
+    p <span class="op">=</span> <span class="dv">1</span> <span class="co">#puissance de 2</span>
+    somme <span class="op">=</span> <span class="dv">0</span>
+    <span class="cf">for</span> k <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, n<span class="op">+</span><span class="dv">1</span>):
+        somme <span class="op">+=</span> p<span class="op">*</span>(a<span class="op">**</span><span class="dv">2</span> <span class="op">-</span> b<span class="op">**</span><span class="dv">2</span>)
+        a, b <span class="op">=</span> (a<span class="op">+</span>b)<span class="op">/</span><span class="fl">2.</span>, (a<span class="op">*</span>b)<span class="op">**</span>(<span class="dv">1</span><span class="op">/</span><span class="fl">2.</span>)
+        p <span class="op">*=</span> <span class="dv">2</span>
+    <span class="cf">return</span> <span class="dv">2</span><span class="op">*</span>a<span class="op">**</span><span class="dv">2</span><span class="op">/</span>(<span class="fl">1.</span> <span class="op">-</span> somme)
+
+<span class="co">&quot;&quot;&quot;</span>
+<span class="co">In [70]: [approx_pi(k) for k in range(5)]</span>
+<span class="co">Out[70]: </span>
+<span class="co">[2.0,</span>
+<span class="co"> 2.9142135623730954,</span>
+<span class="co"> 3.14057925052217,</span>
+<span class="co"> 3.141592646213547,</span>
+<span class="co"> 3.1415926535898078]</span>
+<span class="co">&quot;&quot;&quot;</span></code></pre></div>
+</div>
+<div id="changement-de-base-pour-un-entier-non-signé" class="titleslide slide section level1"><h1>Changement de base pour un entier non signé</h1></div><div id="exercice-21" class="slide section level2">
+<h2>Exercice 21</h2>
+<ul>
+<li>Création d'une variable globale <code>MAX_BIT</code> qu'on initialise à 8 bits.</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">MAX_BIT <span class="op">=</span> <span class="dv">8</span></code></pre></div>
+<ul>
+<li>Fonction <code>dec_to_bin(n)</code> de conversion d'écriture décimale en binaire, retourne un tableau de <code>MAX_BIT</code> bits. Il faut noter que si l'entier passé en argument est code sur plus de <code>MAX_BIT</code> bits, on a un <strong>dépassement de capacité</strong>.</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="kw">def</span> dec_to_bin(n):
+    <span class="co">&#39;&#39;&#39;Conversion d&#39;un entier n en binaire par l&#39;algorithme</span>
+<span class="co">    des divisions en cascades. Retourne un tableau de MAX_BIT bits&#39;&#39;&#39;</span>
+    bits <span class="op">=</span> [<span class="dv">0</span>]<span class="op">*</span>MAX_BIT
+    k <span class="op">=</span> MAX_BIT <span class="op">-</span> <span class="dv">1</span> <span class="co">#on commence par remplir les bits de poids faible</span>
+    <span class="cf">while</span> k <span class="op">&gt;=</span> <span class="dv">0</span> <span class="kw">and</span> n <span class="op">&gt;</span> <span class="dv">0</span>:
+        bits[k] <span class="op">=</span> n<span class="op">%</span><span class="dv">2</span>
+        n <span class="op">=</span> n<span class="op">//</span><span class="dv">2</span>
+        k <span class="op">=</span> k <span class="op">-</span> <span class="dv">1</span>
+    <span class="cf">return</span> bits
+<span class="co">&quot;&quot;&quot;</span>
+<span class="co">In [16]: dec_to_bin(255)</span>
+<span class="co">Out[16]: [1, 1, 1, 1, 1, 1, 1, 1]</span>
+
+<span class="co">In [17]: dec_to_bin(256)   #dépassement de capacité sur 8 bits </span>
+<span class="co">Out[17]: [0, 0, 0, 0, 0, 0, 0, 0]</span>
+<span class="co">&quot;&quot;&quot;</span></code></pre></div>
+<p>Deux autres versions de cette fonction où la taille du tableau retourné n'est pas limitée. Attention la boucle doit s'exécuter au moins une fois pour que l'écriture binaire de 0 soit retournée et si on insère les bits à la fin, le tableau doit être renversé car on commence par les bits de poids faibles soit avec <code>bits.reverse()</code> soit avec un slicing <code>bits[::-1]</code></p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="kw">def</span> dec_to_binV2(n):
+    bits <span class="op">=</span> [n<span class="op">%</span><span class="dv">2</span>]
+    n <span class="op">=</span> n <span class="op">//</span> <span class="dv">2</span>
+    <span class="cf">while</span> n <span class="op">&gt;</span> <span class="dv">0</span>:
+        bits.append(n<span class="op">%</span><span class="dv">2</span>)
+        n <span class="op">=</span> n<span class="op">//</span><span class="dv">2</span>
+    bits.reverse()
+    <span class="cf">return</span> bits
+
+<span class="kw">def</span> dec_to_binV3(n):
+    bits <span class="op">=</span> []
+    <span class="cf">while</span> n<span class="op">//</span><span class="dv">2</span> <span class="op">&gt;</span> <span class="dv">0</span>:
+        bits.append(n<span class="op">%</span><span class="dv">2</span>)
+        n <span class="op">=</span> n<span class="op">//</span><span class="dv">2</span>
+    bits.append(n<span class="op">%</span><span class="dv">2</span>)
+    <span class="cf">return</span> bits[::<span class="op">-</span><span class="dv">1</span>]
+    
+<span class="co">&quot;&quot;&quot;</span>
+<span class="co">In [21]: [dec_to_binV2(n) for n in range(4)]</span>
+<span class="co">Out[21]: [[0], [1], [1, 0], [1, 1]]</span>
+
+<span class="co">In [22]: [dec_to_binV3(n) for n in range(4)]</span>
+<span class="co">Out[22]: [[0], [1], [1, 0], [1, 1]]</span>
+<span class="co">&quot;&quot;&quot;</span></code></pre></div>
+<ul>
+<li><p>Le plus grand entier non signé qu'on peut réprésenter sur <span class="math inline">\(31\)</span> bits est <span class="math inline">\(2^{31}-1\)</span>.</p></li>
+<li><p>Fonction <code>bin_to_dec(bits)</code> de conversion d'écriture binaire en décimale</p></li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="kw">def</span> bin_to_dec(bits):
+    <span class="co">&#39;&#39;&#39;Conversion de l&#39;écriture d&#39;un entier de la base dix à la base deux&#39;&#39;&#39;</span>
+    n <span class="op">=</span> <span class="dv">0</span>
+    <span class="cf">for</span> k <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(bits)):
+        n <span class="op">=</span> <span class="dv">2</span><span class="op">*</span>n <span class="op">+</span> bits[k]
+    <span class="cf">return</span> n
+<span class="co">&quot;&quot;&quot;</span>
+<span class="co">&gt;&gt;&gt; [bin_to_dec(dec_to_bin(k)) for k in range(17)]</span>
+<span class="co">[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]</span>
+<span class="co">&quot;&quot;&quot;</span></code></pre></div>
+</div>
+<div id="représentation-des-nombres-réels-sous-forme-de-flottants" class="titleslide slide section level1"><h1>Représentation des nombres réels sous forme de flottants</h1></div><div id="exercice-22" class="slide section level2">
+<h2>Exercice 22</h2>
+<ul>
+<li>Question 1, avec import du module <code>decimal</code>.</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="im">from</span> decimal <span class="im">import</span> <span class="op">*</span>
+<span class="co">&quot;&quot;&quot;</span>
+<span class="co">In [2]: getcontext().prec = 24</span>
+
+<span class="co">In [3]: Decimal.from_float(12.65)</span>
+<span class="co">Out[3]: Decimal(&#39;12.6500000000000003552713678800500929355621337890625&#39;)</span>
+<span class="co">&quot;&quot;&quot;</span></code></pre></div>
+<ul>
+<li>Question 2 : <span class="math inline">\(1 = 2^{0}\)</span> et la mantisse d'un flottant en double précision sur 64 bits est codée sur <span class="math inline">\(52\)</span> bits. Le successeur de 1 parmi les flottants est donc <span class="math inline">\(1 + 2^{-52}\)</span></li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co">&quot;&quot;&quot;</span>
+<span class="co">In [4]: 1 + 2**(-53) == 1</span>
+<span class="co">Out[4]: True</span>
+<span class="co">In [5]: 1 + 2**(-52) == 1</span>
+<span class="co">Out[5]: False</span>
+<span class="co">&quot;&quot;&quot;</span></code></pre></div>
+<ul>
+<li>Question 2 (suite) : pour le prédécesseur de <span class="math inline">\(1\)</span>, il faut considérer que l'écart minimum entre 2 flottants compris entre <span class="math inline">\(2^{-1}\)</span> et <span class="math inline">\(2^{0}\)</span> est <span class="math inline">\(2^{-1} \times 2^{-52} = 2^{-53}\)</span>. Le prédécesseur de <span class="math inline">\(1\)</span> parmi les flottants est donc <span class="math inline">\(1 - 2^{-53}\)</span>.</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co">&quot;&quot;&quot;</span>
+<span class="co">In [9]: 1 - 2**(-53) == 1</span>
+<span class="co">Out[9]: False</span>
+
+<span class="co">In [10]: 1 - 2**(-54) == 1</span>
+<span class="co">Out[10]: True</span>
+<span class="co">&quot;&quot;&quot;</span></code></pre></div>
+<ul>
+<li>Question 3</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">k <span class="op">=</span> <span class="dv">0</span>
+<span class="cf">while</span> <span class="fl">1.</span> <span class="op">+</span> <span class="dv">10</span><span class="op">**</span>(<span class="op">-</span>k) <span class="op">&gt;</span> <span class="dv">1</span>:
+    k <span class="op">+=</span> <span class="dv">1</span> 
+<span class="bu">print</span>(<span class="st">&#39;1 + 10**(-</span><span class="sc">%d</span><span class="st">) == 1 --&gt; True&#39;</span><span class="op">%</span>k)
+<span class="co">&quot;&quot;&quot;</span>
+<span class="co">In [11]: (executing lines 381 to 384 of &quot;correcTP4-Fonctions-Suites-Flottants.py&quot;)</span>
+<span class="co">1 + 10**(-16) == 1 --&gt; True</span>
+<span class="co">&quot;&quot;&quot;</span></code></pre></div>
+<p>Ce script permet de déterminer le plus petit entier <span class="math inline">\(k\)</span> tel que <span class="math inline">\(1 + 10^{-k}\)</span> inférieur au plus petit écart avec le flottant successeur de 1 qui est <span class="math inline">\(1 + 2^{-52}\)</span> donc <span class="math inline">\(k &gt; \log(2^{-52})/(-\log(10))\)</span>.</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co">&quot;&quot;&quot;</span>
+<span class="co"># In [13]: math.log(2**(-52))/-math.log(10)</span>
+<span class="co"># Out[13]: 15.65355977452702</span>
+<span class="co">&quot;&quot;&quot;</span></code></pre></div>
+<p>On trouve <span class="math inline">\(16\)</span> (nombre de chiffres significatifs pour le type <code>float</code>). On peut avoir plus d'infos sur le type <code>float</code> utilisé par Python avec <code>sys.float_info</code>.</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co">&quot;&quot;&quot;</span>
+<span class="co">In [19]: import sys</span>
+<span class="co">In [20]: sys.float_info</span>
+<span class="co">Out[20]: sys.float_info(max=1.7976931348623157e+308,</span>
+<span class="co"> max_exp=1024, max_10_exp=308, min=2.2250738585072014e-308, </span>
+<span class="co"> min_exp=-1021, min_10_exp=-307, dig=15, mant_dig=53, </span>
+<span class="co"> epsilon=2.220446049250313e-16, radix=2, rounds=1)</span>
+<span class="co">&quot;&quot;&quot;</span></code></pre></div>
+<p>Si <span class="math inline">\(x\)</span> est un réel et <span class="math inline">\(fx\)</span> sa représentation sous forme de flottant on a <span class="math inline">\(fx = x \times (1+\varepsilon)\)</span>.</p>
+<p><span class="math inline">\(\varepsilon\)</span> est <em>l'erreur relative</em> et <em>l'erreur absolue</em> est <span class="math inline">\(\varepsilon \times x\)</span>.</p>
+<ul>
+<li><p>Question 4 :</p>
+<p>Au format double précision sur 64 bits, l'exposant est codé sur 11 bits. Deux valeurs (0 et <span class="math inline">\(2^{11}-1\)</span>) sont réservées aux valeurs spéciales (<code>Inf</code>, <code>NAN</code>, 0) et il y a autant d'exposants négatifs que de positifs, donc l'exposant maximal est <span class="math inline">\((2^{11} - 2)/2= 2^{10} - 1 = 1023\)</span>.</p>
+<p>De plus la mantisse est codée sur 52 bits. Le plus grand flottant est donc <span class="math inline">\(2^{1023} \times (1+2^{-1}+\ldots+2^{-52}) =2^{1023}\times(1-2^{-53})/2^{-1} = 2^{1024}-2^{971}\)</span>.</p>
+<p>Attention pour obtenir l'infini il ne suffit pas d'ajouter 1 à ce nombre, il faut ajouter au moins le + petit écart entre 2 flottants au-delà de <span class="math inline">\(2^{1023}\)</span> qui est <span class="math inline">\(2^{-52}\times 2^{1023}\)</span>.</p></li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co">&quot;&quot;&quot;</span>
+<span class="co">In [48]: maxfloat = sum(2.**(1023-i) for i in range(53))</span>
+
+<span class="co">In [49]: maxfloat == float(2**1024 - 2**971)</span>
+<span class="co">Out[49]: True</span>
+
+<span class="co">In [50]: maxfloat + 2**(-52)*2**1023</span>
+<span class="co">Out[50]: inf</span>
+<span class="co">&quot;&quot;&quot;</span></code></pre></div>
+<ul>
+<li>Question 5</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="im">from</span> decimal <span class="im">import</span> <span class="op">*</span>
+getcontext (). prec <span class="op">=</span> <span class="dv">50</span>  <span class="co"># précision en décimal</span>
+
+<span class="kw">def</span> approx1(x):
+    <span class="cf">return</span> <span class="fl">1.</span><span class="op">/</span>x <span class="op">-</span> <span class="fl">1.</span><span class="op">/</span>(x<span class="op">+</span><span class="dv">1</span>)
+
+<span class="kw">def</span> approx2(x):
+    <span class="cf">return</span> <span class="fl">1.</span><span class="op">/</span>(x<span class="op">*</span>(x<span class="op">+</span><span class="dv">1</span>))
+    
+<span class="kw">def</span> exacte(x):
+    <span class="co">#Attention Decimal(0.1) est moins précis que Decimal(str(0.1))</span>
+    <span class="cf">return</span> <span class="dv">1</span><span class="op">/</span>(Decimal(<span class="bu">str</span>(x))<span class="op">*</span>(Decimal(<span class="bu">str</span>(x))<span class="op">+</span><span class="dv">1</span>))
+
+<span class="kw">def</span> erreur_absolue(exacte, approx):
+    approxdec <span class="op">=</span> Decimal(approx)
+    <span class="cf">return</span> <span class="bu">abs</span>(exacte <span class="op">-</span> approxdec)
+
+<span class="kw">def</span> erreur_relative(exacte, approx):
+    approxdec <span class="op">=</span> Decimal(approx)
+    <span class="cf">return</span> <span class="bu">abs</span>(exacte <span class="op">-</span> approxdec)<span class="op">/</span><span class="bu">abs</span>(exacte)
+    
+<span class="bu">print</span>(<span class="st">&quot;</span><span class="sc">{:&lt;11}</span><span class="st">|</span><span class="sc">{:^16}</span><span class="st">|</span><span class="sc">{:^16}</span><span class="st">|</span><span class="sc">{:^16}</span><span class="st">|</span><span class="sc">{:^14}</span><span class="st">&quot;</span>.<span class="bu">format</span>(<span class="st">&#39;x&#39;</span>,<span class="st">&#39;1/x-1/(x+1)&#39;</span>, 
+<span class="st">&#39;exacte&#39;</span>, <span class="st">&#39;erreur absolue&#39;</span>, <span class="st">&#39;erreur relative&#39;</span>))
+<span class="cf">for</span> i, x <span class="kw">in</span> <span class="bu">enumerate</span>([<span class="fl">1.1</span><span class="op">*</span><span class="dv">2</span><span class="op">**</span>i <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">0</span>, <span class="dv">55</span>, <span class="dv">2</span>)]):
+    <span class="bu">print</span>(<span class="st">&quot;</span><span class="sc">{:&lt;11}</span><span class="st">|</span><span class="sc">{:&lt;16.10e}</span><span class="st">|</span><span class="sc">{:&lt;16.10e}</span><span class="st">|</span><span class="sc">{:&lt;16.10e}</span><span class="st">|</span><span class="sc">{:&lt;16.10e}</span><span class="st">&quot;</span>.<span class="bu">format</span>(<span class="st">&#39;1&#39;</span>
+    <span class="st">&#39;.1*2**(</span><span class="sc">%d</span><span class="st">)&#39;</span><span class="op">%</span>(<span class="dv">2</span><span class="op">*</span>i),approx1(x),exacte(x),
+    erreur_absolue(exacte(x), approx1(x)),erreur_relative(exacte(x),approx1(x))))
+
+<span class="bu">print</span>(<span class="st">&quot;</span><span class="sc">{:&lt;11}</span><span class="st">|</span><span class="sc">{:^16}</span><span class="st">|</span><span class="sc">{:^16}</span><span class="st">|</span><span class="sc">{:^16}</span><span class="st">|</span><span class="sc">{:^14}</span><span class="st">&quot;</span>.<span class="bu">format</span>(
+<span class="st">&#39;x&#39;</span>,<span class="st">&#39;1/(x(x+1))&#39;</span>, <span class="st">&#39;exacte&#39;</span>,<span class="st">&#39;erreur absolue&#39;</span>, <span class="st">&#39;erreur relative&#39;</span>))
+<span class="cf">for</span> i, x <span class="kw">in</span> <span class="bu">enumerate</span>([<span class="fl">1.1</span><span class="op">*</span><span class="dv">2</span><span class="op">**</span>i <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">0</span>, <span class="dv">55</span>, <span class="dv">2</span>)]):
+    <span class="bu">print</span>(<span class="st">&quot;</span><span class="sc">{:&lt;11}</span><span class="st">|</span><span class="sc">{:&lt;16.10e}</span><span class="st">|</span><span class="sc">{:&lt;16.10e}</span><span class="st">|</span><span class="sc">{:&lt;16.10e}</span><span class="st">|</span><span class="sc">{:&lt;16.10e}</span><span class="st">&quot;</span>.<span class="bu">format</span>(
+    <span class="st">&#39;1.1*2**(</span><span class="sc">%d</span><span class="st">)&#39;</span><span class="op">%</span>(<span class="dv">2</span><span class="op">*</span>i),approx2(x),exacte(x),
+    erreur_absolue(exacte(x),approx2(x)),erreur_relative(exacte(x),approx2(x))))
+<span class="co">&quot;&quot;&quot;</span>
+<span class="co">x          |  1/x-1/(x+1)   |     exacte     | erreur absolue |erreur relative</span>
+<span class="co">1.1*2**(0) |4.3290043290e-01|4.3290043290e-1 |3.8449282238e-18|8.8817841970e-18</span>
+<span class="co">1.1*2**(2) |4.2087542088e-02|4.2087542088e-2 |2.7101403800e-18|6.4392935428e-17</span>
+<span class="co">1.1*2**(4) |3.0547409580e-03|3.0547409580e-3 |4.2257389073e-18|1.3833378887e-15</span>
+<span class="co">...............................................................................</span>
+<span class="co">1.1*2**(52)|4.9303806576e-32|4.0746947584e-32|8.5568589926e-33|2.1000000000e-1 </span>
+<span class="co">1.1*2**(54)|0.0000000000e+00|2.5466842240e-33|2.5466842240e-33|1.0000000000e+0  </span>
+<span class="co">x          |   1/(x(x+1))   |     exacte     | erreur absolue |erreur relative</span>
+<span class="co">1.1*2**(0) |4.3290043290e-01|4.3290043290e-1 |1.1486723069e-16|2.6534330289e-16</span>
+<span class="co">1.1*2**(2) |4.2087542088e-02|4.2087542088e-2 |1.1167647428e-17|2.6534330289e-16</span>
+<span class="co">...............................................................................</span>
+<span class="co">1.1*2**(52)|4.0746947584e-32|4.0746947584e-32|4.8528250255e-49|1.1909665173e-17</span>
+<span class="co">1.1*2**(54)|2.5466842240e-33|2.5466842240e-33|2.6834477366e-49|1.0537025797e-16</span>
+<span class="co">&quot;&quot;&quot;</span></code></pre></div>
+</div><div id="exercice-23" class="slide section level2">
+<h2>Exercice 23</h2>
+<p>La suite définie par <span class="math inline">\(\begin{cases} u_{0}=1/3 \\ u_{n+1}=4u(n) - 1 \end{cases}\)</span> est constante : <span class="math inline">\(\forall n \in \mathbb{N}, \, u_{n} = 1/3\)</span>.</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="kw">def</span> suiteu(n):
+    <span class="cf">if</span> n <span class="op">&lt;</span> <span class="dv">0</span>:
+        <span class="cf">return</span> <span class="va">None</span>
+    u <span class="op">=</span> <span class="dv">1</span><span class="op">/</span><span class="dv">3</span>
+    <span class="bu">print</span>(<span class="st">&#39;u(0)= &#39;</span>, u)
+    <span class="cf">for</span> k <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, n<span class="op">+</span><span class="dv">1</span>):
+        u <span class="op">=</span> <span class="dv">4</span><span class="op">*</span>u <span class="op">-</span> <span class="dv">1</span>
+        <span class="bu">print</span>(<span class="st">&#39;u(</span><span class="sc">%d</span><span class="st">)=</span><span class="sc">%1.15f</span><span class="st">&#39;</span><span class="op">%</span>(k, u))</code></pre></div>
+<p>Le développement de <span class="math inline">\(1/3\)</span> en base 2 est <span class="math inline">\(0,01010101 \ldots\)</span> (infini et périodique).</p>
+<p>Si on avait une infinité de bits en machine <span class="math inline">\(4\times (1/3) - 1\)</span> redonnerait <span class="math inline">\(0,0101 \ldots\)</span> puisqu'en base 2 nmultiplier par <span class="math inline">\(4=2^{2}\)</span> revient à décaler la virgule de 2 rangs vers la droite. Mais au départ la représentation de <span class="math inline">\(1/3\)</span> sous forme de flottant est <span class="math inline">\(2^{-2}\times 1,0101\ldots\)</span> (26 fois la période 01). Donc en multipliant par 4 on fait remonter chaque bit exact puis on le supprime en enlevant 1. Après 26 applications de la relation de récurrence, il ne devrait plus rester de bits exacts comme on peut le vérifier ci-dessous. A partir de <span class="math inline">\(u(27) = 0\)</span> il ne reste plus de bits exacts.</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co">&quot;&quot;&quot;</span>
+<span class="co">In [58]: suiteu(50)</span>
+<span class="co">u(0)=  0.3333333333333333</span>
+<span class="co">u(1)=0.333333333333333</span>
+<span class="co">u(2)=0.333333333333333</span>
+<span class="co">u(3)=0.333333333333332</span>
+<span class="co">u(4)=0.333333333333329</span>
+<span class="co">......................</span>
+<span class="co">u(25)=0.312500000000000</span>
+<span class="co">u(26)=0.250000000000000</span>
+<span class="co">u(27)=0.000000000000000</span>
+<span class="co">u(28)=-1.000000000000000</span>
+<span class="co">.........................</span>
+<span class="co">u(49)=-5864062014805.000000000000000</span>
+<span class="co">u(50)=-23456248059221.000000000000000</span>
+<span class="co">&quot;&quot;&quot;</span></code></pre></div>
+</div><div id="exercice-24" class="slide section level2">
+<h2>Exercice 24</h2>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="im">import</span> math 
+
+<span class="kw">def</span> expo(x, n):
+    <span class="co">&#39;&#39;&#39;Retourne une approximation de exp(x)</span>
+<span class="co">    avec la formule exp(x) = 1 + x + ...+x**n/n!&#39;&#39;&#39;</span>
+    <span class="cf">if</span> n <span class="op">&gt;=</span> <span class="dv">0</span>:
+        somme, terme <span class="op">=</span> <span class="dv">1</span>, <span class="dv">1</span> 
+        <span class="cf">for</span> k <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, n<span class="op">+</span><span class="dv">1</span>):
+            terme <span class="op">*=</span> <span class="bu">float</span>(x)<span class="op">/</span>k
+            somme <span class="op">+=</span> terme
+        <span class="cf">return</span> somme</code></pre></div>
+<p>Notre fonction maison fait ce qu'on attend pour les <span class="math inline">\(x &gt; 0\)</span>.</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co">&quot;&quot;&quot;</span>
+<span class="co">In [63]: expo(1, 50)</span>
+<span class="co">Out[63]: 2.7182818284590455</span>
+<span class="co">In [64]: expo(10, 50)</span>
+<span class="co">Out[64]: 22026.465794806714</span>
+<span class="co">In [66]: math.exp(10)</span>
+<span class="co">Out[66]: 22026.465794806718</span>
+<span class="co">&quot;&quot;&quot;</span></code></pre></div>
+<p>Pour les <span class="math inline">\(x &lt; 0\)</span> petits en valeur absolue tout va bien.</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co">&quot;&quot;&quot;</span>
+<span class="co">In [67]: expo(-1, 50)</span>
+<span class="co">Out[67]: 0.36787944117144245</span>
+
+<span class="co">In [68]: math.exp(-1)</span>
+<span class="co">Out[68]: 0.36787944117144233</span>
+<span class="co">&quot;&quot;&quot;</span></code></pre></div>
+<p>Mais si <span class="math inline">\(x &lt; 0\)</span> est plus grand en valeur absolue, dans le calcul de la somme des <span class="math inline">\(x^{k}/k!\)</span> pour <span class="math inline">\(k\)</span> entre 0 et <span class="math inline">\(n\)</span>, on ajoute des nombres de signes opposés <span class="math inline">\(+\)</span> ou <span class="math inline">\(-\)</span>,on a donc des phénomènes de <em>cancellation</em> et aussi des phénomènes d'<em>absorption</em> lorsque <span class="math inline">\(k\)</span> assez grand et que <span class="math inline">\(x^{k}/k!\)</span> devient très petit sans compter qu'il finit par atteindre le zéro machine.</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">
+x <span class="op">=</span> <span class="dv">-30</span>
+val <span class="op">=</span> math.exp(x)
+<span class="cf">for</span> n <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">120</span>):
+    <span class="bu">print</span>(<span class="st">&#39;n : </span><span class="sc">%d</span><span class="st"> Bibliothèque : </span><span class="sc">%1.6e</span><span class="st"> et \</span>
+<span class="st">    Maison : </span><span class="sc">%1.6e</span><span class="st">&#39;</span><span class="op">%</span>(n, val, expo(x, n)))
+
+<span class="co">&quot;&quot;&quot;</span>
+<span class="co">In [62]: (executing lines 520 to 534 of &quot;correcTP4-Fonctions-Suites-Flottants.py&quot;)</span>
+<span class="co">n : 0 Bibliothèque : 9.357623e-14 et     Maison : 1.000000e+00</span>
+<span class="co">n : 1 Bibliothèque : 9.357623e-14 et     Maison : -2.900000e+01</span>
+<span class="co">n : 2 Bibliothèque : 9.357623e-14 et     Maison : 4.210000e+02</span>
+<span class="co">.......................................o(</span>
+<span class="co">n : 21 Bibliothèque : 9.357623e-14 et     Maison : -1.194482e+11</span>
+<span class="co">n : 22 Bibliothèque : 9.357623e-14 et     Maison : 1.597426e+11</span>
+<span class="co">n : 23 Bibliothèque : 9.357623e-14 et     Maison : -2.044193e+11</span>
+<span class="co">n : 24 Bibliothèque : 9.357623e-14 et     Maison : 2.507830e+11</span>
+<span class="co">...................................</span>
+<span class="co">n : 72 Bibliothèque : 9.357623e-14 et     Maison : 1.074591e+02</span>
+<span class="co">n : 73 Bibliothèque : 9.357623e-14 et     Maison : -4.373428e+01</span>
+<span class="co">n : 74 Bibliothèque : 9.357623e-14 et     Maison : 1.756034e+01</span>
+<span class="co">.....................................</span>
+<span class="co">n : 80 Bibliothèque : 9.357623e-14 et     Maison : 5.595934e-02</span>
+<span class="co">n : 81 Bibliothèque : 9.357623e-14 et     Maison : -2.053140e-02</span>
+<span class="co">n : 82 Bibliothèque : 9.357623e-14 et     Maison : 7.453018e-03</span>
+<span class="co">n : 83 Bibliothèque : 9.357623e-14 et     Maison : -2.661833e-03</span>
+<span class="co">......................................</span>
+<span class="co">n : 88 Bibliothèque : 9.357623e-14 et     Maison : 1.931170e-05</span>
+<span class="co">n : 89 Bibliothèque : 9.357623e-14 et     Maison : 1.687945e-06</span>
+<span class="co">..................................................</span>
+<span class="co">n : 92 Bibliothèque : 9.357623e-14 et     Maison : 6.257378e-06</span>
+<span class="co">n : 93 Bibliothèque : 9.357623e-14 et     Maison : 6.053660e-06</span>
+<span class="co">n : 94 Bibliothèque : 9.357623e-14 et     Maison : 6.118676e-06</span>
+<span class="co">n : 95 Bibliothèque : 9.357623e-14 et     Maison : 6.098145e-06</span>
+<span class="co">.....................................</span>
+<span class="co">n : 102 Bibliothèque : 9.357623e-14 et     Maison : 6.103044e-06</span>
+<span class="co">n : 103 Bibliothèque : 9.357623e-14 et     Maison : 6.103042e-06</span>
+<span class="co">................................</span>
+<span class="co">n : 118 Bibliothèque : 9.357623e-14 et     Maison : 6.103042e-06</span>
+<span class="co">n : 119 Bibliothèque : 9.357623e-14 et     Maison : 6.103042e-06</span>
+<span class="co">&quot;&quot;&quot;</span></code></pre></div>
+</div><div id="exercice-24-1" class="slide section level2">
+<h2>Exercice 24</h2>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="kw">def</span> somme1(n):
+    <span class="co">&#39;&#39;&#39;Somme du plus grand au plus petit&#39;&#39;&#39;</span>
+    s <span class="op">=</span> <span class="dv">0</span>
+    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>,n<span class="op">+</span><span class="dv">1</span>):
+        s <span class="op">+=</span> <span class="dv">1</span><span class="op">/</span>i<span class="op">**</span><span class="dv">4</span>
+    <span class="cf">return</span> s
+
+<span class="kw">def</span> somme2(n):
+    <span class="co">&#39;&#39;&#39;Somme du plus petit au plus grand&#39;&#39;&#39;</span>
+    s <span class="op">=</span> <span class="dv">0</span>
+    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(n<span class="op">+</span><span class="dv">1</span>,<span class="dv">0</span>,<span class="op">-</span><span class="dv">1</span>):
+        s <span class="op">+=</span> <span class="dv">1</span><span class="op">/</span>i<span class="op">**</span><span class="dv">4</span>
+    <span class="cf">return</span> s
+
+<span class="cf">for</span> n <span class="kw">in</span> [<span class="dv">10000</span>, <span class="dv">100000</span>]:
+    <span class="bu">print</span>(<span class="st">&#39;Somme 1 = &#39;</span>, somme1(n))
+    <span class="bu">print</span>(<span class="st">&#39;Somme 2 = &#39;</span>, somme2(n))
+
+<span class="co">#In [69]: (executing lines 594 to 610 of &quot;correcTP4-Fonctions-Suites-Flottants.py&quot;)</span>
+<span class="co"># Somme 1 =  1.0823232337108615</span>
+<span class="co"># Somme 2 =  1.082323233710805</span>
+<span class="co"># Somme 1 =  1.0823232337108615</span>
+<span class="co"># Somme 2 =  1.082323233711138</span>
+    
+<span class="co">#valeur de la limite pi**4/90</span>
+<span class="co"># In [70]: math.pi**4/90</span>
+<span class="co"># Out[70]: 1.082323233711138</span></code></pre></div>
+</div><div id="exercice-25" class="slide section level2">
+<h2>Exercice 25</h2>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="kw">def</span> boulanger(x):
+    <span class="co">&#39;&#39;&#39;Fonction du boulanger&#39;&#39;&#39;</span>
+    <span class="co">#0.5 est un flottant représenté de façon exacte</span>
+    <span class="cf">if</span> <span class="dv">0</span><span class="op">&lt;=</span> x <span class="op">&lt;=</span> <span class="fl">0.5</span>:
+        <span class="cf">return</span> <span class="dv">2</span><span class="op">*</span>x
+    <span class="cf">return</span> <span class="dv">2</span><span class="op">*</span>(<span class="dv">1</span> <span class="op">-</span> x)
+
+<span class="kw">def</span> iterations(x,n):
+    <span class="co">&#39;&#39;&#39;tableaux des n premières itérations par la fonction du boulanger</span>
+<span class="co">    en partant de t&#39;&#39;&#39;</span>
+    tab <span class="op">=</span> [x]
+    <span class="cf">for</span> k <span class="kw">in</span> <span class="bu">range</span>(n):
+        tab.append(boulanger(tab[<span class="op">-</span><span class="dv">1</span>]))
+    <span class="cf">return</span> tab</code></pre></div>
+<p>Soit <span class="math inline">\(b(n)\)</span> le terme de rang n d'une suite du boulanger. Si <span class="math inline">\(0 \leqslant b(n) \leqslant 1/2\)</span> son développement binaire est du type <span class="math inline">\(0,0\ldots\)</span>. <span class="math inline">\(b(n+1) = 2b(n)\)</span> donc son développement binaire est obtenu à partir de celui de <span class="math inline">\(b(n)\)</span> en décalant tous les bits vers la gauche. Si <span class="math inline">\(1/2 \leqslant b(n) \leqslant 1\)</span> son développement binaire est du type <span class="math inline">\(0,1\ldots\)</span>. <span class="math inline">\(b(n+1) = 2(1-b(n))\)</span> donc son développement binaire est obtenu à partir de celui de <span class="math inline">\(b(n)\)</span> en remplaçant tous les 0 par des 1 et vice-versa puis en décalant tous les bits vers la gauche. Pour la valeur initiale <span class="math inline">\(b(0)=1/3\)</span> on a <span class="math inline">\(b(1)=2/3\)</span> <span class="math inline">\(b(2)=2/3\)</span> et par récurrence immédiate, pour tout entier <span class="math inline">\(n \geqslant 1\)</span> on a <span class="math inline">\(b(n) = 2/3\)</span> La représentation de <span class="math inline">\(1/3\)</span> sous forme de flottant n'est pas exacte, on peut l'obtenir avec la fonction <code>Decimal.from_float</code> du module decimal.</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co">&quot;&quot;&quot;</span>
+<span class="co">In [34]: Decimal.from_float(1/3)</span>
+<span class="co">Out[34]: Decimal(&#39;0.333333333333333314829616256247390992939472198486328125&#39;)</span>
+<span class="co">&quot;&quot;&quot;</span></code></pre></div>
+<p>Il est donc normal qu'avec une représentation en flottants cette suite se comporte de façon chaotique. Si on calcule les 100 premiers termes, on observe que les derniers sont nuls au lieu d'etre égaux à <span class="math inline">\(2/3\)</span>. Le module <code>decimal</code> permet une représentation avec un nombre réglable de décimales exactes. Avec 50 décimales exactes, les termes de rang compris entre 0 et 100 sont plus proches de <span class="math inline">\(2/3\)</span> que pour les flottants mais ils s'éloignent progressivement des valeurs exactes.</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co">&quot;&quot;&quot;</span>
+<span class="co">In [16]: t1 = iterations(1/3, 100)</span>
+
+<span class="co">In [17]: t1[-5:]</span>
+<span class="co">Out[17]: [0.0, 0.0, 0.0, 0.0, 0.0]</span>
+
+<span class="co">In [18]: from decimal import *</span>
+
+<span class="co">In [19]: getcontext().prec = 50</span>
+
+<span class="co">In [20]: t2 = iterations(Decimal(&#39;1&#39;)/Decimal(&#39;3&#39;), 100)</span>
+
+<span class="co">In [21]: t2[-4:]</span>
+<span class="co">Out[21]: </span>
+<span class="co">[Decimal(&#39;0.66666666666666666666693076054171421445864514650112&#39;),</span>
+<span class="co"> Decimal(&#39;0.66666666666666666666613847891657157108270970699776&#39;),</span>
+<span class="co"> Decimal(&#39;0.66666666666666666666772304216685685783458058600448&#39;),</span>
+<span class="co"> Decimal(&#39;0.66666666666666666666455391566628628433083882799104&#39;)]</span>
+
+<span class="co">In [49]: t2[:4]</span>
+<span class="co">Out[49]: </span>
+<span class="co">[Decimal(&#39;0.33333333333333333333333333333333333333333333333333&#39;),</span>
+<span class="co"> Decimal(&#39;0.66666666666666666666666666666666666666666666666666&#39;),</span>
+<span class="co"> Decimal(&#39;0.66666666666666666666666666666666666666666666666668&#39;),</span>
+<span class="co"> Decimal(&#39;0.66666666666666666666666666666666666666666666666664&#39;)]</span>
+<span class="co">&quot;&quot;&quot;</span></code></pre></div>
+</div>
+<div id="pour-ceux-qui-sennuient" class="titleslide slide section level1"><h1>Pour ceux qui s'ennuient</h1></div><div id="exo-27-exponentiation-rapide" class="slide section level2">
+<h2>Exo 27 Exponentiation rapide</h2>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="kw">def</span> expo_rapideiter(a, n): <span class="co">#Version itérative</span>
+    acc <span class="op">=</span>  a
+    puis <span class="op">=</span> <span class="dv">1</span>
+    <span class="cf">while</span> n <span class="op">&gt;</span> <span class="dv">0</span>:
+        <span class="cf">if</span> n<span class="op">%</span><span class="dv">2</span> <span class="op">==</span> <span class="dv">1</span>:
+            puis <span class="op">*=</span> acc
+        acc <span class="op">**=</span> <span class="dv">2</span>
+        n <span class="op">//=</span> <span class="dv">2</span>
+    <span class="cf">return</span> puis
+
+<span class="kw">def</span> expo_rapiderec(a, n): <span class="co">#Version récursive</span>
+    <span class="cf">if</span> n <span class="op">==</span> <span class="dv">0</span>:
+        <span class="cf">return</span> <span class="dv">1</span>
+    <span class="cf">if</span> n<span class="op">%</span><span class="dv">2</span> <span class="op">==</span> <span class="dv">0</span>:
+        <span class="cf">return</span> expo_rapiderec(a, n<span class="op">//</span><span class="dv">2</span>)<span class="op">**</span><span class="dv">2</span>
+    <span class="cf">return</span> expo_rapiderec(a, n<span class="op">//</span><span class="dv">2</span>)<span class="op">*</span>a</code></pre></div>
+</div><div id="exo-28-projet-euler-56" class="slide section level2">
+<h2>Exo 28 Projet Euler 56</h2>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="kw">def</span> digits(n, base <span class="op">=</span> <span class="dv">2</span>):
+    t <span class="op">=</span> [n<span class="op">%</span>base]
+    n <span class="op">=</span> n <span class="op">//</span> base
+    <span class="cf">while</span> n <span class="op">&gt;</span> <span class="dv">0</span>:
+        t.append(n<span class="op">%</span>base)
+        n <span class="op">=</span> n <span class="op">//</span> base
+    t.reverse()
+    <span class="cf">return</span> t
+
+<span class="kw">def</span> projet56():
+    maxi <span class="op">=</span> <span class="dv">-1</span>
+    <span class="cf">for</span> a <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">2</span>, <span class="dv">101</span>):
+        <span class="cf">for</span> b <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">2</span>, <span class="dv">101</span>):
+            s <span class="op">=</span> <span class="bu">sum</span>(digits(expo_rapideiter(a,b), base <span class="op">=</span> <span class="dv">10</span>))
+            <span class="cf">if</span> s <span class="op">&gt;</span> maxi: maxi <span class="op">=</span> s
+    <span class="cf">return</span> maxi
+ 
+<span class="co">&quot;&quot;&quot;</span>
+<span class="co">In [60]: projet56()</span>
+<span class="co">Out[60]: 972</span>
+<span class="co">&quot;&quot;&quot;</span></code></pre></div>
+</div>
+</body>
+</html>
