@@ -32,3 +32,9 @@ Sujets réalisés par Stéphane Gonnord/Laurent Jouhet/Frédéric Junier/Stépha
   - [corrigé HTML](TP3/corrige/I1-TP-03-Boucles-corrige.html)
   - [corrigé pdf](TP3/corrige/I1-TP-03-Boucles-corrige.pdf)
   - [corrigé python](TP3/corrige/I1-TP-03-Boucles-corrige.py)
+
+* TP4 :
+  - [énoncé](TP4/sujet/I1-TP-04-Fonctions-Suites-sujet.pdf)
+  - [corrigé HTML](TP4/corrige/I1-TP-04-Fonctions-Suites-corrige.html)
+  - [corrigé pdf](TP4/corrige/I1-TP-04-Fonctions-Suites-corrige.pdf)
+  - [corrigé python](TP4/corrige/I1-TP-04-Fonctions-Suites-corrige.py)
