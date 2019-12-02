@@ -1,0 +1,732 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+ "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <meta name="author" content="Chenevois-Jouhet-Junier" />
+  <title>Corrigé du TP 05 Listes</title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+  </style>
+  <link rel="stylesheet" type="text/css" media="screen, projection, print"
+    href="https://www.w3.org/Talks/Tools/Slidy2/styles/slidy.css" />
+  <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+  <script src="https://www.w3.org/Talks/Tools/Slidy2/scripts/slidy.js"
+    charset="utf-8" type="text/javascript"></script>
+</head>
+<body>
+<div class="slide titlepage">
+  <h1 class="title">Corrigé du TP 05 Listes</h1>
+  <p class="author">
+Chenevois-Jouhet-Junier
+  </p>
+</div>
+<div class="slide section level1">
+
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"></code></pre></div>
+</div>
+<div id="manipulations-des-tableauxlistes-slicing-et-compréhension" class="slide section level1">
+<h1>Manipulations des tableaux/listes; slicing et compréhension</h1>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="im">import</span> math, random <span class="co">#imports de bibliothèques/modules utiles pour le TP</span></code></pre></div>
+<h2 id="exercice-1">Exercice 1</h2>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">t1<span class="op">=</span>[<span class="dv">10</span>,<span class="dv">30</span>,<span class="dv">42</span>,<span class="dv">2</span>,<span class="dv">17</span>,<span class="dv">5</span>,<span class="dv">30</span>,<span class="op">-</span><span class="dv">20</span>]
+
+t2 <span class="op">=</span> [] 
+<span class="cf">for</span> i <span class="op">in</span> <span class="bu">range</span>(<span class="op">-</span><span class="dv">3</span>, <span class="dv">6</span>):
+    t2.append(i<span class="op">**</span><span class="dv">2</span>)
+    
+<span class="co">#t21 identique à t2</span>
+t21 <span class="op">=</span> [i<span class="op">**</span><span class="dv">2</span> <span class="cf">for</span> i <span class="op">in</span> <span class="bu">range</span>(<span class="op">-</span><span class="dv">3</span>,<span class="dv">6</span>)]
+
+t3 <span class="op">=</span> []
+<span class="cf">for</span> i <span class="op">in</span> <span class="bu">range</span>(<span class="dv">1000</span>):
+    <span class="cf">if</span> (i<span class="op">%</span><span class="dv">5</span>) <span class="op">in</span> [<span class="dv">0</span>, <span class="dv">2</span>, <span class="dv">4</span>]: 
+        t3.append(i<span class="op">**</span><span class="dv">3</span>)
+        
+<span class="co">#t31 identique à t3</span>
+t31 <span class="op">=</span> [i<span class="op">**</span><span class="dv">3</span> <span class="cf">for</span> i <span class="op">in</span> <span class="bu">range</span>(<span class="dv">1000</span>) <span class="cf">if</span> (i<span class="op">%</span><span class="dv">5</span>) <span class="op">in</span> [<span class="dv">0</span>,<span class="dv">2</span>,<span class="dv">4</span>]]
+
+t4 <span class="op">=</span> [<span class="fl">841.0</span>]
+<span class="cf">for</span> i <span class="op">in</span> <span class="bu">range</span>(<span class="dv">20</span>):
+    t4.append(t4[i]<span class="op">/</span><span class="dv">3+28</span>)
+
+
+
+<span class="co">&quot;&quot;&quot;</span>
+<span class="co">&gt;&gt;&gt; for i in [&#39;0&#39;,&#39;00&#39;,&#39;000&#39;,&#39;1&#39;,&#39;2&#39;,&#39;3&#39;,&#39;4&#39;]:</span>
+<span class="co">...     L = eval(&#39;l&#39;+i)</span>
+<span class="co">...     print &#39;Liste %s de longueur %s&#39;%(&#39;l&#39;+i,len(L))</span>
+<span class="co">... </span>
+<span class="co">Liste l0 de longueur 15</span>
+<span class="co">Liste l00 de longueur 15</span>
+<span class="co">Liste l000 de longueur 15</span>
+<span class="co">Liste l1 de longueur 8</span>
+<span class="co">Liste l2 de longueur 9</span>
+<span class="co">Liste l3 de longueur 600</span>
+<span class="co">Liste l3 de longueur 21</span>
+<span class="co">&quot;&quot;&quot;</span></code></pre></div>
+<h2 id="exercice-2">Exercice 2</h2>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co">#renommons les listes de l&#39;exo 1 en remplaçant t par l</span>
+t0,t1,t2,t3,t4 <span class="op">=</span> l0,l1,l2,l3,l4  </code></pre></div>
+<h2 id="exercice-3">Exercice 3</h2>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co"># Dix derniers éléments de t3</span>
+t5 <span class="op">=</span> t3[<span class="op">-</span><span class="dv">10</span>:]
+<span class="co"># Éléments de t3 sauf les 250 premiers et les 250 derniers</span>
+t6 <span class="op">=</span> t3[<span class="dv">250</span>:<span class="op">-</span><span class="dv">250</span>]
+<span class="co">#cinq premiers éléments de t4 suivie des cinq derniers de t4</span>
+t7 <span class="op">=</span> t4[:<span class="dv">5</span>]<span class="op">+</span>t4[<span class="op">-</span><span class="dv">5</span>:]</code></pre></div>
+<h2 id="exercice-4">Exercice 4</h2>
+<p>Recopier les commandes ci-dessous dans l'éditeur de la page web <a href="http://pythontutor.com/visualize.html" class="uri">http://pythontutor.com/visualize.html</a></p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">k <span class="op">=</span> [<span class="dv">10</span>,<span class="dv">15</span>,<span class="dv">12</span>]
+t <span class="op">=</span> k
+m <span class="op">=</span> t
+n <span class="op">=</span> m[:]
+m[<span class="dv">1</span>] <span class="op">=</span> <span class="dv">17</span>
+n[<span class="dv">0</span>] <span class="op">=</span> <span class="dv">19</span></code></pre></div>
+<p>k,t,m sont des alias de la même liste et n pointe vers 1 autre liste</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"></code></pre></div>
+<h2 id="exercice-5">Exercice 5</h2>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">t5 <span class="op">=</span> [t2[<span class="dv">2</span><span class="op">*</span>i<span class="dv">+1</span>] <span class="cf">for</span> i <span class="op">in</span> <span class="bu">range</span>(<span class="dv">3</span>)]
+t6 <span class="op">=</span> [x<span class="op">**</span><span class="dv">2</span> <span class="cf">for</span> x <span class="op">in</span> t2]
+t7 <span class="op">=</span> [(x,y) <span class="cf">for</span> x <span class="op">in</span> [<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>] <span class="cf">for</span> y <span class="op">in</span> [<span class="dv">3</span>,<span class="dv">1</span>,<span class="dv">4</span>] <span class="cf">if</span> x <span class="op">!=</span> y]
+
+<span class="co">&quot;&quot;&quot;</span>
+<span class="co">&gt;&gt;&gt; t2,t5</span>
+<span class="co">([9, 4, 1, 0, 1, 4, 9, 16, 25], [4, 0, 4])</span>
+<span class="co">t5 contient les trois premiers éléments de t2 d&#39;indice impair</span>
+<span class="co">&gt;&gt;&gt; t6</span>
+<span class="co">[81, 16, 1, 0, 1, 16, 81, 256, 625]</span>
+<span class="co">t6 contient les carrés des éléments de t2</span>
+<span class="co">&gt;&gt;&gt; t7</span>
+<span class="co">[(1, 3), (1, 4), (2, 3), (2, 1), (2, 4), (3, 1), (3, 4)]</span>
+<span class="co">t7 contient les couples (i,j) avec i in [1,2,3] et j in [3,1,4] et i!=j </span>
+<span class="co">&quot;&quot;&quot;</span></code></pre></div>
+<p>Compléments sur les listes en compréhension :</p>
+<ul>
+<li>Liste des classes scientifiques par année, puis par filière puis par numéro de classe :</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co">&quot;&quot;&quot;</span>
+<span class="co">In [4]: [x + y + z for x in [800, 900] for y in [30, 40, 50] for z in range(1, 4)]</span>
+<span class="co">Out[4]: </span>
+<span class="co">[831,  832,  833, 841, 842, 843, ...   951, 952, 953]</span>
+<span class="co">&quot;&quot;&quot;</span></code></pre></div>
+<ul>
+<li>Liste des classes scientifiques par filière, puis par année puis par numéro de classe :</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co">&quot;&quot;&quot;</span>
+<span class="co">In [5]: [x + y + z for y in [30, 40, 50] for x in [800, 900]  for z in range(1, 4)]</span>
+<span class="co">Out[5]: </span>
+<span class="co">[831,  832,  833, 931, 932, 933, ...   951, 952, 953]</span>
+<span class="co">&quot;&quot;&quot;</span></code></pre></div>
+<h2 id="exercice-6">Exercice 6</h2>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co">#listes des termes d&#39;indice pair de t1 (len(t1)//2 tours de boucle for)</span>
+t8 <span class="op">=</span> [t1[i] <span class="cf">for</span> i <span class="op">in</span> <span class="bu">range</span>(<span class="dv">0</span>,<span class="bu">len</span>(t1),<span class="dv">2</span>)]
+<span class="co">#idem, listes des termes d&#39;indice pair de t1 (len(t1)//2 tours de boucle for)</span>
+<span class="co">#ATTENTION ne pas passer un flottant comme len(t1)/2 comme argument de range</span>
+t81 <span class="op">=</span> [t1[<span class="dv">2</span> <span class="op">*</span> i] <span class="cf">for</span> i <span class="op">in</span> <span class="bu">range</span>(<span class="bu">len</span>(t1)<span class="op">//</span><span class="dv">2</span>)]
+<span class="co">#liste des termes pairs de t1 ( len(t1) tours de boucle for)</span>
+t9 <span class="op">=</span> [terme <span class="cf">for</span> terme <span class="op">in</span> t1 <span class="cf">if</span> terme<span class="op">%</span><span class="dv">2</span> <span class="op">==</span> <span class="dv">0</span>]
+<span class="co">#&gt;&gt;&gt; t1,t8</span>
+<span class="co">#[10, 30, 42, 2, 17, 5, 30, -20],[10, 42, 17, 30]</span>
+<span class="co">#&gt;&gt;&gt; t9</span>
+<span class="co">#[10, 30, 42, 2, 30, -20]</span></code></pre></div>
+<h2 id="exercice-7">Exercice 7</h2>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="kw">def</span> echange(tab, i, j):
+    <span class="co">&quot;&quot;&quot;echange les valeurs de tab[i] et tab[j]&quot;&quot;&quot;</span>
+    <span class="co">#Facultatif : on vérifie que i et j sont des entiers compris entre 0 et len(t)</span>
+    <span class="co">#sinon la fonction génère une erreur</span>
+    <span class="co">#assert isinstance(i,int) and isinstance(j,int) and 0&lt;=i&lt;len(tab) and 0&lt;=j&lt;len(tab)</span>
+    tab[i],tab[j] <span class="op">=</span> tab[j],tab[i]
+    <span class="co">#inutile de retourner t puisque les listes sont passées par référence</span>
+
+<span class="co">&quot;&quot;&quot;</span>
+<span class="co">&gt;&gt;&gt; t=[i**3 for i in range(5)]</span>
+<span class="co">&gt;&gt;&gt; echange(t,1,2)</span>
+<span class="co">&gt;&gt;&gt; t</span>
+<span class="co">[0, 8, 1, 27, 64]</span>
+<span class="co">&quot;&quot;&quot;</span></code></pre></div>
+</div>
+<div id="parcours-de-tableaux" class="slide section level1">
+<h1>Parcours de tableaux</h1>
+<h2 id="exercice-8">Exercice 8</h2>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="kw">def</span> somme(tab):
+    <span class="co">&quot;&quot;&quot;somme des éléments d&#39;un tableau, redéfinition de sum&quot;&quot;&quot;</span>
+    s <span class="op">=</span> <span class="dv">0</span>
+    <span class="cf">for</span> terme <span class="op">in</span> tab:
+        s <span class="op">=</span> s <span class="op">+</span> terme
+        <span class="co">#s += terme   est un raccourci</span>
+    <span class="cf">return</span> s
+
+<span class="kw">def</span> produit(tab):
+    <span class="co">&quot;&quot;&quot;produit des éléments d&#39;un tableau&quot;&quot;&quot;</span>
+    p <span class="op">=</span> <span class="dv">1</span>
+    <span class="cf">for</span> terme <span class="op">in</span> tab:
+        p <span class="op">*=</span> terme
+        <span class="co">#p *= terme est un raccourci</span>
+    <span class="cf">return</span> p</code></pre></div>
+<h2 id="exercice-9">Exercice 9</h2>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="kw">def</span> moyenne(tab):
+    <span class="co">&quot;&quot;&quot;moyenne des éléments d&#39;un tableau&quot;&quot;&quot;</span>
+    <span class="cf">return</span> somme(tab)<span class="op">/</span><span class="bu">len</span>(tab)
+
+<span class="kw">def</span> ecart_type(tab):
+    <span class="co">&quot;&quot;&quot;écart-type des éléments d&#39;un tableau&quot;&quot;&quot;</span>
+    <span class="cf">return</span> math.sqrt(moyenne([e<span class="op">**</span><span class="dv">2</span> <span class="cf">for</span> e <span class="op">in</span> tab])<span class="op">-</span>moyenne(tab)<span class="op">**</span><span class="dv">2</span>)
+
+<span class="co">&quot;&quot;&quot;</span>
+<span class="co">&gt;&gt;&gt; moyenne(t2)</span>
+<span class="co">7.666666666666667</span>
+<span class="co">&gt;&gt;&gt; ecart_type(t2)</span>
+<span class="co">7.803133273813083</span>
+<span class="co">&quot;&quot;&quot;</span></code></pre></div>
+<h2 id="exercice-10">Exercice 10</h2>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="kw">def</span> maximum(tab):
+    <span class="co">&quot;&quot;&quot;retourne le maximum d&#39;un tableau, redéfinition de max&quot;&quot;&quot;</span>
+    <span class="cf">if</span> tab <span class="op">==</span> []:  <span class="co">#si la liste est vide</span>
+        <span class="cf">return</span> <span class="va">None</span>
+    m <span class="op">=</span> tab[<span class="dv">0</span>]
+    <span class="cf">for</span> terme <span class="op">in</span> tab[<span class="dv">1</span>:]:
+        <span class="cf">if</span> terme <span class="op">&gt;</span> m:
+            m <span class="op">=</span> terme
+    <span class="cf">return</span> m
+    
+<span class="kw">def</span> maximum2(tab):
+    <span class="co">&quot;&quot;&quot;retourne le maximum d&#39;un tableau, redéfinition de max&quot;&quot;&quot;</span>
+    <span class="cf">if</span> tab <span class="op">==</span> []:  <span class="co">#si la liste est vide</span>
+        <span class="cf">return</span> <span class="va">None</span>
+    m <span class="op">=</span> tab[<span class="dv">0</span>]
+    <span class="cf">for</span> k <span class="op">in</span> <span class="bu">range</span>(<span class="dv">1</span>, <span class="bu">len</span>(tab)):
+        <span class="cf">if</span> tab[k] <span class="op">&gt;</span> m:
+            m <span class="op">=</span> tab[k]
+    <span class="cf">return</span> m
+    
+<span class="kw">def</span> maximum3(tab):
+    <span class="co">&quot;&quot;&quot;retourne le maximum d&#39;un tableau, marche pour les listes vides&quot;&quot;&quot;</span>
+    m <span class="op">=</span> <span class="op">-</span><span class="bu">float</span>(<span class="st">&#39;inf&#39;</span>)  <span class="co">#on initialise m à moins l&#39;infini </span>
+    <span class="cf">for</span> terme <span class="op">in</span> tab:
+        <span class="cf">if</span> terme <span class="op">&gt;</span> m:
+            m <span class="op">=</span> terme
+    <span class="cf">return</span> m
+<span class="co">&quot;&quot;&quot;</span>
+<span class="co">&gt;&gt;&gt; maximum(t1)</span>
+<span class="co">42</span>
+<span class="co">&quot;&quot;&quot;</span>
+<span class="kw">def</span> position_maximum(tab):
+    <span class="co">&quot;&quot;&quot;retourne la première position où le maximum est atteint&quot;&quot;&quot;</span>
+    <span class="cf">if</span> tab <span class="op">==</span> []:  <span class="co">#si la liste est vide</span>
+        <span class="cf">return</span> <span class="va">None</span>
+    imaxi, maxi <span class="op">=</span> <span class="dv">0</span>, tab[<span class="dv">0</span>]
+    <span class="cf">for</span> indice <span class="op">in</span> <span class="bu">range</span>(<span class="dv">1</span>, <span class="bu">len</span>(tab)):
+        terme <span class="op">=</span> tab[indice]
+        <span class="cf">if</span> terme <span class="op">&gt;</span> maxi:
+            imaxi, maxi <span class="op">=</span> indice, terme
+    <span class="cf">return</span> imaxi
+    
+<span class="kw">def</span> position_maximum2(tab):
+    <span class="co">&quot;&quot;&quot;retourne la première position où le maximum est atteint&quot;&quot;&quot;</span>
+    imaxi, maxi <span class="op">=</span> <span class="dv">0</span>, tab[<span class="dv">0</span>]
+    <span class="co">#l&#39;itérateur enumrate permet de récupérer le couple indice,valeur</span>
+    <span class="cf">for</span> indice,terme <span class="op">in</span> <span class="bu">enumerate</span>(tab):
+        <span class="cf">if</span> terme <span class="op">&gt;</span> maxi:
+            imaxi, maxi <span class="op">=</span> indice, terme
+    <span class="cf">return</span> imaxi
+
+<span class="co">&quot;&quot;&quot;</span>
+<span class="co">&gt;&gt;&gt; position_maximum(t1)</span>
+<span class="co">2</span>
+<span class="co">&quot;&quot;&quot;</span></code></pre></div>
+<h2 id="exercice-11">Exercice 11</h2>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="kw">def</span> liste_position_maximum(tab):
+    <span class="co">&quot;&quot;&quot;retourne le maximum et la liste des positions où il est atteint&quot;&quot;&quot;</span>
+    tmaxi, maxi <span class="op">=</span> [<span class="dv">0</span>],tab[<span class="dv">0</span>]
+    <span class="cf">for</span> indice <span class="op">in</span> <span class="bu">range</span>(<span class="dv">1</span>, <span class="bu">len</span>(tab)):
+        terme <span class="op">=</span> tab[indice]
+        <span class="cf">if</span> terme <span class="op">&gt;</span> maxi:
+            tmaxi, maxi <span class="op">=</span> [indice], terme
+        <span class="cf">elif</span> terme <span class="op">==</span> maxi:
+            tmaxi.append(indice)
+    <span class="cf">return</span> tmaxi, maxi
+
+<span class="co">&quot;&quot;&quot;</span>
+<span class="co">&gt;&gt;&gt; from random import randint</span>
+<span class="co">&gt;&gt;&gt; t=[randint(1,5) for i in range(10)]</span>
+<span class="co">&gt;&gt;&gt; t</span>
+<span class="co">[4, 4, 1, 5, 5, 4, 2, 2, 1, 2]</span>
+<span class="co">&gt;&gt;&gt; liste_position_maximum(t)</span>
+<span class="co">([3, 4], 5)</span>
+<span class="co">&quot;&quot;&quot;</span></code></pre></div>
+<h2 id="exercice-12">Exercice 12</h2>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="kw">def</span> est_croissante(tab):
+    <span class="co">&quot;&quot;&quot;retourne True si tab est croissante et False sinon&quot;&quot;&quot;</span>
+    <span class="cf">for</span> i <span class="op">in</span> <span class="bu">range</span>(<span class="dv">1</span>, <span class="bu">len</span>(tab)):
+        <span class="cf">if</span> tab[i] <span class="op">&lt;</span> tab[i<span class="dv">-1</span>]:
+            <span class="cf">return</span> <span class="va">False</span>
+    <span class="co">#si on arrive là le tableau était dans l&#39;ordre croissant</span>
+    <span class="cf">return</span> <span class="va">True</span>
+
+<span class="kw">def</span> est_strict_decroissante(tab):
+    <span class="co">&quot;&quot;&quot;retourne True si tab est strictement décroissante et False sinon&quot;&quot;&quot;</span>
+    <span class="cf">for</span> i <span class="op">in</span> <span class="bu">range</span>(<span class="dv">1</span>, <span class="bu">len</span>(tab)):
+        <span class="cf">if</span> tab[i] <span class="op">&gt;=</span> tab[i<span class="dv">-1</span>]:
+            <span class="cf">return</span> <span class="va">False</span>
+    <span class="co">#si on arrive là le tableau était dans l&#39;ordre strictement décroissant</span>
+    <span class="cf">return</span> <span class="va">True</span>
+
+<span class="co">&quot;&quot;&quot;</span>
+<span class="co">&gt;&gt;&gt; est_croissante([1,2,2,3,4])</span>
+<span class="co">True</span>
+<span class="co">&gt;&gt;&gt; est_croissante([1,2,2,3,1])</span>
+<span class="co">False</span>
+<span class="co">&gt;&gt;&gt; est_strict_decroissante([4,3,2,1])</span>
+<span class="co">True</span>
+<span class="co">&gt;&gt;&gt; est_strict_decroissante([4,3,2,1,1])</span>
+<span class="co">False</span>
+<span class="co">&quot;&quot;&quot;</span></code></pre></div>
+<h2 id="exercice-13">Exercice 13</h2>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="kw">def</span> sommes_cumulees(tab):
+    <span class="co">&quot;&quot;&quot;retourne les sommes cumulées de tab depuis le premier terme&quot;&quot;&quot;</span>
+    cumul <span class="op">=</span> [tab[<span class="dv">0</span>]]
+    naddition <span class="op">=</span> <span class="dv">0</span>
+    <span class="cf">for</span> terme <span class="op">in</span> tab[<span class="dv">1</span>:]:
+        cumul.append(cumul[<span class="op">-</span><span class="dv">1</span>]<span class="op">+</span>terme)
+        naddition <span class="op">+=</span> <span class="dv">1</span>
+    <span class="cf">return</span> cumul,<span class="st">&#39;</span><span class="sc">%s</span><span class="st"> additions&#39;</span><span class="op">%</span>naddition
+
+<span class="co">&quot;&quot;&quot;</span>
+<span class="co">&gt;&gt;&gt; sommes_cumulees(t2)</span>
+<span class="co">([9, 13, 14, 14, 15, 19, 28, 44, 69], &#39;8 additions&#39;)</span>
+<span class="co">&quot;&quot;&quot;</span></code></pre></div>
+<h2 id="exercice-14">Exercice 14</h2>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="kw">def</span> deux_gros(tab):
+    <span class="co">&quot;&quot;&quot;retourne les deux + gros éléments d&#39;un tableau de longueur&gt;=2&quot;&quot;&quot;</span>
+    <span class="cf">assert</span> <span class="bu">len</span>(tab) <span class="op">&gt;=</span> <span class="dv">2</span>
+    <span class="cf">if</span> tab[<span class="dv">0</span>] <span class="op">&gt;</span> tab[<span class="dv">1</span>]:
+        gros <span class="op">=</span> tab[:<span class="dv">2</span>]
+    <span class="cf">elif</span> tab[<span class="dv">0</span>] <span class="op">&lt;</span> tab[<span class="dv">1</span>]:
+        gros <span class="op">=</span> tab[<span class="dv">1</span>::<span class="op">-</span><span class="dv">1</span>]
+    <span class="cf">else</span>:
+        gros <span class="op">=</span> [tab[<span class="dv">0</span>]]
+    <span class="cf">for</span> terme <span class="op">in</span> tab[<span class="dv">2</span>:]:
+        <span class="cf">if</span> <span class="bu">len</span>(gros) <span class="op">==</span> <span class="dv">1</span>:
+            <span class="cf">if</span> terme <span class="op">&gt;</span> gros[<span class="dv">0</span>]:
+                gros.insert(terme,<span class="dv">0</span>)
+            <span class="cf">else</span>:
+                gros.append(terme)
+        <span class="cf">else</span>:
+            <span class="cf">if</span> terme <span class="op">&gt;</span> gros[<span class="dv">0</span>]:
+                gros[<span class="dv">0</span>],gros[<span class="dv">1</span>] <span class="op">=</span> terme, gros[<span class="dv">0</span>]
+            <span class="cf">elif</span> gros[<span class="dv">0</span>] <span class="op">&gt;</span> terme <span class="op">&gt;</span> gros[<span class="dv">1</span>]: 
+                gros[<span class="dv">1</span>] <span class="op">=</span> terme
+    <span class="cf">return</span> gros</code></pre></div>
+<h2 id="exercice-15">Exercice 15</h2>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="kw">def</span> deux_grosbis(tab):
+    <span class="co">&quot;&quot;&quot;idem mais répétition du plus gros s&#39;il apparait 2 fois&quot;&quot;&quot;</span>
+    <span class="cf">assert</span> <span class="bu">len</span>(tab) <span class="op">&gt;=</span> <span class="dv">2</span>
+    <span class="cf">if</span> tab[<span class="dv">0</span>] <span class="op">&gt;</span> tab[<span class="dv">1</span>]:
+        gros <span class="op">=</span> tab[:<span class="dv">2</span>]
+    <span class="cf">elif</span> tab[<span class="dv">0</span>] <span class="op">&lt;</span> tab[<span class="dv">1</span>]:
+        gros <span class="op">=</span> tab[<span class="dv">1</span>::<span class="op">-</span><span class="dv">1</span>]
+    <span class="cf">else</span>:
+        gros <span class="op">=</span> [tab[<span class="dv">0</span>]]<span class="op">*</span><span class="dv">2</span>
+    <span class="cf">for</span> terme <span class="op">in</span> tab[<span class="dv">2</span>:]:
+        <span class="cf">if</span> terme <span class="op">&gt;</span> gros[<span class="dv">0</span>]:
+            gros[<span class="dv">0</span>], gros[<span class="dv">1</span>] <span class="op">=</span> terme, gros[<span class="dv">0</span>]
+        <span class="cf">elif</span> terme <span class="op">&gt;</span> gros[<span class="dv">1</span>]:
+            gros[<span class="dv">1</span>] <span class="op">=</span> terme
+    <span class="cf">return</span> gros
+
+<span class="co">&quot;&quot;&quot;</span>
+<span class="co">&gt;&gt;&gt; deux_gros(t1)</span>
+<span class="co">[42, 30]</span>
+<span class="co">&gt;&gt;&gt; deux_gros(t1+[42])</span>
+<span class="co">[42, 30]</span>
+<span class="co">&gt;&gt;&gt; deux_grosbis(t1+[42])</span>
+<span class="co">[42, 42]</span>
+<span class="co">&quot;&quot;&quot;</span>
+</code></pre></div>
+<h2 id="exercice-16">Exercice 16</h2>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">
+<span class="kw">def</span> difference(t):
+    <span class="co">&quot;&quot;&quot;Modifie le tableau t en substituant a chaque element sauf le premier</span>
+<span class="co">    sa difference avec l&#39;element precedent&quot;&quot;&quot;</span>
+    n <span class="op">=</span> <span class="bu">len</span>(t)
+    <span class="cf">for</span> k <span class="op">in</span> <span class="bu">range</span>(n <span class="op">-</span> <span class="dv">1</span>, <span class="dv">0</span>, <span class="op">-</span><span class="dv">1</span>):
+        t[k]<span class="op">=</span> t[k] <span class="op">-</span> t[k <span class="op">-</span> <span class="dv">1</span>]
+    <span class="cf">return</span> t
+    </code></pre></div>
+<p>Il faut modifier le tableau de droite à gauche afin de préserver les valeurs qu'on utilise dans les différences (celles des cellules précédentes du tableau).</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="kw">def</span> difference_reciproque(t):
+    <span class="co">&quot;&quot;&quot;Modifie t, fonction réciproque de difference&quot;&quot;&quot;</span>
+    n <span class="op">=</span> <span class="bu">len</span>(t)
+    <span class="cf">for</span> k <span class="op">in</span> <span class="bu">range</span>(<span class="dv">1</span>, n):
+        t[k]<span class="op">=</span> t[k] <span class="op">+</span> t[k <span class="op">-</span> <span class="dv">1</span>]
+    <span class="cf">return</span> t
+
+<span class="co">&quot;&quot;&quot;</span>
+<span class="co">In [3]: t = [4,5,3,7] ; difference(t)</span>
+<span class="co">Out[3]: [4, 1, -2, 4]</span>
+
+<span class="co">In [4]: difference_reciproque(t)</span>
+<span class="co">Out[4]: [4, 5, 3, 7]</span>
+<span class="co">&quot;&quot;&quot;</span></code></pre></div>
+<h2 id="exercice-17">Exercice 17</h2>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">
+<span class="kw">def</span> distincts(t):
+    <span class="co">&quot;&quot;&quot;Retourne un booleen, teste si les éléments d&#39;un tableau sont distincts&quot;&quot;&quot;</span>
+    <span class="co">#on compare chaque élément avec ses successeurs</span>
+    <span class="cf">for</span> i <span class="op">in</span> <span class="bu">range</span>(<span class="bu">len</span>(t)):
+        <span class="cf">for</span> j <span class="op">in</span> <span class="bu">range</span>(i<span class="dv">+1</span>, <span class="bu">len</span>(t)):
+            <span class="cf">if</span> t[j] <span class="op">==</span> t[i]:
+                <span class="cf">return</span> <span class="va">False</span>
+    <span class="cf">return</span> <span class="va">True</span>
+
+<span class="co">&quot;&quot;&quot;</span>
+<span class="co">In [2]: t1, distincts(t1)</span>
+<span class="co">Out[2]: ([10, 30, 42, 2, 17, 5, 30, -20], False)</span>
+
+<span class="co">In [3]: t1[:-2], distincts(t1[:-2])</span>
+<span class="co">Out[3]: ([10, 30, 42, 2, 17, 5], True)</span>
+<span class="co">&quot;&quot;&quot;</span>
+
+<span class="kw">def</span> distincts2(t):
+    <span class="co">&quot;&quot;&quot;Retourne un booleen, teste si les éléments d&#39;un tableau sont distincts&quot;&quot;&quot;</span>
+    i <span class="op">=</span> <span class="dv">0</span>
+    <span class="cf">while</span> i <span class="op">&lt;</span> <span class="bu">len</span>(t):
+        j <span class="op">=</span> i <span class="op">+</span> <span class="dv">1</span>
+        <span class="cf">while</span> j <span class="op">&lt;</span> <span class="bu">len</span>(t):
+            <span class="cf">if</span> t[j] <span class="op">==</span> t[i]:
+                <span class="cf">return</span> <span class="va">False</span>
+            j <span class="op">+=</span> <span class="dv">1</span>
+        i <span class="op">+=</span> <span class="dv">1</span>
+    <span class="cf">return</span> <span class="va">True</span></code></pre></div>
+<p>Dans le pire des cas (tous les éléments distincts), n - 1 + n - 2 + ... + 1 comparaisons sont effectuées (soit n(n-1)/2), complexité quadratique</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">
+<span class="kw">def</span> est_permutation(t):
+    <span class="co">&quot;&quot;&quot;teste si un tableau est une permutation&quot;&quot;&quot;</span>
+    
+    <span class="kw">def</span> est_permutation_aux(t):
+        <span class="co">&quot;&quot;&quot;Fonction auxiliaire, celle qui travaille&quot;&quot;&quot;</span>
+        <span class="cf">for</span> i <span class="op">in</span> <span class="bu">range</span>(<span class="bu">len</span>(t)):
+            <span class="cf">if</span> memo[t[i] <span class="op">-</span> <span class="dv">1</span>]:  <span class="co">#si valeur deja vu ce n&#39;est pas une permutation </span>
+                <span class="cf">return</span> <span class="va">False</span>
+            memo[t[i] <span class="op">-</span> <span class="dv">1</span>] <span class="op">=</span> <span class="va">True</span>
+        <span class="cf">return</span> <span class="va">True</span>  <span class="co">#si on arrive ici c&#39;est une permutation</span>
+        
+    memo <span class="op">=</span> [<span class="va">False</span>]<span class="op">*</span><span class="bu">len</span>(t) <span class="co">#initialisation du tableau de memoization</span>
+    <span class="cf">return</span> est_permutation_aux(t)
+
+<span class="co">&quot;&quot;&quot;</span>
+<span class="co">In [20]: t = [i for i in range(1, 11)] ; random.shuffle(t) ; t</span>
+<span class="co">Out[20]: [4, 2, 8, 10, 3, 9, 7, 6, 1, 5]</span>
+
+<span class="co">In [21]: est_permutation(t)</span>
+<span class="co">Out[21]: True</span>
+
+<span class="co">In [22]: tn = t + [2] ; est_permutation(tn)</span>
+<span class="co">Out[22]: False</span>
+<span class="co">&quot;&quot;&quot;</span></code></pre></div>
+<h2 id="exercice-18">Exercice 18</h2>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">
+<span class="kw">def</span> grand_et_petit(tab):
+    n <span class="op">=</span> <span class="bu">len</span>(tab)
+    <span class="cf">assert</span> n<span class="op">%</span><span class="dv">2</span> <span class="op">==</span> <span class="dv">0</span>, <span class="st">&#39;Le tableau doit etre de taille paire&#39;</span>
+    tcopie <span class="op">=</span> <span class="bu">sorted</span>(tab)
+    tres <span class="op">=</span> []
+    n <span class="op">=</span> <span class="bu">len</span>(tcopie)<span class="op">//</span><span class="dv">2</span>
+    <span class="cf">for</span> k <span class="op">in</span> <span class="bu">range</span>(n):
+        tres.extend([tcopie[<span class="op">-</span><span class="dv">1</span><span class="op">-</span>k], tcopie[k]])
+    <span class="cf">return</span> tres
+
+<span class="kw">def</span> grand_et_petit2(tab):
+    t <span class="op">=</span> <span class="bu">sorted</span>(tab)
+    <span class="cf">return</span> [k<span class="op">%</span><span class="dv">2</span> <span class="op">==</span> <span class="dv">0</span> <span class="op">and</span> t[<span class="op">-</span><span class="dv">1</span><span class="op">-</span>k<span class="op">//</span><span class="dv">2</span>] <span class="op">or</span> t[(k<span class="dv">-1</span>)<span class="op">//</span><span class="dv">2</span>] <span class="cf">for</span> k <span class="op">in</span> <span class="bu">range</span>(<span class="bu">len</span>(t))]
+
+<span class="co">&quot;&quot;&quot;</span>
+<span class="co">In [18]: tab = random.sample(range(1000), 10)</span>
+
+<span class="co">In [19]: tab</span>
+<span class="co">Out[19]: [708, 566, 84, 624, 691, 390, 560, 576, 485, 117]</span>
+
+<span class="co">In [20]: grand_et_petit(tab)</span>
+<span class="co">Out[20]: [708, 84, 691, 117, 624, 390, 576, 485, 566, 560]</span>
+
+<span class="co">In [21]: grand_et_petit2(tab)</span>
+<span class="co">Out[21]: [708, 84, 691, 117, 624, 390, 576, 485, 566, 560]</span>
+<span class="co">&quot;&quot;&quot;</span></code></pre></div>
+<h2 id="exercice-19">Exercice 19</h2>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">
+<span class="kw">def</span> lissage(t):
+    newt <span class="op">=</span> [t[<span class="dv">0</span>]]
+    <span class="cf">for</span> k <span class="op">in</span> <span class="bu">range</span>(<span class="dv">1</span>, <span class="bu">len</span>(t)<span class="op">-</span><span class="dv">1</span>):
+        newt.append((t[k<span class="dv">-1</span>] <span class="op">+</span> t[k<span class="dv">+1</span>])<span class="op">/</span><span class="dv">2</span>)
+    newt.append(t[<span class="op">-</span><span class="dv">1</span>])
+    <span class="cf">return</span> newt
+    
+<span class="kw">def</span> ecartmax(t):
+    f <span class="op">=</span> <span class="kw">lambda</span> tab,k : <span class="bu">abs</span>(tab[k] <span class="op">-</span> tab[k<span class="dv">+1</span>])
+    <span class="cf">return</span> <span class="bu">max</span>([f(t, k) <span class="cf">for</span> k <span class="op">in</span> <span class="bu">range</span>(<span class="dv">0</span>, <span class="bu">len</span>(t)<span class="op">-</span><span class="dv">1</span>)])
+
+<span class="kw">def</span> nblissages(tmes, diffmax, itermax):
+    mesures <span class="op">=</span> tmes
+    nliss <span class="op">=</span> <span class="dv">0</span>
+    <span class="cf">while</span> nliss <span class="op">&lt;=</span> itermax <span class="op">and</span> ecartmax(mesures) <span class="op">&gt;=</span> diffmax:
+        mesures <span class="op">=</span> lissage(mesures)
+        nliss <span class="op">+=</span> <span class="dv">1</span>
+    <span class="cf">if</span> nliss <span class="op">&lt;=</span> itermax:
+        <span class="cf">return</span> nliss
+    <span class="cf">return</span> <span class="va">None</span></code></pre></div>
+<h2 id="exercice-20">Exercice 20</h2>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">
+<span class="kw">def</span> maximum_intervalle(t, n):
+    taille_tableau <span class="op">=</span> <span class="bu">len</span>(t)
+    <span class="cf">assert</span> n <span class="op">&lt;=</span> taille_tableau, <span class="st">&#39;len(sous-tableau) &lt;= len(tableau) !&#39;</span>
+    s <span class="op">=</span> <span class="dv">0</span>
+    <span class="cf">for</span> k <span class="op">in</span> <span class="bu">range</span>(n):
+        s <span class="op">+=</span> t[k]
+    debut <span class="op">=</span> <span class="dv">0</span>
+    fin <span class="op">=</span> n <span class="op">-</span> <span class="dv">1</span>
+    smax <span class="op">=</span> s
+    <span class="cf">for</span> k <span class="op">in</span> <span class="bu">range</span>(n, taille_tableau <span class="op">-</span> n <span class="op">+</span> <span class="dv">1</span>):
+         s <span class="op">-=</span> t[debut]
+         debut <span class="op">+=</span> <span class="dv">1</span>
+         fin <span class="op">+=</span> <span class="dv">1</span>
+         s <span class="op">+=</span> t[fin]
+         <span class="cf">if</span> s <span class="op">&gt;</span> smax:
+             smax <span class="op">=</span> s
+    <span class="cf">return</span> smax
+
+<span class="co">&quot;&quot;&quot;</span>
+<span class="co">In [90]: maximum_intervalle([10,2,8,4,7,5], 3)</span>
+<span class="co">Out[90]: 20</span>
+<span class="co">&quot;&quot;&quot;</span></code></pre></div>
+</div>
+<div id="extrait-du-sujet-posé-au-concours-centrale-2015" class="slide section level1">
+<h1>Extrait du sujet posé au concours Centrale 2015</h1>
+<h2 id="exercice-21-sujet-centrale-2015">Exercice 21 Sujet Centrale 2015</h2>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co">&quot;&quot;&quot;</span>
+<span class="co">In [6]: [1, 2, 3] + [4, 5, 6]</span>
+<span class="co">Out[6]: [1, 2, 3, 4, 5, 6]</span>
+
+<span class="co">In [7]: 2 * [1, 2, 3]</span>
+<span class="co">Out[7]: [1, 2, 3, 1, 2, 3]</span>
+<span class="co">&quot;&quot;&quot;</span></code></pre></div>
+<h2 id="exercice-22-sujet-centrale-2015">Exercice 22 Sujet Centrale 2015</h2>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="kw">def</span> smul(k ,t):
+    <span class="co">&quot;&quot;&quot;Retourne une nouvelle liste où chaque élément de t est multiplié par le</span>
+<span class="co">    réel k&quot;&quot;&quot;</span>
+    n <span class="op">=</span> <span class="bu">len</span>(t)
+    v <span class="op">=</span> [<span class="dv">0</span>]<span class="op">*</span>n
+    <span class="cf">for</span> i <span class="op">in</span> <span class="bu">range</span>(n):
+        v[i] <span class="op">=</span> t[i] <span class="op">*</span> k
+    <span class="cf">return</span> v
+
+<span class="kw">def</span> vsom(u ,v):
+    <span class="co">&quot;&quot;&quot;Retourne une nouvelle liste où chaque élément est la somme des éléments</span>
+<span class="co">    des listes u et v de meme index&quot;&quot;&quot;</span>
+    n <span class="op">=</span> <span class="bu">len</span>(u)
+    <span class="cf">assert</span> <span class="bu">len</span>(v) <span class="op">==</span> n, <span class="st">&quot;Les deux listes doivent etre de meme longueur&quot;</span>
+    w <span class="op">=</span> [<span class="dv">0</span>]<span class="op">*</span>n
+    <span class="cf">for</span> i <span class="op">in</span> <span class="bu">range</span>(n):
+        w[i] <span class="op">=</span> u[i] <span class="op">+</span> v[i]
+    <span class="cf">return</span> w
+
+<span class="kw">def</span> vdif(u ,v):
+    <span class="co">&quot;&quot;&quot;Retourne une nouvelle liste où chaque élément est la différence entre</span>
+<span class="co">     l&#39;élement de v et l&#39;élément de u de meme index&quot;&quot;&quot;</span>
+    n <span class="op">=</span> <span class="bu">len</span>(u)
+    <span class="cf">assert</span> <span class="bu">len</span>(v) <span class="op">==</span> n, <span class="st">&quot;Les deux listes doivent etre de meme longueur&quot;</span>
+    <span class="cf">return</span> vsom(v, smul(<span class="op">-</span><span class="dv">1</span>, u))
+
+<span class="kw">def</span> vprod(u ,v):
+    <span class="co">&quot;&quot;&quot;Retourne une nouvelle liste où chaque élément est le produit des éléments</span>
+<span class="co">    de v et v de meme index&quot;&quot;&quot;</span>
+    n <span class="op">=</span> <span class="bu">len</span>(u)
+    <span class="cf">assert</span> <span class="bu">len</span>(v) <span class="op">==</span> n, <span class="st">&quot;Les deux listes doivent etre de meme longueur&quot;</span>
+    w <span class="op">=</span> [<span class="dv">0</span>]<span class="op">*</span>n
+    <span class="cf">for</span> i <span class="op">in</span> <span class="bu">range</span>(n):
+        w[i] <span class="op">=</span> u[i] <span class="op">*</span> v[i]
+    <span class="cf">return</span> w
+    
+<span class="kw">def</span> prodscal(u ,v):
+    <span class="co">&quot;&quot;&quot;Retourne le produit scalaire des vecteurs de coordonnées u et v&quot;&quot;&quot;</span>
+    n <span class="op">=</span> <span class="bu">len</span>(u)
+    <span class="cf">assert</span> <span class="bu">len</span>(v) <span class="op">==</span> n, <span class="st">&quot;Les deux listes doivent etre de meme longueur&quot;</span>
+    w <span class="op">=</span> vprod(u, v)
+    s <span class="op">=</span> <span class="dv">0</span>
+    <span class="cf">for</span> i <span class="op">in</span> <span class="bu">range</span>(n):
+        s <span class="op">+=</span> w[i]
+    <span class="cf">return</span> s
+    
+<span class="co">&quot;&quot;&quot;</span>
+<span class="co">In [10]: smul(2, [1, 2, 3])</span>
+<span class="co">Out[10]: [2, 4, 6]</span>
+
+<span class="co">In [11]: vsom([1, 2, 3], [4, 5, 6])</span>
+<span class="co">Out[11]: [5, 7, 9]</span>
+
+<span class="co">In [12]: vdif([1, 2, 3], [4, 5, 6])</span>
+<span class="co">Out[12]: [3, 3, 3]</span>
+
+<span class="co">In [13]: vprod([1, 2, 3], [4, 5, 6])</span>
+<span class="co">Out[13]: [4, 10, 18]</span>
+
+<span class="co">In [14]: prodscal([1, 2, 3], [4, 5, 6])</span>
+<span class="co">Out[14]: 32</span>
+<span class="co">&quot;&quot;&quot;</span></code></pre></div>
+<h2 id="exercice-23-sujet-centrale-2015">Exercice 23 Sujet Centrale 2015</h2>
+<p>Force exercée sur le corps <span class="math inline">\(P_{j}\)</span> par l'ensemble des autres corps <span class="math inline">\(P_{k}\)</span> avec <span class="math inline">\(k \neq j\)</span></p>
+\begin{align*}
+\overrightarrow{F_{j}} &amp;= \sum_{k\neq j}\overrightarrow{F_{k/j}} \\
+\overrightarrow{F_{j}} &amp;= \sum_{k\neq j}G\frac{m_{j}m_{k}}{r_{jk}^{3}}\overrightarrow{P_{j}P_{k}}
+\end{align*}
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">
+G <span class="op">=</span> <span class="fl">6.67</span><span class="op">*</span><span class="dv">10</span><span class="op">**</span>(<span class="op">-</span><span class="dv">11</span>)  <span class="co">#Constante gravitationnelle</span>
+
+<span class="kw">def</span> force2(m1, p1, m2, p2):
+    <span class="co">&quot;&quot;&quot;Retourne la liste de coordonnées de la force gravitationnelle exercée</span>
+<span class="co">    par le corps de masse m2 et de position p2 sur le corps de masse m1 et de position p1&quot;&quot;&quot;</span>
+    vecteur <span class="op">=</span> vdif(p1, p2) <span class="co">#coordonnées du vecteur vect(p1, p2)</span>
+    norme <span class="op">=</span> (prodscal(vecteur, vecteur))<span class="op">**</span><span class="fl">0.5</span>
+    <span class="cf">return</span> smul(G<span class="op">*</span>m1<span class="op">*</span>m2<span class="op">/</span>norme<span class="op">**</span><span class="dv">3</span>, vecteur)
+    
+    
+<span class="kw">def</span> forceN(j, m, pos):
+    <span class="co">&quot;&quot;&quot;Prend en parametre l&#39;indice j du corps sur lequel s&#39;exerce</span>
+<span class="co">    la force, la liste m des masses des N corps, la liste pos des positions</span>
+<span class="co">    et retourne le vecteur force Fj exercé par tous les autres corps</span>
+<span class="co">    sur le corps j&quot;&quot;&quot;</span>
+    f <span class="op">=</span> [<span class="dv">0</span>]<span class="op">*</span><span class="dv">3</span> <span class="co">#vecteur force resultante</span>
+    n <span class="op">=</span> <span class="bu">len</span>(m)
+    <span class="cf">assert</span> n <span class="op">==</span> <span class="bu">len</span>(pos), <span class="st">&quot;Les listes m et pos doivent etre de meme taille&quot;</span>
+    mj <span class="op">=</span> m[j]
+    pj <span class="op">=</span> p[j]
+    <span class="cf">for</span> k <span class="op">in</span> <span class="bu">range</span>(n):
+        <span class="cf">if</span> k <span class="op">!=</span> j:
+            f <span class="op">=</span> vsom(f, force2(mj, pj, m[k], p[k]))
+    <span class="cf">return</span> f</code></pre></div>
+</div>
+<div id="pour-ceux-qui-sennuient" class="slide section level1">
+<h1>Pour ceux qui s'ennuient</h1>
+<h2 id="exercice-24">Exercice 24</h2>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">
+<span class="kw">def</span> fibonacci(n):
+    <span class="co">&quot;&quot;&quot;retourne un tableau de (n+1) éléments contenant les termes f0,..,fn&quot;&quot;&quot;</span>
+    tab <span class="op">=</span> [<span class="dv">0</span>,<span class="dv">1</span>]
+    <span class="cf">for</span> i <span class="op">in</span> <span class="bu">range</span>(<span class="dv">2</span>,n<span class="dv">+1</span>):
+        tab.append(tab[i<span class="dv">-1</span>]<span class="op">+</span>tab[i<span class="dv">-2</span>])
+    <span class="cf">return</span> tab
+<span class="co">&quot;&quot;&quot;</span>
+<span class="co">&gt;&gt;&gt; fibonacci(10)</span>
+<span class="co">[0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55]</span>
+<span class="co">&quot;&quot;&quot;</span></code></pre></div>
+<h2 id="exercice-25">Exercice 25</h2>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">
+<span class="kw">def</span> ligne_binome(n):
+    <span class="co">&quot;&quot;&quot;retourne la liste des C(n,k) avec 0&lt;=k&lt;=n&quot;&quot;&quot;</span>
+    <span class="cf">assert</span> <span class="bu">isinstance</span>(n,<span class="bu">int</span>) <span class="op">and</span> n<span class="op">&gt;=</span><span class="dv">0</span>,<span class="st">&quot;n doit être un entier positif&quot;</span>
+    <span class="cf">if</span> n<span class="op">==</span><span class="dv">0</span>:
+        <span class="cf">return</span>  [<span class="dv">1</span>]
+    <span class="cf">else</span>:
+        ligneavant <span class="op">=</span> [<span class="dv">1</span>,<span class="dv">1</span>]
+        <span class="cf">for</span> i <span class="op">in</span> <span class="bu">range</span>(<span class="dv">2</span>,n<span class="dv">+1</span>):
+            ligne <span class="op">=</span> [<span class="dv">1</span>]
+            <span class="cf">for</span> k <span class="op">in</span> <span class="bu">range</span>(<span class="dv">1</span>,i):
+                ligne.append(ligneavant[k<span class="dv">-1</span>]<span class="op">+</span>ligneavant[k])
+            ligne.append(<span class="dv">1</span>)
+            ligneavant <span class="op">=</span> ligne
+        <span class="cf">return</span> ligneavant
+
+<span class="co">&quot;&quot;&quot;</span>
+<span class="co">&gt;&gt;&gt; for i in range(6):</span>
+<span class="co">...     print(ligne_binome(i))</span>
+<span class="co">... </span>
+<span class="co">[1]</span>
+<span class="co">[1, 1]</span>
+<span class="co">[1, 2, 1]</span>
+<span class="co">[1, 3, 3, 1]</span>
+<span class="co">[1, 4, 6, 4, 1]</span>
+<span class="co">[1, 5, 10, 10, 5, 1]</span>
+<span class="co">&quot;&quot;&quot;</span></code></pre></div>
+<h2 id="exercice-26">Exercice 26</h2>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">
+<span class="kw">def</span> plus_grand_bloc_croissant(t):
+    <span class="co">&quot;&quot;&quot;retourne un triplet (longueur,indice du t,plus grande sous-suite</span>
+<span class="co">    croissante constituée de termes  consécutifs du tableau)&quot;&quot;&quot;</span>
+    lmax <span class="op">=</span> <span class="dv">0</span><span class="co">#longueur du plus grand bloc croissant</span>
+    bmax <span class="op">=</span> <span class="va">None</span>  <span class="co">#indices de début et de fin (exclu) du + gd  bloc croissant</span>
+    k <span class="op">=</span> <span class="dv">0</span> <span class="co">#indice de départ d&#39;exploration d&#39;un nouveau bloc</span>
+    <span class="cf">while</span> k <span class="op">&lt;</span> <span class="bu">len</span>(t) <span class="op">-</span> lmax:
+        j <span class="op">=</span> k
+        <span class="co">#recherche de l&#39;indice du + grand bloc croissant à partir de k</span>
+        <span class="cf">while</span> j <span class="op">&lt;</span> <span class="bu">len</span>(t)<span class="op">-</span><span class="dv">1</span> <span class="op">and</span> t[j<span class="dv">+1</span>] <span class="op">&gt;=</span> t[j]:
+            j <span class="op">+=</span> <span class="dv">1</span>
+        lprov <span class="op">=</span> j <span class="op">-</span> k <span class="op">+</span> <span class="dv">1</span>
+        <span class="cf">if</span> lprov <span class="op">&gt;</span> lmax:  <span class="co">#mise à jour des paramètres du maximum</span>
+            lmax <span class="op">=</span> lprov
+            bmax <span class="op">=</span> (k, j <span class="op">+</span> <span class="dv">1</span>)
+        k <span class="op">=</span> j <span class="op">+</span> <span class="dv">1</span>
+    <span class="cf">return</span> lmax, t[bmax[<span class="dv">0</span>]: bmax[<span class="dv">1</span>]]
+
+<span class="co">&quot;&quot;&quot;</span>
+<span class="co">In [12]: plus_grand_bloc_croissant([2,10,1,3,5,7,6,8,9])</span>
+<span class="co">Out[12]: (4, [1, 3, 5, 7])</span>
+<span class="co">In [13]: plus_grand_bloc_croissant([2,10,1,3,5,6,7,8,9])</span>
+<span class="co">Out[13]: (7, [1, 3, 5, 6, 7, 8, 9])</span>
+<span class="co">In [24]: lmax, _ = plus_grand_bloc_croissant([i for i in range(10**6)])</span>
+<span class="co">In [25]: lmax</span>
+<span class="co">Out[25]: 1000000</span>
+<span class="co">&quot;&quot;&quot;</span></code></pre></div>
+<p>Algorithme de complexité linéaire (d'ordre <span class="math inline">\(n\)</span>) dans le pire des cas qui serait un tableau croissant comme <code>[0,11,2,3,4,5,...,999999]</code></p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="kw">def</span> test_exo26():
+    <span class="im">from</span> random <span class="im">import</span> randint
+    resultats <span class="op">=</span> []
+    <span class="cf">for</span> _ <span class="op">in</span> <span class="bu">range</span>(<span class="dv">100</span>):
+        t <span class="op">=</span> [randint(<span class="dv">0</span>,<span class="dv">10</span><span class="op">**</span><span class="dv">6</span>) <span class="cf">for</span> _ <span class="op">in</span> <span class="bu">range</span>(<span class="dv">10</span><span class="op">**</span><span class="dv">5</span>)]
+        resultats.append(plus_grand_bloc_croissant(t)[<span class="dv">0</span>])
+    <span class="cf">return</span> moyenne(resultats),maximum(resultats)
+
+
+
+    </code></pre></div>
+</div>
+</body>
+</html>
