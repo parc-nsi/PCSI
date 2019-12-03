@@ -5,7 +5,7 @@ Documents et ressources TP d'Informatique pour tous en PCSI au lycée du Parc an
 Professeur référent : Laurent Jouhet
 Sujets réalisés par Stéphane Gonnord/Laurent Jouhet/Frédéric Junier/Stéphane Chenevois
 
-##Conférence de Judicael Courant du mardi 19 Novembre 2019 : "Une brève histoire des langages de programmation"
+## Conférence de Judicael Courant du mardi 19 Novembre 2019 : "Une brève histoire des langages de programmation"
 
 [Captation vidéo de la conférence](https://tube.ac-lyon.fr/videos/watch/2f7065e3-13c7-432c-80cc-94e769d38272)
 
