@@ -7,8 +7,7 @@ Sujets réalisés par Stéphane Gonnord/Laurent Jouhet/Frédéric Junier/Stépha
 
 ##Conférence de Judicael Courant du mardi 19 Novembre 2019 : "Une brève histoire des langages de programmation"
 
-
-<iframe width="560" height="315" sandbox="allow-same-origin allow-scripts" src="https://tube.ac-lyon.fr/videos/embed/2f7065e3-13c7-432c-80cc-94e769d38272" frameborder="0" allowfullscreen></iframe>
+[Captation vidéo de la conférence](https://tube.ac-lyon.fr/videos/watch/2f7065e3-13c7-432c-80cc-94e769d38272)
 
 
 ## Ressources Python :
