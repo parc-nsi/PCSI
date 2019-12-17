@@ -49,3 +49,12 @@ Sujets réalisés par Stéphane Gonnord/Laurent Jouhet/Frédéric Junier/Stépha
   - [corrigé HTML](TP5/corrige/I1-TP-05-Listes-corrige.html)
   - [corrigé pdf](TP5/corrige/I1-TP-05-Listes-corrige.pdf)
   - [corrigé python](TP5/corrige/I1-TP-05-Listes-corrige.py)
+  
+ 
+* TP6 :
+  - [énoncé](TP6/sujet/I1-TP-06-Recherche-Cribles-sujet.pdf)
+  - [corrigé HTML](TP6/corrige/I1-TP-06-Recherche-Cribles-corrige.html)
+  - [corrigé pdf](TP6/corrige/I1-TP-06-Recherche-Cribles-corrige.pdf)
+  - [corrigé python](TP6/corrige/I1-TP-06-Recherche-Cribles-corrige.py)
+  - [fichier cadeau](TP6/cadeau/cadeau_06.py)
+  - [exercice Tas de Graine  du Castor Informatique 2017](https://concours.castor-informatique.fr/index.php?team=castor2017)
