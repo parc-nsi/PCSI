@@ -65,5 +65,5 @@ Sujets réalisés par Stéphane Gonnord/Laurent Jouhet/Frédéric Junier/Stépha
   - [corrigé pdf](TP7/corrige/I1-TP-07-Fichiers-Matplotlib-corrige.pdf)
   - [corrigé python](TP7/corrige/I1-TP-07-Fichiers-Matplotlib-corrige.py)
   - [cadeau.py](TP7/eleves/cadeau.py)
-  - [archive des ressources](TP7/eleves/ressources.py)
+  - [archive des ressources](TP7/eleves/ressources.zip)
   
