@@ -9,6 +9,11 @@ Sujets réalisés par Stéphane Gonnord/Laurent Jouhet/Frédéric Junier/Stépha
 
 [Captation vidéo de la conférence](https://tube.ac-lyon.fr/videos/watch/2f7065e3-13c7-432c-80cc-94e769d38272)
 
+## Concours Prologin 
+
+* Entraînez-vous à résoudre des problèmes d'algorithmique sur les sites suivants :
+  - [Concours Prologin](https://prologin.org/train/)
+  - [France IOI](http://www.france-ioi.org/)
 
 ## Ressources Python :
 
