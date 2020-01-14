@@ -58,3 +58,12 @@ Sujets réalisés par Stéphane Gonnord/Laurent Jouhet/Frédéric Junier/Stépha
   - [corrigé python](TP6/corrige/I1-TP-06-Recherche-Cribles-corrige.py)
   - [fichier cadeau](TP6/eleves/cadeau_06.py)
   - [exercice Tas de Graine  du Castor Informatique 2017](https://concours.castor-informatique.fr/index.php?team=castor2017)
+  
+* TP7 :
+  - [énoncé](TP7/sujet/I1-TP-07-Fichiers-Matplotlib-sujet.pdf)
+  - [corrigé HTML](TP7/corrige/I1-TP-07-Fichiers-Matplotlib-corrige.html)
+  - [corrigé pdf](TP7/corrige/I1-TP-07-Fichiers-Matplotlib-corrige.pdf)
+  - [corrigé python](TP7/corrige/I1-TP-07-Fichiers-Matplotlib-corrige.py)
+  - [cadeau.py](TP7/eleves/cadeau.py)
+  - [archive des ressources](TP7/eleves/ressources.py)
+  
