@@ -1,0 +1,647 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+ "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <meta name="author" content="Chenevois-Jouhet-Junier-Rebout" />
+  <title>Corrigé du TP 07 Fichiers et Graphiques avec matplotlib</title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+  </style>
+  <link rel="stylesheet" type="text/css" media="screen, projection, print"
+    href="http://www.w3.org/Talks/Tools/Slidy2/styles/slidy.css" />
+  <script src="http://www.w3.org/Talks/Tools/Slidy2/scripts/slidy.js"
+    charset="utf-8" type="text/javascript"></script>
+</head>
+<body>
+<div class="slide titlepage">
+  <h1 class="title">Corrigé du TP 07 Fichiers et Graphiques avec <code>matplotlib</code></h1>
+  <p class="author">
+Chenevois-Jouhet-Junier-Rebout
+  </p>
+</div>
+<div class="slide section level1">
+
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"></code></pre></div>
+</div>
+<div id="outils" class="slide section level1">
+<h1>Outils</h1>
+<p>Imports des bibliothèques/modules nécessaires :</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="im">import</span> math, random  
+<span class="im">import</span> numpy <span class="im">as</span> np                <span class="co">#module avec les array qui sont des tableaux optimisés </span>
+<span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt   <span class="co">#module avec des fonctions graphiques</span>
+<span class="im">import</span> sys                        <span class="co">#accès au système (sortie standard  sys.sdtout, entrée standard sys.stdin)</span>
+<span class="im">import</span> time                       <span class="co">#module avec des fonctions de mesure de temps</span></code></pre></div>
+<p>Pour mesurer le temps d'exécution d'un appel de fonction on utilisera la fonction <code>time</code> ou la fonction <code>perf_counter</code> du module <code>time</code>.</p>
+<p><code>time.time()</code> mesure le nombre de secondes écoulés depuis Epoch, l'origine des temps informatiques, fixée le 01/01/1970 à 00:00:00 en temps UTC.</p>
+<p><code>time.perf_counter()</code> retourne le temps écoulé depuis le premier appel de <code>time.perf_counter()</code>. C'est un outil de mesure plus précis, pour mesurer un temps plus court.</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co">&quot;&quot;&quot;</span>
+<span class="co">In [28]: debut = time.perf_counter() ; t = [i for i in range(10**7)] ; duree = time.perf_counter() - debut</span>
+
+<span class="co">In [29]: duree</span>
+<span class="co">Out[29]: 0.6903144909997536</span>
+<span class="co">&quot;&quot;&quot;</span></code></pre></div>
+<p>Voici une fonction permettant d'exécuter la fonction qui lui est passée en argument et d'afficher le temps d'exécution.</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="kw">def</span> chrono(fonction):
+    <span class="co">&#39;&#39;&#39;Fonction de chronométrage de la fonction passée en paramètre</span>
+<span class="co">    Pour exécuter et chronométrer f(*args) saisir chrono(f)(*args) &#39;&#39;&#39;</span>
+    
+    <span class="kw">def</span> fonction2(<span class="op">*</span>args):
+        chrono_debut <span class="op">=</span> time.perf_counter()
+        rep <span class="op">=</span> fonction(<span class="op">*</span>args)
+        chrono_fin <span class="op">=</span> time.perf_counter()
+        <span class="bu">print</span>(<span class="st">&quot;Temps d&#39;exécution de </span><span class="sc">{:s}</span><span class="st"> : </span><span class="sc">{:1.6f}</span><span class="st"> secondes&quot;</span>.<span class="bu">format</span>(<span class="op">\</span>
+        fonction.<span class="va">__name__</span>, chrono_fin <span class="op">-</span> chrono_debut))
+        <span class="cf">return</span> rep
+        
+    <span class="cf">return</span> fonction2
+    
+<span class="co">&quot;&quot;&quot;</span>
+<span class="co">In [33]: def f(n):</span>
+<span class="co">    ...:     return [i for i in range(n)]</span>
+<span class="co">    ...:  </span>
+<span class="co">In [34]: t = chrono(f)(10**7)</span>
+<span class="co">Temps d&#39;exécution de f : 0.583690 secondes</span>
+<span class="co">&quot;&quot;&quot;</span></code></pre></div>
+</div>
+<div id="lecture-dun-fichier-texte" class="slide section level1">
+<h1>Lecture d'un fichier texte</h1>
+<h2 id="exercice-2">Exercice 2</h2>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="kw">def</span> nb_ligne(fichier):
+    c <span class="op">=</span> <span class="dv">0</span>
+    f <span class="op">=</span> <span class="bu">open</span>(fichier, <span class="st">&#39;r&#39;</span>)
+    <span class="cf">for</span> ligne <span class="kw">in</span> f:
+        c <span class="op">+=</span> <span class="dv">1</span>
+    f.close()
+    <span class="cf">return</span> c
+
+<span class="co">&quot;&quot;&quot;</span>
+<span class="co">In [7]: nb_ligne(&#39;dico.txt&#39;)</span>
+<span class="co">Out[7]: 336530</span>
+<span class="co">&quot;&quot;&quot;</span>
+
+<span class="kw">def</span> matchFirstCharPrenom(fichier, prenom):
+    firstChar <span class="op">=</span> prenom.lower()[<span class="dv">0</span>]
+    c <span class="op">=</span> <span class="dv">0</span>
+    f <span class="op">=</span> <span class="bu">open</span>(fichier, <span class="st">&#39;r&#39;</span>)
+    <span class="cf">for</span> ligne <span class="kw">in</span> f:
+        <span class="cf">if</span> ligne.lower()[<span class="dv">0</span>] <span class="op">==</span> firstChar:
+            c <span class="op">+=</span> <span class="dv">1</span>
+    f.close()
+    <span class="cf">return</span> c
+    
+<span class="kw">def</span> matchLastCharPrenom(fichier, prenom):
+    lastChar <span class="op">=</span> prenom.lower()[<span class="op">-</span><span class="dv">1</span>]
+    c <span class="op">=</span> <span class="dv">0</span>
+    f <span class="op">=</span> <span class="bu">open</span>(fichier, <span class="st">&#39;r&#39;</span>)
+    <span class="cf">for</span> ligne <span class="kw">in</span> f:
+        <span class="cf">if</span> ligne.rstrip().lower()[<span class="op">-</span><span class="dv">1</span>] <span class="op">==</span> lastChar:
+            c <span class="op">+=</span> <span class="dv">1</span>
+    f.close()
+    <span class="cf">return</span> c
+
+<span class="co">&quot;&quot;&quot;</span>
+<span class="co">&gt;&gt;&gt; matchFirstCharPrenom(&#39;dico.txt&#39;,&#39;frédéric&#39;)</span>
+<span class="co">12485</span>
+
+<span class="co">&gt;&gt;&gt; matchLastCharPrenom(&#39;dico.txt&#39;,&#39;frédéric&#39;)</span>
+<span class="co">179</span>
+<span class="co">&quot;&quot;&quot;</span></code></pre></div>
+<h2 id="exercice-3">Exercice 3</h2>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="kw">def</span> somme_premiers_fichier(fichier):
+    <span class="co">&#39;&#39;&#39;retourne la somme des entiers premiers successifs stockés dans</span>
+<span class="co">    le fichier dont le fichier d&#39;accès est passé en paramètre&#39;&#39;&#39;</span>
+    mon_fichier <span class="op">=</span> <span class="bu">open</span>(fichier,<span class="st">&#39;r&#39;</span>) <span class="co"># &#39;r&#39;  pour lecture</span>
+    s <span class="op">=</span> <span class="dv">0</span>
+    <span class="cf">for</span> L <span class="kw">in</span> mon_fichier:
+        <span class="co">#penser à nettoyer la ligne (enlever les caractères de fin de ligne)</span>
+        s <span class="op">+=</span> <span class="bu">int</span>(L.rstrip())
+    mon_fichier.close()
+    <span class="cf">return</span> s
+
+<span class="co">&quot;&quot;&quot;</span>
+<span class="co">In [1]: somme_premiers_fichier(&#39;premiers-1000.txt&#39;)</span>
+<span class="co">Out[1]: 3682913</span>
+<span class="co">&quot;&quot;&quot;</span></code></pre></div>
+<h2 id="exercice-4">Exercice 4</h2>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="kw">def</span> creer_fichier_scores(nom, nbscores):
+    <span class="co">&quot;&quot;&quot;Crée un fichier de scores réalisés lors de parties d&#39;un jeu video </span>
+<span class="co">    par 26 joueurs possibles de nom compris entre &#39;A&#39; et &#39;Z&#39;.</span>
+<span class="co">    Format d&#39;une ligne &#39;nom,score\n&#39;&quot;&quot;&quot;</span>
+    joueurs <span class="op">=</span> [<span class="bu">chr</span>(<span class="bu">ord</span>(<span class="st">&#39;A&#39;</span>) <span class="op">+</span> k) <span class="cf">for</span> k <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">26</span>)]
+    f <span class="op">=</span> <span class="bu">open</span>(nom, <span class="st">&#39;w&#39;</span>)
+    <span class="cf">for</span> k <span class="kw">in</span> <span class="bu">range</span>(nbscores):
+        f.write(random.randint(<span class="dv">0</span>,<span class="dv">12</span>)<span class="op">*</span><span class="st">&#39; &#39;</span> <span class="op">+</span> 
+        joueurs[random.randint(<span class="dv">0</span>, <span class="dv">25</span>)]<span class="op">+</span><span class="st">&#39;,&#39;</span><span class="op">+</span> <span class="bu">str</span>(random.randint(<span class="dv">0</span>, <span class="dv">1000</span>)) <span class="op">+</span> <span class="st">&#39;</span><span class="ch">\n</span><span class="st">&#39;</span>)
+    f.close()
+    
+<span class="kw">def</span> extraire_scores(fichier):
+    f <span class="op">=</span> <span class="bu">open</span>(fichier, <span class="st">&#39;r&#39;</span>)
+    score_joueur <span class="op">=</span> [<span class="dv">0</span>]<span class="op">*</span><span class="dv">26</span>
+    <span class="cf">for</span> ligne <span class="kw">in</span> f:
+        joueur, score <span class="op">=</span> ligne.strip().split(<span class="st">&#39;,&#39;</span>)
+        score_joueur[<span class="bu">ord</span>(joueur) <span class="op">-</span> <span class="bu">ord</span>(<span class="st">&#39;A&#39;</span>)] <span class="op">+=</span> <span class="bu">int</span>(score)
+    <span class="cf">return</span> score_joueur
+
+<span class="kw">def</span> extraire_moyennes(fichier):
+    f <span class="op">=</span> <span class="bu">open</span>(fichier, <span class="st">&#39;r&#39;</span>)
+    score_joueur <span class="op">=</span> [<span class="dv">0</span>]<span class="op">*</span><span class="dv">26</span>
+    nbpartie_joueur <span class="op">=</span> [<span class="dv">0</span>]<span class="op">*</span><span class="dv">26</span>
+    moyenne_joueur <span class="op">=</span> [<span class="dv">0</span>]<span class="op">*</span><span class="dv">26</span>
+    <span class="cf">for</span> ligne <span class="kw">in</span> f:
+        joueur, score <span class="op">=</span> ligne.strip().split(<span class="st">&#39;,&#39;</span>)
+        delta  <span class="op">=</span> <span class="bu">ord</span>(joueur) <span class="op">-</span> <span class="bu">ord</span>(<span class="st">&#39;A&#39;</span>)
+        score_joueur[delta] <span class="op">+=</span> <span class="bu">int</span>(score)
+        nbpartie_joueur[delta] <span class="op">+=</span> <span class="dv">1</span>
+    <span class="cf">for</span> k <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">26</span>):
+        moyenne_joueur[k] <span class="op">=</span> score_joueur[k]<span class="op">/</span>nbpartie_joueur[k]
+    <span class="cf">return</span> moyenne_joueur</code></pre></div>
+<h2 id="exercice-5">Exercice 5</h2>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">
+<span class="kw">def</span> admissibles(fichier):
+    <span class="co">&#39;&#39;&#39;ouvre un fichier d&#39;admissibilité et retourne une liste de 5 éléments </span>
+<span class="co">    constituée du  toral  d&#39;admissibles et des admissibles par série d&#39;oral&#39;&#39;&#39;</span>
+    mon_fichier <span class="op">=</span> <span class="bu">open</span>(fichier,<span class="st">&#39;r&#39;</span>) <span class="co"># &#39;r&#39; pour lecture</span>
+    decompte <span class="op">=</span> [<span class="dv">0</span>]<span class="op">*</span><span class="dv">5</span>
+    <span class="cf">for</span> ligne <span class="kw">in</span> mon_fichier:
+        ligne <span class="op">=</span> ligne.rstrip() <span class="co">#nettoyage des fins de ligne</span>
+        <span class="co">#on récupère les champs séparés par des tabulations dans une liste</span>
+        champs <span class="op">=</span> ligne.split(<span class="st">&#39;</span><span class="ch">\t</span><span class="st">&#39;</span>)
+        <span class="cf">if</span> champs[<span class="op">-</span><span class="dv">1</span>]<span class="op">!=</span><span class="st">&#39;-&#39;</span>:
+            <span class="co">#incrémentation du total d&#39;admissibles</span>
+            decompte[<span class="dv">0</span>] <span class="op">+=</span> <span class="dv">1</span>
+            <span class="co">#puis de la série d&#39;oral correspondante</span>
+            decompte[<span class="bu">int</span>(champs[<span class="op">-</span><span class="dv">1</span>])] <span class="op">+=</span> <span class="dv">1</span>
+    mon_fichier.close()
+    <span class="cf">return</span> decompte
+
+
+<span class="co">&quot;&quot;&quot;</span>
+<span class="co">In [2]: admissibles(&#39;admissibles.txt&#39;)</span>
+<span class="co">Out[2]: [1718, 417, 417, 410, 474]</span>
+<span class="co">&quot;&quot;&quot;</span></code></pre></div>
+</div>
+<div id="écriture-dans-un-fichier-texte" class="slide section level1">
+<h1>Écriture dans un fichier texte</h1>
+<h2 id="exercice-6">Exercice 6</h2>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">
+<span class="kw">def</span> est_premier(n):
+    <span class="cf">if</span> n <span class="op">&lt;=</span> <span class="dv">1</span>:
+        <span class="cf">return</span> <span class="va">False</span>
+    <span class="cf">for</span> d <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">2</span>, <span class="bu">int</span>(math.sqrt(n))<span class="op">+</span><span class="dv">1</span>):
+            <span class="cf">if</span> n<span class="op">%</span>d <span class="op">==</span> <span class="dv">0</span>:
+                <span class="cf">return</span> <span class="va">False</span>
+    <span class="cf">return</span> <span class="va">True</span>
+
+<span class="kw">def</span> premiers_fichier(fichier,n):
+    <span class="co">&#39;&#39;&#39;Ecrit tous les entiers premiers majorés par n&gt;=2</span>
+<span class="co">    dans un fichier texte&#39;&#39;&#39;</span>
+    mon_fichier <span class="op">=</span> <span class="bu">open</span>(fichier,<span class="st">&#39;w&#39;</span>)
+    <span class="cf">assert</span> n<span class="op">&gt;=</span><span class="dv">2</span> <span class="co">#n doit etre supérieur ou égal à 2</span>
+    entier <span class="op">=</span> <span class="dv">2</span>
+    <span class="cf">while</span> entier <span class="op">&lt;</span> n:
+        <span class="cf">if</span> est_premier(entier):
+            mon_fichier.write(<span class="bu">str</span>(entier)<span class="op">+</span><span class="st">&#39;</span><span class="ch">\n</span><span class="st">&#39;</span>)
+        entier <span class="op">+=</span> <span class="dv">1</span>
+    mon_fichier.close()
+<span class="co">&quot;&quot;&quot;</span>
+<span class="co">In [6]: premiers_fichier(&#39;premiers.txt&#39;, 10**4)</span>
+<span class="co">&quot;&quot;&quot;</span></code></pre></div>
+<h2 id="exercice-7">Exercice 7</h2>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">
+<span class="kw">def</span> tri_admissibles(fichier):
+    <span class="co">&#39;&#39;&#39;A partir d&#39;un fichier d&#39;admissibles, crée quatre fichiers regroupant les </span>
+<span class="co">    noms et prenoms des  admissibles selon leur série à l&#39;oral. &#39;&#39;&#39;</span>
+    <span class="co">#la fonction os.path.join permet de construire une chemin d&#39;accès avec le séparateur</span>
+    <span class="co">#de fichier propre au système &#39;\&#39; pour Windows ou &#39;/&#39; pour Linux</span>
+    
+    fichier_source <span class="op">=</span> <span class="bu">open</span>(fichier,<span class="st">&#39;r&#39;</span>)
+    <span class="co">#liste avec les descripteurs de fichiers ouverts en écriture (un par série)</span>
+    oral <span class="op">=</span> [<span class="bu">open</span>(os.path.join(<span class="st">&#39;fichiers-sortie&#39;</span>,<span class="st">&#39;admissible</span><span class="sc">%s</span><span class="st">.txt&#39;</span><span class="op">%</span>i),
+    <span class="st">&#39;w&#39;</span>) <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, <span class="dv">5</span>)]
+    <span class="cf">for</span> ligne <span class="kw">in</span> fichier_source:
+        ligne <span class="op">=</span> ligne.rstrip()
+        champs <span class="op">=</span> ligne.split(<span class="st">&#39;</span><span class="ch">\t</span><span class="st">&#39;</span>)
+        admissible <span class="op">=</span> champs[<span class="op">-</span><span class="dv">1</span>]
+        <span class="cf">if</span> admissible <span class="op">!=</span> <span class="st">&#39;-&#39;</span>:
+            oral[<span class="bu">int</span>(admissible)<span class="op">-</span><span class="dv">1</span>].write(champs[<span class="op">-</span><span class="dv">3</span>]<span class="op">+</span><span class="st">&#39;</span><span class="ch">\n</span><span class="st">&#39;</span>)
+    <span class="cf">for</span> fichier <span class="kw">in</span> oral:
+        fichier.close()
+    fichier_source.close()
+
+<span class="co">&quot;&quot;&quot;</span>
+<span class="co">In [9]: tri_admissibles(&#39;fichiers-entree/admissibles.txt&#39;)</span>
+<span class="co">&quot;&quot;&quot;</span></code></pre></div>
+<h2 id="exercice-8">Exercice 8</h2>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="kw">def</span> upper_fichier(fichier):
+    <span class="co">&#39;&#39;&#39;Transforme en majuscules toutes les caractères d&#39;un fichier&#39;&#39;&#39;</span>
+    racine, extension <span class="op">=</span> os.path.splitext(fichier)
+    mon_fichier <span class="op">=</span> <span class="bu">open</span>(fichier,<span class="st">&#39;r&#39;</span>)
+    <span class="co">#ouverture du fichier qui contiendra le texte en majuscules</span>
+    fichier_majuscule <span class="op">=</span> <span class="bu">open</span>(os.path.join(<span class="st">&#39;fichiers-sortie&#39;</span>, 
+    racine<span class="op">+</span><span class="st">&#39;-upper&#39;</span><span class="op">+</span>extension),<span class="st">&#39;w&#39;</span>)
+    tampon <span class="op">=</span> mon_fichier.read()
+    tampon <span class="op">=</span> tampon.upper()
+    fichier_majuscule.write(tampon)
+    mon_fichier.close()
+    fichier_majuscule.close()
+
+<span class="co">&quot;&quot;&quot;</span>
+<span class="co">In [13]: upper_fichier(&#39;correcTP7Fichiers.py&#39;)</span>
+<span class="co">&quot;&quot;&quot;</span></code></pre></div>
+</div>
+<div id="quelques-graphiques-avec-matplotlib" class="slide section level1">
+<h1>Quelques graphiques avec <code>matplotlib</code></h1>
+<h2 id="matplotlib-est-une-immense-bibliothèque-où-trouver-de-laide"><code>matplotlib</code> est une immense bibliothèque, où trouver de l'aide ?</h2>
+<ul>
+<li><p>Documentation officielle sur <code>matplotlib.pyplot</code> : <a href="http://matplotlib.org/api/pyplot_summary.html" class="uri">http://matplotlib.org/api/pyplot_summary.html</a></p></li>
+<li><p>Un tutoriel en anglais sur <code>numpy</code> et <code>scipy</code> (bibliothèque de calcul scientifique plus vaste incluant <code>numpy</code>) : <a href="http://wiki.scipy.org/Tentative_NumPy_Tutorial" class="uri">http://wiki.scipy.org/Tentative_NumPy_Tutorial</a></p></li>
+<li><p>Un tutoriel en français sur <code>matplotlib.pyplot</code> : <a href="http://www.loria.fr/~rougier/teaching/matplotlib/" class="uri">http://www.loria.fr/~rougier/teaching/matplotlib/</a></p></li>
+<li><p>Les scipy lecture, des tutoriel en anglais sur <code>numpy</code>, <code>scipy</code> et <code>matplotlib</code> : <a href="http://scipy-lectures.github.io/" class="uri">http://scipy-lectures.github.io/</a>.</p></li>
+</ul>
+<h2 id="exercices-9-et-10">Exercices 9 et 10</h2>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="kw">def</span> exo9():
+    <span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt
+    <span class="im">import</span> numpy <span class="im">as</span> np
+    
+    
+    <span class="kw">def</span> exo10():
+        <span class="co">&quot;&quot;&quot;Code de l&#39;exo 10&quot;&quot;&quot;</span>
+        plt.grid()
+        plt.axhline(color<span class="op">=</span><span class="st">&#39;black&#39;</span>)
+        plt.axvline(color<span class="op">=</span><span class="st">&#39;black&#39;</span>)
+        ys <span class="op">=</span> np.sin(t)
+        plt.plot(t,ys, label<span class="op">=</span><span class="st">&#39;sinus&#39;</span>)
+        plt.legend(loc<span class="op">=</span><span class="st">&#39;upper left&#39;</span>)
+        
+    <span class="co">#tableau de 1000 valeurs prises entre -pi et 3*pi compris avec un pas régulier</span>
+    t <span class="op">=</span> np.linspace(<span class="op">-</span>np.pi,<span class="dv">3</span><span class="op">*</span>np.pi,<span class="dv">1000</span>)
+    <span class="bu">print</span>(<span class="st">&#39;type de la variable t :&#39;</span> ,<span class="bu">type</span>(t), <span class="st">&#39;</span><span class="ch">\n</span><span class="st">Méthodes de l</span><span class="ch">\&#39;</span><span class="st">objet : &#39;</span>,<span class="bu">dir</span>(t))
+    <span class="co">#t est un array numpy type particulier de tableau</span>
+    <span class="co">#on utilise la fonction cos du module numpy car elle est vectorialisée</span>
+    <span class="co">#on peut l&#39;appliquer à un tableau (elle s&#39;applique à chaque élément)</span>
+    y <span class="op">=</span> np.cos(t)
+    plt.plot(t,y, label<span class="op">=</span><span class="st">&#39;cosinus&#39;</span>)
+    <span class="co">#on peut commenter la ligne suivante pour ne pas l&#39;exécuter</span>
+    exo10()
+    <span class="co">#toujours appeler savefig avant show sinon sauvegarde vide !!!</span>
+    plt.savefig(<span class="st">&#39;cosinus-sinus.pdf&#39;</span>)
+    plt.show()
+
+<span class="co">&quot;&quot;&quot;</span>
+<span class="co">In [22]: exo9()</span>
+<span class="co">&quot;&quot;&quot;</span></code></pre></div>
+<ul>
+<li>Type de la variable <code>t</code> : <code>&lt;class 'numpy.ndarray'&gt;</code></li>
+<li>Méthodes de l'objet : <code>['T', '__abs__', '__add__', '__and__', '__array__', ..., 'var', 'view']</code></li>
+</ul>
+<h2 id="exercice-11">Exercice 11</h2>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">
+<span class="kw">def</span> exo11(xmin,xmax,ymin,ymax):
+    <span class="co">&#39;&#39;&#39;Courbes des fonctions x-&gt;x, x-&gt;x^2 et x-&gt;x^3 dans la fenetre</span>
+<span class="co">    [xmin,xmax]x[ymin,ymax]&#39;&#39;&#39;</span>
+    <span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt
+    <span class="im">import</span> numpy <span class="im">as</span> np
+    <span class="im">import</span> os.path
+    plt.axis([xmin,xmax,ymin,ymax])
+    t <span class="op">=</span> np.linspace(xmin,xmax,<span class="dv">1000</span>)
+    style <span class="op">=</span> [<span class="st">&#39;-&#39;</span>,<span class="st">&#39;-&#39;</span>,<span class="st">&#39;--&#39;</span>]
+    couleur <span class="op">=</span> [<span class="st">&#39;red&#39;</span>,<span class="st">&#39;green&#39;</span>,<span class="st">&#39;blue&#39;</span>]
+    largeur<span class="op">=</span>[<span class="dv">2</span>,<span class="dv">4</span>,<span class="dv">1</span>]
+    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">3</span>):
+        plt.plot(t,t<span class="op">**</span>(i<span class="op">+</span><span class="dv">1</span>), linewidth<span class="op">=</span>largeur[i], linestyle<span class="op">=</span>style[i],
+        color<span class="op">=</span>couleur[i])
+    plt.axhline(color<span class="op">=</span><span class="st">&#39;black&#39;</span>)
+    plt.axvline(color<span class="op">=</span><span class="st">&#39;black&#39;</span>)
+    plt.legend([<span class="vs">r&#39;$x$&#39;</span>,<span class="vs">r&#39;$x^2$&#39;</span>,<span class="vs">r&#39;$x^3$&#39;</span>],loc<span class="op">=</span><span class="st">&#39;lower right&#39;</span>)
+    plt.title(<span class="st">&#39;Puissances comparées&#39;</span>)
+    plt.savefig(<span class="st">&#39;puissances_comparees.pdf&#39;</span>)
+    plt.show()</code></pre></div>
+<h2 id="exercice-12">Exercice 12</h2>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">
+<span class="kw">def</span> exo12():
+    <span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt
+    V, pH, Der <span class="op">=</span> [],[],[<span class="dv">0</span>]
+    veq <span class="op">=</span> []
+    
+    <span class="co"># Lecture du fichier et &quot;construction&quot; des listes V et pH</span>
+    
+    monfichier <span class="op">=</span> <span class="bu">open</span>(<span class="st">&#39;Dosage.txt&#39;</span>,<span class="st">&#39;r&#39;</span>)
+    
+    monfichier.readline()
+    <span class="cf">for</span> l <span class="kw">in</span> monfichier : 
+        v,ph <span class="op">=</span> l.rstrip().split(<span class="st">&#39;</span><span class="ch">\t</span><span class="st">&#39;</span>)
+        V.append(<span class="bu">float</span>(v))
+        pH.append(<span class="bu">float</span>(ph))
+    
+    monfichier.close()    
+    
+    <span class="co"># Calcul de la dérivée et &quot;construction&quot; de la liste Der</span>
+    
+    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span> (<span class="dv">1</span>, <span class="bu">len</span>(V)<span class="op">-</span><span class="dv">1</span>):
+        Der.append((pH[i<span class="op">+</span><span class="dv">1</span>]<span class="op">-</span>pH[i<span class="dv">-1</span>])<span class="op">/</span>(V[i<span class="op">+</span><span class="dv">1</span>]<span class="op">-</span>V[i<span class="dv">-1</span>]))
+    Der.append(<span class="dv">0</span>)
+    
+    <span class="co"># Tracé des graphiques</span>
+    
+    fig, ax1 <span class="op">=</span> plt.subplots()
+    ax2  <span class="op">=</span>  ax1.twinx()
+    ax1.plot(V, pH, <span class="st">&#39;g-&#39;</span>)
+    ax2.plot(V, Der,<span class="st">&#39;b-&#39;</span>)
+    ax1.set_xlabel(<span class="st">&#39;Volume de soude versé V&#39;</span>)
+    ax1.set_ylabel(<span class="st">&#39;$pH$&#39;</span>, color<span class="op">=</span><span class="st">&#39;g&#39;</span>)
+    ax2.set_ylabel(<span class="vs">r&quot;$\frac</span><span class="sc">{dpH}{dV}</span><span class="vs">$&quot;</span>, color<span class="op">=</span><span class="st">&#39;b&#39;</span>, fontsize <span class="op">=</span> <span class="dv">16</span>)
+    
+    plt.savefig(<span class="st">&quot;Fig dosage.pdf&quot;</span>)
+    plt.show()
+    
+    <span class="co"># Détermination des volumes équivalents &quot;théoriques&quot; par recherche des maxima locaux</span>
+    
+    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>,<span class="bu">len</span>(Der)<span class="op">-</span><span class="dv">1</span>):
+        <span class="cf">if</span> Der[i] <span class="op">&gt;</span> Der[i<span class="dv">-1</span>] <span class="kw">and</span> Der[i] <span class="op">&gt;</span> Der[i<span class="op">+</span><span class="dv">1</span>]:
+            veq.append(V[i])
+    
+    <span class="cf">if</span> <span class="bu">len</span>(veq) <span class="op">==</span> <span class="dv">0</span> :
+        <span class="bu">print</span> (<span class="st">&quot;Pas de volume équivalent&quot;</span>)
+    <span class="cf">elif</span> <span class="bu">len</span>(veq) <span class="op">==</span> <span class="dv">1</span> :
+        <span class="bu">print</span>(<span class="st">&quot;Un seul volume équivalent : Véq = &quot;</span>,veq[<span class="dv">0</span>],<span class="st">&quot;mL&quot;</span>)
+    <span class="cf">else</span> :
+        <span class="bu">print</span>(<span class="st">&quot;Les volumes équivalents sont :</span><span class="ch">\n</span><span class="st">&quot;</span>)   
+        <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(veq)):
+            <span class="bu">print</span>(<span class="st">&quot;Véq(&quot;</span>,i<span class="op">+</span><span class="dv">1</span>,<span class="st">&quot;) = &quot;</span>,veq[i],<span class="st">&quot;mL&quot;</span>)
+    </code></pre></div>
+<p>L'analyse du graphique montre qu'il n'y a qu'une seule équivalence, les autres maxima locaux correspondant à des artéfacts</p>
+<p>Véq = 17,2 mL</p>
+<p>Relation à l'équivalence Ca/5<em>V0 = Cb</em>Véq d'où Ca = (5<em>Cb</em>Véq)/V0 = 0,435 mol/L</p>
+</div>
+<div id="recherche-dans-un-fichier" class="slide section level1">
+<h1>Recherche dans un fichier</h1>
+<h2 id="exercice-13">Exercice 13</h2>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="kw">def</span> projet99():
+    <span class="im">from</span> math <span class="im">import</span> log
+    parse <span class="op">=</span> <span class="kw">lambda</span> ligne : <span class="bu">list</span>(<span class="bu">map</span>(<span class="bu">int</span>, ligne.rstrip().split(<span class="st">&#39;,&#39;</span>)))
+    f <span class="op">=</span> <span class="bu">open</span>(<span class="st">&#39;base_exp.txt&#39;</span>,<span class="st">&#39;r&#39;</span>)
+    t <span class="op">=</span> <span class="bu">list</span>(<span class="bu">map</span>(parse,  f.readlines()))
+    f.close()
+    maxi <span class="op">=</span> <span class="bu">float</span>(<span class="st">&#39;-inf&#39;</span>)
+    n <span class="op">=</span> <span class="dv">1</span>
+    <span class="cf">for</span> base, exp <span class="kw">in</span> t:
+        m <span class="op">=</span> exp <span class="op">*</span> log(base) 
+        <span class="cf">if</span> exp <span class="op">*</span> log(base) <span class="op">&gt;</span> maxi:
+            nmaxi <span class="op">=</span> n
+            maxi <span class="op">=</span> m 
+        n <span class="op">+=</span> <span class="dv">1</span>
+    <span class="cf">return</span> nmaxi
+    <span class="co">&quot;&quot;&quot;</span>
+<span class="co">In [3]: projet99()</span>
+<span class="co">Out[3]: 709</span>
+<span class="co">&quot;&quot;&quot;</span></code></pre></div>
+<h2 id="exercice-14">Exercice 14</h2>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="kw">def</span> creer_departements(fichier, n):
+    <span class="co">&#39;&#39;&#39;Cree un fichier texte contenant n noms de départements</span>
+<span class="co">    de format *****numero_ligne où * est une lettre majuscule.&#39;&#39;&#39;</span>
+    debut <span class="op">=</span> <span class="bu">ord</span>(<span class="st">&#39;A&#39;</span>)
+    fin <span class="op">=</span> <span class="bu">ord</span>(<span class="st">&#39;Z&#39;</span>)
+    f <span class="op">=</span> <span class="bu">open</span>(fichier, <span class="st">&#39;w&#39;</span>)
+    <span class="cf">for</span> k <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, n<span class="op">+</span><span class="dv">1</span>):
+        f.write(<span class="st">&#39;&#39;</span>.join(<span class="bu">chr</span>(random.randint(debut, fin)) <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">5</span>)) <span class="op">+</span> <span class="op">\</span>
+        <span class="bu">str</span>(k) <span class="op">+</span> <span class="st">&#39;</span><span class="ch">\n</span><span class="st">&#39;</span>)
+    f.close()
+
+<span class="kw">def</span> extraire_departements(fichier):
+    <span class="co">&#39;&#39;&#39;Extrait dans un tableau les noms de départements contenus sur </span>
+<span class="co">    chaque ligne du fichier de format nom_departement et trie le tableau</span>
+<span class="co">    dans l&#39;ordre croissant.&#39;&#39;&#39;</span>
+    f <span class="op">=</span> <span class="bu">open</span>(fichier, <span class="st">&#39;r&#39;</span>)
+    t <span class="op">=</span> [ligne.rstrip() <span class="cf">for</span> ligne <span class="kw">in</span> f]
+    t.sort()
+    <span class="cf">return</span> t
+    
+<span class="kw">def</span> creer_numero_departements(fichier, tab):
+    <span class="co">&#39;&#39;&#39;Recopie les noms de fichier du tableau tab  sont dans l&#39;ordre croissant,</span>
+<span class="co">    dans un fichier en formatant chaque ligne ainsi : numero (de 1 ),</span>
+<span class="co">     nom_departement&#39;&#39;&#39;</span>
+    g <span class="op">=</span> <span class="bu">open</span>(fichier, <span class="st">&#39;w&#39;</span>)
+    <span class="cf">for</span> k <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(tab)):
+        g.write( <span class="bu">str</span>(k<span class="op">+</span><span class="dv">1</span>) <span class="op">+</span>  <span class="st">&#39;,&#39;</span> <span class="op">+</span> tab[k] <span class="op">+</span> <span class="st">&#39;</span><span class="ch">\n</span><span class="st">&#39;</span>)
+    g.close()
+    
+<span class="kw">def</span> recherche_dicho_numero_departements(t, nom_dep):
+    <span class="co">&#39;&#39;&#39;Recherche dichotomique d&#39;un numéro de département dans un tableau de noms</span>
+<span class="co">    de départements triés dans l&#39;ordre croissant.</span>
+<span class="co">    Retourne -1 si le département n&#39;existe pas.&#39;&#39;&#39;</span>
+    debut <span class="op">=</span> <span class="dv">0</span>
+    fin <span class="op">=</span> <span class="bu">len</span>(t) <span class="op">-</span> <span class="dv">1</span>
+    <span class="cf">while</span> debut <span class="op">&lt;=</span> fin:
+        med <span class="op">=</span> (debut <span class="op">+</span> fin)<span class="op">//</span><span class="dv">2</span>
+        target <span class="op">=</span> t[med]
+        <span class="cf">if</span> target <span class="op">==</span> nom_dep:
+            <span class="cf">return</span> med <span class="op">+</span> <span class="dv">1</span>
+        <span class="cf">elif</span> target <span class="op">&lt;</span> nom_dep:
+            debut <span class="op">=</span> med <span class="op">+</span> <span class="dv">1</span>
+        <span class="cf">else</span>:
+            fin <span class="op">=</span> med <span class="op">-</span> <span class="dv">1</span>
+    <span class="cf">return</span> <span class="dv">-1</span>
+    
+<span class="kw">def</span> recherche_seq_numero_departements(t, nom_dep):
+    <span class="co">&#39;&#39;&#39;Recherche séquentielle d&#39;un numéro de département dans un tableau de noms</span>
+<span class="co">    de départements triés dans l&#39;ordre croissant.</span>
+<span class="co">    Retourne -1 si le département n&#39;existe pas.&#39;&#39;&#39;</span>
+    <span class="cf">for</span> k, element <span class="kw">in</span> <span class="bu">enumerate</span>(t):
+        <span class="cf">if</span> element <span class="op">==</span> nom_dep:
+            <span class="cf">return</span> k <span class="op">+</span> <span class="dv">1</span>
+    <span class="cf">return</span> <span class="dv">-1</span></code></pre></div>
+<p>Dans <strong>le pire des cas</strong> (recherche de l'élément en dernière position dans le tableau ordonné), la complexité d'un algorithme de <strong>recherche séquentielle</strong> (ou par balayage) est <strong>linéaire</strong>, de l'ordre de la taille du tableau.</p>
+<p>La complexité d'un algorithme de <strong>recherche dichotomique</strong> est <strong>logarithmique</strong>, de l'ordre du logarithme de la taille du tableau, quelle que soit la position de l'élément recherché</p>
+</div>
+<div id="encore-des-fichiers" class="slide section level1">
+<h1>Encore des fichiers</h1>
+<h2 id="exercice-15">Exercice 15</h2>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">
+<span class="kw">def</span> premiers_par_ligne(fichier, n, m):
+    <span class="co">&#39;&#39;&#39;Crée un fichier texte puis écrit tous les entiers premiers majorés par </span>
+<span class="co">    n&gt;=2 avec m entiers premiers par ligne (par exemple m =10)&#39;&#39;&#39;</span>
+    mon_fichier <span class="op">=</span> <span class="bu">open</span>(fichier,<span class="st">&#39;w&#39;</span>)
+    <span class="cf">assert</span> n<span class="op">&gt;=</span><span class="dv">2</span> <span class="co">#n doit etre supérieur à 2</span>
+    nbpremier <span class="op">=</span> <span class="dv">0</span>
+    entier <span class="op">=</span> <span class="dv">2</span>
+    <span class="cf">while</span> entier<span class="op">&lt;</span>n:
+        <span class="cf">if</span> est_premier(entier):
+            mon_fichier.write(<span class="bu">str</span>(entier)<span class="op">+</span><span class="st">&#39;</span><span class="ch">\t</span><span class="st">&#39;</span>)
+            nbpremier <span class="op">+=</span> <span class="dv">1</span>
+            <span class="co">#si m divise entier on a  rempli une ligne avec m  premiers</span>
+            <span class="cf">if</span> nbpremier<span class="op">%</span>m <span class="op">==</span> <span class="dv">0</span>:
+                mon_fichier.write(<span class="st">&#39;</span><span class="ch">\n</span><span class="st">&#39;</span>)
+        entier <span class="op">+=</span> <span class="dv">1</span>
+    mon_fichier.close()
+    
+<span class="co">&quot;&quot;&quot;</span>
+<span class="co">In[32]:premiers_par_ligne(&#39;premiers-1000-10ligne.txt&#39;,1000,10)</span>
+<span class="co">&quot;&quot;&quot;</span></code></pre></div>
+<h2 id="exercice-16">Exercice 16</h2>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">
+<span class="kw">def</span> somme_premiers_fichier2(fichier):
+    <span class="co">&quot;&quot;&quot;retourne la somme des 1000 plus petits entiers premiers contenus</span>
+<span class="co">    dans un fichiert passé en paramètre.</span>
+<span class="co">    Une ligne peut contenir plusieurs entiers premiers  séparés par des &#39;\t&#39;&quot;&quot;&quot;</span>
+    f <span class="op">=</span> <span class="bu">open</span>(fichier,<span class="st">&#39;r&#39;</span>)
+    tabprem <span class="op">=</span> [<span class="bu">int</span>(n) <span class="cf">for</span> ligne <span class="kw">in</span> f <span class="cf">for</span> n <span class="kw">in</span> ligne.rstrip().split(<span class="st">&#39;</span><span class="ch">\t</span><span class="st">&#39;</span>)]
+    f.close()
+    <span class="cf">return</span> <span class="bu">sum</span>(tabprem)
+
+<span class="co">&quot;&quot;&quot;</span>
+<span class="co">In [40]: somme_premiers_fichier2(&#39;premiers-1000.txt&#39;)</span>
+<span class="co">Out[40]: 5736396</span>
+<span class="co">&quot;&quot;&quot;</span></code></pre></div>
+<h2 id="exercice-17">Exercice 17</h2>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">
+<span class="kw">def</span> exo17():
+    <span class="co">&#39;&#39;&#39;Graphe discret des 11 premiers termes de la suite u définie par </span>
+<span class="co">    u(0)=-8.43 et u(n+1)=-1/2*u(n)+63&#39;&#39;&#39;</span>
+    <span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt
+    <span class="im">import</span> numpy <span class="im">as</span> np
+    <span class="im">import</span> os.path
+    <span class="co">#liste des indices</span>
+    n <span class="op">=</span> np.arange(<span class="dv">0</span>,<span class="dv">11</span>)
+    <span class="co">#calcul de la liste des termes</span>
+    u <span class="op">=</span> [<span class="op">-</span><span class="fl">8.43</span>]
+    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">10</span>):
+        u.append(<span class="op">-</span><span class="fl">0.5</span><span class="op">*</span>u[<span class="op">-</span><span class="dv">1</span>]<span class="op">+</span><span class="dv">63</span>)
+    plt.plot(n,u,linestyle<span class="op">=</span><span class="st">&#39;--&#39;</span>,color<span class="op">=</span><span class="st">&#39;red&#39;</span>,marker<span class="op">=</span><span class="st">&#39;o&#39;</span>)
+    plt.axhline(color<span class="op">=</span><span class="st">&#39;black&#39;</span>)
+    <span class="co">#la suite converge vers 42</span>
+    plt.axhline(<span class="dv">42</span>,color<span class="op">=</span><span class="st">&#39;blue&#39;</span>)
+    <span class="co">#chaine précédée d&#39;un r pour raw, ainsi les caractères spéciaux de python</span>
+    <span class="co">#ne sont pas interprétés, le code Latex pour l&#39;affichage mathématique l&#39;est</span>
+    plt.legend([<span class="vs">r&#39;$u_{n+1}=-\frac</span><span class="sc">{1}{2}</span><span class="vs">u_</span><span class="sc">{n}</span><span class="vs">+63$ et $u_</span><span class="sc">{0}</span><span class="vs">=-8.43$&#39;</span>],
+    loc<span class="op">=</span><span class="st">&#39;lower right&#39;</span>)
+    plt.title(<span class="st">&#39;Evolution d</span><span class="ch">\&#39;</span><span class="st">une suite&#39;</span>)
+    plt.savefig(<span class="st">&#39;exo17-suite.pdf&#39;</span>)
+    plt.show()</code></pre></div>
+<h2 id="exercice-18">Exercice 18</h2>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">
+<span class="kw">def</span> creer_fichier_points(nom):
+    <span class="co">&#39;&#39;&#39;Crée un fichier texte avec les coordonnées de n points à coordonnées entières</span>
+<span class="co">    .Chaque ligne est de la forme : 100\t40\n pour un point de coordonnées (100,40).</span>
+<span class="co">    0&lt;= x &lt;= 100 et 0&lt;= y &lt;= 100.</span>
+<span class="co">    &#39;&#39;&#39;</span>
+    f <span class="op">=</span> <span class="bu">open</span>(nom,<span class="st">&#39;w&#39;</span>)
+    points <span class="op">=</span> [(x, y) <span class="cf">for</span> x <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">101</span>) <span class="cf">for</span> y <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">101</span>)]
+    random.shuffle(points)
+    <span class="cf">for</span> p <span class="kw">in</span> points:
+        f.write(<span class="bu">str</span>(p[<span class="dv">0</span>])<span class="op">+</span><span class="st">&#39;</span><span class="ch">\t</span><span class="st">&#39;</span><span class="op">+</span><span class="bu">str</span>(p[<span class="dv">1</span>])<span class="op">+</span><span class="st">&#39;</span><span class="ch">\n</span><span class="st">&#39;</span>)
+    f.close()
+
+<span class="kw">def</span> extraire_points(fichier, n):
+    <span class="co">&#39;&#39;&#39;Retourne un tableau avec les coordonnées des points enregistrés sur les </span>
+<span class="co">    n premières lignes du fichier&#39;&#39;&#39;</span>
+    f <span class="op">=</span> <span class="bu">open</span>(fichier)
+    pts <span class="op">=</span> []
+    <span class="cf">for</span> k <span class="kw">in</span> <span class="bu">range</span>(n):
+        ligne <span class="op">=</span> f.readline()
+        coord <span class="op">=</span> <span class="bu">tuple</span>(<span class="bu">map</span>(<span class="bu">int</span>, ligne.split(<span class="st">&#39;</span><span class="ch">\t</span><span class="st">&#39;</span>)))
+        pts.append(coord)
+    f.close()
+    <span class="cf">return</span> pts
+        
+<span class="kw">def</span> crible(points):
+    <span class="co">&#39;&#39;&#39;Retourne un crible d&#39;un tableau etat de dimensions 101x101</span>
+<span class="co">    avec t[y][x] = True si le point de coordonnées (x,y) appartient </span>
+<span class="co">    au tableau points et t[y][x] = False sinon&#39;&#39;&#39;</span>
+    N <span class="op">=</span> <span class="dv">101</span>
+    etat <span class="op">=</span> [[<span class="va">False</span>]<span class="op">*</span>N <span class="cf">for</span> k <span class="kw">in</span> <span class="bu">range</span>(N)]
+    <span class="cf">for</span> p <span class="kw">in</span> points:
+        x, y <span class="op">=</span> p
+        etat[y][x] <span class="op">=</span> <span class="va">True</span>
+    <span class="cf">return</span> etat
+    
+<span class="kw">def</span> nb_milieux(points):
+    <span class="co">&#39;&#39;&#39;Retourne le nombre de points qui sont milieu de deux autres points</span>
+<span class="co">    dont les coordonnées sont contenues dans le tableau points&#39;&#39;&#39;</span>
+    nbmilieux <span class="op">=</span> <span class="dv">0</span>
+    nbpoints <span class="op">=</span> <span class="bu">len</span>(points)
+    etat <span class="op">=</span> crible(points)
+    <span class="co">#decompte des milieux, boucles sur les couples de points</span>
+    <span class="cf">for</span> k <span class="kw">in</span> <span class="bu">range</span>(nbpoints):
+       xa, ya <span class="op">=</span> points[k]
+       <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(k<span class="op">+</span><span class="dv">1</span>, nbpoints):
+          xb, yb <span class="op">=</span> points[j]
+          <span class="cf">if</span> (xa <span class="op">+</span> xb)<span class="op">%</span><span class="dv">2</span> <span class="op">==</span> <span class="dv">0</span> <span class="kw">and</span> (ya <span class="op">+</span> yb)<span class="op">%</span><span class="dv">2</span> <span class="op">==</span> <span class="dv">0</span>:
+             xm, ym <span class="op">=</span> (xa <span class="op">+</span> xb)<span class="op">//</span><span class="dv">2</span>, (ya <span class="op">+</span> yb)<span class="op">//</span><span class="dv">2</span>
+             <span class="cf">if</span> etat[ym][xm]:
+                nbmilieux <span class="op">+=</span> <span class="dv">1</span>
+                etat[ym][xm] <span class="op">=</span> <span class="va">True</span>          
+    <span class="cf">return</span> nbmilieux
+ </code></pre></div>
+<h2 id="exercice-19">Exercice 19</h2>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"> 
+<span class="kw">def</span> exo19(fichier):
+    <span class="co">&#39;&#39;&#39;Distribution des valeurs des pixels d&#39;une image en niveaux de gris&#39;&#39;&#39;</span>
+    <span class="im">from</span> PIL <span class="im">import</span> Image
+    <span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt
+    <span class="im">import</span> numpy <span class="im">as</span> np
+    Mona <span class="op">=</span> Image.<span class="bu">open</span>(fichier)
+    <span class="co">#affichage du mode (ici &#39;L&#39; pour niveaux de gris) et du format de l&#39;image</span>
+    <span class="co">#ey de la taille de l&#39;image (Largeur,Hauteur)</span>
+    <span class="bu">print</span>(Mona.mode,Mona.<span class="bu">format</span>,Mona.size)
+    L,H <span class="op">=</span> Mona.size
+    histo <span class="op">=</span> Mona.histogram()
+    histocumul <span class="op">=</span> [histo[<span class="dv">0</span>]]
+    <span class="co">#il y a 256 nuances de niveau de gris len(histo) == 256</span>
+    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, <span class="dv">256</span>):
+        histocumul.append(histocumul[<span class="op">-</span><span class="dv">1</span>]<span class="op">+</span>histo[i])
+    <span class="co">#normalisation des histogrammes</span>
+    max1,max2 <span class="op">=</span> <span class="bu">list</span>(<span class="bu">map</span>(<span class="bu">max</span>,(histo,histocumul)))
+    histonorm <span class="op">=</span> [<span class="bu">float</span>(f)<span class="op">/</span>max1 <span class="cf">for</span> f <span class="kw">in</span> histo]
+    histocumulnorm <span class="op">=</span> [<span class="bu">float</span>(g)<span class="op">/</span>max2 <span class="cf">for</span> g <span class="kw">in</span> histocumul]
+    <span class="co">#Graphique</span>
+    plt.axis([<span class="dv">0</span>,<span class="dv">256</span>,<span class="dv">0</span>,<span class="dv">1</span>])
+    plt.plot(np.arange(<span class="dv">256</span>),histonorm,color<span class="op">=</span><span class="st">&#39;green&#39;</span>)
+    plt.plot(np.arange(<span class="dv">256</span>),histocumulnorm,color<span class="op">=</span><span class="st">&#39;blue&#39;</span>)
+    plt.ylabel(<span class="st">u&#39;Distribution, somme normalisée&#39;</span>)
+    plt.xlabel(<span class="st">u&#39;Niveaux de gris&#39;</span>)
+    plt.title(<span class="st">u&#39;Distribution des pixels pour la Joconde&#39;</span>)
+    plt.savefig(<span class="st">&#39;DistributionPixelsJoconde.pdf&#39;</span>)
+    <span class="co">#plt.show()</span>
+    <span class="cf">return</span> histo, histocumul</code></pre></div>
+</div>
+</body>
+</html>
