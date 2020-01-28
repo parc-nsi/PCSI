@@ -72,3 +72,9 @@ Sujets réalisés par Stéphane Gonnord/Laurent Jouhet/Frédéric Junier/Stépha
   - [cadeau.py](TP7/eleves/cadeau.py)
   - [archive des ressources](TP7/eleves/ressources.zip)
   
+ * TP Révisions :
+  - [énoncé](TP-revisions/sujet/I1-TP-Revisions-Janvier3-sujet.pdf)
+  - [corrigé HTML](TP-revisions/corrige/I1-TP-Revisions-Janvier3-corrige.html)
+  - [corrigé pdf](TP-revisions/corrige/I1-TP-Revisions-Janvier3-corrige.pdf)
+  - [corrigé python](TP-revisions/corrige/I1-TP-Revisions-Janvier3-corrige.py)
+  - [cadeau.py](TP-revisions/ressources/cadeau.py)
