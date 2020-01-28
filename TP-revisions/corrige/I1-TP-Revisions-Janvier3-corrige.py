@@ -336,7 +336,7 @@ __Démontrons la correction de la fonction `divisible7`__
 étiqueté par le reste de la division euclidienne par 7 de  $u_{p}$"
 
 * I(0) est vrai, l'invariant est vrai avant l'entrée dans la boucle (_précondition_).
-* Supposons que I(p) soit vrai, c'est-à-dire qu'on se trouve au ommet étiqueté par $u_{p}$ modulo 7.
+* Supposons que I(p) soit vrai, c'est-à-dire qu'on se trouve au sommet étiqueté par $u_{p}$ modulo 7.
 Comme on a $u_{p+1}=10 \times u_{p} + c_{p}$, le parcours de la flèche en pointillés issue du sommet, nous amène au sommet
 étiqueté par e $10 \times u_{p}$ modulo 7. Le parcours de $c_{p}$ flèches en traits pleins, nous amène ensuite  au sommet
 étiqueté par e $10 \times u_{p} + c_{p}=u_{p+1}$ modulo 7. 

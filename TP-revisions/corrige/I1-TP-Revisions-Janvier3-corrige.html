@@ -47,9 +47,9 @@ code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* Com
 code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
   </style>
   <link rel="stylesheet" type="text/css" media="screen, projection, print"
-    href="https://www.w3.org/Talks/Tools/Slidy2/styles/slidy.css" />
+    href="http://www.w3.org/Talks/Tools/Slidy2/styles/slidy.css" />
   <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_CHTML-full" type="text/javascript"></script>
-  <script src="https://www.w3.org/Talks/Tools/Slidy2/scripts/slidy.js"
+  <script src="http://www.w3.org/Talks/Tools/Slidy2/scripts/slidy.js"
     charset="utf-8" type="text/javascript"></script>
 </head>
 <body>
@@ -357,7 +357,7 @@ Chenevois-Jouhet-Junier
 <ul>
 <li><p>On considère l'invariant de boucle I(p)= &quot;Après l'itération d'index <span class="math inline">\(p\)</span>, on se trouve sur le sommet étiqueté par le reste de la division euclidienne par 7 de <span class="math inline">\(u_{p}\)</span>&quot;</p></li>
 <li>I(0) est vrai, l'invariant est vrai avant l'entrée dans la boucle (<em>précondition</em>).</li>
-<li>Supposons que I(p) soit vrai, c'est-à-dire qu'on se trouve au ommet étiqueté par <span class="math inline">\(u_{p}\)</span> modulo 7. Comme on a <span class="math inline">\(u_{p+1}=10 \times u_{p} + c_{p}\)</span>, le parcours de la flèche en pointillés issue du sommet, nous amène au sommet étiqueté par e <span class="math inline">\(10 \times u_{p}\)</span> modulo 7. Le parcours de <span class="math inline">\(c_{p}\)</span> flèches en traits pleins, nous amène ensuite au sommet étiqueté par e <span class="math inline">\(10 \times u_{p} + c_{p}=u_{p+1}\)</span> modulo 7. <strong>L'invariant est donc conservé</strong>.</li>
+<li>Supposons que I(p) soit vrai, c'est-à-dire qu'on se trouve au sommet étiqueté par <span class="math inline">\(u_{p}\)</span> modulo 7. Comme on a <span class="math inline">\(u_{p+1}=10 \times u_{p} + c_{p}\)</span>, le parcours de la flèche en pointillés issue du sommet, nous amène au sommet étiqueté par e <span class="math inline">\(10 \times u_{p}\)</span> modulo 7. Le parcours de <span class="math inline">\(c_{p}\)</span> flèches en traits pleins, nous amène ensuite au sommet étiqueté par e <span class="math inline">\(10 \times u_{p} + c_{p}=u_{p+1}\)</span> modulo 7. <strong>L'invariant est donc conservé</strong>.</li>
 <li><p><strong>De plus la boucle se termine car l'entier <span class="math inline">\(n\)</span> comporte un nombre fini de chiffres. Par conservation de l'invariant, il est vrai en sortie de boucle (<em>postcondition</em>) ce qui prouve la correction de l'algorithme</strong>.</p></li>
 </ul>
 <div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">
