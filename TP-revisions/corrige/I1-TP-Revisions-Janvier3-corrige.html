@@ -1,0 +1,477 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+ "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <meta name="author" content="Chenevois-Jouhet-Junier" />
+  <title>Corrigé du TP de Révisions</title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+  </style>
+  <link rel="stylesheet" type="text/css" media="screen, projection, print"
+    href="http://www.w3.org/Talks/Tools/Slidy2/styles/slidy.css" />
+  <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_CHTML-full" type="text/javascript"></script>
+  <script src="http://www.w3.org/Talks/Tools/Slidy2/scripts/slidy.js"
+    charset="utf-8" type="text/javascript"></script>
+</head>
+<body>
+<div class="slide titlepage">
+  <h1 class="title">Corrigé du TP de Révisions</h1>
+  <p class="author">
+Chenevois-Jouhet-Junier
+  </p>
+</div>
+<div class="slide section level2">
+
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"></code></pre></div>
+</div>
+<div id="révisions-sur-les-boucles-les-tests-les-fonctions-les-listes" class="titleslide slide section level1"><h1>Révisions sur les boucles, les tests, les fonctions, les listes</h1></div><div id="exercice-1-persistance-dun-entier" class="slide section level2">
+<h2>Exercice 1 Persistance d'un entier</h2>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">
+<span class="kw">def</span> decoupe(n):
+    <span class="cf">return</span> n<span class="op">//</span><span class="dv">10</span>, n<span class="op">%</span><span class="dv">10</span>
+    
+
+<span class="kw">def</span> chiffres(n):    
+    n, u <span class="op">=</span> decoupe(n)
+    t <span class="op">=</span> [u]
+    <span class="cf">while</span> n <span class="op">&gt;</span> <span class="dv">0</span>:
+        n, u <span class="op">=</span> decoupe(n)
+        t.insert(<span class="dv">0</span>, u)
+    <span class="cf">return</span> t
+
+<span class="kw">def</span> prod(n):
+    p <span class="op">=</span> <span class="dv">1</span>
+    c <span class="op">=</span> chiffres(n)
+    <span class="cf">for</span>  k <span class="kw">in</span> c:
+        p <span class="op">*=</span> k
+    <span class="cf">return</span> p
+
+<span class="kw">def</span> persistance(n):
+    k <span class="op">=</span> <span class="dv">0</span>
+    <span class="cf">while</span> n <span class="op">&gt;</span> <span class="dv">9</span>:
+        n <span class="op">=</span> prod(n)
+        k <span class="op">+=</span> <span class="dv">1</span>
+    <span class="cf">return</span> k
+    
+
+<span class="kw">def</span> max_persistance(n):
+    m <span class="op">=</span> <span class="dv">0</span>
+    <span class="cf">for</span> k <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">10</span>, n):
+        p <span class="op">=</span> persistance(k)
+        <span class="cf">if</span> p <span class="op">&gt;</span> m:
+            m <span class="op">=</span> p
+    <span class="cf">return</span> m
+
+<span class="co">&quot;&quot;&quot;</span>
+<span class="co">In [2]: max_persistance(1000)</span>
+<span class="co">Out[2]: 5</span>
+<span class="co">&quot;&quot;&quot;</span></code></pre></div>
+</div><div id="exercice-2-recherche-simultanée-de-maximum-et-minimum" class="slide section level2">
+<h2>Exercice 2 : Recherche simultanée de maximum et minimum</h2>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="kw">def</span> maxi(t):
+    <span class="co">&#39;&#39;&#39;Retourne le maximum d&#39;un tableau d&#39;entiers&#39;&#39;&#39;</span>
+    n <span class="op">=</span> <span class="bu">len</span>(t)
+    <span class="cf">if</span> <span class="bu">len</span>(t) <span class="op">==</span> <span class="dv">0</span>:
+        <span class="cf">return</span> <span class="va">None</span>
+    M <span class="op">=</span> t[<span class="dv">0</span>]
+    <span class="cf">for</span> k <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, n):
+        element <span class="op">=</span> t[k]
+        <span class="cf">if</span> element <span class="op">&gt;</span> M:
+            M <span class="op">=</span> element
+    <span class="cf">return</span> M
+
+<span class="kw">def</span> mini(t):
+    <span class="co">&#39;&#39;&#39;Retourne le minimum d&#39;un tableau d&#39;entiers&#39;&#39;&#39;</span>
+    <span class="cf">if</span> <span class="bu">len</span>(t) <span class="op">==</span> <span class="dv">0</span>:
+        <span class="cf">return</span> <span class="va">None</span>
+    m <span class="op">=</span> t[<span class="dv">0</span>]
+    <span class="cf">for</span> element <span class="kw">in</span> t[<span class="dv">1</span>:]:
+        <span class="cf">if</span> element <span class="op">&lt;</span> m:
+            m <span class="op">=</span> element
+    <span class="cf">return</span> m
+
+<span class="kw">def</span> extremum_simultane(L):
+    <span class="co">&#39;&#39;&#39;Recherche simultane du maximum et du minimum par paire</span>
+<span class="co">    Complexité linéaire, n/2 + 2*(n/2 - 1) = 3n/2 - 2 comparaisons&#39;&#39;&#39;</span>
+    
+    <span class="kw">def</span> maxmin_paire(a, b):
+        <span class="cf">if</span> a <span class="op">&gt;</span> b:
+            <span class="cf">return</span> a, b
+        <span class="cf">return</span> b, a
+    
+    taille <span class="op">=</span> <span class="bu">len</span>(L)
+    <span class="co">#liste vide</span>
+    <span class="cf">if</span> taille <span class="op">==</span> <span class="dv">0</span>:
+        <span class="cf">return</span>
+    <span class="co">#liste de longueur impaire complété avec le dernier element doublé</span>
+    <span class="cf">if</span> taille<span class="op">%</span><span class="dv">2</span> <span class="op">==</span> <span class="dv">1</span>:
+        L.append(L[<span class="op">-</span><span class="dv">1</span>])
+    <span class="co">#initialisation du maxcourant et du mincourant</span>
+    maxcourant, mincourant <span class="op">=</span> maxmin_paire(L[<span class="dv">0</span>], L[<span class="dv">1</span>])
+    <span class="cf">for</span> k <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, taille<span class="op">//</span><span class="dv">2</span>):
+        maxp, minp <span class="op">=</span> maxmin_paire(L[<span class="dv">2</span><span class="op">*</span>k], L[<span class="dv">2</span><span class="op">*</span>k <span class="op">+</span> <span class="dv">1</span>])
+        <span class="cf">if</span> maxp <span class="op">&gt;</span> maxcourant:
+            maxcourant <span class="op">=</span> maxp
+        <span class="cf">if</span> minp <span class="op">&lt;</span> mincourant:
+            mincourant <span class="op">=</span> minp
+    <span class="cf">return</span> mincourant, maxcourant
+    
+<span class="co">&quot;&quot;&quot;</span>
+<span class="co">&gt;&gt;&gt; min_maxi([10,5,18,6])</span>
+<span class="co">(5, 18)</span>
+
+<span class="co">&gt;&gt;&gt; min_maxi([10,5,18,6,843,-15,0])</span>
+<span class="co">(-15, 843)</span>
+<span class="co">&quot;&quot;&quot;</span></code></pre></div>
+</div><div class="slide section level2">
+
+<p><strong>Analyse de complexité</strong> (en nombre de comparaisons et par rapport à la taille <span class="math inline">\(n\)</span> du tableau <code>t</code> ) :</p>
+<ul class="incremental">
+<li><p>Pour les fonctions <code>maxi(t)</code> et <code>mini(t)</code>, il faut <span class="math inline">\(n\)</span> comparaisons si <span class="math inline">\(n\)</span> est la taille du tableau. Ces fonctions ont donc une complexité de <span class="math inline">\(n\)</span> donc en <span class="math inline">\(O(n)\)</span>.</p></li>
+<li><p>Pour la recherche simultanée du minimum et du maximum :</p>
+<ul class="incremental">
+<li><p>Deux appels successifs à <code>maxi(t)</code> et <code>mini(t)</code> donnent une complexité de <span class="math inline">\(2n\)</span> donc en <span class="math inline">\(O(n)\)</span> mais avec une constante plus grande que la recherche d'un seul extremum.</p></li>
+<li><p>Si on rassemble les comparaisons des deux boucles des fonctions dans une même boucle, le nombre de comparaisons de change pas.</p></li>
+<li><p>En revanche la fonction <code>min_maxi(t)</code> effectue <span class="math inline">\(3\)</span> comparaisons par tour de boucles et environ <span class="math inline">\(\lfloor \frac{n}{2} \rfloor\)</span> tours de boucles soit environ <span class="math inline">\(\lfloor \frac{3n}{2} \rfloor\)</span> comparaisons. La complexité est en <span class="math inline">\(O(n)\)</span> mais avec une constante plus petite.</p></li>
+</ul></li>
+</ul>
+</div><div class="slide section level2">
+
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"></code></pre></div>
+</div><div id="exercice-3-run-length-encoding" class="slide section level2">
+<h2>Exercice 3 : Run-length encoding</h2>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="kw">def</span> compresse(u):
+    <span class="co">&quot;&quot;&quot;le premier élément est égal au premier élément de u (ici 1) ;</span>
+<span class="co"> ensuite, on indique le nombre de fois que cet élément est répété (ici 3) ;</span>
+<span class="co"> à chaque fois qu’une série se termine, on indique la longueur de la série suivante&quot;&quot;&quot;</span>
+    courant <span class="op">=</span> u[<span class="dv">0</span>]
+    compteur <span class="op">=</span> <span class="dv">1</span>
+    tc <span class="op">=</span> [courant]
+    k <span class="op">=</span> <span class="dv">1</span>
+    n <span class="op">=</span> <span class="bu">len</span>(u)
+    <span class="cf">while</span> k <span class="op">&lt;</span> n:
+        <span class="cf">if</span> u[k] <span class="op">!=</span> courant:
+            tc.append(compteur)
+            compteur <span class="op">=</span> <span class="dv">1</span>
+            courant <span class="op">=</span> u[k]
+        <span class="cf">else</span>:
+            compteur <span class="op">+=</span> <span class="dv">1</span>
+        k <span class="op">+=</span> <span class="dv">1</span>
+    tc.append(compteur)
+    <span class="cf">return</span> tc
+
+<span class="kw">def</span> decompresse(v):
+    courant <span class="op">=</span> v[<span class="dv">0</span>]
+    u <span class="op">=</span> [courant]<span class="op">*</span>v[<span class="dv">1</span>]
+    <span class="cf">for</span> k <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">2</span>, <span class="bu">len</span>(v)):
+        courant <span class="op">=</span> <span class="dv">1</span> <span class="op">-</span> courant
+        u.extend([courant]<span class="op">*</span>v[k])
+    <span class="cf">return</span> u      
+
+<span class="co">&quot;&quot;&quot;</span>
+<span class="co">In [3]: compresse([1, 1, 1, 0, 1, 0, 0, 1])</span>
+<span class="co">Out[3]: [1, 3, 1, 1, 2, 1]</span>
+
+<span class="co">In [4]: decompresse([1, 3, 1, 1, 2, 1])</span>
+<span class="co">Out[4]: [1, 1, 1, 0, 1, 0, 0, 1]</span>
+<span class="co">&quot;&quot;&quot;</span></code></pre></div>
+</div><div id="exercice-4-suite-diatomique-de-stern" class="slide section level2">
+<h2>Exercice 4 Suite diatomique de Stern</h2>
+<p>Citons Wikipedia :</p>
+<p>Si l'on dispose la suite de Stern (en ommettant le premier terme 0) en lignes successives de 1, 2, 4, 8, ... termes, comme dans la figure ci-dessous, il se présente des propriétés remarquables.</p>
+<ul>
+<li>La somme des termes de chaque ligne est une puissance de 3.</li>
+<li>Les maxima de chaque ligne constituent la suite de Fibonacci.</li>
+<li>Si on omet le 1 initial, chaque ligne est un palindrome.</li>
+<li>Chaque colonne forme une suite arithmétique. La suite formée des raisons est la suite de Stern elle-même. Cela signifie que la suite de Stern dispose d'une structure fractale.</li>
+</ul>
+<div class="figure">
+<img src="images/611px-Suite_Diatomique_Stern2.svg.png" alt="Crédits : Theon CC BY-SA" />
+<p class="caption">Crédits : Theon CC BY-SA</p>
+</div>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"> 
+
+<span class="kw">def</span> suite_diatomique(n):
+    t <span class="op">=</span> [<span class="dv">0</span>] <span class="op">*</span> (n <span class="op">+</span> <span class="dv">1</span>)
+    t[<span class="dv">0</span>] <span class="op">=</span> <span class="dv">0</span>
+    t[<span class="dv">1</span>] <span class="op">=</span> <span class="dv">1</span>
+    <span class="cf">for</span> k <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">2</span>, n, <span class="dv">2</span>):
+        t[k] <span class="op">=</span> t[k <span class="op">//</span> <span class="dv">2</span>]
+        t[k <span class="op">+</span> <span class="dv">1</span>] <span class="op">=</span> t[k <span class="op">//</span> <span class="dv">2</span>] <span class="op">+</span> t[k <span class="op">//</span> <span class="dv">2</span> <span class="op">+</span> <span class="dv">1</span>]
+    <span class="cf">return</span> t[<span class="op">-</span><span class="dv">1</span>]
+    
+<span class="kw">def</span> suite_diatomiqueV2(n):
+    <span class="co">&quot;voir https://fr.wikipedia.org/wiki/Suite_diatomique_de_Stern&quot;</span>
+    <span class="cf">if</span> n <span class="op">==</span> <span class="dv">0</span>:
+        <span class="cf">return</span> <span class="dv">0</span>
+    t <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">1</span>]   <span class="co">#initialisation de t avec u(1) et u(2)</span>
+    indexmax <span class="op">=</span> <span class="dv">2</span> <span class="co">#index du dernier terme de la sauite  dans t</span>
+    <span class="cf">while</span> indexmax <span class="op">&lt;</span> n:
+        indexmax <span class="op">=</span> indexmax <span class="op">*</span> <span class="dv">2</span>
+        t2 <span class="op">=</span> []
+        <span class="cf">for</span> k <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(t) <span class="op">-</span> <span class="dv">1</span>):
+            t2.extend([t[k], t[k] <span class="op">+</span> t[k<span class="op">+</span><span class="dv">1</span>]])
+        t2.append(t[<span class="op">-</span><span class="dv">1</span>])
+        t <span class="op">=</span> t2
+    <span class="cf">return</span> t[n <span class="op">-</span> indexmax <span class="op">//</span> <span class="dv">2</span>]
+    
+<span class="kw">def</span> suite_diatomiqueV3(n):
+    <span class="co">&quot;avec fonction auxiliaire récursive et memoization dans un dictionnaire&quot;</span>
+
+    <span class="kw">def</span> aux(n):
+        <span class="cf">if</span> n <span class="kw">in</span> memo:
+            <span class="cf">return</span> memo[n]
+        <span class="cf">elif</span> n <span class="op">%</span> <span class="dv">2</span> <span class="op">==</span> <span class="dv">0</span>:
+            memo[n] <span class="op">=</span> aux(n <span class="op">//</span> <span class="dv">2</span>)
+            <span class="cf">return</span> memo[n]
+        <span class="cf">else</span>:
+            memo[n] <span class="op">=</span> aux(n <span class="op">//</span> <span class="dv">2</span>) <span class="op">+</span>  aux(n <span class="op">//</span> <span class="dv">2</span> <span class="op">+</span> <span class="dv">1</span>)
+            <span class="cf">return</span> memo[n]
+
+    memo <span class="op">=</span> {<span class="dv">0</span> : <span class="dv">0</span>, <span class="dv">1</span> : <span class="dv">1</span>}
+    <span class="cf">return</span> aux(n)
+    
+<span class="co"># In [36]: [suite_diatomique(k) for k in range(10)]</span>
+<span class="co"># Out[36]: [0, 1, 1, 2, 1, 3, 2, 3, 1, 4]</span>
+  
+  </code></pre></div>
+</div><div id="exercice-5-suite-de-fibonaccci" class="slide section level2">
+<h2>Exercice 5 Suite de Fibonaccci</h2>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">
+<span class="kw">def</span> fibonachiffres(n):
+    <span class="co">&quot;&quot;&quot;Retourne le rang du premier terme de la suite de Fibonacci avec n chiffres&quot;&quot;&quot;</span>
+    fibo <span class="op">=</span> [<span class="dv">0</span>, <span class="dv">1</span>]
+    rang <span class="op">=</span> <span class="dv">0</span>
+    puissance10 <span class="op">=</span> <span class="dv">10</span>
+    nbchiffres <span class="op">=</span> <span class="dv">1</span>
+    <span class="cf">while</span> nbchiffres <span class="op">&lt;</span> n:
+        rang <span class="op">=</span> rang <span class="op">+</span> <span class="dv">1</span>
+        fibo[<span class="dv">0</span>], fibo[<span class="dv">1</span>] <span class="op">=</span> fibo[<span class="dv">1</span>], fibo[<span class="dv">0</span>] <span class="op">+</span> fibo[<span class="dv">1</span>]
+        <span class="cf">if</span> fibo[<span class="dv">0</span>] <span class="op">&gt;=</span> puissance10:
+            nbchiffres <span class="op">=</span> nbchiffres <span class="op">+</span> <span class="dv">1</span>
+            puissance10 <span class="op">=</span> puissance10 <span class="op">*</span> <span class="dv">10</span>
+    <span class="cf">return</span> rang
+
+<span class="co"># In [5]: fibonachiffres(2020)</span>
+<span class="co"># Out[5]: 9663</span></code></pre></div>
+</div><div id="exercice-6-entiers-palindromes" class="slide section level2">
+<h2>Exercice 6 Entiers palindromes</h2>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">
+<span class="kw">def</span> nombre2chiffres(n, b):
+    <span class="co">&quot;Retourne la liste des chiffres en base b de n&quot;</span>
+    t <span class="op">=</span> []
+    <span class="cf">while</span> n <span class="op">&gt;=</span> b:        
+        t.append(n <span class="op">%</span> b)
+        n <span class="op">=</span> n <span class="op">//</span> b
+    t.append(n)
+    <span class="cf">return</span> t[::<span class="op">-</span><span class="dv">1</span>]
+    
+<span class="kw">def</span>  chiffres2nombre(chiffres, base <span class="op">=</span> <span class="dv">10</span>):
+    <span class="co">&quot;Avec l&#39;algorithme d&#39;Horner&quot;</span>
+    nombre <span class="op">=</span> <span class="dv">0</span>
+    <span class="cf">for</span> k <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">0</span>, <span class="bu">len</span>(chiffres)):
+        nombre <span class="op">=</span> nombre <span class="op">*</span> base <span class="op">+</span> chiffres[k]
+    <span class="cf">return</span> nombre
+
+<span class="kw">def</span> palindrome(liste):
+    n <span class="op">=</span> <span class="bu">len</span>(liste)
+    <span class="cf">for</span> k <span class="kw">in</span> <span class="bu">range</span>(n <span class="op">//</span> <span class="dv">2</span>):
+        <span class="cf">if</span> liste[k] <span class="op">!=</span> liste[n <span class="op">-</span> <span class="dv">1</span> <span class="op">-</span> k]:
+            <span class="cf">return</span> <span class="va">False</span>
+    <span class="cf">return</span> <span class="va">True</span>
+    
+<span class="kw">def</span> somme_palindrome_dix_deux(bsup):
+    <span class="co">&quot;Retourne la somme des entiers &lt; bsup et palindromes dans les bases 10 et 2&quot;</span>
+    s <span class="op">=</span> <span class="dv">0</span>
+    <span class="cf">for</span> n <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, bsup):
+        <span class="cf">if</span> palindrome(nombre2chiffres(n, <span class="dv">10</span>)) <span class="kw">and</span> palindrome(nombre2chiffres(n, <span class="dv">2</span>)):
+            s <span class="op">=</span> s <span class="op">+</span> n
+    <span class="cf">return</span> s
+    
+<span class="co"># In [15]: somme_palindrome_dix_deux(10**7)</span>
+<span class="co"># Out[15]: 25846868</span>
+    </code></pre></div>
+</div>
+<div id="critère-de-divisibilité-par-7" class="titleslide slide section level1"><h1>Critère de divisibilité par 7</h1></div><div id="exercice-7" class="slide section level2">
+<h2>Exercice 7</h2>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">
+<span class="kw">def</span> divisible7(n):
+    <span class="co">&quot;&quot;&quot;Retourne un booléen indiquant si n divisible par 7&quot;&quot;&quot;</span>
+    bleu <span class="op">=</span> [<span class="dv">0</span>, <span class="dv">3</span>, <span class="dv">6</span>, <span class="dv">2</span>, <span class="dv">5</span>, <span class="dv">1</span>, <span class="dv">4</span>]
+    noir <span class="op">=</span> [(k <span class="op">+</span> <span class="dv">1</span>)<span class="op">%</span><span class="dv">7</span> <span class="cf">for</span> k <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">7</span>)]
+    chiffres <span class="op">=</span> nombre2chiffres(n, <span class="dv">10</span>)
+    nbchiffres <span class="op">=</span> <span class="bu">len</span>(chiffres)
+    sommet <span class="op">=</span> <span class="dv">0</span>
+    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(nbchiffres):
+        c <span class="op">=</span> chiffres[i]
+        sommet <span class="op">=</span> bleu[sommet]
+        <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(c):
+            sommet <span class="op">=</span> noir[sommet]
+    <span class="cf">return</span> sommet <span class="op">==</span> <span class="dv">0</span></code></pre></div>
+<p>Les arêtes en trait plein relient les sommets étiquetés par les restes successifs de la division euclidienne d'un entier naturel par 7, lorsqu'on passe d'un entier au suivant en ajoutant 1.</p>
+<p>Les arêtes en trait plein relient les sommets étiquetés par les restes successifs de la division euclidienne d'un entier naturel par 7, lorsqu'on passe d'un entier au suivant en multipliant par 10.</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co"># In [20]: [(10 ** k) % 7 for k in range(7)]</span>
+<span class="co"># Out[20]: [1, 3, 2, 6, 4, 5, 1]</span></code></pre></div>
+<p>Soit un entier <span class="math inline">\(n\)</span> donc la suite des chiffres en base dix est <span class="math inline">\(c_{1}c_{2}\ldots c_{k}\)</span> par ordre décroissant des puissances de dix associées.</p>
+<p>D'après l'algorithme d'Horner, <span class="math inline">\(n\)</span> est le terme <span class="math inline">\(u_{k}\)</span> de la suite définie par : <span class="math inline">\(u_{0}=0\)</span> et <span class="math inline">\(u_{p+1}=10 \times u_{p} + c_{p}\)</span>.</p>
+<p><strong>Démontrons la correction de la fonction <code>divisible7</code></strong></p>
+<ul>
+<li><p>On considère l'invariant de boucle I(p)= &quot;Après l'itération d'index <span class="math inline">\(p\)</span>, on se trouve sur le sommet étiqueté par le reste de la division euclidienne par 7 de <span class="math inline">\(u_{p}\)</span>&quot;</p></li>
+<li>I(0) est vrai, l'invariant est vrai avant l'entrée dans la boucle (<em>précondition</em>).</li>
+<li>Supposons que I(p) soit vrai, c'est-à-dire qu'on se trouve au ommet étiqueté par <span class="math inline">\(u_{p}\)</span> modulo 7. Comme on a <span class="math inline">\(u_{p+1}=10 \times u_{p} + c_{p}\)</span>, le parcours de la flèche en pointillés issue du sommet, nous amène au sommet étiqueté par e <span class="math inline">\(10 \times u_{p}\)</span> modulo 7. Le parcours de <span class="math inline">\(c_{p}\)</span> flèches en traits pleins, nous amène ensuite au sommet étiqueté par e <span class="math inline">\(10 \times u_{p} + c_{p}=u_{p+1}\)</span> modulo 7. <strong>L'invariant est donc conservé</strong>.</li>
+<li><p><strong>De plus la boucle se termine car l'entier <span class="math inline">\(n\)</span> comporte un nombre fini de chiffres. Par conservation de l'invariant, il est vrai en sortie de boucle (<em>postcondition</em>) ce qui prouve la correction de l'algorithme</strong>.</p></li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">
+
+
+    </code></pre></div>
+</div>
+<div id="algorithme-glouton" class="titleslide slide section level1"><h1>Algorithme glouton</h1></div><div id="exercice-9-rendu-de-monnaie-glouton" class="slide section level2">
+<h2>Exercice 9 : rendu de monnaie glouton</h2>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">
+<span class="kw">def</span> rendu_monnaie_glouton(somme, systeme):
+    <span class="co">&quot;&quot;&quot;Retourne la décomposition de somme sous forme</span>
+<span class="co">    d&#39;une liste de pieces choisies par les pièces de la liste  systeme.&quot;&quot;&quot;</span>
+    <span class="co">#tri des pièces du systeme par ordre decroissant de valeurs</span>
+    systeme_copie <span class="op">=</span> <span class="bu">sorted</span>(systeme, reverse <span class="op">=</span> <span class="va">True</span>)  
+    rendu <span class="op">=</span> []
+    <span class="cf">for</span> idpiece <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(systeme_copie)):
+        piece <span class="op">=</span> systeme_copie[idpiece]
+        <span class="cf">while</span> somme <span class="op">&gt;=</span> piece:
+            somme <span class="op">=</span> somme <span class="op">-</span> piece
+            rendu.append(piece)
+    <span class="co">#postcondition</span>
+    <span class="cf">assert</span> somme <span class="op">==</span> <span class="dv">0</span>, <span class="st">&quot;Rendu impossible&quot;</span>
+    <span class="cf">return</span> rendu
+
+<span class="co"># In [7]: rendu_monnaie_glouton(520, [1, 2, 5, 10, 20, 50, 100, 200])</span>
+<span class="co"># Out[7]: [200, 200, 100, 20]</span>
+
+<span class="co">#Crash le rendu de monnaie est impossible dans ce système</span>
+<span class="co">#alors qu&#39;il existe une solution minimale : 10 + 10  + 10 + 10 + 5 + 2 + 2 + 2</span>
+<span class="co"># In [19]: rendu_monnaie_glouton(51, [2, 5, 10, 50, 100])</span>
+<span class="co"># ---------------------------------------------------------------------------</span>
+<span class="co"># AssertionError                            Traceback (most recent call last)</span>
+<span class="co"># &lt;ipython-input-19-9108a4c669ac&gt; in &lt;module&gt;</span>
+<span class="co"># ----&gt; 1 rendu_monnaie_glouton(51, [2, 5, 10, 50, 100])</span>
+<span class="co"># </span>
+<span class="co"># </span>
+<span class="co"># AssertionError: Rendu impossible</span>
+
+</code></pre></div>
+</div><div id="exercice-10-complexité-du-rendu-de-monnaie-glouton" class="slide section level2">
+<h2>Exercice 10 : complexité du rendu de monnaie glouton</h2>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">
+<span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt
+<span class="im">import</span> numpy <span class="im">as</span> np
+
+systeme <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">5</span>, <span class="dv">10</span>, <span class="dv">20</span>, <span class="dv">50</span>, <span class="dv">100</span>, <span class="dv">200</span>]
+plt.figure(figsize <span class="op">=</span> (<span class="dv">15</span>,<span class="dv">15</span>))
+<span class="cf">for</span> i, bsup <span class="kw">in</span> <span class="bu">enumerate</span>([<span class="dv">1000</span>,<span class="dv">10000</span>,<span class="dv">50000</span>,<span class="dv">100000</span>]):
+    plt.subplot(<span class="dv">2</span>,<span class="dv">2</span>,i <span class="op">+</span> <span class="dv">1</span>)
+    les_sommes <span class="op">=</span> np.arange(bsup <span class="op">+</span> <span class="dv">1</span>)
+    les_rendus <span class="op">=</span> [<span class="bu">len</span>(rendu_monnaie_glouton(somme, systeme)) <span class="cf">for</span> somme <span class="kw">in</span> les_sommes]
+    plt.plot(les_sommes, les_rendus, label <span class="op">=</span> <span class="st">&#39;Nombre de pièces&#39;</span>)
+    plt.ylabel(<span class="st">&#39;Nombre de pièces&#39;</span>)
+    plt.xlabel(<span class="st">&#39;Somme&#39;</span>)
+    plt.title(<span class="st">&#39;Somme maximale = </span><span class="sc">{}</span><span class="st">&#39;</span>.<span class="bu">format</span>(bsup))
+    plt.plot([<span class="dv">0</span>,bsup],[<span class="dv">0</span>, bsup <span class="op">//</span> systeme[<span class="op">-</span><span class="dv">1</span>]],
+            label <span class="op">=</span><span class="vs">r&#39;$y =\frac{\mathrm</span><span class="sc">{somme}</span><span class="vs">}{\mathrm</span><span class="sc">{piece}</span><span class="vs">_</span><span class="sc">{max}</span><span class="vs">}$&#39;</span>)
+    plt.legend(loc<span class="op">=</span><span class="st">&#39;lower right&#39;</span>)
+plt.savefig(<span class="st">&#39;complexite-glouton.pdf&#39;</span>)
+plt.show()
+
+</code></pre></div>
+</div><div id="exercice-11-marche-aléatoire-et-fougère-de-barnsley" class="slide section level2">
+<h2>Exercice 11 : marche aléatoire et fougère de Barnsley</h2>
+<p>A propos de la fougère de Barnsley, on pourra consulter <a href="https://fr.wikipedia.org/wiki/Foug%C3%A8re_de_Barnsley">https://fr.wikipedia.org/wiki/Foug%C3%A8re_de_Barnsley</a>.</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="im">from</span> random <span class="im">import</span> random
+
+<span class="kw">def</span> f1(x, y):
+    <span class="cf">return</span> (<span class="dv">0</span>, <span class="fl">0.16</span><span class="op">*</span>y)
+
+<span class="kw">def</span> f2(x, y):
+    <span class="cf">return</span> (<span class="fl">0.85</span><span class="op">*</span>x <span class="op">+</span> <span class="fl">0.04</span><span class="op">*</span>y, <span class="fl">-0.04</span><span class="op">*</span>x <span class="op">+</span> <span class="fl">0.85</span><span class="op">*</span>y <span class="op">+</span> <span class="fl">1.6</span>)
+
+<span class="kw">def</span> f3(x, y):
+    <span class="cf">return</span> (<span class="fl">0.2</span><span class="op">*</span>x <span class="op">-</span> <span class="fl">0.26</span><span class="op">*</span>y, <span class="fl">0.23</span><span class="op">*</span>x <span class="op">+</span> <span class="fl">0.22</span><span class="op">*</span>y <span class="op">+</span> <span class="fl">1.6</span>)
+
+<span class="kw">def</span> f4(x, y):
+    <span class="cf">return</span> (<span class="op">-</span><span class="fl">0.15</span><span class="op">*</span>x <span class="op">+</span> <span class="fl">0.28</span><span class="op">*</span>y, <span class="fl">0.26</span><span class="op">*</span>x <span class="op">+</span> <span class="fl">0.24</span><span class="op">*</span>y <span class="op">+</span> <span class="fl">0.44</span>)
+
+<span class="kw">def</span> choixfonction():
+    alea <span class="op">=</span> random()
+    <span class="cf">if</span> alea <span class="op">&lt;</span> <span class="fl">0.01</span>:
+        <span class="cf">return</span> f1
+    <span class="cf">elif</span> alea <span class="op">&lt;</span> <span class="fl">0.86</span>:
+        <span class="cf">return</span> f2
+    <span class="cf">elif</span> alea <span class="op">&lt;</span> <span class="fl">0.93</span>:
+        <span class="cf">return</span> f3
+    <span class="cf">return</span> f4
+
+<span class="co">&quot;&quot;&quot;</span>
+<span class="co">In [16]: sum([1 for k in range(1000) if choixfonction().__name__ == &#39;f2&#39; ])/1000</span>
+<span class="co">Out[16]: 0.851</span>
+<span class="co">&quot;&quot;&quot;</span>
+
+<span class="kw">def</span> marche_aleatoire(n):
+    <span class="co">&quot;&quot;&quot;Retourne les  couples de coordonnées des différents points du parcours</span>
+<span class="co">    lors d&#39;une marche aléatoire de n pas&quot;&quot;&quot;</span>
+    (x, y) <span class="op">=</span> (<span class="dv">2</span> <span class="op">*</span> random() <span class="op">-</span> <span class="dv">1</span>,<span class="dv">2</span> <span class="op">*</span> random() <span class="op">-</span> <span class="dv">1</span>)
+    lesx <span class="op">=</span> [x]
+    lesy <span class="op">=</span> [y]
+    <span class="cf">for</span> k <span class="kw">in</span> <span class="bu">range</span>(n):
+        (x, y) <span class="op">=</span> choixfonction()(x, y)
+        lesx.append(x)
+        lesy.append(y)
+    <span class="cf">return</span> lesx, lesy
+
+<span class="kw">def</span> exo14():
+    (lesx, lesy) <span class="op">=</span> marche_aleatoire(<span class="dv">10000</span>)
+    plt.axis(<span class="st">&#39;equal&#39;</span>) <span class="co">#repère orthonormal</span>
+    plt.plot(lesx, lesy, <span class="st">&#39;k,&#39;</span>) <span class="co">#affichage sous forme de pixels noirs</span>
+    plt.show()
+    plt.savefig(<span class="st">&#39;marche1000.png&#39;</span>)
+</code></pre></div>
+</div>
+</body>
+</html>
