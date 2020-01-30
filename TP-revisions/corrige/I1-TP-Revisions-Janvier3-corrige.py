@@ -201,7 +201,7 @@ def suite_diatomiqueV2(n):
     if n == 0:
         return 0
     t = [1, 1]   #initialisation de t avec u(1) et u(2)
-    indexmax = 2 #index du dernier terme de la sauite  dans t
+    indexmax = 2 #index du dernier terme de la suite  dans t
     while indexmax < n:
         indexmax = indexmax * 2
         t2 = []
@@ -227,10 +227,34 @@ def suite_diatomiqueV3(n):
     memo = {0 : 0, 1 : 1}
     return aux(n)
     
+def suite_diatomiqueV4(n):
+    decomposition = [n]
+    terme = 0
+    while len(decomposition) > 0:
+        newdecomposition = []
+        for m in decomposition:
+            quotient, reste = m // 2, m % 2
+            if reste == 0:
+                if quotient == 1:
+                    terme = terme + 1
+                else:
+                    newdecomposition.append(quotient)
+            else:
+                if quotient == 1:
+                    terme = terme + 1
+                    newdecomposition.append(quotient + 1)
+                else:
+                    newdecomposition.extend([quotient, quotient + 1])
+        decomposition = newdecomposition
+    return terme
+
+
 # In [36]: [suite_diatomique(k) for k in range(10)]
 # Out[36]: [0, 1, 1, 2, 1, 3, 2, 3, 1, 4]
   
-  
+# >>> suite_diatomique(10000001)
+#9469
+
 """!
 ## Exercice 5 Suite de Fibonaccci
 !"""
@@ -315,7 +339,7 @@ Les arêtes en trait plein relient les sommets étiquetés par les restes succes
 la division euclidienne d'un entier naturel par 7, lorsqu'on passe d'un entier au suivant en
 ajoutant 1.
 
-Les arêtes en trait plein relient les sommets étiquetés par les restes successifs de
+Les arêtes en pointillées relient les sommets étiquetés par les restes successifs de
 la division euclidienne d'un entier naturel par 7, lorsqu'on passe d'un entier au suivant en
 multipliant par 10.
 !"""
@@ -327,7 +351,7 @@ Soit un entier $n$ donc la suite des chiffres en base dix est $c_{1}c_{2}\ldots 
 par ordre décroissant des puissances de dix associées.
 
 D'après l'algorithme d'Horner, $n$ est le terme $u_{k}$ de la suite définie  par :
-$u_{0}=0$ et $u_{p+1}=10 \times u_{p} + c_{p}$. 
+$u_{0}=0$ et $u_{p+1}=10 \times u_{p} + c_{p + 1}$. 
 
 
 __Démontrons la correction de la fonction `divisible7`__
@@ -337,9 +361,9 @@ __Démontrons la correction de la fonction `divisible7`__
 
 * I(0) est vrai, l'invariant est vrai avant l'entrée dans la boucle (_précondition_).
 * Supposons que I(p) soit vrai, c'est-à-dire qu'on se trouve au sommet étiqueté par $u_{p}$ modulo 7.
-Comme on a $u_{p+1}=10 \times u_{p} + c_{p}$, le parcours de la flèche en pointillés issue du sommet, nous amène au sommet
-étiqueté par e $10 \times u_{p}$ modulo 7. Le parcours de $c_{p}$ flèches en traits pleins, nous amène ensuite  au sommet
-étiqueté par e $10 \times u_{p} + c_{p}=u_{p+1}$ modulo 7. 
+Comme on a $u_{p+1}=10 \times u_{p} + c_{p + 1}$, le parcours de la flèche en pointillés issue du sommet, nous amène au sommet
+étiqueté par  $10 \times u_{p}$ modulo 7. Le parcours de $c_{p+1}$ flèches en traits pleins, nous amène ensuite  au sommet
+étiqueté par  $10 \times u_{p} + c_{p+1}=u_{p+1}$ modulo 7. 
 __L'invariant est donc conservé__.
 * __De plus la boucle se termine car l'entier $n$ comporte un nombre fini de chiffres. Par  conservation de l'invariant, il est vrai en sortie de boucle (_postcondition_) ce qui prouve la 
 correction de l'algorithme__.
