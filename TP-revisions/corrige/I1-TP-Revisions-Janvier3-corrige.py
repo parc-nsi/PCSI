@@ -373,7 +373,7 @@ correction de l'algorithme__.
 
     
 """!
-#Algorithme glouton
+# Algorithme glouton
 
 ## Exercice 9 :  rendu de monnaie glouton
 !"""
