@@ -84,6 +84,6 @@ Sujets réalisés par Stéphane Gonnord/Laurent Jouhet/Frédéric Junier/Stépha
 * TP 8 :
   - [énoncé](TP8/sujet/I1-TP-08-Dichotomie-Newton-sujet.pdf)
   - [corrigé version markdown HTML](TP8/corrige/I1-TP-08-Dichotomie-Newton-corrige-git.md)
-  - [corrigé version pdf](TP8/corrige/II1-TP-08-Dichotomie-Newton-corrige.pdf)
+  - [corrigé version pdf](TP8/corrige/I1-TP-08-Dichotomie-Newton-corrige.pdf)
   - [corrigé version diaporama HTML](TP8/corrige/I1-TP-08-Dichotomie-Newton-corrige-slidy.html)
   - [corrigé version python](TP8/corrige/I1-TP-08-Dichotomie-Newton-corrige.py)
