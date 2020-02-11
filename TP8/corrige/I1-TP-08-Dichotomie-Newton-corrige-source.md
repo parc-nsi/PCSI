@@ -267,10 +267,12 @@ du moins tant que $h$ n'est pas trop petit ( $h \geqslant 10^{-8}$ ).
 
 Si $f$ est deux fois dérivable en $x_0$, d'après la formule de Taylor-Young on a :
 
-\begin{align*}
-f(x_0+h) - f(x_0) &= h \times f'(x_0) + h^2/2 \times f''(x_0) + o(h^2) \\
-\frac{f(x_0+h) - f(x_0)}{h} - f'(x_{0}) &= h/2 \times f''(x_0) + o(h)
-\end{align*}
+$$
+f(x_0+h) - f(x_0) = h \times f'(x_0) + h^2/2 \times f''(x_0) + o(h^2)
+$$
+$$
+\frac{f(x_0+h) - f(x_0)}{h} - f'(x_{0}) = h/2 \times f''(x_0) + o(h)
+$$
 
 Les problèmes d'approximation avec les flottants vont se poser dans la comparaison
 de $f(x_0+h) - f(x_0)$ et de $hf'(x_0)$ dès que l'écart entre les deux, de l'ordre de $h^2$

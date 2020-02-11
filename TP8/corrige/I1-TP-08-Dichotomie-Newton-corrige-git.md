@@ -307,6 +307,21 @@ Si ![f](https://latex.codecogs.com/png.latex?f "f") est deux fois
 dérivable en ![x\_0](https://latex.codecogs.com/png.latex?x_0 "x_0"),
 d’après la formule de Taylor-Young on a :
 
+  
+![&#10;f(x\_0+h) - f(x\_0) = h \\times f'(x\_0) + h^2/2 \\times
+f''(x\_0) +
+o(h^2)&#10;](https://latex.codecogs.com/png.latex?%0Af%28x_0%2Bh%29%20-%20f%28x_0%29%20%3D%20h%20%5Ctimes%20f%27%28x_0%29%20%2B%20h%5E2%2F2%20%5Ctimes%20f%27%27%28x_0%29%20%2B%20o%28h%5E2%29%0A
+"
+f(x_0+h) - f(x_0) = h \\times f'(x_0) + h^2/2 \\times f''(x_0) + o(h^2)
+")  
+  
+![&#10;\\frac{f(x\_0+h) - f(x\_0)}{h} - f'(x\_{0}) = h/2 \\times
+f''(x\_0) +
+o(h)&#10;](https://latex.codecogs.com/png.latex?%0A%5Cfrac%7Bf%28x_0%2Bh%29%20-%20f%28x_0%29%7D%7Bh%7D%20-%20f%27%28x_%7B0%7D%29%20%3D%20h%2F2%20%5Ctimes%20f%27%27%28x_0%29%20%2B%20o%28h%29%0A
+"
+\\frac{f(x_0+h) - f(x_0)}{h} - f'(x_{0}) = h/2 \\times f''(x_0) + o(h)
+")  
+
 Les problèmes d’approximation avec les flottants vont se poser dans la
 comparaison de ![f(x\_0+h) -
 f(x\_0)](https://latex.codecogs.com/png.latex?f%28x_0%2Bh%29%20-%20f%28x_0%29
