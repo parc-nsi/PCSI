@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="Chenevois-Jouhet-Junier" />
+  <title>Corrigé du TP 8 Dichotomie - Newton</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      {   }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+    code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+    code span.at { color: #7d9029; } /* Attribute */
+    code span.bn { color: #40a070; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #4070a0; } /* Char */
+    code span.cn { color: #880000; } /* Constant */
+    code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+    code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+    code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+    code span.dt { color: #902000; } /* DataType */
+    code span.dv { color: #40a070; } /* DecVal */
+    code span.er { color: #ff0000; font-weight: bold; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #40a070; } /* Float */
+    code span.fu { color: #06287e; } /* Function */
+    code span.im { } /* Import */
+    code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+    code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+    code span.op { color: #666666; } /* Operator */
+    code span.ot { color: #007020; } /* Other */
+    code span.pp { color: #bc7a00; } /* Preprocessor */
+    code span.sc { color: #4070a0; } /* SpecialChar */
+    code span.ss { color: #bb6688; } /* SpecialString */
+    code span.st { color: #4070a0; } /* String */
+    code span.va { color: #19177c; } /* Variable */
+    code span.vs { color: #4070a0; } /* VerbatimString */
+    code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="../Pandoc/style_nsi.css" />
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" type="text/javascript"></script>
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Corrigé du TP 8 Dichotomie - Newton</h1>
+<p class="author">Chenevois-Jouhet-Junier</p>
+</header>
+<nav id="TOC" role="doc-toc">
+<h2 id="toc-title">Table des matières</h2>
+<ul>
+<li><a href="#recherche-dichotomique-dun-zéro">Recherche dichotomique d’un zéro</a>
+<ul>
+<li><a href="#exo1">Exo1</a></li>
+<li><a href="#exo2">Exo2</a></li>
+<li><a href="#exo3">Exo3</a></li>
+</ul></li>
+<li><a href="#exo4">Exo4</a>
+<ul>
+<li><a href="#exo5">Exo5</a></li>
+<li><a href="#exo6">Exo6</a></li>
+<li><a href="#exo7">Exo7</a></li>
+<li><a href="#exo8">Exo8</a></li>
+</ul></li>
+<li><a href="#méthode-de-newton">Méthode de Newton</a>
+<ul>
+<li><a href="#exo9">Exo9</a></li>
+<li><a href="#exo10">Exo10</a></li>
+<li><a href="#exo11">Exo11</a></li>
+<li><a href="#exo12">Exo12</a></li>
+<li><a href="#exo13">Exo13</a></li>
+</ul></li>
+<li><a href="#pour-ceux-qui-sennuient">Pour ceux qui s’ennuient</a>
+<ul>
+<li><a href="#exo-14-méthode-de-la-sécante">Exo 14 Méthode de la sécante</a></li>
+<li><a href="#exo-15">Exo 15</a></li>
+<li><a href="#exo16">Exo16</a></li>
+</ul></li>
+</ul>
+</nav>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1"></a></span>
+<span id="cb2-2"><a href="#cb2-2"></a><span class="co"># -*- coding: utf-8 -*-</span></span>
+<span id="cb2-3"><a href="#cb2-3"></a></span>
+<span id="cb2-4"><a href="#cb2-4"></a><span class="im">import</span> math</span></code></pre></div>
+<h1 id="recherche-dichotomique-dun-zéro">Recherche dichotomique d’un zéro</h1>
+<h2 id="exo1">Exo1</h2>
+<div class="sourceCode" id="cb3"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1"></a></span>
+<span id="cb3-2"><a href="#cb3-2"></a><span class="kw">def</span> dichotomie(f,a,b,epsilon):</span>
+<span id="cb3-3"><a href="#cb3-3"></a>    <span class="co">&#39;&#39;&#39;Retourne r tel que abs(r-z) &lt;= epsilon où z est un zéro de f sur [a;b]</span></span>
+<span id="cb3-4"><a href="#cb3-4"></a><span class="co">    &#39;&#39;&#39;</span></span>
+<span id="cb3-5"><a href="#cb3-5"></a>    <span class="cf">assert</span> f(a)<span class="op">*</span>f(b)<span class="op">&lt;=</span><span class="dv">0</span>,<span class="st">&quot;la fonction f doit changer de signe sur [a,b]&quot;</span></span>
+<span id="cb3-6"><a href="#cb3-6"></a>    g, d <span class="op">=</span> a, b</span>
+<span id="cb3-7"><a href="#cb3-7"></a>    <span class="cf">if</span> g <span class="op">&gt;</span> d:</span>
+<span id="cb3-8"><a href="#cb3-8"></a>        g, d <span class="op">=</span> d, g</span>
+<span id="cb3-9"><a href="#cb3-9"></a>    fg <span class="op">=</span>  f(g)</span>
+<span id="cb3-10"><a href="#cb3-10"></a>    <span class="cf">while</span> d <span class="op">-</span> g <span class="op">&gt;</span> <span class="dv">2</span><span class="op">*</span>epsilon:</span>
+<span id="cb3-11"><a href="#cb3-11"></a>        m  <span class="op">=</span> (g<span class="op">+</span>d)<span class="op">/</span><span class="fl">2.</span></span>
+<span id="cb3-12"><a href="#cb3-12"></a>        fm <span class="op">=</span> f(m)</span>
+<span id="cb3-13"><a href="#cb3-13"></a>        <span class="cf">if</span> fm<span class="op">*</span>fg <span class="op">&lt;=</span> <span class="dv">0</span>:</span>
+<span id="cb3-14"><a href="#cb3-14"></a>            d <span class="op">=</span> m           </span>
+<span id="cb3-15"><a href="#cb3-15"></a>        <span class="cf">else</span>:</span>
+<span id="cb3-16"><a href="#cb3-16"></a>            g, fg <span class="op">=</span> m, fm</span>
+<span id="cb3-17"><a href="#cb3-17"></a>    <span class="cf">return</span> (g<span class="op">+</span>d)<span class="op">/</span><span class="fl">2.</span></span>
+<span id="cb3-18"><a href="#cb3-18"></a>            </span>
+<span id="cb3-19"><a href="#cb3-19"></a><span class="co">&quot;&quot;&quot;</span></span>
+<span id="cb3-20"><a href="#cb3-20"></a><span class="co">&gt;&gt;&gt; 2**(1/2.),dichotomie(lambda x:x**2-2,1,2,1e-6)</span></span>
+<span id="cb3-21"><a href="#cb3-21"></a><span class="co">(1.4142135623730951, 1.4142141342163086)</span></span>
+<span id="cb3-22"><a href="#cb3-22"></a><span class="co">&gt;&gt;&gt; import math</span></span>
+<span id="cb3-23"><a href="#cb3-23"></a><span class="co">&gt;&gt;&gt; math.pi,dichotomie(math.sin,3,4,1e-10)</span></span>
+<span id="cb3-24"><a href="#cb3-24"></a><span class="co">(3.141592653589793, 3.141592653642874)</span></span>
+<span id="cb3-25"><a href="#cb3-25"></a><span class="co">&quot;&quot;&quot;</span></span>
+<span id="cb3-26"><a href="#cb3-26"></a></span>
+<span id="cb3-27"><a href="#cb3-27"></a><span class="kw">def</span> test_exo1(f):</span>
+<span id="cb3-28"><a href="#cb3-28"></a>    <span class="co">&#39;&#39;&#39;Test de la fonction dichotomie en prenant pour f la fonction </span></span>
+<span id="cb3-29"><a href="#cb3-29"></a><span class="co">    f : x -&gt; f(x) et [a, b] = [1, 2], et différentes valeurs de epsilon</span></span>
+<span id="cb3-30"><a href="#cb3-30"></a><span class="co">    &#39;&#39;&#39;</span></span>
+<span id="cb3-31"><a href="#cb3-31"></a>    <span class="cf">for</span> k <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, <span class="dv">17</span>):</span>
+<span id="cb3-32"><a href="#cb3-32"></a>        <span class="bu">print</span>(<span class="st">&#39;epsilon=10**(-</span><span class="sc">%d</span><span class="st">), x=</span><span class="sc">%.17f</span><span class="st">&#39;</span><span class="op">%</span>(k,dichotomie(f,<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">10</span><span class="op">**</span>(<span class="op">-</span>k))))</span>
+<span id="cb3-33"><a href="#cb3-33"></a></span>
+<span id="cb3-34"><a href="#cb3-34"></a><span class="co">&quot;&quot;&quot;</span></span>
+<span id="cb3-35"><a href="#cb3-35"></a><span class="co">&gt;&gt;&gt; test_exo1(lambda x : x**2 - 2)</span></span>
+<span id="cb3-36"><a href="#cb3-36"></a><span class="co">epsilon=10**(-1), x=1.43750000000000000</span></span>
+<span id="cb3-37"><a href="#cb3-37"></a><span class="co">epsilon=10**(-2), x=1.41406250000000000</span></span>
+<span id="cb3-38"><a href="#cb3-38"></a><span class="co">epsilon=10**(-3), x=1.41503906250000000</span></span>
+<span id="cb3-39"><a href="#cb3-39"></a><span class="co">epsilon=10**(-4), x=1.41424560546875000</span></span>
+<span id="cb3-40"><a href="#cb3-40"></a><span class="co">epsilon=10**(-5), x=1.41420745849609375</span></span>
+<span id="cb3-41"><a href="#cb3-41"></a><span class="co">epsilon=10**(-6), x=1.41421413421630859</span></span>
+<span id="cb3-42"><a href="#cb3-42"></a><span class="co">epsilon=10**(-7), x=1.41421359777450562</span></span>
+<span id="cb3-43"><a href="#cb3-43"></a><span class="co">epsilon=10**(-8), x=1.41421356052160263</span></span>
+<span id="cb3-44"><a href="#cb3-44"></a><span class="co">epsilon=10**(-9), x=1.41421356145292521</span></span>
+<span id="cb3-45"><a href="#cb3-45"></a><span class="co">epsilon=10**(-10), x=1.41421356232604012</span></span>
+<span id="cb3-46"><a href="#cb3-46"></a><span class="co">epsilon=10**(-11), x=1.41421356237697182</span></span>
+<span id="cb3-47"><a href="#cb3-47"></a><span class="co">epsilon=10**(-12), x=1.41421356237242435</span></span>
+<span id="cb3-48"><a href="#cb3-48"></a><span class="co">epsilon=10**(-13), x=1.41421356237304963</span></span>
+<span id="cb3-49"><a href="#cb3-49"></a><span class="co">epsilon=10**(-14), x=1.41421356237309936</span></span>
+<span id="cb3-50"><a href="#cb3-50"></a><span class="co">epsilon=10**(-15), x=1.41421356237309492</span></span>
+<span id="cb3-51"><a href="#cb3-51"></a><span class="co">&quot;&quot;&quot;</span></span></code></pre></div>
+<p>Le calcul ne se termine pas pour <span class="math inline">\(\text{epsilon} =10^{-16}\)</span> car au voisinage de 1 l’écart minimal entre deux flottants consécutifs est <span class="math inline">\(2^{-52} \approx 2,220446049250313 \times 10^{-16}\)</span>.</p>
+<p>Ainsi si la condition d’arret est <span class="math inline">\(d - g \leqslant 2 \times 10^{-16}\)</span> elle ne peut jamais etre réalisée et on a une boucle infinie.</p>
+<h2 id="exo2">Exo2</h2>
+<div class="sourceCode" id="cb4"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1"></a></span>
+<span id="cb4-2"><a href="#cb4-2"></a><span class="kw">def</span> dichotomie2(f,a,b,epsilon, digits<span class="op">=</span><span class="dv">8</span>, itermax<span class="op">=</span><span class="dv">100</span>):</span>
+<span id="cb4-3"><a href="#cb4-3"></a>    <span class="co">&#39;&#39;&#39;Retourne r tel que abs(r-z) &lt;= epsilon  où z est un zéro de f </span></span>
+<span id="cb4-4"><a href="#cb4-4"></a><span class="co">    sur [a;b] et affiche les intervalles intermédiaires avec un nombre d&#39;itéra-</span></span>
+<span id="cb4-5"><a href="#cb4-5"></a><span class="co">    tions &lt;= itermax. On a rajouté un compteur  c d&#39;itérations et pour minimiser </span></span>
+<span id="cb4-6"><a href="#cb4-6"></a><span class="co">    les appels à f on mémorise lors de chaque itération f(m) dans  fm</span></span>
+<span id="cb4-7"><a href="#cb4-7"></a><span class="co">    &#39;&#39;&#39;</span></span>
+<span id="cb4-8"><a href="#cb4-8"></a>    <span class="cf">assert</span> f(a)<span class="op">*</span>f(b)<span class="op">&lt;=</span><span class="dv">0</span>,<span class="st">&quot;la fonction f doit changer de signe sur [a,b]&quot;</span></span>
+<span id="cb4-9"><a href="#cb4-9"></a>    g, d <span class="op">=</span> a, b</span>
+<span id="cb4-10"><a href="#cb4-10"></a>    <span class="cf">if</span> g <span class="op">&gt;</span> d:</span>
+<span id="cb4-11"><a href="#cb4-11"></a>        g, d <span class="op">=</span> d, g</span>
+<span id="cb4-12"><a href="#cb4-12"></a>    fg <span class="op">=</span> f(g)</span>
+<span id="cb4-13"><a href="#cb4-13"></a>    c <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb4-14"><a href="#cb4-14"></a>    formatage <span class="op">=</span> <span class="st">&quot;%.&quot;</span> <span class="op">+</span> <span class="bu">str</span>(digits) <span class="op">+</span> <span class="st">&quot;f&quot;</span></span>
+<span id="cb4-15"><a href="#cb4-15"></a>    template <span class="op">=</span> (<span class="st">&quot;iteration c=</span><span class="sc">%s</span><span class="st"> g=&quot;</span> <span class="op">+</span> formatage <span class="op">+</span><span class="st">&quot;</span><span class="ch">\t</span><span class="st"> d=&quot;</span><span class="op">+</span>formatage<span class="op">+</span><span class="st">&quot;</span><span class="ch">\t</span><span class="st"> m=&quot;</span></span>
+<span id="cb4-16"><a href="#cb4-16"></a>         <span class="op">+</span>formatage<span class="op">+</span><span class="st">&quot;</span><span class="ch">\t</span><span class="st"> f(m)=&quot;</span><span class="op">+</span>formatage)</span>
+<span id="cb4-17"><a href="#cb4-17"></a>    <span class="cf">while</span> d <span class="op">-</span> g <span class="op">&gt;</span> <span class="dv">2</span><span class="op">*</span>epsilon <span class="kw">and</span> c <span class="op">&lt;=</span> itermax:</span>
+<span id="cb4-18"><a href="#cb4-18"></a>        c <span class="op">+=</span> <span class="dv">1</span></span>
+<span id="cb4-19"><a href="#cb4-19"></a>        m  <span class="op">=</span> (g<span class="op">+</span>d)<span class="op">/</span><span class="fl">2.</span></span>
+<span id="cb4-20"><a href="#cb4-20"></a>        fm <span class="op">=</span> f(m)</span>
+<span id="cb4-21"><a href="#cb4-21"></a>        <span class="bu">print</span>(template<span class="op">%</span>(c, g,d,m,f(m)))</span>
+<span id="cb4-22"><a href="#cb4-22"></a>        <span class="cf">if</span> fm<span class="op">*</span>fg <span class="op">&lt;=</span> <span class="dv">0</span>:</span>
+<span id="cb4-23"><a href="#cb4-23"></a>            d <span class="op">=</span> m           </span>
+<span id="cb4-24"><a href="#cb4-24"></a>        <span class="cf">else</span>:</span>
+<span id="cb4-25"><a href="#cb4-25"></a>            g, fg <span class="op">=</span> m, fm</span>
+<span id="cb4-26"><a href="#cb4-26"></a>    <span class="cf">return</span> (g<span class="op">+</span>d)<span class="op">/</span><span class="fl">2.</span>  </span>
+<span id="cb4-27"><a href="#cb4-27"></a></span>
+<span id="cb4-28"><a href="#cb4-28"></a><span class="co">&quot;&quot;&quot;</span></span>
+<span id="cb4-29"><a href="#cb4-29"></a><span class="co">&gt;&gt;&gt; math.pi,dichotomie2(math.sin,3,4,0.001)</span></span>
+<span id="cb4-30"><a href="#cb4-30"></a><span class="co">iteration c=1 g=3.00000000   d=4.00000000    m=3.50000000    f(m)=-0.35078323</span></span>
+<span id="cb4-31"><a href="#cb4-31"></a><span class="co">iteration c=2 g=3.00000000   d=3.50000000    m=3.25000000    f(m)=-0.10819513</span></span>
+<span id="cb4-32"><a href="#cb4-32"></a><span class="co">iteration c=3 g=3.00000000   d=3.25000000    m=3.12500000    f(m)=0.01659189</span></span>
+<span id="cb4-33"><a href="#cb4-33"></a><span class="co">iteration c=4 g=3.12500000   d=3.25000000    m=3.18750000    f(m)=-0.04589122</span></span>
+<span id="cb4-34"><a href="#cb4-34"></a><span class="co">iteration c=5 g=3.12500000   d=3.18750000    m=3.15625000    f(m)=-0.01465682</span></span>
+<span id="cb4-35"><a href="#cb4-35"></a><span class="co">iteration c=6 g=3.12500000   d=3.15625000    m=3.14062500    f(m)=0.00096765</span></span>
+<span id="cb4-36"><a href="#cb4-36"></a><span class="co">iteration c=7 g=3.14062500   d=3.15625000    m=3.14843750    f(m)=-0.00684479</span></span>
+<span id="cb4-37"><a href="#cb4-37"></a><span class="co">iteration c=8 g=3.14062500   d=3.14843750    m=3.14453125    f(m)=-0.00293859</span></span>
+<span id="cb4-38"><a href="#cb4-38"></a><span class="co">iteration c=9 g=3.14062500   d=3.14453125    m=3.14257812    f(m)=-0.00098547</span></span>
+<span id="cb4-39"><a href="#cb4-39"></a><span class="co">(3.141592653589793, 3.1416015625)</span></span>
+<span id="cb4-40"><a href="#cb4-40"></a><span class="co">&quot;&quot;&quot;</span></span></code></pre></div>
+<p>Le nombre d’itérations théoriquement attendu pour l’approximation de la solution de <span class="math inline">\(\sin(x) = 0\)</span> sur [3;4] avec une précision de <span class="math inline">\(0,001\)</span> est l’entier <span class="math inline">\(p\)</span> tel que :</p>
+<p><span class="math display">\[1/2^p \leqslant  2 \times 0,001 &lt; 1/2^{p-1}\]</span></p>
+<p>C’est donc 9 :</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1"></a><span class="co">&quot;&quot;&quot;</span></span>
+<span id="cb5-2"><a href="#cb5-2"></a><span class="co">&gt;&gt;&gt; math.log(0.002, 2)</span></span>
+<span id="cb5-3"><a href="#cb5-3"></a><span class="co">-8.965784284662087</span></span>
+<span id="cb5-4"><a href="#cb5-4"></a></span>
+<span id="cb5-5"><a href="#cb5-5"></a><span class="co">&gt;&gt;&gt; 2**(-8), 2**(-9)</span></span>
+<span id="cb5-6"><a href="#cb5-6"></a><span class="co">(0.00390625, 0.001953125)</span></span>
+<span id="cb5-7"><a href="#cb5-7"></a><span class="co">&quot;&quot;&quot;</span></span></code></pre></div>
+<h2 id="exo3">Exo3</h2>
+<div class="sourceCode" id="cb6"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1"></a><span class="kw">def</span> nbiter(a, b, epsilon):</span>
+<span id="cb6-2"><a href="#cb6-2"></a>    <span class="co">&#39;&#39;&#39;Retourne le nombre entier d&#39;itérations théorique</span></span>
+<span id="cb6-3"><a href="#cb6-3"></a><span class="co">     pour l&#39;appel dichotomie(g, a, b, epsilon)</span></span>
+<span id="cb6-4"><a href="#cb6-4"></a><span class="co">     (b-a)/2**n &lt;= 2*epsilon donc n &gt;= (ln(b-a) -ln(epsilon))/ln(2) - 1</span></span>
+<span id="cb6-5"><a href="#cb6-5"></a><span class="co">    &#39;&#39;&#39;</span></span>
+<span id="cb6-6"><a href="#cb6-6"></a>    res <span class="op">=</span> (math.log(b <span class="op">-</span> a) <span class="op">-</span> math.log(epsilon))<span class="op">/</span>math.log(<span class="dv">2</span>) <span class="op">-</span> <span class="dv">1</span> </span>
+<span id="cb6-7"><a href="#cb6-7"></a>    <span class="cf">if</span> <span class="bu">int</span>(res) <span class="op">==</span> res:</span>
+<span id="cb6-8"><a href="#cb6-8"></a>        <span class="cf">return</span> res</span>
+<span id="cb6-9"><a href="#cb6-9"></a>    <span class="cf">return</span> <span class="bu">int</span>(res) <span class="op">+</span> <span class="dv">1</span></span>
+<span id="cb6-10"><a href="#cb6-10"></a></span>
+<span id="cb6-11"><a href="#cb6-11"></a><span class="kw">def</span> f(t):</span>
+<span id="cb6-12"><a href="#cb6-12"></a>    <span class="cf">return</span> <span class="dv">10</span><span class="op">**</span>(<span class="op">-</span><span class="dv">8</span>)<span class="op">*</span>t<span class="op">**</span><span class="dv">2</span> <span class="op">-</span> <span class="dv">4</span><span class="op">/</span><span class="dv">5</span><span class="op">*</span>t <span class="op">+</span> <span class="dv">10</span><span class="op">**</span>(<span class="op">-</span><span class="dv">8</span>)</span></code></pre></div>
+<p>Approximation de <span class="math inline">\(x_1\)</span></p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1"></a><span class="co">&quot;&quot;&quot;</span></span>
+<span id="cb7-2"><a href="#cb7-2"></a><span class="co">&gt;&gt;&gt; nbiter( 0, 1, 10**(-12))</span></span>
+<span id="cb7-3"><a href="#cb7-3"></a><span class="co">39</span></span>
+<span id="cb7-4"><a href="#cb7-4"></a><span class="co">&gt;&gt;&gt; dichotomie(f, 0, 1, 10**(-12))</span></span>
+<span id="cb7-5"><a href="#cb7-5"></a><span class="co">1.2499185686465353e-08</span></span>
+<span id="cb7-6"><a href="#cb7-6"></a><span class="co">&gt;&gt;&gt; dichotomie2(f, 0, 1, 10**(-12), digits=13, itermax=int(nbiter( 0, 1, 10**(-12))*1.1))</span></span>
+<span id="cb7-7"><a href="#cb7-7"></a><span class="co">iteration c=1 g=0.0000000000000  d=1.0000000000000   m=0.5000000000000   f(m)=-0.3999999875000</span></span>
+<span id="cb7-8"><a href="#cb7-8"></a><span class="co">iteration c=2 g=0.0000000000000  d=0.5000000000000   m=0.2500000000000   f(m)=-0.1999999893750</span></span>
+<span id="cb7-9"><a href="#cb7-9"></a><span class="co">.........................................................................</span></span>
+<span id="cb7-10"><a href="#cb7-10"></a><span class="co">iteration c=38 g=0.0000000124928     d=0.0000000125001   m=0.0000000124965   f(m)=0.0000000000028</span></span>
+<span id="cb7-11"><a href="#cb7-11"></a><span class="co">iteration c=39 g=0.0000000124965     d=0.0000000125001   m=0.0000000124983   f(m)=0.0000000000014</span></span>
+<span id="cb7-12"><a href="#cb7-12"></a><span class="co">1.2499185686465353e-08</span></span>
+<span id="cb7-13"><a href="#cb7-13"></a><span class="co">&quot;&quot;&quot;</span></span></code></pre></div>
+<p>Approximation de <span class="math inline">\(x_2\)</span></p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1"></a><span class="co">&quot;&quot;&quot;</span></span>
+<span id="cb8-2"><a href="#cb8-2"></a><span class="co">&gt;&gt;&gt; nbiter( 7*10**7, 9*10**7, 10**(-12))</span></span>
+<span id="cb8-3"><a href="#cb8-3"></a><span class="co">64</span></span>
+<span id="cb8-4"><a href="#cb8-4"></a><span class="co">&gt;&gt;&gt; dichotomie(f, 7*10**7, 9*10**7, 10**(-12))</span></span>
+<span id="cb8-5"><a href="#cb8-5"></a><span class="co">#Boucle infinie</span></span>
+<span id="cb8-6"><a href="#cb8-6"></a><span class="co">&gt;&gt;&gt; dichotomie2(f, 7*10**7, 8*10**7, 10**(-12), digits=13, itermax=int(nbiter( 7*10**7, 8*10**7, 10**(-12))*1.1))</span></span>
+<span id="cb8-7"><a href="#cb8-7"></a><span class="co">iteration c=1 g=70000000.0000000000000   d=80000000.0000000000000    m=75000000.0000000000000    f(m)=-3749999.9999999902211</span></span>
+<span id="cb8-8"><a href="#cb8-8"></a><span class="co">...............................................</span></span>
+<span id="cb8-9"><a href="#cb8-9"></a><span class="co">iteration c=50 g=79999999.9999999850988  d=80000000.0000000000000    m=80000000.0000000000000    f(m)=0.0000000100000</span></span>
+<span id="cb8-10"><a href="#cb8-10"></a><span class="co">iteration c=51 g=79999999.9999999850988  d=80000000.0000000000000    m=80000000.0000000000000    f(m)=0.0000000100000</span></span>
+<span id="cb8-11"><a href="#cb8-11"></a><span class="co">...................................................................</span></span>
+<span id="cb8-12"><a href="#cb8-12"></a><span class="co">iteration c=71 g=79999999.9999999850988  d=80000000.0000000000000    m=80000000.0000000000000    f(m)=0.0000000100000</span></span>
+<span id="cb8-13"><a href="#cb8-13"></a><span class="co">    80000000.0</span></span>
+<span id="cb8-14"><a href="#cb8-14"></a><span class="co">&quot;&quot;&quot;</span></span></code></pre></div>
+<p>On observe qu’à partir de la 51 ème itération on a toujours <span class="math inline">\(m = d = 80000000\)</span> Or comme <span class="math inline">\(x_{2} = 79999999,999999987500\)</span> , on a <span class="math inline">\(f(g) \times f(m) &lt; 0\)</span> et donc l’intervalle reste stable à partir de la 51 ème itération et la boucle ne se termine pas (l’écart entre les deux bornes de la zone de recherche qui est le <strong>variant de boucle</strong> ne diminue plus).</p>
+<p>En partant de <span class="math inline">\(g=7 \times 10^7\)</span> et <span class="math inline">\(d=9\times 10^7\)</span>, au bout de la 51 ème itération on a <span class="math inline">\(g-d= 2\times 10^7/2^{51} \approx 8,881784197001252 \times 10^{-9}\)</span>.</p>
+<p>C’est inférieur à la distance minimale entre deux flottants consécutifs au voisinage de <span class="math inline">\(8 \times 10^{7}\)</span> qui est <span class="math inline">\(8 \times 10^{7}/2^{52}\approx 1,7763568394002505\times 10^{-8}\)</span>.</p>
+<p>Ainsi quand on calcule <span class="math inline">\((g + d)/2=(79999999,99999999+80000000,0)/2\)</span>,on retrouve le flottant <span class="math inline">\(80000000,0\)</span> (arrondi par excès au flottant le plus proche).</p>
+<h1 id="exo4">Exo4</h1>
+<div class="sourceCode" id="cb9"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1"></a></span>
+<span id="cb9-2"><a href="#cb9-2"></a><span class="kw">def</span> derive(f, x0, h):</span>
+<span id="cb9-3"><a href="#cb9-3"></a>    <span class="co">&#39;&#39;&#39;Retourne une approximation de f&#39;(x0) </span></span>
+<span id="cb9-4"><a href="#cb9-4"></a><span class="co">    qui est au moins d&#39;ordre 1 si f est C2</span></span>
+<span id="cb9-5"><a href="#cb9-5"></a><span class="co">    &#39;&#39;&#39;</span></span>
+<span id="cb9-6"><a href="#cb9-6"></a>    <span class="cf">return</span> (f(x0<span class="op">+</span>h)<span class="op">-</span>f(x0))<span class="op">/</span>h</span></code></pre></div>
+<h2 id="exo5">Exo5</h2>
+<div class="sourceCode" id="cb10"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1"></a></span>
+<span id="cb10-2"><a href="#cb10-2"></a><span class="kw">def</span> test_exo5(f, x0, yprime0):</span>
+<span id="cb10-3"><a href="#cb10-3"></a>    <span class="cf">for</span> k <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">18</span>):</span>
+<span id="cb10-4"><a href="#cb10-4"></a>        approx <span class="op">=</span> derive(f, x0, <span class="dv">10</span><span class="op">**</span>(<span class="op">-</span>k))</span>
+<span id="cb10-5"><a href="#cb10-5"></a>        <span class="bu">print</span>(<span class="st">&#39;h = 10**(-</span><span class="sc">%d</span><span class="st">), Erreur = </span><span class="sc">%.16f</span><span class="st">&#39;</span><span class="op">%</span>(k, <span class="bu">abs</span>(yprime0 <span class="op">-</span> approx)))</span>
+<span id="cb10-6"><a href="#cb10-6"></a></span>
+<span id="cb10-7"><a href="#cb10-7"></a><span class="co">&quot;&quot;&quot;</span></span>
+<span id="cb10-8"><a href="#cb10-8"></a><span class="co">&gt;&gt;&gt; test_exo5(lambda x : math.exp(x), 0, 1)</span></span>
+<span id="cb10-9"><a href="#cb10-9"></a><span class="co">h = 10**(-0), Erreur = 0.7182818284590451</span></span>
+<span id="cb10-10"><a href="#cb10-10"></a><span class="co">h = 10**(-1), Erreur = 0.0517091807564771</span></span>
+<span id="cb10-11"><a href="#cb10-11"></a><span class="co">h = 10**(-2), Erreur = 0.0050167084167949</span></span>
+<span id="cb10-12"><a href="#cb10-12"></a><span class="co">h = 10**(-3), Erreur = 0.0005001667083846</span></span>
+<span id="cb10-13"><a href="#cb10-13"></a><span class="co">h = 10**(-4), Erreur = 0.0000500016671410</span></span>
+<span id="cb10-14"><a href="#cb10-14"></a><span class="co">h = 10**(-5), Erreur = 0.0000050000069649</span></span>
+<span id="cb10-15"><a href="#cb10-15"></a><span class="co">h = 10**(-6), Erreur = 0.0000004999621837</span></span>
+<span id="cb10-16"><a href="#cb10-16"></a><span class="co">h = 10**(-7), Erreur = 0.0000000494336803</span></span>
+<span id="cb10-17"><a href="#cb10-17"></a><span class="co">h = 10**(-8), Erreur = 0.0000000060774710</span></span>
+<span id="cb10-18"><a href="#cb10-18"></a><span class="co">h = 10**(-9), Erreur = 0.0000000827403710</span></span>
+<span id="cb10-19"><a href="#cb10-19"></a><span class="co">h = 10**(-10), Erreur = 0.0000000827403710</span></span>
+<span id="cb10-20"><a href="#cb10-20"></a><span class="co">h = 10**(-11), Erreur = 0.0000000827403710</span></span>
+<span id="cb10-21"><a href="#cb10-21"></a><span class="co">h = 10**(-12), Erreur = 0.0000889005823410</span></span>
+<span id="cb10-22"><a href="#cb10-22"></a><span class="co">h = 10**(-13), Erreur = 0.0007992778373591</span></span>
+<span id="cb10-23"><a href="#cb10-23"></a><span class="co">h = 10**(-14), Erreur = 0.0007992778373591</span></span>
+<span id="cb10-24"><a href="#cb10-24"></a><span class="co">h = 10**(-15), Erreur = 0.1102230246251565</span></span>
+<span id="cb10-25"><a href="#cb10-25"></a><span class="co">h = 10**(-16), Erreur = 1.0000000000000000</span></span>
+<span id="cb10-26"><a href="#cb10-26"></a><span class="co">&quot;&quot;&quot;</span></span></code></pre></div>
+<p>L’erreur semble proportionnelle à <span class="math inline">\(h\)</span> du moins tant que <span class="math inline">\(h\)</span> n’est pas trop petit ( <span class="math inline">\(h \geqslant 10^{-8}\)</span> ).</p>
+<p>Si <span class="math inline">\(f\)</span> est deux fois dérivable en <span class="math inline">\(x_0\)</span>, d’après la formule de Taylor-Young on a :</p>
+<p><span class="math display">\[\begin{align*}
+f(x_0+h) - f(x_0) &amp;= h \times f&#39;(x_0) + h^2/2 \times f&#39;&#39;(x_0) + o(h^2) \\
+\frac{f(x_0+h) - f(x_0)}{h} - f&#39;(x_{0}) &amp;= h/2 \times f&#39;&#39;(x_0) + o(h)
+\end{align*}\]</span></p>
+<p>Les problèmes d’approximation avec les flottants vont se poser dans la comparaison de <span class="math inline">\(f(x_0+h) - f(x_0)\)</span> et de <span class="math inline">\(hf&#39;(x_0)\)</span> dès que l’écart entre les deux, de l’ordre de <span class="math inline">\(h^2\)</span> si <span class="math inline">\(f&#39;&#39;(x_0) \neq 0\)</span>, devient plus petit que <span class="math inline">\(2^{-52} \approx 2,2 \times 10^{-16}\)</span>. Cet epsilon est la plus petite différence relative entre deux flottants. Or la fonction exponentielle est deux fois dérivable en 0 et <span class="math inline">\(\exp&#39;&#39;(0)\)</span> est non nul donc dès que <span class="math inline">\(h^2\)</span> inférieur à <span class="math inline">\(10^{-16}\)</span> on rencontre des problèmes d’approximation.</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1"></a><span class="co">&quot;&quot;&quot;</span></span>
+<span id="cb11-2"><a href="#cb11-2"></a><span class="co">&gt;&gt;&gt; test_exo5(lambda x : math.sin(x), 0, 1)</span></span>
+<span id="cb11-3"><a href="#cb11-3"></a><span class="co">h = 10**(-0), Erreur = 0.1585290151921035</span></span>
+<span id="cb11-4"><a href="#cb11-4"></a><span class="co">h = 10**(-1), Erreur = 0.0016658335317185</span></span>
+<span id="cb11-5"><a href="#cb11-5"></a><span class="co">h = 10**(-2), Erreur = 0.0000166665833335</span></span>
+<span id="cb11-6"><a href="#cb11-6"></a><span class="co">h = 10**(-3), Erreur = 0.0000001666666584</span></span>
+<span id="cb11-7"><a href="#cb11-7"></a><span class="co">h = 10**(-4), Erreur = 0.0000000016666666</span></span>
+<span id="cb11-8"><a href="#cb11-8"></a><span class="co">h = 10**(-5), Erreur = 0.0000000000166668</span></span>
+<span id="cb11-9"><a href="#cb11-9"></a><span class="co">h = 10**(-6), Erreur = 0.0000000000001666</span></span>
+<span id="cb11-10"><a href="#cb11-10"></a><span class="co">h = 10**(-7), Erreur = 0.0000000000000017</span></span>
+<span id="cb11-11"><a href="#cb11-11"></a><span class="co">h = 10**(-8), Erreur = 0.0000000000000000</span></span>
+<span id="cb11-12"><a href="#cb11-12"></a><span class="co">h = 10**(-9), Erreur = 0.0000000000000000</span></span>
+<span id="cb11-13"><a href="#cb11-13"></a><span class="co">h = 10**(-10), Erreur = 0.0000000000000000</span></span>
+<span id="cb11-14"><a href="#cb11-14"></a><span class="co">h = 10**(-11), Erreur = 0.0000000000000000</span></span>
+<span id="cb11-15"><a href="#cb11-15"></a><span class="co">h = 10**(-12), Erreur = 0.0000000000000000</span></span>
+<span id="cb11-16"><a href="#cb11-16"></a><span class="co">h = 10**(-13), Erreur = 0.0000000000000000</span></span>
+<span id="cb11-17"><a href="#cb11-17"></a><span class="co">h = 10**(-14), Erreur = 0.0000000000000000</span></span>
+<span id="cb11-18"><a href="#cb11-18"></a><span class="co">h = 10**(-15), Erreur = 0.0000000000000000</span></span>
+<span id="cb11-19"><a href="#cb11-19"></a><span class="co">h = 10**(-16), Erreur = 0.0000000000000000</span></span>
+<span id="cb11-20"><a href="#cb11-20"></a><span class="co">h = 10**(-17), Erreur = 0.0000000000000000</span></span>
+<span id="cb11-21"><a href="#cb11-21"></a><span class="co">&quot;&quot;&quot;</span></span></code></pre></div>
+<p>Pour l’approximation de <span class="math inline">\(\sin&#39;(0)\)</span> l’erreur semble proportionnelle à <span class="math inline">\(h^2\)</span> Celà s’explique par le DL(sin, 0, 3) :</p>
+<p><span class="math display">\[\sin(h) = h - h^3/6 + o(h^3)\]</span></p>
+<p>donc</p>
+<p><span class="math display">\[(\sin(h) - \sin(0))/h - \sin&#39;(0) = 1 - h^2/6 + o(h^2) - \cos(0)=  -h^2/6 + o(h^2)\]</span></p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1"></a><span class="co">&quot;&quot;&quot;</span></span>
+<span id="cb12-2"><a href="#cb12-2"></a><span class="co">&gt;&gt;&gt; test_exo5(lambda x : math.cos(x), math.pi/6, -0.5)</span></span>
+<span id="cb12-3"><a href="#cb12-3"></a><span class="co">h = 10**(-0), Erreur = 0.3188453735832678</span></span>
+<span id="cb12-4"><a href="#cb12-4"></a><span class="co">h = 10**(-1), Erreur = 0.0424322810575211</span></span>
+<span id="cb12-5"><a href="#cb12-5"></a><span class="co">h = 10**(-2), Erreur = 0.0043217576429893</span></span>
+<span id="cb12-6"><a href="#cb12-6"></a><span class="co">h = 10**(-3), Erreur = 0.0004329293325505</span></span>
+<span id="cb12-7"><a href="#cb12-7"></a><span class="co">h = 10**(-4), Erreur = 0.0000433004376248</span></span>
+<span id="cb12-8"><a href="#cb12-8"></a><span class="co">h = 10**(-5), Erreur = 0.0000043301173207</span></span>
+<span id="cb12-9"><a href="#cb12-9"></a><span class="co">h = 10**(-6), Erreur = 0.0000004330568686</span></span>
+<span id="cb12-10"><a href="#cb12-10"></a><span class="co">h = 10**(-7), Erreur = 0.0000000435906315</span></span>
+<span id="cb12-11"><a href="#cb12-11"></a><span class="co">h = 10**(-8), Erreur = 0.0000000080634948</span></span>
+<span id="cb12-12"><a href="#cb12-12"></a><span class="co">h = 10**(-9), Erreur = 0.0000000413701855</span></span>
+<span id="cb12-13"><a href="#cb12-13"></a><span class="co">h = 10**(-10), Erreur = 0.0000000413701855</span></span>
+<span id="cb12-14"><a href="#cb12-14"></a><span class="co">h = 10**(-11), Erreur = 0.0000000413701855</span></span>
+<span id="cb12-15"><a href="#cb12-15"></a><span class="co">h = 10**(-12), Erreur = 0.0000444502911705</span></span>
+<span id="cb12-16"><a href="#cb12-16"></a><span class="co">h = 10**(-13), Erreur = 0.0007105841059456</span></span>
+<span id="cb12-17"><a href="#cb12-17"></a><span class="co">h = 10**(-14), Erreur = 0.0003996389186796</span></span>
+<span id="cb12-18"><a href="#cb12-18"></a><span class="co">h = 10**(-15), Erreur = 0.0551115123125783</span></span>
+<span id="cb12-19"><a href="#cb12-19"></a><span class="co">h = 10**(-16), Erreur = 0.6102230246251565</span></span>
+<span id="cb12-20"><a href="#cb12-20"></a><span class="co">h = 10**(-17), Erreur = 0.5000000000000000</span></span>
+<span id="cb12-21"><a href="#cb12-21"></a><span class="co">&quot;&quot;&quot;</span></span></code></pre></div>
+<p>Pour l’approximation de <span class="math inline">\(\cos&#39;(\pi/6)\)</span> l’erreur semble proportionnelle à <span class="math inline">\(h\)</span> tant que <span class="math inline">\(h \geqslant 10^{-8}\)</span>.</p>
+<h2 id="exo6">Exo6</h2>
+<p>Tant que <span class="math inline">\(h\)</span> n’est pas trop petit et que les problèmes d’approximation avec les flottants ne se posent pas à l’ordre 2 pour le calcul de <span class="math inline">\(f(x_0+h)\)</span>, l’erreur est proportionnelle à <span class="math inline">\(h\)</span> sauf pour l’approximation de la dérivée de sinus. La fonction sinus étant impaire, il n’y a pas de terme en <span class="math inline">\(h^2\)</span> dans le développement de Taylor de <span class="math inline">\(\sin(0+h)\)</span> et l’erreur entre <span class="math inline">\((\sin(0+h)-\sin(0))/h\)</span> et <span class="math inline">\(\sin&#39;(0)\)</span> est donc majorée par <span class="math inline">\(\sin^{(3)}(0)/6 \times h^2\)</span>.</p>
+<h2 id="exo7">Exo7</h2>
+<div class="sourceCode" id="cb13"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1"></a></span>
+<span id="cb13-2"><a href="#cb13-2"></a><span class="kw">def</span> derive2(f, x0, h):</span>
+<span id="cb13-3"><a href="#cb13-3"></a>    <span class="co">&#39;&#39;&#39;Approche la dérivée de f en x0 par (f(x0+h)-f(x0-h))/(2*h)</span></span>
+<span id="cb13-4"><a href="#cb13-4"></a><span class="co">    L&#39;approximation sera d&#39;ordre 2 si f est C3</span></span>
+<span id="cb13-5"><a href="#cb13-5"></a><span class="co">    &#39;&#39;&#39;</span></span>
+<span id="cb13-6"><a href="#cb13-6"></a>    <span class="cf">return</span> (f(x0<span class="op">+</span>h) <span class="op">-</span> f(x0<span class="op">-</span>h))<span class="op">/</span>(<span class="dv">2</span><span class="op">*</span>h)</span>
+<span id="cb13-7"><a href="#cb13-7"></a></span>
+<span id="cb13-8"><a href="#cb13-8"></a><span class="kw">def</span> test_exo7(f, x0, yprime0):</span>
+<span id="cb13-9"><a href="#cb13-9"></a>    <span class="cf">for</span> k <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">10</span>):</span>
+<span id="cb13-10"><a href="#cb13-10"></a>        approx <span class="op">=</span> derive2(f, x0, <span class="dv">10</span><span class="op">**</span>(<span class="op">-</span>k))</span>
+<span id="cb13-11"><a href="#cb13-11"></a>        <span class="bu">print</span>(<span class="st">&#39;h = 10**(-</span><span class="sc">%d</span><span class="st">), Erreur = </span><span class="sc">%.16f</span><span class="st">&#39;</span><span class="op">%</span>(k, <span class="bu">abs</span>(yprime0 <span class="op">-</span> approx)))</span>
+<span id="cb13-12"><a href="#cb13-12"></a></span>
+<span id="cb13-13"><a href="#cb13-13"></a><span class="co">&quot;&quot;&quot;</span></span>
+<span id="cb13-14"><a href="#cb13-14"></a><span class="co">&gt;&gt;&gt; test_exo7(lambda x : math.exp(x), 0, 1)</span></span>
+<span id="cb13-15"><a href="#cb13-15"></a><span class="co">h = 10**(-0), Erreur = 0.1752011936438014</span></span>
+<span id="cb13-16"><a href="#cb13-16"></a><span class="co">h = 10**(-1), Erreur = 0.0016675001984410</span></span>
+<span id="cb13-17"><a href="#cb13-17"></a><span class="co">h = 10**(-2), Erreur = 0.0000166667499921</span></span>
+<span id="cb13-18"><a href="#cb13-18"></a><span class="co">h = 10**(-3), Erreur = 0.0000001666666813</span></span>
+<span id="cb13-19"><a href="#cb13-19"></a><span class="co">h = 10**(-4), Erreur = 0.0000000016668897</span></span>
+<span id="cb13-20"><a href="#cb13-20"></a><span class="co">h = 10**(-5), Erreur = 0.0000000000121023</span></span>
+<span id="cb13-21"><a href="#cb13-21"></a><span class="co">h = 10**(-6), Erreur = 0.0000000000267555</span></span>
+<span id="cb13-22"><a href="#cb13-22"></a><span class="co">h = 10**(-7), Erreur = 0.0000000005263558</span></span>
+<span id="cb13-23"><a href="#cb13-23"></a><span class="co">.....</span></span>
+<span id="cb13-24"><a href="#cb13-24"></a></span>
+<span id="cb13-25"><a href="#cb13-25"></a><span class="co">&gt;&gt;&gt; test_exo7(lambda x : math.sin(x), 0, 1)</span></span>
+<span id="cb13-26"><a href="#cb13-26"></a><span class="co">h = 10**(-0), Erreur = 0.1585290151921035</span></span>
+<span id="cb13-27"><a href="#cb13-27"></a><span class="co">h = 10**(-1), Erreur = 0.0016658335317185</span></span>
+<span id="cb13-28"><a href="#cb13-28"></a><span class="co">h = 10**(-2), Erreur = 0.0000166665833335</span></span>
+<span id="cb13-29"><a href="#cb13-29"></a><span class="co">h = 10**(-3), Erreur = 0.0000001666666584</span></span>
+<span id="cb13-30"><a href="#cb13-30"></a><span class="co">h = 10**(-4), Erreur = 0.0000000016666666</span></span>
+<span id="cb13-31"><a href="#cb13-31"></a><span class="co">h = 10**(-5), Erreur = 0.0000000000166668</span></span>
+<span id="cb13-32"><a href="#cb13-32"></a><span class="co">h = 10**(-6), Erreur = 0.0000000000001666</span></span>
+<span id="cb13-33"><a href="#cb13-33"></a><span class="co">h = 10**(-7), Erreur = 0.0000000000000017</span></span>
+<span id="cb13-34"><a href="#cb13-34"></a><span class="co">.......</span></span>
+<span id="cb13-35"><a href="#cb13-35"></a></span>
+<span id="cb13-36"><a href="#cb13-36"></a><span class="co">&gt;&gt;&gt; test_exo7(lambda x : math.cos(x), math.pi/6, -0.5)</span></span>
+<span id="cb13-37"><a href="#cb13-37"></a><span class="co">h = 10**(-0), Erreur = 0.0792645075960519</span></span>
+<span id="cb13-38"><a href="#cb13-38"></a><span class="co">h = 10**(-1), Erreur = 0.0008329167658595</span></span>
+<span id="cb13-39"><a href="#cb13-39"></a><span class="co">h = 10**(-2), Erreur = 0.0000083332916674</span></span>
+<span id="cb13-40"><a href="#cb13-40"></a><span class="co">h = 10**(-3), Erreur = 0.0000000833332843</span></span>
+<span id="cb13-41"><a href="#cb13-41"></a><span class="co">h = 10**(-4), Erreur = 0.0000000008332774</span></span>
+<span id="cb13-42"><a href="#cb13-42"></a><span class="co">h = 10**(-5), Erreur = 0.0000000000133778</span></span>
+<span id="cb13-43"><a href="#cb13-43"></a><span class="co">h = 10**(-6), Erreur = 0.0000000000143778</span></span>
+<span id="cb13-44"><a href="#cb13-44"></a><span class="co">h = 10**(-7), Erreur = 0.0000000002631779</span></span>
+<span id="cb13-45"><a href="#cb13-45"></a><span class="co">.......</span></span>
+<span id="cb13-46"><a href="#cb13-46"></a><span class="co">&quot;&quot;&quot;</span></span></code></pre></div>
+<p>Dans tous les cas l’erreur semble ici proportionnelle à <span class="math inline">\(h^2\)</span>, le comportement chaotique du aux erreurs d’approximations des flottants commencent dès que <span class="math inline">\(h^3\)</span> est inférieur à <span class="math inline">\(2^{-52}\)</span> (+ petite distance relative entre deux flottants) c’est à dire dès que <span class="math inline">\(h\)</span> est inférieur à <span class="math inline">\(2^{-14}\approx 6.103515625 \, \text{e}-05\)</span></p>
+<h2 id="exo8">Exo8</h2>
+<div class="sourceCode" id="cb14"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1"></a></span>
+<span id="cb14-2"><a href="#cb14-2"></a><span class="kw">def</span> derive_seconde(f, x0, h):</span>
+<span id="cb14-3"><a href="#cb14-3"></a>    <span class="co">&#39;&#39;&#39;Approximation de la dérivée seconde de f en x0 par </span></span>
+<span id="cb14-4"><a href="#cb14-4"></a><span class="co">    (f(x0+h)+f(x0-h)-2f(x0))/h**2</span></span>
+<span id="cb14-5"><a href="#cb14-5"></a><span class="co">    Si f est deux fois dérivable en x0&#39;&#39;&#39;</span></span>
+<span id="cb14-6"><a href="#cb14-6"></a>    <span class="cf">return</span> (f(x0<span class="op">+</span>h)<span class="op">+</span>f(x0<span class="op">-</span>h)<span class="op">-</span><span class="dv">2</span><span class="op">*</span>f(x0))<span class="op">/</span>(h<span class="op">**</span><span class="dv">2</span>)</span>
+<span id="cb14-7"><a href="#cb14-7"></a></span>
+<span id="cb14-8"><a href="#cb14-8"></a><span class="kw">def</span> test_exo8(f, x0, y2prime0):</span>
+<span id="cb14-9"><a href="#cb14-9"></a>    <span class="cf">for</span> k <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">10</span>):</span>
+<span id="cb14-10"><a href="#cb14-10"></a>        approx <span class="op">=</span> derive_seconde(f, x0, <span class="dv">10</span><span class="op">**</span>(<span class="op">-</span>k))</span>
+<span id="cb14-11"><a href="#cb14-11"></a>        <span class="bu">print</span>(<span class="st">&#39;h = 10**(-</span><span class="sc">%d</span><span class="st">), Erreur = </span><span class="sc">%.16f</span><span class="st">&#39;</span><span class="op">%</span>(k, <span class="bu">abs</span>(y2prime0 <span class="op">-</span> approx)))</span>
+<span id="cb14-12"><a href="#cb14-12"></a>  </span>
+<span id="cb14-13"><a href="#cb14-13"></a><span class="co">&quot;&quot;&quot;</span></span>
+<span id="cb14-14"><a href="#cb14-14"></a><span class="co">&gt;&gt;&gt; test_exo8(lambda x : math.exp(x), 0, 1)</span></span>
+<span id="cb14-15"><a href="#cb14-15"></a><span class="co">h = 10**(-0), Erreur = 0.0861612696304874</span></span>
+<span id="cb14-16"><a href="#cb14-16"></a><span class="co">h = 10**(-1), Erreur = 0.0008336111607006</span></span>
+<span id="cb14-17"><a href="#cb14-17"></a><span class="co">h = 10**(-2), Erreur = 0.0000083333583376</span></span>
+<span id="cb14-18"><a href="#cb14-18"></a><span class="co">h = 10**(-3), Erreur = 0.0000000836285494</span></span>
+<span id="cb14-19"><a href="#cb14-19"></a><span class="co">h = 10**(-4), Erreur = 0.0000000060774710</span></span>
+<span id="cb14-20"><a href="#cb14-20"></a><span class="co">h = 10**(-5), Erreur = 0.0000000827403708</span></span>
+<span id="cb14-21"><a href="#cb14-21"></a><span class="co">h = 10**(-6), Erreur = 0.0000889005823410</span></span>
+<span id="cb14-22"><a href="#cb14-22"></a><span class="co">h = 10**(-7), Erreur = 0.0230037383298621</span></span>
+<span id="cb14-23"><a href="#cb14-23"></a><span class="co">........</span></span>
+<span id="cb14-24"><a href="#cb14-24"></a></span>
+<span id="cb14-25"><a href="#cb14-25"></a><span class="co">&gt;&gt;&gt; test_exo8(lambda x : math.cos(x), 0, -1)</span></span>
+<span id="cb14-26"><a href="#cb14-26"></a><span class="co">h = 10**(-0), Erreur = 0.0806046117362795</span></span>
+<span id="cb14-27"><a href="#cb14-27"></a><span class="co">h = 10**(-1), Erreur = 0.0008330556051643</span></span>
+<span id="cb14-28"><a href="#cb14-28"></a><span class="co">h = 10**(-2), Erreur = 0.0000083333052672</span></span>
+<span id="cb14-29"><a href="#cb14-29"></a><span class="co">h = 10**(-3), Erreur = 0.0000000833489935</span></span>
+<span id="cb14-30"><a href="#cb14-30"></a><span class="co">h = 10**(-4), Erreur = 0.0000000060774710</span></span>
+<span id="cb14-31"><a href="#cb14-31"></a><span class="co">h = 10**(-5), Erreur = 0.0000000827403708</span></span>
+<span id="cb14-32"><a href="#cb14-32"></a><span class="co">h = 10**(-6), Erreur = 0.0000889005823410</span></span>
+<span id="cb14-33"><a href="#cb14-33"></a><span class="co">......</span></span>
+<span id="cb14-34"><a href="#cb14-34"></a></span>
+<span id="cb14-35"><a href="#cb14-35"></a><span class="co">&gt;&gt;&gt; test_exo8(lambda x : math.sin(x), math.pi/6, -0.5)</span></span>
+<span id="cb14-36"><a href="#cb14-36"></a><span class="co">h = 10**(-0), Erreur = 0.0403023058681398</span></span>
+<span id="cb14-37"><a href="#cb14-37"></a><span class="co">h = 10**(-1), Erreur = 0.0004165278025822</span></span>
+<span id="cb14-38"><a href="#cb14-38"></a><span class="co">h = 10**(-2), Erreur = 0.0000041666526336</span></span>
+<span id="cb14-39"><a href="#cb14-39"></a><span class="co">h = 10**(-3), Erreur = 0.0000000415634744</span></span>
+<span id="cb14-40"><a href="#cb14-40"></a><span class="co">h = 10**(-4), Erreur = 0.0000000030387355</span></span>
+<span id="cb14-41"><a href="#cb14-41"></a><span class="co">h = 10**(-5), Erreur = 0.0000011515932100</span></span>
+<span id="cb14-42"><a href="#cb14-42"></a><span class="co">h = 10**(-6), Erreur = 0.0000665720112920</span></span>
+<span id="cb14-43"><a href="#cb14-43"></a><span class="co">......</span></span>
+<span id="cb14-44"><a href="#cb14-44"></a><span class="co">&quot;&quot;&quot;</span></span></code></pre></div>
+<p>Tant que <span class="math inline">\(h\)</span> n’est pas trop petit (<span class="math inline">\(h^4 &gt; 2^{-52}\)</span> soit <span class="math inline">\(h &gt; 0,0001220703125\)</span>) , l’erreur semble proportionnelle à <span class="math inline">\(h^2\)</span>. Si <span class="math inline">\(f\)</span> est <span class="math inline">\(\mathcal{C}^4\)</span>, avec une inégalité de Taylor-Lagrange, on peut la majorer par <span class="math inline">\(M_4/12 \times h^2\)</span> où <span class="math inline">\(M_4\)</span> est un majorant de <span class="math inline">\(f^{(4)}\)</span> au voisinage de <span class="math inline">\(x_0\)</span>.</p>
+<h1 id="méthode-de-newton">Méthode de Newton</h1>
+<h2 id="exo9">Exo9</h2>
+<div class="sourceCode" id="cb15"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1"></a></span>
+<span id="cb15-2"><a href="#cb15-2"></a><span class="kw">def</span> newton(f, fprime, u0, epsilon):</span>
+<span id="cb15-3"><a href="#cb15-3"></a>    <span class="co">&#39;&#39;&#39;Retourne l&#39;approximation du zéro de f au voisinage de u0</span></span>
+<span id="cb15-4"><a href="#cb15-4"></a><span class="co">    par itération de la méthode de Newton à partir de u0&#39;&#39;&#39;</span></span>
+<span id="cb15-5"><a href="#cb15-5"></a>    g <span class="op">=</span> <span class="kw">lambda</span> x : x <span class="op">-</span> f(x)<span class="op">/</span>fprime(x)</span>
+<span id="cb15-6"><a href="#cb15-6"></a>    u0 <span class="op">=</span> <span class="bu">float</span>(u0) <span class="co">#pour Python2</span></span>
+<span id="cb15-7"><a href="#cb15-7"></a>    u1 <span class="op">=</span> g(u0)</span>
+<span id="cb15-8"><a href="#cb15-8"></a>    <span class="cf">while</span> <span class="bu">abs</span>(u1 <span class="op">-</span> u0) <span class="op">&gt;</span> epsilon:</span>
+<span id="cb15-9"><a href="#cb15-9"></a>        u0, u1 <span class="op">=</span> u1, g(u1)</span>
+<span id="cb15-10"><a href="#cb15-10"></a>    <span class="cf">return</span> u1</span></code></pre></div>
+<h2 id="exo10">Exo10</h2>
+<div class="sourceCode" id="cb16"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1"></a></span>
+<span id="cb16-2"><a href="#cb16-2"></a><span class="kw">def</span> test_exo10(f, fprime, u0, zero):</span>
+<span id="cb16-3"><a href="#cb16-3"></a>    <span class="cf">for</span> k <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, <span class="dv">8</span>):</span>
+<span id="cb16-4"><a href="#cb16-4"></a>        res <span class="op">=</span> newton(f, fprime, u0, <span class="dv">10</span><span class="op">**</span>(<span class="op">-</span>k))</span>
+<span id="cb16-5"><a href="#cb16-5"></a>        <span class="bu">print</span>(<span class="st">&#39;epsilon = 10**(-</span><span class="sc">%d</span><span class="st">) , res = </span><span class="sc">%.17f</span><span class="st"> ,  Erreur = </span><span class="sc">%.16f</span><span class="st">&#39;</span><span class="op">%</span>(k,</span>
+<span id="cb16-6"><a href="#cb16-6"></a>         res, <span class="bu">abs</span>(zero <span class="op">-</span> res)))</span>
+<span id="cb16-7"><a href="#cb16-7"></a></span>
+<span id="cb16-8"><a href="#cb16-8"></a><span class="co">&quot;&quot;&quot;</span></span>
+<span id="cb16-9"><a href="#cb16-9"></a><span class="co">&gt;&gt;&gt; test_exo10(lambda x : x**2 - 2, lambda x : 2*x, 2, math.sqrt(2))</span></span>
+<span id="cb16-10"><a href="#cb16-10"></a><span class="co">epsilon = 10**(-1) , res = 1.41666666666666674 ,  Erreur = 0.0024531042935716</span></span>
+<span id="cb16-11"><a href="#cb16-11"></a><span class="co">epsilon = 10**(-2) , res = 1.41421568627450989 ,  Erreur = 0.0000021239014147</span></span>
+<span id="cb16-12"><a href="#cb16-12"></a><span class="co">epsilon = 10**(-3) , res = 1.41421356237468987 ,  Erreur = 0.0000000000015947</span></span>
+<span id="cb16-13"><a href="#cb16-13"></a><span class="co">epsilon = 10**(-4) , res = 1.41421356237468987 ,  Erreur = 0.0000000000015947</span></span>
+<span id="cb16-14"><a href="#cb16-14"></a><span class="co">epsilon = 10**(-5) , res = 1.41421356237468987 ,  Erreur = 0.0000000000015947</span></span>
+<span id="cb16-15"><a href="#cb16-15"></a><span class="co">epsilon = 10**(-6) , res = 1.41421356237309515 ,  Erreur = 0.0000000000000000</span></span>
+<span id="cb16-16"><a href="#cb16-16"></a><span class="co">epsilon = 10**(-7) , res = 1.41421356237309515 ,  Erreur = 0.0000000000000000</span></span>
+<span id="cb16-17"><a href="#cb16-17"></a></span>
+<span id="cb16-18"><a href="#cb16-18"></a><span class="co">&gt;&gt;&gt; test_exo10(lambda x : math.sin(x), lambda x : math.cos(x), 3, math.pi)</span></span>
+<span id="cb16-19"><a href="#cb16-19"></a><span class="co">epsilon = 10**(-1) , res = 3.14159265330047699 ,  Erreur = 0.0000000002893161</span></span>
+<span id="cb16-20"><a href="#cb16-20"></a><span class="co">epsilon = 10**(-2) , res = 3.14159265330047699 ,  Erreur = 0.0000000002893161</span></span>
+<span id="cb16-21"><a href="#cb16-21"></a><span class="co">epsilon = 10**(-3) , res = 3.14159265330047699 ,  Erreur = 0.0000000002893161</span></span>
+<span id="cb16-22"><a href="#cb16-22"></a><span class="co">epsilon = 10**(-4) , res = 3.14159265358979312 ,  Erreur = 0.0000000000000000</span></span>
+<span id="cb16-23"><a href="#cb16-23"></a><span class="co">epsilon = 10**(-5) , res = 3.14159265358979312 ,  Erreur = 0.0000000000000000</span></span>
+<span id="cb16-24"><a href="#cb16-24"></a><span class="co">epsilon = 10**(-6) , res = 3.14159265358979312 ,  Erreur = 0.0000000000000000</span></span>
+<span id="cb16-25"><a href="#cb16-25"></a><span class="co">epsilon = 10**(-7) , res = 3.14159265358979312 ,  Erreur = 0.0000000000000000</span></span>
+<span id="cb16-26"><a href="#cb16-26"></a><span class="co">&quot;&quot;&quot;</span></span></code></pre></div>
+<p>Convergence très rapide dans les deux cas.</p>
+<h2 id="exo11">Exo11</h2>
+<div class="sourceCode" id="cb17"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1"></a></span>
+<span id="cb17-2"><a href="#cb17-2"></a><span class="kw">def</span> newton_bis(f, fprime, u0, nb_iter):</span>
+<span id="cb17-3"><a href="#cb17-3"></a>    <span class="co">&#39;&#39;&#39;Retourne l&#39;approximation du zéro de f au voisinage de u0</span></span>
+<span id="cb17-4"><a href="#cb17-4"></a><span class="co">    par itération de la méthode de Newton à partir de u0 avec affichage</span></span>
+<span id="cb17-5"><a href="#cb17-5"></a><span class="co">    des résultats intermédiaires jusqu&#39;à un nombre d&#39;itérations imposé&#39;&#39;&#39;</span></span>
+<span id="cb17-6"><a href="#cb17-6"></a>    g <span class="op">=</span> <span class="kw">lambda</span> x : x <span class="op">-</span> f(x)<span class="op">/</span>fprime(x)</span>
+<span id="cb17-7"><a href="#cb17-7"></a>    u0 <span class="op">=</span> <span class="bu">float</span>(u0) <span class="co">#pour Python2</span></span>
+<span id="cb17-8"><a href="#cb17-8"></a>    u1 <span class="op">=</span> g(u0)</span>
+<span id="cb17-9"><a href="#cb17-9"></a>    iteration <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb17-10"><a href="#cb17-10"></a>    <span class="cf">while</span> iteration <span class="op">&lt;=</span> nb_iter:</span>
+<span id="cb17-11"><a href="#cb17-11"></a>        iteration <span class="op">+=</span> <span class="dv">1</span>  </span>
+<span id="cb17-12"><a href="#cb17-12"></a>        <span class="bu">print</span>(<span class="st">&#39;Itération </span><span class="sc">%d</span><span class="st">, resint = </span><span class="sc">%.17f</span><span class="st">&#39;</span><span class="op">%</span>(iteration, u1))   </span>
+<span id="cb17-13"><a href="#cb17-13"></a>        u0, u1 <span class="op">=</span> u1, g(u1) </span>
+<span id="cb17-14"><a href="#cb17-14"></a>    <span class="cf">return</span> u1</span>
+<span id="cb17-15"><a href="#cb17-15"></a></span>
+<span id="cb17-16"><a href="#cb17-16"></a><span class="co">&quot;&quot;&quot;</span></span>
+<span id="cb17-17"><a href="#cb17-17"></a><span class="co">&gt;&gt;&gt; newton_bis(lambda x : x**2 - 2, lambda x : 2*x, 3, 12)</span></span>
+<span id="cb17-18"><a href="#cb17-18"></a><span class="co">Itération 1, resint = 1.83333333333333326</span></span>
+<span id="cb17-19"><a href="#cb17-19"></a><span class="co">Itération 2, resint = 1.46212121212121215</span></span>
+<span id="cb17-20"><a href="#cb17-20"></a><span class="co">Itération 3, resint = 1.41499842989480284</span></span>
+<span id="cb17-21"><a href="#cb17-21"></a><span class="co">Itération 4, resint = 1.41421378004719767</span></span>
+<span id="cb17-22"><a href="#cb17-22"></a><span class="co">Itération 5, resint = 1.41421356237311180</span></span>
+<span id="cb17-23"><a href="#cb17-23"></a><span class="co">Itération 6, resint = 1.41421356237309492</span></span>
+<span id="cb17-24"><a href="#cb17-24"></a><span class="co">Itération 7, resint = 1.41421356237309515</span></span>
+<span id="cb17-25"><a href="#cb17-25"></a><span class="co">Itération 8, resint = 1.41421356237309492</span></span>
+<span id="cb17-26"><a href="#cb17-26"></a><span class="co">Itération 9, resint = 1.41421356237309515</span></span>
+<span id="cb17-27"><a href="#cb17-27"></a><span class="co">Itération 10, resint = 1.41421356237309492</span></span>
+<span id="cb17-28"><a href="#cb17-28"></a><span class="co">Itération 11, resint = 1.41421356237309515</span></span>
+<span id="cb17-29"><a href="#cb17-29"></a><span class="co">Itération 12, resint = 1.41421356237309492</span></span>
+<span id="cb17-30"><a href="#cb17-30"></a><span class="co">1.4142135623730951</span></span>
+<span id="cb17-31"><a href="#cb17-31"></a><span class="co">&gt;&gt;&gt; math.sqrt(2)</span></span>
+<span id="cb17-32"><a href="#cb17-32"></a><span class="co">1.4142135623730951</span></span>
+<span id="cb17-33"><a href="#cb17-33"></a><span class="co">&quot;&quot;&quot;</span></span></code></pre></div>
+<p>Au bout de 7 itérations on a 16 décimales exactes avec ensuite une oscillation autour de <span class="math inline">\(1,41421356237309515\)</span> et <span class="math inline">\(1,41421356237309492\)</span></p>
+<h2 id="exo12">Exo12</h2>
+<div class="sourceCode" id="cb18"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1"></a></span>
+<span id="cb18-2"><a href="#cb18-2"></a></span>
+<span id="cb18-3"><a href="#cb18-3"></a><span class="kw">def</span> newton_ter(f, fprime, u0, nb_iter, zero):</span>
+<span id="cb18-4"><a href="#cb18-4"></a>    <span class="co">&#39;&#39;&#39;Retourne l&#39;approximation du zéro de f au voisinage de u0</span></span>
+<span id="cb18-5"><a href="#cb18-5"></a><span class="co">    par itération de la méthode de Newton à partir de u0 avec affichage</span></span>
+<span id="cb18-6"><a href="#cb18-6"></a><span class="co">    des résultats intermédiaires et de log(abs(resint-zero))</span></span>
+<span id="cb18-7"><a href="#cb18-7"></a><span class="co">    jusqu&#39;à un nombre d&#39;itérations imposé&#39;&#39;&#39;</span></span>
+<span id="cb18-8"><a href="#cb18-8"></a>    g <span class="op">=</span> <span class="kw">lambda</span> x : x <span class="op">-</span> f(x)<span class="op">/</span>fprime(x)</span>
+<span id="cb18-9"><a href="#cb18-9"></a>    u0 <span class="op">=</span> <span class="bu">float</span>(u0) <span class="co">#pour Python2</span></span>
+<span id="cb18-10"><a href="#cb18-10"></a>    u1 <span class="op">=</span> g(u0)</span>
+<span id="cb18-11"><a href="#cb18-11"></a>    iteration <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb18-12"><a href="#cb18-12"></a>    <span class="cf">while</span> iteration <span class="op">&lt;=</span> nb_iter:</span>
+<span id="cb18-13"><a href="#cb18-13"></a>        iteration <span class="op">+=</span> <span class="dv">1</span> </span>
+<span id="cb18-14"><a href="#cb18-14"></a>        <span class="bu">print</span>(<span class="st">&#39;Itération </span><span class="sc">%d</span><span class="st">, resint = </span><span class="sc">%.15f</span><span class="st">, log(abs(resint-</span><span class="sc">%s</span><span class="st">))=</span><span class="sc">%d</span><span class="st">&#39;</span><span class="op">%</span>(iteration,</span>
+<span id="cb18-15"><a href="#cb18-15"></a>         u1, zero, <span class="bu">round</span>(math.log(<span class="bu">abs</span>(u1 <span class="op">-</span> zero), <span class="dv">2</span>))))</span>
+<span id="cb18-16"><a href="#cb18-16"></a>        u0, u1 <span class="op">=</span> u1, g(u1)</span>
+<span id="cb18-17"><a href="#cb18-17"></a>    <span class="cf">return</span> u1</span>
+<span id="cb18-18"><a href="#cb18-18"></a></span>
+<span id="cb18-19"><a href="#cb18-19"></a><span class="co">&quot;&quot;&quot;</span></span>
+<span id="cb18-20"><a href="#cb18-20"></a><span class="co">&gt;&gt;&gt; newton_ter(lambda x : x**2 - 2, lambda x : 2*x, 3, 12, math.sqrt(2))</span></span>
+<span id="cb18-21"><a href="#cb18-21"></a><span class="co">Itération 1, resint = 1.833333333333333, log(abs(resint-1.4142135623730951))=-1</span></span>
+<span id="cb18-22"><a href="#cb18-22"></a><span class="co">Itération 2, resint = 1.462121212121212, log(abs(resint-1.4142135623730951))=-4</span></span>
+<span id="cb18-23"><a href="#cb18-23"></a><span class="co">Itération 3, resint = 1.414998429894803, log(abs(resint-1.4142135623730951))=-10</span></span>
+<span id="cb18-24"><a href="#cb18-24"></a><span class="co">Itération 4, resint = 1.414213780047198, log(abs(resint-1.4142135623730951))=-22</span></span>
+<span id="cb18-25"><a href="#cb18-25"></a><span class="co">Itération 5, resint = 1.414213562373112, log(abs(resint-1.4142135623730951))=-46</span></span>
+<span id="cb18-26"><a href="#cb18-26"></a><span class="co">Itération 6, resint = 1.414213562373095, log(abs(resint-1.4142135623730951))=-52</span></span>
+<span id="cb18-27"><a href="#cb18-27"></a><span class="co">Traceback (most recent call last):</span></span>
+<span id="cb18-28"><a href="#cb18-28"></a><span class="co">............</span></span>
+<span id="cb18-29"><a href="#cb18-29"></a><span class="co">    u1, zero, round(math.log(abs(u1 - zero), 2))))</span></span>
+<span id="cb18-30"><a href="#cb18-30"></a><span class="co">ValueError: math domain error</span></span>
+<span id="cb18-31"><a href="#cb18-31"></a><span class="co">&gt;&gt;&gt; newton_ter(lambda x : math.sin(x), lambda x : math.cos(x), 3, 12, math.pi)</span></span>
+<span id="cb18-32"><a href="#cb18-32"></a><span class="co">Itération 1, resint = 3.142546543074278, log(abs(resint-3.141592653589793))=-10</span></span>
+<span id="cb18-33"><a href="#cb18-33"></a><span class="co">Itération 2, resint = 3.141592653300477, log(abs(resint-3.141592653589793))=-32</span></span>
+<span id="cb18-34"><a href="#cb18-34"></a><span class="co">Traceback (most recent call last):</span></span>
+<span id="cb18-35"><a href="#cb18-35"></a><span class="co">........</span></span>
+<span id="cb18-36"><a href="#cb18-36"></a><span class="co">    u1, zero, round(math.log(abs(u1 - zero), 2))))</span></span>
+<span id="cb18-37"><a href="#cb18-37"></a><span class="co">ValueError: math domain error</span></span>
+<span id="cb18-38"><a href="#cb18-38"></a><span class="co">&quot;&quot;&quot;</span></span></code></pre></div>
+<p><span class="math inline">\(\log(\vert \, \text{resint}-\text{zero} \, \vert)\)</span> (avec logarithme binaire) donne l’ordre de grandeur de l’erreur commise (en puissance de <span class="math inline">\(2\)</span>) lorsqu’on approche le zero par resint. On peut mesurer ainsi la progression du nombre de bits exacts des itérés. Pour l’approximation de <span class="math inline">\(\sqrt{2}\)</span> zero de <span class="math inline">\(f(x)=x^2-2\)</span>, il est de l’ordre de <span class="math inline">\(2^{n}\)</span>, la convergence est quadratique et le nombre de bits exacts double environ à chaque itération. Pour l’approximation de <span class="math inline">\(\pi\)</span>, zero de <span class="math inline">\(f(x)=sin(x)\)</span>, la convergence peut etre cubique car le nombre de bits semble tripler entre les itérations 1 et 2 et après trois itérations le plus petit écart relatif entre deux flottants succcessifs est atteint.</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode python"><code class="sourceCode python"></code></pre></div>
+<h2 id="exo13">Exo13</h2>
+<div class="sourceCode" id="cb20"><pre class="sourceCode python"><code class="sourceCode python"></code></pre></div>
+<p>La fonction carré <span class="math inline">\(f:x \mapsto x^2\)</span> a un unique zéro sur <span class="math inline">\([-1;1]\)</span> qui est 0.</p>
+<p>On peut l’approcher par la méthode de Newton avec <span class="math inline">\(u_0=1\)</span> et <span class="math inline">\(u_{n+1}=u_{n}-\frac{f(u_n)}{f&#39;(u_n)}=u_n-\frac{u_n}{2} = \frac{1}{2}u_n\)</span></p>
+<p>Par une récurrence évidente on a <span class="math inline">\(u_n=\frac{1}{2^n}\)</span>.</p>
+<p>Ainsi lors de la <span class="math inline">\(n^{ième}\)</span> itération l’erreur commise est <span class="math inline">\(1/2^n\)</span> On a <span class="math inline">\(\log(\vert \, \text{resint}-\text{zero} \, \vert)\)</span> de l’ordre de <span class="math inline">\(n\)</span> et non pas de <span class="math inline">\(2^n\)</span> comme pour l’approximation de <span class="math inline">\(\sqrt{2}\)</span>, racine de <span class="math inline">\(x \mapsto x^2 - 2\)</span> sur [1;2]. La convergence est donc plus lente, de l’ordre de 1 bit par itération comme pour une approximation par dichotomie</p>
+<h1 id="pour-ceux-qui-sennuient">Pour ceux qui s’ennuient</h1>
+<h2 id="exo-14-méthode-de-la-sécante">Exo 14 Méthode de la sécante</h2>
+<ol type="1">
+<li><p>Il peut y avoir divergence, ou même <span class="math inline">\(u_n\)</span> peut ne pas être défini à partir d’un certain rang, mais si <span class="math inline">\(u_0\)</span> et <span class="math inline">\(u_1\)</span> sont assez proches du zéro, on peut espérer qu’il y ait convergence de <span class="math inline">\(u_n\)</span> vers ce zéro</p></li>
+<li><p>Par égalité des pentes de la sécantes :</p></li>
+</ol>
+<p><span class="math display">\[(0 - f(u_{n-1}))/(u_{n} - u_{n-1}) = (f(u_{n-1}) - f(u_{n-2}))/(u_{n-1} - u_{n-2})\]</span></p>
+<p>donc</p>
+<p><span class="math display">\[u_{n} = u_{n-1} - f(u_{n-1}) \times ((u_{n-1} - u_{n-2})/(f(u_{n-1}) - f(u_{n-2}))\]</span></p>
+<p>ou</p>
+<p><span class="math display">\[u_{n}= (u_{n-2} \times f(u_{n-1}) - u_{n-1} \times f(u_{n-2}))/(f(u_{n-1}) - f(u_{n-2}))\]</span></p>
+<ol start="3" type="1">
+<li>Condition d’arrêt : <span class="math inline">\(\vert \, u_{n}-u_{n-1} \, \vert \leqslant \varepsilon\)</span>.</li>
+</ol>
+<div class="sourceCode" id="cb21"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1"></a></span>
+<span id="cb21-2"><a href="#cb21-2"></a><span class="kw">def</span> secante(f, u0, u1, epsilon):</span>
+<span id="cb21-3"><a href="#cb21-3"></a>    <span class="co">&#39;&#39;&#39;Approximation à espilon près du zero de f au voisinage de u0 et u1</span></span>
+<span id="cb21-4"><a href="#cb21-4"></a><span class="co">    par la méthode de la sécante&#39;&#39;&#39;</span></span>
+<span id="cb21-5"><a href="#cb21-5"></a>    g <span class="op">=</span> <span class="kw">lambda</span> x, y : x <span class="op">-</span> f(x)<span class="op">*</span>(x <span class="op">-</span> y)<span class="op">/</span>(f(x) <span class="op">-</span> f(y))</span>
+<span id="cb21-6"><a href="#cb21-6"></a>    u0, u1 <span class="op">=</span> <span class="bu">float</span>(u0), <span class="bu">float</span>(u1) <span class="co">#pour Python2    </span></span>
+<span id="cb21-7"><a href="#cb21-7"></a>    <span class="cf">while</span> <span class="bu">abs</span>(u1 <span class="op">-</span> u0) <span class="op">&gt;</span> epsilon:</span>
+<span id="cb21-8"><a href="#cb21-8"></a>        u1, u0 <span class="op">=</span> g(u1, u0), u1</span>
+<span id="cb21-9"><a href="#cb21-9"></a>    <span class="cf">return</span> u1</span>
+<span id="cb21-10"><a href="#cb21-10"></a></span>
+<span id="cb21-11"><a href="#cb21-11"></a><span class="kw">def</span> test_exo14(f, u0, u1, zero):</span>
+<span id="cb21-12"><a href="#cb21-12"></a>    <span class="cf">for</span> k <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, <span class="dv">13</span>):</span>
+<span id="cb21-13"><a href="#cb21-13"></a>        res <span class="op">=</span> secante(f, u0, u1, <span class="dv">10</span><span class="op">**</span>(<span class="op">-</span>k))</span>
+<span id="cb21-14"><a href="#cb21-14"></a>        <span class="bu">print</span>(<span class="st">&#39;epsilon = 10**(-</span><span class="sc">%d</span><span class="st">) , res = </span><span class="sc">%.17f</span><span class="st"> ,  Erreur = </span><span class="sc">%.17f</span><span class="st">&#39;</span><span class="op">%</span>(k,</span>
+<span id="cb21-15"><a href="#cb21-15"></a>         res, <span class="bu">abs</span>(zero <span class="op">-</span> res)))</span>
+<span id="cb21-16"><a href="#cb21-16"></a>         </span>
+<span id="cb21-17"><a href="#cb21-17"></a><span class="co">&quot;&quot;&quot;</span></span>
+<span id="cb21-18"><a href="#cb21-18"></a><span class="co">&gt;&gt;&gt; test_exo14(lambda x : x**2 - 2, 1, 2, math.sqrt(2))</span></span>
+<span id="cb21-19"><a href="#cb21-19"></a><span class="co">epsilon = 10**(-1) , res = 1.40000000000000013 ,  Erreur = 0.01421356237309501</span></span>
+<span id="cb21-20"><a href="#cb21-20"></a><span class="co">epsilon = 10**(-2) , res = 1.41421143847487008 ,  Erreur = 0.00000212389822507</span></span>
+<span id="cb21-21"><a href="#cb21-21"></a><span class="co">epsilon = 10**(-3) , res = 1.41421143847487008 ,  Erreur = 0.00000212389822507</span></span>
+<span id="cb21-22"><a href="#cb21-22"></a><span class="co">epsilon = 10**(-4) , res = 1.41421356205732041 ,  Erreur = 0.00000000031577474</span></span>
+<span id="cb21-23"><a href="#cb21-23"></a><span class="co">epsilon = 10**(-5) , res = 1.41421356205732041 ,  Erreur = 0.00000000031577474</span></span>
+<span id="cb21-24"><a href="#cb21-24"></a><span class="co">epsilon = 10**(-6) , res = 1.41421356237309537 ,  Erreur = 0.00000000000000022</span></span>
+<span id="cb21-25"><a href="#cb21-25"></a><span class="co">epsilon = 10**(-7) , res = 1.41421356237309537 ,  Erreur = 0.00000000000000022</span></span>
+<span id="cb21-26"><a href="#cb21-26"></a><span class="co">epsilon = 10**(-8) , res = 1.41421356237309537 ,  Erreur = 0.00000000000000022</span></span>
+<span id="cb21-27"><a href="#cb21-27"></a><span class="co">epsilon = 10**(-9) , res = 1.41421356237309537 ,  Erreur = 0.00000000000000022</span></span>
+<span id="cb21-28"><a href="#cb21-28"></a><span class="co">epsilon = 10**(-10) , res = 1.41421356237309515 ,  Erreur = 0.00000000000000000</span></span>
+<span id="cb21-29"><a href="#cb21-29"></a><span class="co">.............</span></span>
+<span id="cb21-30"><a href="#cb21-30"></a></span>
+<span id="cb21-31"><a href="#cb21-31"></a><span class="co">&gt;&gt;&gt; test_exo14(lambda x : math.sin(x), 3, 4, math.pi)</span></span>
+<span id="cb21-32"><a href="#cb21-32"></a><span class="co">epsilon = 10**(-1) , res = 3.13945909821807856 ,  Erreur = 0.00213355537171456</span></span>
+<span id="cb21-33"><a href="#cb21-33"></a><span class="co">epsilon = 10**(-2) , res = 3.14159272798485700 ,  Erreur = 0.00000007439506389</span></span>
+<span id="cb21-34"><a href="#cb21-34"></a><span class="co">epsilon = 10**(-3) , res = 3.14159265358973672 ,  Erreur = 0.00000000000005640</span></span>
+<span id="cb21-35"><a href="#cb21-35"></a><span class="co">epsilon = 10**(-4) , res = 3.14159265358973672 ,  Erreur = 0.00000000000005640</span></span>
+<span id="cb21-36"><a href="#cb21-36"></a><span class="co">epsilon = 10**(-5) , res = 3.14159265358973672 ,  Erreur = 0.00000000000005640</span></span>
+<span id="cb21-37"><a href="#cb21-37"></a><span class="co">epsilon = 10**(-6) , res = 3.14159265358973672 ,  Erreur = 0.00000000000005640</span></span>
+<span id="cb21-38"><a href="#cb21-38"></a><span class="co">epsilon = 10**(-7) , res = 3.14159265358973672 ,  Erreur = 0.00000000000005640</span></span>
+<span id="cb21-39"><a href="#cb21-39"></a><span class="co">epsilon = 10**(-8) , res = 3.14159265358979312 ,  Erreur = 0.00000000000000000</span></span>
+<span id="cb21-40"><a href="#cb21-40"></a><span class="co">epsilon = 10**(-9) , res = 3.14159265358979312 ,  Erreur = 0.00000000000000000</span></span>
+<span id="cb21-41"><a href="#cb21-41"></a><span class="co">epsilon = 10**(-10) , res = 3.14159265358979312 ,  Erreur = 0.00000000000000000</span></span>
+<span id="cb21-42"><a href="#cb21-42"></a><span class="co">&quot;&quot;&quot;</span></span>
+<span id="cb21-43"><a href="#cb21-43"></a></span>
+<span id="cb21-44"><a href="#cb21-44"></a><span class="kw">def</span> secante_ter(f, u0, u1, nbiter, zero):</span>
+<span id="cb21-45"><a href="#cb21-45"></a>    <span class="co">&#39;&#39;&#39;Approximation à espilon près du zero de f au voisinage de u0 et u1</span></span>
+<span id="cb21-46"><a href="#cb21-46"></a><span class="co">    par la méthode de la sécante avec affichage des résultats inter</span></span>
+<span id="cb21-47"><a href="#cb21-47"></a><span class="co">     et de log(abs(resint-zero)) jusqu&#39;à un nombre d&#39;itérations imposé&#39;&#39;&#39;</span></span>
+<span id="cb21-48"><a href="#cb21-48"></a>    g <span class="op">=</span> <span class="kw">lambda</span> x, y : x <span class="op">-</span> f(x)<span class="op">*</span>(x <span class="op">-</span> y)<span class="op">/</span>(f(x) <span class="op">-</span> f(y))</span>
+<span id="cb21-49"><a href="#cb21-49"></a>    u0, u1 <span class="op">=</span> <span class="bu">float</span>(u0), <span class="bu">float</span>(u1) <span class="co">#pour Python2</span></span>
+<span id="cb21-50"><a href="#cb21-50"></a>    iteration <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb21-51"><a href="#cb21-51"></a>    <span class="cf">while</span> iteration <span class="op">&lt;=</span> nbiter:</span>
+<span id="cb21-52"><a href="#cb21-52"></a>        iteration <span class="op">+=</span> <span class="dv">1</span></span>
+<span id="cb21-53"><a href="#cb21-53"></a>        <span class="bu">print</span>(<span class="st">&#39;Itération </span><span class="sc">%d</span><span class="st">, resint = </span><span class="sc">%.15f</span><span class="st">, log(abs(resint-</span><span class="sc">%s</span><span class="st">))=</span><span class="sc">%d</span><span class="st">&#39;</span><span class="op">%</span>(iteration,</span>
+<span id="cb21-54"><a href="#cb21-54"></a>         u1, zero, <span class="bu">round</span>(math.log(<span class="bu">abs</span>(u1 <span class="op">-</span> zero), <span class="dv">10</span>))))</span>
+<span id="cb21-55"><a href="#cb21-55"></a>        u1, u0 <span class="op">=</span> g(u1, u0), u1</span>
+<span id="cb21-56"><a href="#cb21-56"></a>    <span class="cf">return</span> u1</span>
+<span id="cb21-57"><a href="#cb21-57"></a></span>
+<span id="cb21-58"><a href="#cb21-58"></a><span class="co">&quot;&quot;&quot;</span></span>
+<span id="cb21-59"><a href="#cb21-59"></a><span class="co">&gt;&gt;&gt; secante_ter(lambda x : x**2 - 2, 1, 2, 20, math.sqrt(2))</span></span>
+<span id="cb21-60"><a href="#cb21-60"></a><span class="co">Itération 1, resint = 2.000000000000000, log(abs(resint-1.4142135623730951)=0</span></span>
+<span id="cb21-61"><a href="#cb21-61"></a><span class="co">Itération 2, resint = 1.333333333333333, log(abs(resint-1.4142135623730951)=-1</span></span>
+<span id="cb21-62"><a href="#cb21-62"></a><span class="co">Itération 3, resint = 1.400000000000000, log(abs(resint-1.4142135623730951)=-2</span></span>
+<span id="cb21-63"><a href="#cb21-63"></a><span class="co">Itération 4, resint = 1.414634146341463, log(abs(resint-1.4142135623730951)=-3</span></span>
+<span id="cb21-64"><a href="#cb21-64"></a><span class="co">Itération 5, resint = 1.414211438474870, log(abs(resint-1.4142135623730951)=-6</span></span>
+<span id="cb21-65"><a href="#cb21-65"></a><span class="co">Itération 6, resint = 1.414213562057320, log(abs(resint-1.4142135623730951)=-10</span></span>
+<span id="cb21-66"><a href="#cb21-66"></a><span class="co">Itération 7, resint = 1.414213562373095, log(abs(resint-1.4142135623730951)=-16</span></span>
+<span id="cb21-67"><a href="#cb21-67"></a><span class="co">Traceback (most recent call last):</span></span>
+<span id="cb21-68"><a href="#cb21-68"></a><span class="co">........</span></span>
+<span id="cb21-69"><a href="#cb21-69"></a><span class="co">ValueError: math domain error</span></span>
+<span id="cb21-70"><a href="#cb21-70"></a><span class="co">&gt;&gt;&gt; secante_ter(lambda x : math.sin(x), 3, 4, 20, math.pi)</span></span>
+<span id="cb21-71"><a href="#cb21-71"></a><span class="co">Itération 1, resint = 4.000000000000000, log(abs(resint-3.141592653589793)=0</span></span>
+<span id="cb21-72"><a href="#cb21-72"></a><span class="co">Itération 2, resint = 3.157162792479947, log(abs(resint-3.141592653589793)=-2</span></span>
+<span id="cb21-73"><a href="#cb21-73"></a><span class="co">Itération 3, resint = 3.139459098218079, log(abs(resint-3.141592653589793)=-3</span></span>
+<span id="cb21-74"><a href="#cb21-74"></a><span class="co">Itération 4, resint = 3.141592727984857, log(abs(resint-3.141592653589793)=-7</span></span>
+<span id="cb21-75"><a href="#cb21-75"></a><span class="co">Itération 5, resint = 3.141592653589737, log(abs(resint-3.141592653589793)=-13</span></span>
+<span id="cb21-76"><a href="#cb21-76"></a><span class="co">Traceback (most recent call last):</span></span>
+<span id="cb21-77"><a href="#cb21-77"></a><span class="co">........</span></span>
+<span id="cb21-78"><a href="#cb21-78"></a><span class="co">ValueError: math domain error</span></span>
+<span id="cb21-79"><a href="#cb21-79"></a><span class="co">&quot;&quot;&quot;</span></span></code></pre></div>
+<p>Convergence très rapide également. On peut montrer que dans ce cas, <span class="math inline">\(\log(\vert \, \text{resint}-\text{zero} \, \vert)\)</span> est de l’ordre de <span class="math inline">\(\phi^n\)</span> où <span class="math inline">\(\phi\)</span> est le nombre d’or <span class="math inline">\(\phi \approx 1,618\)</span> donc c’est moins bien que le <span class="math inline">\(2^n\)</span> de la méthode de Newton pour l’approximation de <span class="math inline">\(\sqrt{2}\)</span> mais la différence de vitesse est négligeable. Puisque <span class="math inline">\(\phi^m = 2^n \Leftrightarrow m = n\times \ln(2)/\ln(\phi)\)</span>, le nombre d’itérations pour obtenir la même précision est juste à multiplier par <span class="math inline">\(ln(2)/ln(\phi)\)</span> Mais gros avantage sur la méthode de Newton, on n’a pas besoin de la dérivée de <span class="math inline">\(f\)</span>.</p>
+<h2 id="exo-15">Exo 15</h2>
+<p>Méthode de Newton appliquée à la recherche de racines complexes de <span class="math inline">\(f:z \mapsto z^2 - 843\)</span>.</p>
+<p><span class="math display">\[\begin{align*}
+u_{n+1} &amp;= u_{n} - f(u_{n})/f&#39;(u_{n}) \\
+u_{n+1} &amp;= u_{n} - (u^{2}_n - 843)/(2u_{n}) =  u_{n}/2 + 843/(2u_{n}) \\
+u_{n+1} &amp;= 1/2 \times (u_{n}+843/u_{n})
+\end{align*}\]</span></p>
+<p>On peut commencer par <span class="math inline">\(u_{0}=843\)</span>.</p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1"></a></span>
+<span id="cb22-2"><a href="#cb22-2"></a></span>
+<span id="cb22-3"><a href="#cb22-3"></a><span class="kw">def</span> racine_complexe(Z, nbiter):</span>
+<span id="cb22-4"><a href="#cb22-4"></a>    <span class="co">&#39;&#39;&#39;Approximation d&#39;une racine complexe de z**2 = Z par la méthode de Newton&#39;&#39;&#39;</span></span>
+<span id="cb22-5"><a href="#cb22-5"></a>    u <span class="op">=</span> Z</span>
+<span id="cb22-6"><a href="#cb22-6"></a>    <span class="cf">for</span> k <span class="kw">in</span> <span class="bu">range</span>(nbiter):</span>
+<span id="cb22-7"><a href="#cb22-7"></a>        u <span class="op">=</span> <span class="dv">1</span><span class="op">/</span><span class="dv">2</span><span class="op">*</span>(u<span class="op">+</span>Z<span class="op">/</span>u)</span>
+<span id="cb22-8"><a href="#cb22-8"></a>    <span class="cf">return</span> u</span>
+<span id="cb22-9"><a href="#cb22-9"></a></span>
+<span id="cb22-10"><a href="#cb22-10"></a><span class="co">&quot;&quot;&quot;</span></span>
+<span id="cb22-11"><a href="#cb22-11"></a><span class="co">&gt;&gt;&gt; r = racine_complexe(complex(1,1), 50)</span></span>
+<span id="cb22-12"><a href="#cb22-12"></a><span class="co">&gt;&gt;&gt; r**2</span></span>
+<span id="cb22-13"><a href="#cb22-13"></a><span class="co">(0.9999999999999998+0.9999999999999999j)</span></span>
+<span id="cb22-14"><a href="#cb22-14"></a><span class="co">&gt;&gt;&gt; r = racine_complexe(complex(1,-1), 50)</span></span>
+<span id="cb22-15"><a href="#cb22-15"></a><span class="co">&gt;&gt;&gt; r</span></span>
+<span id="cb22-16"><a href="#cb22-16"></a><span class="co">(1.0986841134678098-0.45508986056222733j)</span></span>
+<span id="cb22-17"><a href="#cb22-17"></a><span class="co">&gt;&gt;&gt; r**2</span></span>
+<span id="cb22-18"><a href="#cb22-18"></a><span class="co">(0.9999999999999998-0.9999999999999999j)</span></span>
+<span id="cb22-19"><a href="#cb22-19"></a><span class="co">&gt;&gt;&gt; r = racine_complexe(complex(-1,-1), 50)</span></span>
+<span id="cb22-20"><a href="#cb22-20"></a><span class="co">&gt;&gt;&gt; r**2</span></span>
+<span id="cb22-21"><a href="#cb22-21"></a><span class="co">(-0.9999999999999998-0.9999999999999999j)</span></span>
+<span id="cb22-22"><a href="#cb22-22"></a><span class="co">&gt;&gt;&gt; r = racine_complexe(843, 50)</span></span>
+<span id="cb22-23"><a href="#cb22-23"></a><span class="co">&gt;&gt;&gt; r</span></span>
+<span id="cb22-24"><a href="#cb22-24"></a><span class="co">29.03446228191595</span></span>
+<span id="cb22-25"><a href="#cb22-25"></a><span class="co">&gt;&gt;&gt; r**2</span></span>
+<span id="cb22-26"><a href="#cb22-26"></a><span class="co">842.9999999999999</span></span>
+<span id="cb22-27"><a href="#cb22-27"></a><span class="co">&quot;&quot;&quot;</span></span></code></pre></div>
+<h2 id="exo16">Exo16</h2>
+<div class="sourceCode" id="cb23"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1"></a></span>
+<span id="cb23-2"><a href="#cb23-2"></a><span class="im">from</span> PIL <span class="im">import</span> Image</span>
+<span id="cb23-3"><a href="#cb23-3"></a></span>
+<span id="cb23-4"><a href="#cb23-4"></a>Largeur, Hauteur <span class="op">=</span> <span class="dv">400</span>, <span class="dv">400</span></span>
+<span id="cb23-5"><a href="#cb23-5"></a>Zxmax, Zymax <span class="op">=</span> <span class="dv">1</span>, <span class="dv">1</span></span>
+<span id="cb23-6"><a href="#cb23-6"></a>f0 <span class="op">=</span> <span class="kw">lambda</span> z : z<span class="op">**</span><span class="dv">3</span> <span class="op">-</span> <span class="dv">1</span></span>
+<span id="cb23-7"><a href="#cb23-7"></a>fp0 <span class="op">=</span> <span class="kw">lambda</span> z : <span class="dv">3</span><span class="op">*</span>z<span class="op">**</span><span class="dv">2</span></span>
+<span id="cb23-8"><a href="#cb23-8"></a>racines0 <span class="op">=</span> [<span class="dv">1</span>, <span class="bu">complex</span>(math.cos(<span class="dv">2</span><span class="op">*</span>math.pi<span class="op">/</span><span class="fl">3.</span>), math.sin(<span class="dv">2</span><span class="op">*</span>math.pi<span class="op">/</span><span class="fl">3.</span>)),</span>
+<span id="cb23-9"><a href="#cb23-9"></a><span class="bu">complex</span>(math.cos(<span class="dv">4</span><span class="op">*</span>math.pi<span class="op">/</span><span class="fl">3.</span>), math.sin(<span class="dv">4</span><span class="op">*</span>math.pi<span class="op">/</span><span class="fl">3.</span>))]</span>
+<span id="cb23-10"><a href="#cb23-10"></a>f1 <span class="op">=</span> <span class="kw">lambda</span> z : z<span class="op">**</span><span class="dv">3</span> <span class="op">+</span> <span class="dv">1</span></span>
+<span id="cb23-11"><a href="#cb23-11"></a>fp1 <span class="op">=</span> <span class="kw">lambda</span> z : <span class="dv">3</span><span class="op">*</span>z<span class="op">**</span><span class="dv">2</span></span>
+<span id="cb23-12"><a href="#cb23-12"></a>racines1 <span class="op">=</span> [<span class="op">-</span><span class="dv">1</span>, <span class="op">-</span><span class="bu">complex</span>(math.cos(<span class="dv">2</span><span class="op">*</span>math.pi<span class="op">/</span><span class="fl">3.</span>), math.sin(<span class="dv">2</span><span class="op">*</span>math.pi<span class="op">/</span><span class="fl">3.</span>)),</span>
+<span id="cb23-13"><a href="#cb23-13"></a><span class="op">-</span><span class="bu">complex</span>(math.cos(<span class="dv">4</span><span class="op">*</span>math.pi<span class="op">/</span><span class="fl">3.</span>), math.sin(<span class="dv">4</span><span class="op">*</span>math.pi<span class="op">/</span><span class="fl">3.</span>))]</span>
+<span id="cb23-14"><a href="#cb23-14"></a><span class="co">#palette de couleur pour les bassins d&#39;attraction des trois zéros de z-&gt;z**3+1</span></span>
+<span id="cb23-15"><a href="#cb23-15"></a>palette <span class="op">=</span> [(<span class="dv">255</span>, <span class="dv">0</span>, <span class="dv">0</span>), (<span class="dv">0</span>, <span class="dv">255</span>, <span class="dv">0</span>), (<span class="dv">255</span>, <span class="dv">255</span>, <span class="dv">255</span>)]</span>
+<span id="cb23-16"><a href="#cb23-16"></a></span>
+<span id="cb23-17"><a href="#cb23-17"></a><span class="kw">def</span> affixe(line, col):</span>
+<span id="cb23-18"><a href="#cb23-18"></a>    <span class="co">&#39;&#39;&#39;Retourne l&#39;affixe du pixel en (line, col) dans la matrice bitmap&#39;&#39;&#39;</span></span>
+<span id="cb23-19"><a href="#cb23-19"></a>    x <span class="op">=</span> (col <span class="op">-</span> Largeur<span class="op">/</span><span class="fl">2.</span>)<span class="op">/</span>Largeur<span class="op">*</span><span class="dv">2</span><span class="op">*</span>Zxmax</span>
+<span id="cb23-20"><a href="#cb23-20"></a>    y <span class="op">=</span> (line <span class="op">-</span> Hauteur<span class="op">/</span><span class="fl">2.</span>)<span class="op">/</span>Hauteur<span class="op">*</span><span class="dv">2</span><span class="op">*</span>Zymax</span>
+<span id="cb23-21"><a href="#cb23-21"></a>    <span class="cf">return</span> <span class="bu">complex</span>(x,y) </span>
+<span id="cb23-22"><a href="#cb23-22"></a>    </span>
+<span id="cb23-23"><a href="#cb23-23"></a><span class="kw">def</span> newton(f, fp, z0, epsilon):</span>
+<span id="cb23-24"><a href="#cb23-24"></a>    <span class="co">#si la dérivée s&#39;annule on arrete les itérations et on retourne 0</span></span>
+<span id="cb23-25"><a href="#cb23-25"></a>    <span class="cf">if</span> fp(z0) <span class="op">==</span> <span class="dv">0</span>:</span>
+<span id="cb23-26"><a href="#cb23-26"></a>        <span class="cf">return</span> <span class="dv">0</span></span>
+<span id="cb23-27"><a href="#cb23-27"></a>    z1 <span class="op">=</span> z0 <span class="op">-</span> f(z0)<span class="op">/</span>fp(z0)</span>
+<span id="cb23-28"><a href="#cb23-28"></a>    <span class="cf">while</span> <span class="bu">abs</span>(z1 <span class="op">-</span> z0) <span class="op">&gt;</span> epsilon:</span>
+<span id="cb23-29"><a href="#cb23-29"></a>        z1, z0 <span class="op">=</span> z1 <span class="op">-</span> f(z1)<span class="op">/</span>fp(z1), z1</span>
+<span id="cb23-30"><a href="#cb23-30"></a>    <span class="cf">return</span> z1</span>
+<span id="cb23-31"><a href="#cb23-31"></a></span>
+<span id="cb23-32"><a href="#cb23-32"></a></span>
+<span id="cb23-33"><a href="#cb23-33"></a></span>
+<span id="cb23-34"><a href="#cb23-34"></a><span class="kw">def</span> applatir(tab):</span>
+<span id="cb23-35"><a href="#cb23-35"></a>    <span class="co">&#39;&#39;&#39;Applatit une matrice bitmap de pixels&#39;&#39;&#39;</span></span>
+<span id="cb23-36"><a href="#cb23-36"></a>    <span class="cf">return</span> [tab[i][j] <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(tab)) <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(tab[i]))]</span>
+<span id="cb23-37"><a href="#cb23-37"></a>    </span>
+<span id="cb23-38"><a href="#cb23-38"></a><span class="kw">def</span> bassins(f, fp, racines, palette, Largeur, Hauteur, Zxmax, Zymax, affixe):</span>
+<span id="cb23-39"><a href="#cb23-39"></a>    <span class="co">&#39;&#39;&#39;Retourne la matrice de pixels, l&#39;image en niveau de gris et l&#39;image</span></span>
+<span id="cb23-40"><a href="#cb23-40"></a><span class="co">    en couleur RGB des bassins d&#39;attraction des zéros des zéros de z -&gt; f(z) de dérivée z -&gt; fp(z, pour les </span></span>
+<span id="cb23-41"><a href="#cb23-41"></a><span class="co">    points du plan complexe de parties réelles et imaginaires entre -1 et 1.</span></span>
+<span id="cb23-42"><a href="#cb23-42"></a><span class="co">    Les points pour lesquels f&#39;(xn)=0 dans la méthode de Newton sont en noir.</span></span>
+<span id="cb23-43"><a href="#cb23-43"></a><span class="co">    &#39;&#39;&#39;</span></span>
+<span id="cb23-44"><a href="#cb23-44"></a>    bitmap <span class="op">=</span> [[(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>) <span class="cf">for</span> col <span class="kw">in</span> <span class="bu">range</span>(Largeur)] <span class="cf">for</span> line <span class="kw">in</span> <span class="bu">range</span>(Hauteur)]    </span>
+<span id="cb23-45"><a href="#cb23-45"></a>    <span class="cf">for</span> line <span class="kw">in</span> <span class="bu">range</span>(Hauteur):</span>
+<span id="cb23-46"><a href="#cb23-46"></a>        <span class="cf">for</span> col <span class="kw">in</span> <span class="bu">range</span>(Largeur):</span>
+<span id="cb23-47"><a href="#cb23-47"></a>            res <span class="op">=</span> newton(f, fp, affixe(line, col), <span class="dv">10</span><span class="op">**</span>(<span class="op">-</span><span class="dv">1</span>))</span>
+<span id="cb23-48"><a href="#cb23-48"></a>            i <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb23-49"><a href="#cb23-49"></a>            <span class="cf">while</span> i <span class="op">&lt;</span> <span class="bu">len</span>(racines) <span class="kw">and</span> <span class="bu">abs</span>(res <span class="op">-</span> racines[i]) <span class="op">&gt;</span> <span class="dv">10</span><span class="op">**</span>(<span class="op">-</span><span class="dv">1</span>):</span>
+<span id="cb23-50"><a href="#cb23-50"></a>                i <span class="op">+=</span> <span class="dv">1</span></span>
+<span id="cb23-51"><a href="#cb23-51"></a>            <span class="cf">if</span> i <span class="op">&lt;</span> <span class="bu">len</span>(racines):</span>
+<span id="cb23-52"><a href="#cb23-52"></a>                    bitmap[line][col] <span class="op">=</span> palette[i]</span>
+<span id="cb23-53"><a href="#cb23-53"></a>            <span class="cf">else</span>:</span>
+<span id="cb23-54"><a href="#cb23-54"></a>                bitmap[line][col] <span class="op">=</span> (<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>)</span>
+<span id="cb23-55"><a href="#cb23-55"></a>    imageRGB <span class="op">=</span> Image.new(<span class="st">&#39;RGB&#39;</span>,(Largeur, Hauteur))</span>
+<span id="cb23-56"><a href="#cb23-56"></a>    imageRGB.putdata(applatir(bitmap))</span>
+<span id="cb23-57"><a href="#cb23-57"></a>    imageL <span class="op">=</span> imageRGB.convert(<span class="st">&#39;L&#39;</span>)</span>
+<span id="cb23-58"><a href="#cb23-58"></a>    <span class="cf">return</span> bitmap, imageRGB, imageL</span>
+<span id="cb23-59"><a href="#cb23-59"></a></span>
+<span id="cb23-60"><a href="#cb23-60"></a></span>
+<span id="cb23-61"><a href="#cb23-61"></a><span class="co">&quot;&quot;&quot;</span></span>
+<span id="cb23-62"><a href="#cb23-62"></a><span class="co">&gt;&gt;&gt; bitmap0, imageRGB0, imageL0 = bassins(f0, fp0, racines0, palette,</span></span>
+<span id="cb23-63"><a href="#cb23-63"></a><span class="co">Largeur, Hauteur, Zxmax, Zymax, affixe) </span></span>
+<span id="cb23-64"><a href="#cb23-64"></a><span class="co">&gt;&gt;&gt; bitmap1, imageRGB1, imageL1 = bassins(f1, fp1, racines1, palette, Largeur, Hauteur, Zxmax, Zymax, affixe)</span></span>
+<span id="cb23-65"><a href="#cb23-65"></a><span class="co">&gt;&gt;&gt; imageRGB1.save(&#39;fractale-z__3+1-RGB.png&#39;)</span></span>
+<span id="cb23-66"><a href="#cb23-66"></a><span class="co">&quot;&quot;&quot;</span></span></code></pre></div>
+<figure>
+<img src="fractale-z3+1-L.png" title="Bassins d&#39;attraction $z \mapsto z^3+1$" alt="" /><figcaption>Bassins d’attraction <span class="math inline">\(z \mapsto z^3+1\)</span></figcaption>
+</figure>
+<div class="sourceCode" id="cb24"><pre class="sourceCode python"><code class="sourceCode python"></code></pre></div>
+</body>
+</html>
