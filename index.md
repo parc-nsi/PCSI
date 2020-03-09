@@ -89,6 +89,7 @@ Sujets réalisés par Stéphane Gonnord/Laurent Jouhet/Frédéric Junier/Stépha
   - [corrigé version python](TP8/corrige/I1-TP-08-Dichotomie-Newton-corrige.py)
   
 * TP 10:
+  - [QCM sur les listes/tableau](https://genumsi.inria.fr/qcm.php?h=7b8eb974bcf4e7349c793267fdf5b6b4) et [corrigé du QCM](https://genumsi.inria.fr/qcm-corrige.php?cle=MTUwOzE5NzsyODE7MzAzOzMwNzszMzk7Mzk5OzQyNjszNzk=), merci au site [Genumsi](https://genumsi.inria.fr/)
   - [énoncé](TP10/sujet/I1-TP-10-Listes_de_Listes-sujet.pdf)
   - [ressources](TP10/ressources)
   - [corrigé version pdf](TP10/corrige/I1-TP-10-Listes_de_Listes-corrige.pdf)
