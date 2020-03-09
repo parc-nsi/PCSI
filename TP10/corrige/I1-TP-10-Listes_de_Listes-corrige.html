@@ -1,0 +1,743 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+ "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <meta name="author" content="Chenevois-Jouhet-Junier" />
+  <title>Corrigé du TP 10 - Tableaux 2</title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+  </style>
+  <link rel="stylesheet" type="text/css" media="screen, projection, print"
+    href="http://www.w3.org/Talks/Tools/Slidy2/styles/slidy.css" />
+  <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+  <script src="http://www.w3.org/Talks/Tools/Slidy2/scripts/slidy.js"
+    charset="utf-8" type="text/javascript"></script>
+</head>
+<body>
+<div class="slide titlepage">
+  <h1 class="title">Corrigé du TP 10 - Tableaux 2</h1>
+  <p class="author">
+Chenevois-Jouhet-Junier
+  </p>
+</div>
+<div class="slide section level1">
+
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"></code></pre></div>
+</div>
+<div id="parcours-de-tableaux" class="slide section level1">
+<h1>Parcours de tableaux</h1>
+<h2 id="exo-1">Exo 1</h2>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">
+<span class="kw">def</span> inversions(t):
+    <span class="co">&#39;&#39;&#39;retourne le nombre de couples du tableau t tels que i&lt;j et t[i]&gt;t[j]&#39;&#39;&#39;</span>
+    n <span class="op">=</span> <span class="dv">0</span>
+    <span class="cf">for</span> i <span class="op">in</span> <span class="bu">range</span>(<span class="bu">len</span>(t)):
+        <span class="cf">for</span> j <span class="op">in</span> <span class="bu">range</span>(i<span class="dv">+1</span>,<span class="bu">len</span>(t)):
+            <span class="cf">if</span> t[j]<span class="op">-</span>t[i] <span class="op">&lt;</span> <span class="dv">0</span>:
+                n <span class="op">+=</span> <span class="dv">1</span> 
+    <span class="cf">return</span> n
+
+<span class="co">&quot;&quot;&quot;</span>
+<span class="co">&gt;&gt;&gt; inversions([5,1,2,4,3])</span>
+<span class="co">5</span>
+<span class="co">&quot;&quot;&quot;</span></code></pre></div>
+<p>Il y a <span class="math inline">\((n-1)+(n-2)+...+1 = \frac{(n-1)n}{2}\)</span> comparaisons dans la boucle interne donc la complexité est  (triangulaire), en <span class="math inline">\(O(n^2)\)</span>.</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"></code></pre></div>
+<h2 id="exo-2">Exo 2</h2>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">
+<span class="kw">def</span> indice_maxi(t):
+    <span class="co">&#39;&#39;&#39;retourne l&#39;indice d&#39;un élément maximal&#39;&#39;&#39;</span>
+    imax <span class="op">=</span> <span class="dv">0</span>
+    maxi <span class="op">=</span> t[imax]
+    <span class="cf">for</span> i <span class="op">in</span> <span class="bu">range</span>(<span class="dv">1</span>,<span class="bu">len</span>(t)):
+        <span class="cf">if</span> t[i] <span class="op">&gt;</span> maxi:
+            maxi, imax <span class="op">=</span> t[i], i
+    <span class="cf">return</span> i</code></pre></div>
+<p>Il y a <span class="math inline">\(n-1\)</span> comparaisons (un parcours de tableau) donc la complexité est  en <span class="math inline">\(O(n)\)</span>.</p>
+<h2 id="exo-3">Exo 3</h2>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">
+<span class="kw">def</span> indices_difference_maxi(t):
+    <span class="co">&#39;&#39;&#39;retourne un couple (i,j) tel que i&gt;=j et abs(ti-tj) maximal&#39;&#39;&#39;</span>
+    couple <span class="op">=</span> (<span class="dv">0</span>,<span class="dv">0</span>)
+    maxi <span class="op">=</span> <span class="dv">0</span>
+    <span class="cf">for</span> j <span class="op">in</span> <span class="bu">range</span>(<span class="bu">len</span>(t)):
+        <span class="cf">for</span> i <span class="op">in</span> <span class="bu">range</span>(j<span class="dv">+1</span>,<span class="bu">len</span>(t)):
+            ecart <span class="op">=</span> <span class="bu">abs</span>(t[i]<span class="op">-</span>t[j]) 
+            <span class="cf">if</span> ecart <span class="op">&gt;</span> maxi:
+                couple <span class="op">=</span> (i,j)
+                maxi <span class="op">=</span> ecart
+    <span class="cf">return</span> couple</code></pre></div>
+<p>Il y a <span class="math inline">\((n-1)+(n-2)+...+1 = \frac{(n-1)n}{2}\)</span> comparaisons dans la boucle interne donc la complexité est <strong>quadratique</strong> (triangulaire) en <span class="math inline">\(O(n^2)\)</span>.</p>
+<h2 id="exo-4">Exo 4</h2>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">
+<span class="kw">def</span> undoublon(t):
+    <span class="co">&#39;&#39;&#39;retourne True si t contient au moins un doublon et False sinon&#39;&#39;&#39;</span>
+    <span class="cf">for</span> j <span class="op">in</span> <span class="bu">range</span>(<span class="bu">len</span>(t)):
+        <span class="cf">for</span> i <span class="op">in</span> <span class="bu">range</span>(j<span class="dv">+1</span>,<span class="bu">len</span>(t)):
+            <span class="cf">if</span> t[i] <span class="op">==</span> t[j]:
+                <span class="cf">return</span> <span class="va">True</span>
+    <span class="cf">return</span> <span class="va">False</span>
+
+<span class="co">&quot;&quot;&quot;</span>
+<span class="co">&gt;&gt;&gt; undoublon([10,2,5,23,2])</span>
+<span class="co">True</span>
+<span class="co">&gt;&gt;&gt; undoublon([10,2,5,23,12])</span>
+<span class="co">False</span>
+<span class="co">&gt;&gt;&gt; undoublon([23,2,5,23,12])</span>
+<span class="co">True</span>
+<span class="co">&gt;&gt;&gt; undoublon([2,2,2])</span>
+<span class="co">True</span>
+<span class="co">&quot;&quot;&quot;</span></code></pre></div>
+<p>La fonction <code>undoublon(t)</code> est de complexité <strong>quadratique</strong> (triangulaire) dans le pire des cas. Si l'on connaît la plage des valeurs de <code>t</code>, on peut déterminer si <code>t</code> possède un doublon en le parcourant et en mettant à jour un un tableau ees éléments déjà vus. La complexité est alors <strong>linéaire</strong>.</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">
+<span class="kw">def</span> undoublon_lineraire(t, n, m):
+    <span class="co">&#39;&#39;&#39;retourne True si t contient au moins un doublon et False sinon.</span>
+<span class="co">    , les valeurs de t étant des entiers compris entre n et m &#39;&#39;&#39;</span>
+    dejavu <span class="op">=</span> [<span class="va">False</span>] <span class="op">*</span> (m <span class="op">-</span> n  <span class="op">+</span> <span class="dv">1</span>)
+    <span class="cf">for</span> e <span class="op">in</span> t:
+        <span class="cf">if</span> dejavu[e <span class="op">-</span> n] :
+            <span class="cf">return</span> <span class="va">True</span>
+        dejavu[ e <span class="op">-</span> n ] <span class="op">=</span> <span class="va">True</span>
+    <span class="cf">return</span> <span class="va">False</span>
+    </code></pre></div>
+<h2 id="exo-5">Exo 5</h2>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">
+<span class="kw">def</span> doublons(t):
+    <span class="co">&#39;&#39;&#39;retourne la liste des doublons&#39;&#39;&#39;</span>
+    L <span class="op">=</span> []
+    <span class="cf">for</span> i <span class="op">in</span> <span class="bu">range</span>(<span class="bu">len</span>(t)):
+        <span class="cf">for</span> j <span class="op">in</span> <span class="bu">range</span>(i<span class="dv">+1</span>,<span class="bu">len</span>(t)):
+            <span class="cf">if</span> t[i] <span class="op">==</span> t[j]:
+                L.append((i,j))
+    <span class="cf">return</span> L
+
+<span class="co">&quot;&quot;&quot;</span>
+<span class="co">&gt;&gt;&gt; doublons([2,5,2,42])</span>
+<span class="co">[(0, 2)]</span>
+<span class="co">&gt;&gt;&gt; doublons([2,5,3,42])</span>
+<span class="co">[]</span>
+<span class="co">&quot;&quot;&quot;</span></code></pre></div>
+<p>Complexité <strong>quadratique</strong> (triangulaire).</p>
+<h2 id="exo-6-évaluation-de-polynômes">Exo 6 Évaluation de polynômes</h2>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">
+P0 <span class="op">=</span> [<span class="dv">4</span>, <span class="op">-</span><span class="dv">3</span>, <span class="dv">1</span>, <span class="dv">5</span>]
+
+<span class="kw">def</span> evaluation(P,t):
+    <span class="co">&#39;&#39;&#39;Evaluation naive du polynome P en t&#39;&#39;&#39;</span>
+    s<span class="op">=</span><span class="dv">0</span> <span class="co"># la somme provisoire</span>
+    <span class="cf">for</span> i <span class="op">in</span> <span class="bu">range</span>(<span class="bu">len</span>(P)):
+        s <span class="op">=</span> s <span class="op">+</span> P[i]<span class="op">*</span>t<span class="op">**</span>i
+    <span class="cf">return</span> s
+
+<span class="kw">def</span> evaluation_meilleure(P,t):
+    <span class="co">&#39;&#39;&#39;Amélioration de l&#39;évaluation d&#39;un polynome P en t&#39;&#39;&#39;</span>
+    s<span class="op">=</span><span class="dv">0</span> <span class="co"># la somme provisoire</span>
+    p <span class="op">=</span> <span class="dv">1</span>  <span class="co">#la puissance de t provisoire</span>
+    <span class="cf">for</span> i <span class="op">in</span> <span class="bu">range</span>(<span class="bu">len</span>(P)):
+        s <span class="op">=</span> s <span class="op">+</span> P[i]<span class="op">*</span>p
+        p <span class="op">=</span> p<span class="op">*</span>t
+    <span class="cf">return</span> s
+
+<span class="kw">def</span> horner(P,t, verbose<span class="op">=</span><span class="va">False</span>):
+    <span class="co">&#39;&#39;&#39;Evaluation d&#39;un polynome P en t avec l&#39;algorithme de Horner&#39;&#39;&#39;</span>
+    s <span class="op">=</span> <span class="dv">0</span> <span class="co"># la somme provisoire</span>
+    <span class="cf">for</span> i <span class="op">in</span> <span class="bu">range</span>(<span class="op">-</span><span class="dv">1</span>,<span class="op">-</span><span class="bu">len</span>(P)<span class="op">-</span><span class="dv">1</span>,<span class="op">-</span><span class="dv">1</span>):
+        <span class="cf">if</span> verbose:
+            <span class="bu">print</span>(<span class="st">&#39;--&#39;</span><span class="op">*</span>(<span class="bu">len</span>(P) <span class="op">+</span> <span class="dv">1</span> <span class="op">+</span> i)<span class="op">+</span> <span class="st">&#39;&gt;travail sur ({}, {})&#39;</span>.<span class="bu">format</span>(P[:<span class="bu">len</span>(P)<span class="op">+</span>i<span class="dv">+1</span>], t))
+        s <span class="op">=</span> s<span class="op">*</span>t <span class="op">+</span> P[i]
+    <span class="cf">return</span> s
+
+<span class="kw">def</span> hornerec(P,x):
+    <span class="co">&#39;&#39;&#39;Une version récursive de l&#39;algorithme de Horner. Les appels de fonction</span>
+<span class="co">     se font dans l&#39;ordre inverse de la version itérative&#39;&#39;&#39;</span>
+    <span class="cf">if</span> <span class="bu">len</span>(P) <span class="op">==</span> <span class="dv">1</span>:
+        <span class="bu">print</span>(<span class="st">&#39;--&#39;</span><span class="op">*</span>(<span class="bu">len</span>(P))<span class="op">+</span> <span class="st">&#39;&gt;appel de hornerec({}, {})&#39;</span>.<span class="bu">format</span>(P, x))
+        <span class="bu">print</span>(<span class="st">&#39;--&#39;</span><span class="op">*</span>(<span class="bu">len</span>(P))<span class="op">+</span> <span class="st">&#39;&gt;sortie de hornerec({}, {})&#39;</span>.<span class="bu">format</span>(P, x))
+        <span class="cf">return</span> P[<span class="dv">0</span>]
+    <span class="bu">print</span>(<span class="st">&#39;--&#39;</span><span class="op">*</span>(<span class="bu">len</span>(P))<span class="op">+</span> <span class="st">&#39;&gt;appel de hornerec({}, {})&#39;</span>.<span class="bu">format</span>(P, x))
+    res <span class="op">=</span> P[<span class="dv">0</span>] <span class="op">+</span> x<span class="op">*</span>hornerec(P[<span class="dv">1</span>:], x)
+    <span class="bu">print</span>(<span class="st">&#39;--&#39;</span><span class="op">*</span>(<span class="bu">len</span>(P))<span class="op">+</span> <span class="st">&#39;&gt;sortie de hornerec({}, {})&#39;</span>.<span class="bu">format</span>(P, x))
+    <span class="cf">return</span> res
+    
+<span class="co">&quot;&quot;&quot;</span>
+<span class="co">&gt;&gt;&gt; [f(P0, 2) for f in [evaluation, evaluation_meilleure, horner]]</span>
+<span class="co">[42, 42, 42]</span>
+<span class="co">&gt;&gt;&gt; horner(P0, 2, verbose=True)</span>
+<span class="co">--------&gt;travail sur ([4, -3, 1, 5], 2)</span>
+<span class="co">------&gt;travail sur ([4, -3, 1], 2)</span>
+<span class="co">----&gt;travail sur ([4, -3], 2)</span>
+<span class="co">--&gt;travail sur ([4], 2)</span>
+<span class="co">42</span>
+<span class="co">&gt;&gt;&gt; hornerec(P0, 2)</span>
+<span class="co">--------&gt;appel de hornerec([4, -3, 1, 5], 2)</span>
+<span class="co">------&gt;appel de hornerec([-3, 1, 5], 2)</span>
+<span class="co">----&gt;appel de hornerec([1, 5], 2)</span>
+<span class="co">--&gt;appel de hornerec([5], 2)</span>
+<span class="co">--&gt;sortie de hornerec([5], 2)</span>
+<span class="co">----&gt;sortie de hornerec([1, 5], 2)</span>
+<span class="co">------&gt;sortie de hornerec([-3, 1, 5], 2)</span>
+<span class="co">--------&gt;sortie de hornerec([4, -3, 1, 5], 2)</span>
+<span class="co">42</span>
+<span class="co">&quot;&quot;&quot;</span></code></pre></div>
+<p>Complexité</p>
+<ul>
+<li><p>Avec <code>evaluation</code>, pour un polynome de degré <span class="math inline">\(n\)</span> on effectue:</p>
+<ul>
+<li><span class="math inline">\(n+1\)</span> additions</li>
+<li><span class="math inline">\(1+2+3+...+n+(n+1) = \frac{(n+1)(n+2)}{2}\)</span> produits</li>
+</ul></li>
+</ul>
+<p>Soit un total de <span class="math inline">\(\frac{(n+1)(n+3)}{2}\)</span> opérations. La complexité est donc <strong>quadratique</strong> , en <span class="math inline">\(O(n^2)\)</span>.</p>
+<ul>
+<li><p>Avec <code>evaluation_meilleure</code>, pour un polynome de degré <span class="math inline">\(n\)</span> on effectue :</p>
+<ul>
+<li><span class="math inline">\(n+1\)</span> additions</li>
+<li>et <span class="math inline">\(2(n+1)\)</span> produits</li>
+</ul></li>
+</ul>
+<p>Soit un total de <span class="math inline">\(3(n+1)\)</span> opérations. La complexité est donc <strong>linéaire</strong> , en <span class="math inline">\(O(n)\)</span>.</p>
+<ul>
+<li><p>Avec <code>horner</code>, pour un polynome de degré <span class="math inline">\(n\)</span> on effectue :</p>
+<ul>
+<li><span class="math inline">\(n+1\)</span> additions</li>
+<li>et <span class="math inline">\(n+1\)</span> produits</li>
+</ul></li>
+</ul>
+<p>Soit un total de <span class="math inline">\(2(n+1)\)</span> opérations. La complexité est donc <strong>linéaire</strong> , en <span class="math inline">\(O(n)\)</span>.</p>
+</div>
+<div id="tableaux-à-deux-dimensions" class="slide section level1">
+<h1>Tableaux à deux dimensions</h1>
+<h2 id="exo7">Exo7</h2>
+<p>Ci-dessous des liens permanent vers des simulations de représentations de matrices avec <a href="http://www.pythontutor.com/">Python Tutor</a> :</p>
+<ul>
+<li><p>Exemple de l'exo 7: <a href="http://pythontutor.com/visualize.html#code=t1+%3D+%5B%5B0%5D+*+3%5D+*+2%0At2+%3D+%5B%5B0%5D+*+3+for+_+in+range(2)%5D%0A%0At1%5B1%5D%5B1%5D+%3D+42%0At2%5B1%5D%5B1%5D+%3D+42%0A%0At1,+t2&amp;mode=display&amp;origin=opt-frontend.js&amp;cumulative=false&amp;heapPrimitives=false&amp;drawParentPointers=false&amp;textReferences=false&amp;showOnlyOutputs=false&amp;py=3&amp;rawInputLstJSON=%5B%5D&amp;curInstr=0">http://pythontutor.com/visualize.html#code=t1+%3D+%5B%5B0%5D+*+3%5D+*+2%0At2+%3D+%5B%5B0%5D+*+3+for+_+in+range(2)%5D%0A%0At1%5B1%5D%5B1%5D+%3D+42%0At2%5B1%5D%5B1%5D+%3D+42%0A%0At1,+t2&amp;mode=display&amp;origin=opt-frontend.js&amp;cumulative=false&amp;heapPrimitives=false&amp;drawParentPointers=false&amp;textReferences=false&amp;showOnlyOutputs=false&amp;py=3&amp;rawInputLstJSON=%5B%5D&amp;curInstr=0</a></p></li>
+<li><p>Un autre exemple : <a href="http://pythontutor.com/visualize.html#code=L+%3D+%5B0,0,0%5D*4%0AN+%3D+%5B%5B0,0,0%5D%5D*4%0AN%5B1%5D%5B1%5D+%3D+2%0AM+%3D+%5B%5B0,0,0%5D+for+i+in+range(4%29%5D%0AM%5B1%5D%5B1%5D+%3D+2%0AP+%3D+%5B%5B0+for+i+in+range(3%29%5D+for+j+in+range(4%29%5D%0AP%5B1%5D%5B1%5D+%3D+2%0AQ+%3D+%5B%5B0%5D*3+for+j+in+range(4%29%5D%0AR+%3D+%5B%5D%0Afor+nligne+in+range(4%29%3A%0A++++ligne+%3D+%5B%5D%0A++++for+ncol+in+range(3%29%3A%0A++++++++ligne.append(0%29%0A++++R.append(ligne%29&amp;mode=display&amp;origin=opt-frontend.js&amp;cumulative=false&amp;heapPrimitives=false&amp;textReferences=false&amp;py=3&amp;rawInputLstJSON=%5B%5D&amp;curInstr=0">http://pythontutor.com/visualize.html#code=L+%3D+%5B0,0,0%5D*4%0AN+%3D+%5B%5B0,0,0%5D%5D*4%0AN%5B1%5D%5B1%5D+%3D+2%0AM+%3D+%5B%5B0,0,0%5D+for+i+in+range(4%29%5D%0AM%5B1%5D%5B1%5D+%3D+2%0AP+%3D+%5B%5B0+for+i+in+range(3%29%5D+for+j+in+range(4%29%5D%0AP%5B1%5D%5B1%5D+%3D+2%0AQ+%3D+%5B%5B0%5D*3+for+j+in+range(4%29%5D%0AR+%3D+%5B%5D%0Afor+nligne+in+range(4%29%3A%0A++++ligne+%3D+%5B%5D%0A++++for+ncol+in+range(3%29%3A%0A++++++++ligne.append(0%29%0A++++R.append(ligne%29&amp;mode=display&amp;origin=opt-frontend.js&amp;cumulative=false&amp;heapPrimitives=false&amp;textReferences=false&amp;py=3&amp;rawInputLstJSON=%5B%5D&amp;curInstr=0</a></p></li>
+</ul>
+<h2 id="exo8-matrice-nulle-et-copie-de-matrice">Exo8 Matrice nulle et copie de matrice</h2>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">
+<span class="kw">def</span> matrice_nulle(n,p):
+    <span class="co">&#39;&#39;&#39;Retourne la matrice nulle de n lignes et p colonnes&#39;&#39;&#39;</span>
+    <span class="cf">return</span> [[<span class="dv">0</span> <span class="cf">for</span> j <span class="op">in</span> <span class="bu">range</span>(p)] <span class="cf">for</span> i <span class="op">in</span> <span class="bu">range</span>(n)]
+    e
+
+<span class="kw">def</span> dimensions(m):
+    <span class="co">&#39;&#39;&#39;dimensions d&#39;une matrice&#39;&#39;&#39;</span>
+    <span class="cf">return</span> <span class="bu">len</span>(m),<span class="bu">len</span>(m[<span class="dv">0</span>])
+     
+<span class="kw">def</span> copie(m):
+    <span class="co">&#39;&#39;&#39;retourne une copie de la matrice m&#39;&#39;&#39;</span>
+    nlines,ncols <span class="op">=</span> dimensions(m)
+    cp <span class="op">=</span> matrice_nulle(nlines,ncols) <span class="co"># matrice copie</span>
+    <span class="cf">for</span> i <span class="op">in</span> <span class="bu">range</span>(nlines):
+        <span class="cf">for</span> j <span class="op">in</span> <span class="bu">range</span>(ncols):
+            cp[i][j]<span class="op">=</span>m[i][j]
+    <span class="cf">return</span>  cp
+
+<span class="kw">def</span> copie2(m):
+    <span class="co">&#39;&#39;&#39;retourne une copie de la matrice m&#39;&#39;&#39;</span>
+    nlines,ncols <span class="op">=</span> dimensions(m)
+    cp <span class="op">=</span> []  <span class="co"># matrice copie</span>
+    <span class="cf">for</span> i <span class="op">in</span> <span class="bu">range</span>(nlines):
+        ligne <span class="op">=</span> []
+        <span class="cf">for</span> j <span class="op">in</span> <span class="bu">range</span>(ncols):
+            ligne.append(m[i][j])
+        cp.append(ligne)
+    <span class="cf">return</span>  cp
+    
+<span class="kw">def</span> copie3(m):
+    <span class="co">&#39;&#39;&#39;retourne une copie de la matrice m&#39;&#39;&#39;</span>
+    <span class="cf">return</span> [ligne[:] <span class="cf">for</span> ligne <span class="op">in</span> m]
+    
+<span class="kw">def</span> copie_superficielle(m):
+    <span class="co">&#39;&#39;&#39;retourne une copie superficielle de la matrice m, pas ce qu&#39;on veut&#39;&#39;&#39;</span>
+    <span class="cf">return</span> [ligne <span class="cf">for</span> ligne <span class="op">in</span> m]
+    
+<span class="co">&quot;&quot;&quot;</span>
+<span class="co">&gt;&gt;&gt; m1 = matrice_nulle(3, 2) : i</span>
+<span class="co">&gt;&gt;&gt; m1</span>
+<span class="co">[[0, 0], [0, 0], [0, 0]]</span>
+<span class="co">&gt;&gt;&gt; dimensions(m1)</span>
+<span class="co">(3, 2)</span>
+<span class="co">&gt;&gt;&gt; </span>
+<span class="co">&gt;&gt;&gt; m1[1][1] = 3</span>
+<span class="co">&gt;&gt;&gt; m1</span>
+<span class="co">[[0, 0], [0, 3], [0, 0]]</span>
+<span class="co">&gt;&gt;&gt; m2</span>
+<span class="co">[[0, 0], [0, 0], [0, 0]]</span>
+<span class="co">&quot;&quot;&quot;</span></code></pre></div>
+</div>
+<div id="exo-9-addition-de-matrices" class="slide section level1">
+<h1>Exo 9 Addition de matrices</h1>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">
+<span class="kw">def</span> addition(m1, m2):
+    <span class="co">&#39;&#39;&#39;retourne la matrice somme de deux matrices m et n&#39;&#39;&#39;</span>
+    <span class="cf">assert</span> dimensions(m1) <span class="op">==</span> dimensions(m2), <span class="st">&quot;Les matrices n&#39;ont pas la même dimension&quot;</span>
+    nlines, ncols <span class="op">=</span> dimensions(m1)
+    s <span class="op">=</span> matrice_nulle(nlines,ncols)
+    <span class="cf">for</span> i <span class="op">in</span> <span class="bu">range</span>(nlines):
+        <span class="cf">for</span> j <span class="op">in</span> <span class="bu">range</span>(ncols):
+            s[i][j] <span class="op">=</span> m1[i][j]<span class="op">+</span>m2[i][j]
+    <span class="cf">return</span> s
+    
+<span class="kw">def</span> addition2(m1,m2):
+    n, p <span class="op">=</span> dimensions(m1)
+    <span class="cf">assert</span> (n,p) <span class="op">==</span> dimensions(m2),<span class="st">&quot;Les matrices n&#39;ont pas la même dimension&quot;</span>
+    <span class="cf">return</span> [[m[i][j] <span class="op">+</span> m2[j][j] <span class="cf">for</span> j <span class="op">in</span> <span class="bu">range</span>(p)] <span class="cf">for</span> i <span class="op">in</span> <span class="bu">range</span>(n)]</code></pre></div>
+<h2 id="exo-10-multiplication-dune-matrice-par-un-scalaire">Exo 10 Multiplication d'une matrice par un scalaire</h2>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">
+<span class="kw">def</span> multiplication_externe(m, alpha):
+    nlines, ncols <span class="op">=</span> dimensions(m)
+    s <span class="op">=</span> matrice_nulle(nlines, ncols)
+    <span class="cf">for</span> i <span class="op">in</span> <span class="bu">range</span>(nlines):
+        <span class="cf">for</span> j <span class="op">in</span> <span class="bu">range</span>(ncols):
+            s[i][j] <span class="op">=</span> m[i][j]<span class="op">*</span>alpha
+    <span class="cf">return</span> s
+
+<span class="kw">def</span> multiplication_externe2(m, alpha):
+    <span class="co">&#39;&#39;&#39;multiplie tous les coefficients de la matrice m par le scalaire alpha&#39;&#39;&#39;</span>
+    <span class="cf">return</span> [[m[i][j]<span class="op">*</span>alpha <span class="cf">for</span> j <span class="op">in</span> <span class="bu">range</span>(<span class="bu">len</span>(m[<span class="dv">0</span>]))] <span class="cf">for</span> i <span class="op">in</span> <span class="bu">range</span>(<span class="bu">len</span>(m))]</code></pre></div>
+<h2 id="exo11-transposition-dune-matrice">Exo11 Transposition d'une matrice</h2>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">
+
+<span class="kw">def</span> transposition(m):
+    <span class="co">&#39;&#39;&#39;retourne la transposée d&#39;une matrice&#39;&#39;&#39;</span>
+    nlines,ncols <span class="op">=</span> dimensions(m)
+    s <span class="op">=</span> matrice_nulle(ncols, nlines)
+    <span class="cf">for</span> i <span class="op">in</span> <span class="bu">range</span>(ncols):
+        <span class="cf">for</span> j <span class="op">in</span> <span class="bu">range</span>(nlines):
+            s[i][j] <span class="op">=</span> m[j][i]
+    <span class="cf">return</span> s
+
+
+<span class="kw">def</span> transposition2(m):
+    <span class="cf">return</span> [[m[j][i] <span class="cf">for</span> j <span class="op">in</span> <span class="bu">range</span>(<span class="bu">len</span>(m))] <span class="cf">for</span> i <span class="op">in</span> <span class="bu">range</span>(<span class="bu">len</span>(m[<span class="dv">0</span>]))]
+  </code></pre></div>
+<h2 id="exo-12-multiplication-de-deux-matrices">Exo 12 Multiplication de deux matrices</h2>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">
+<span class="kw">def</span> multiplication(m,n):
+    <span class="co">&#39;&#39;&#39;retourne la matrice poduit de m par n&#39;&#39;&#39;</span>
+    mlines,mcols <span class="op">=</span> dimensions(m)
+    nlines,ncols <span class="op">=</span> dimensions(n)
+    <span class="cf">assert</span> mcols <span class="op">==</span> nlines, <span class="st">&quot;Matrices incompatibles&quot;</span>
+    p <span class="op">=</span> matrice_nulle(mlines,ncols)
+    <span class="cf">for</span> i <span class="op">in</span> <span class="bu">range</span>(mlines):
+        <span class="cf">for</span> j <span class="op">in</span> <span class="bu">range</span>(ncols):
+            <span class="cf">for</span> k <span class="op">in</span> <span class="bu">range</span>(mcols): <span class="co"># ou nlines c&#39;est pareil</span>
+                p[i][j] <span class="op">=</span> p[i][j] <span class="op">+</span> m[i][k]<span class="op">*</span>n[k][j]
+    <span class="cf">return</span> p
+
+   
+<span class="kw">def</span> multiplication2(m,n):
+    <span class="co">&#39;&#39;&#39;retourne la matrice poduit de m par n&#39;&#39;&#39;</span>
+    <span class="cf">assert</span> dimensions(m)[<span class="dv">1</span>]<span class="op">==</span>dimensions(n)[<span class="dv">0</span>], <span class="st">&quot;Matrices incompatibles&quot;</span>
+    <span class="cf">return</span> [[<span class="bu">sum</span>([m[i][k]<span class="op">*</span>n[k][j] <span class="cf">for</span> k <span class="op">in</span> <span class="bu">range</span>(<span class="bu">len</span>(m[<span class="dv">0</span>]))]) 
+    <span class="cf">for</span> j <span class="op">in</span> <span class="bu">range</span>(<span class="bu">len</span>(n[<span class="dv">0</span>]))] <span class="cf">for</span> i <span class="op">in</span> <span class="bu">range</span>(<span class="bu">len</span>(m))] </code></pre></div>
+<h2 id="exo13-matrice-identité-et-puissance-dune-matrice">Exo13 Matrice identité et puissance d'une matrice</h2>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">
+<span class="kw">def</span> identite(n):
+    <span class="cf">return</span> [[i <span class="op">==</span> j <span class="op">and</span> <span class="dv">1</span> <span class="op">or</span> <span class="dv">0</span>  <span class="cf">for</span> j <span class="op">in</span> <span class="bu">range</span>(n)] <span class="cf">for</span> i <span class="op">in</span> <span class="bu">range</span>(n)]
+
+
+<span class="kw">def</span> puissance(A, q):
+    n, p <span class="op">=</span> dimensions(A)
+    <span class="cf">assert</span> n <span class="op">==</span> p
+    B <span class="op">=</span> identite(n)
+    <span class="cf">for</span> i <span class="op">in</span> <span class="bu">range</span>(q):
+        B <span class="op">=</span> multiplication(B, A)
+    <span class="cf">return</span> B</code></pre></div>
+<h2 id="exo-14-complexité-des-opérations-matricielles">Exo 14 Complexité des opérations matricielles</h2>
+<ul>
+<li><p>Addition de deux matrices de dimensions <span class="math inline">\(n \times p\)</span> :</p>
+<ul>
+<li><span class="math inline">\(np\)</span> additions de scalaires</li>
+<li><span class="math inline">\(0\)</span> multiplication de scalaires</li>
+<li>Complexité en <span class="math inline">\(O(np)\)</span></li>
+</ul></li>
+<li><p>Multiplication d'une matrice de dimension <span class="math inline">\(n \times p\)</span> par un scalaire :</p>
+<ul>
+<li><span class="math inline">\(0\)</span> addition de scalaires</li>
+<li><span class="math inline">\(np\)</span> multiplications de scalaires</li>
+<li>Complexité en <span class="math inline">\(O(np)\)</span></li>
+</ul></li>
+<li><p>Transposition d'une matrice de dimension <span class="math inline">\(n \times p\)</span> :</p>
+<ul>
+<li><span class="math inline">\(0\)</span> addition de scalaires</li>
+<li><span class="math inline">\(0\)</span> multiplication de scalaires</li>
+<li><span class="math inline">\(np\)</span> affectations dans un nouveau à tableaux à deux dimensions représentant une matrice de dimensions <span class="math inline">\(p \times n\)</span></li>
+<li>Complexité en <span class="math inline">\(O(np)\)</span></li>
+</ul></li>
+<li><p>Multiplication de deux matrices de dimensions <span class="math inline">\(n \times p\)</span> et <span class="math inline">\(p \times q\)</span> :</p>
+<ul>
+<li><span class="math inline">\(np(q-1)\)</span> additions de scalaires</li>
+<li><span class="math inline">\(npq\)</span> multiplications de scalaires</li>
+<li>Complexité en <span class="math inline">\(O(npq)\)</span></li>
+</ul></li>
+<li><p>Puissance de matrice <span class="math inline">\(A^q\)</span> avec A de dimension <span class="math inline">\(n \times n\)</span> :</p>
+<ul>
+<li><span class="math inline">\(qn^2(n-1)\)</span> additions de scalaires</li>
+<li><span class="math inline">\(qn^3\)</span> multiplications de scalaires</li>
+<li>Complexité en <span class="math inline">\(O(qn^3)\)</span></li>
+</ul></li>
+</ul>
+<h2 id="exo-15">Exo 15</h2>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">
+<span class="kw">def</span> est_symetrique(m):
+    <span class="co">&#39;&#39;&#39;Retourne un booleen indiquant si la matrice m est symetrique&#39;&#39;&#39;</span>
+    n, p <span class="op">=</span> dimensions(m)
+    <span class="cf">if</span> n <span class="op">!=</span> p:
+        <span class="cf">return</span> <span class="va">False</span>
+    <span class="cf">for</span> i <span class="op">in</span> <span class="bu">range</span>(n):
+        <span class="cf">for</span> j <span class="op">in</span> <span class="bu">range</span>(i):
+            <span class="cf">if</span> m[i][j] <span class="op">!=</span> m[j][i]:
+                <span class="cf">return</span> <span class="va">False</span>
+    <span class="cf">return</span> <span class="va">True</span>
+    
+<span class="kw">def</span> est_symetrique2(m):
+    n, p <span class="op">=</span> dimensions(m)
+    <span class="cf">if</span> n <span class="op">!=</span> p:
+        <span class="cf">return</span> <span class="va">False</span>
+    <span class="cf">return</span> m <span class="op">==</span> transposition(m)</code></pre></div>
+<p>Complexité :</p>
+<ul>
+<li><p>pour <code>est_symetrique</code> : dans le pire des cas (matrice symétrique) il faut faire <span class="math inline">\(1 + 2 + \cdots + n - 1 = \frac{n(n-1)}{2}\)</span> comparaisons.</p></li>
+<li><p>pour <code>est_symetrique2</code> : <span class="math inline">\(2n^2\)</span> affectations pour créer une matrice nulle de meme dimensions puis la transposée puis <span class="math inline">\(n^2\)</span> comparaisons pour comparer la matrice initiale et sa transposée.</p></li>
+</ul>
+<p>Les deux complexités sont quadratiques, en <span class="math inline">\(O(n^2)\)</span> mais les constantes sont bien plus petites pour la fonction <code>est_symetrique</code>.</p>
+</div>
+<div id="extrait-du-sujet-de-centrale-2016" class="slide section level1">
+<h1>Extrait du sujet de Centrale 2016</h1>
+<h2 id="exo-16">Exo 16</h2>
+<ul>
+<li>Question 1 :</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">conflit <span class="op">=</span> [ [  <span class="dv">0</span>,  <span class="dv">0</span>,  <span class="dv">0</span>,<span class="dv">100</span>,<span class="dv">100</span>,  <span class="dv">0</span>,  <span class="dv">0</span>,<span class="dv">150</span>,  <span class="dv">0</span>],
+            [  <span class="dv">0</span>,  <span class="dv">0</span>,  <span class="dv">0</span>,  <span class="dv">0</span>,  <span class="dv">0</span>, <span class="dv">50</span>,  <span class="dv">0</span>,  <span class="dv">0</span>,  <span class="dv">0</span>],
+            [  <span class="dv">0</span>,  <span class="dv">0</span>,  <span class="dv">0</span>,  <span class="dv">0</span>,<span class="dv">200</span>,  <span class="dv">0</span>,  <span class="dv">0</span>,<span class="dv">300</span>, <span class="dv">50</span>],
+            [<span class="dv">100</span>,  <span class="dv">0</span>,  <span class="dv">0</span>,  <span class="dv">0</span>,  <span class="dv">0</span>,  <span class="dv">0</span>,<span class="dv">400</span>,  <span class="dv">0</span>,  <span class="dv">0</span>],
+            [<span class="dv">100</span>,  <span class="dv">0</span>,<span class="dv">200</span>,  <span class="dv">0</span>,  <span class="dv">0</span>,  <span class="dv">0</span>,<span class="dv">200</span>,  <span class="dv">0</span>,<span class="dv">100</span>],
+            [  <span class="dv">0</span>, <span class="dv">50</span>,  <span class="dv">0</span>,  <span class="dv">0</span>,  <span class="dv">0</span>,  <span class="dv">0</span>,  <span class="dv">0</span>,  <span class="dv">0</span>,  <span class="dv">0</span>],            
+            [  <span class="dv">0</span>,  <span class="dv">0</span>,  <span class="dv">0</span>,<span class="dv">400</span>,<span class="dv">200</span>,  <span class="dv">0</span>,  <span class="dv">0</span>,  <span class="dv">0</span>,  <span class="dv">0</span>],            
+            [<span class="dv">150</span>,  <span class="dv">0</span>,<span class="dv">300</span>,  <span class="dv">0</span>,  <span class="dv">0</span>,  <span class="dv">0</span>,  <span class="dv">0</span>,  <span class="dv">0</span>,  <span class="dv">0</span>],            
+            [  <span class="dv">0</span>,  <span class="dv">0</span>, <span class="dv">50</span>,  <span class="dv">0</span>,<span class="dv">100</span>,  <span class="dv">0</span>,  <span class="dv">0</span>,  <span class="dv">0</span>,  <span class="dv">0</span>] ]
+
+<span class="kw">def</span> nb_conflits():
+    n <span class="op">=</span> <span class="bu">len</span>(conflit)
+    nb <span class="op">=</span> <span class="dv">0</span>
+    <span class="cf">for</span> i <span class="op">in</span> <span class="bu">range</span>(n <span class="op">-</span> <span class="dv">1</span>):
+        <span class="cf">for</span> j <span class="op">in</span> <span class="bu">range</span>(i <span class="op">+</span> <span class="dv">1</span>, n):
+            <span class="cf">if</span> conflit[i][j] <span class="op">!=</span> <span class="dv">0</span>:
+                nb <span class="op">+=</span> <span class="dv">1</span>
+    <span class="cf">return</span> nb
+    </code></pre></div>
+<ul>
+<li><p>Question 2 :</p>
+<p>Cette fonction est de complexité temporelle : <span class="math inline">\(3n -1 + 3n- 2 + \ldots + 1 = \frac{(3n-1)3n}{2}=O(n^2)\)</span></p>
+<p>Il s'agit d'une <strong>complexité quadratique</strong>.</p></li>
+</ul>
+<h2 id="exo-17">Exo 17</h2>
+<ul>
+<li>Question 1 : <strong>nombre de vols par niveau relatif</strong></li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="kw">def</span> nb_vol_par_niveau_relatif(regulation):
+    cout <span class="op">=</span> [<span class="dv">0</span>]<span class="op">*</span><span class="dv">3</span>
+    <span class="cf">for</span> r <span class="op">in</span> regulation:
+        cout[r] <span class="op">+=</span> <span class="dv">1</span>
+    <span class="cf">return</span> cout
+    
+<span class="co">&quot;&quot;&quot;</span>
+<span class="co">In [14]: nb_vol_par_niveau_relatif([0, 1, 1])</span>
+<span class="co">Out[14]: [1, 2, 0]</span>
+<span class="co">&quot;&quot;&quot;</span></code></pre></div>
+<ul>
+<li><p>Question 2 :</p>
+<ul>
+<li><p>Question 2 a) <strong>Coût d'une régulation</strong>, voir fonction <code>cout_regulation</code> ci-dessous.</p></li>
+<li><p>Question 2 b) Complexité de la fonction <code>cout_regulation</code> en fonction du nombre de sommets <span class="math inline">\(n\)</span></p>
+<p>La fonction <code>cout_regulation</code> effectue <span class="math inline">\(n - 1\)</span> tours de boucles externes.</p>
+<p>Chaque tour de boucle externe comprend <span class="math inline">\(n - k - 1\)</span> tours de boucles internes.</p>
+<p>Chaque tour de boucle interne comprend une affectation.</p>
+<p>La complexité de <code>cout_regulation</code> est donc en <span class="math inline">\(n - 1 + n - 2 + \ldots + 1 = \frac{n(n-1)}{2}=O(n^2)\)</span>, elle est <strong>quadratique</strong>.</p></li>
+<li><p>Question 2 c) : coût de la régulation pour laquelle chaque avion vole à son RFL, voir fonction <code>cout_RFL()</code> ci-dessous.</p></li>
+</ul></li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="kw">def</span> cout_regulation(regulation):
+    cout <span class="op">=</span> <span class="dv">0</span>
+    n <span class="op">=</span> <span class="bu">len</span>(regulation)
+    sommet <span class="op">=</span> [<span class="dv">3</span><span class="op">*</span>k <span class="op">+</span> regulation[k] <span class="cf">for</span> k <span class="op">in</span> <span class="bu">range</span>(n)]
+    <span class="cf">for</span> k <span class="op">in</span> <span class="bu">range</span>(n <span class="op">-</span> <span class="dv">1</span>):
+        s <span class="op">=</span> sommet[k]
+        <span class="cf">for</span> j <span class="op">in</span> <span class="bu">range</span>(k <span class="op">+</span> <span class="dv">1</span>, n):            
+            cout <span class="op">+=</span> conflit[s][sommet[j]]
+    <span class="cf">return</span> cout
+    
+<span class="co">&quot;&quot;&quot;</span>
+<span class="co">In [19]: cout_regulation([0, 1, 1])</span>
+<span class="co">Out[19]: 250</span>
+<span class="co">&quot;&quot;&quot;</span>
+<span class="kw">def</span> cout_RFL():
+    <span class="cf">return</span> cout_regulation([<span class="dv">0</span>]<span class="op">*</span>(<span class="bu">len</span>(conflit)<span class="op">//</span><span class="dv">3</span>))
+    
+<span class="co">&quot;&quot;&quot;</span>
+<span class="co">In [21]: cout_RFL()</span>
+<span class="co">Out[21]: 500</span>
+<span class="co">&quot;&quot;&quot;</span></code></pre></div>
+<ul>
+<li><p>Question 3 :</p>
+<p>Pour <span class="math inline">\(n\)</span> vols, il existe <span class="math inline">\(3^n\)</span> régulations possibles qui sont les <span class="math inline">\(n-listes\)</span> d'élements pris dans l'ensemble <code>{0,1,2}</code>.</p>
+<p>Il n'est pas envisageable de calculer les couts de toutes les régulations possibles pour trouver celle de cout minimal, car cet algorithme aurait une complexité en <span class="math inline">\(O(n^2 3^n)\)</span>.</p></li>
+</ul>
+<h2 id="exo-18-algorithme-de-coût-minimal">Exo 18 Algorithme de coût minimal</h2>
+<ul>
+<li>Question 1 : coû d'un sommet</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="kw">def</span> cout_du_sommet(s, etat_sommet):
+    cout <span class="op">=</span> <span class="dv">0</span>
+    adjacents <span class="op">=</span> conflit[s]
+    <span class="cf">for</span> k <span class="op">in</span> <span class="bu">range</span>(<span class="bu">len</span>(etat_sommet)):
+        <span class="cf">if</span> etat_sommet[k] <span class="op">!=</span> <span class="dv">0</span>:
+            cout <span class="op">+=</span> adjacents[k]
+    <span class="cf">return</span> cout
+    
+<span class="co">&quot;&quot;&quot;</span>
+<span class="co">In [23]: cout_du_sommet(8, [1, 0, 0, 0, 1, 0, 2, 2, 2])</span>
+<span class="co">Out[23]: 100</span>
+<span class="co">&quot;&quot;&quot;</span></code></pre></div>
+<ul>
+<li><p>Question 2 :</p>
+<p>La complexité de la fonction <code>cout_du_sommet</code> est <strong>linéaire</strong>, en <span class="math inline">\(3n= O(n)\)</span>, où <span class="math inline">\(n\)</span> est le nombre de sommets.</p></li>
+<li><p>Question 3 : fonction <code>sommet_de_cout_min(etat_sommet)</code> qui retourne le numéro du sommet de coût minimal parmi les sommets qui n'ont pas encore été choisis ou supprimés.</p></li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="kw">def</span> sommet_de_cout_min(etat_sommet):
+    cout_min <span class="op">=</span> <span class="va">None</span>
+    index_min <span class="op">=</span> <span class="va">None</span>
+    <span class="cf">for</span> k <span class="op">in</span> <span class="bu">range</span>(<span class="bu">len</span>(etat_sommet)):
+        s <span class="op">=</span> etat_sommet[k]
+        <span class="cf">if</span> s <span class="op">==</span> <span class="dv">2</span>:
+            c <span class="op">=</span> cout_du_sommet(k, etat_sommet)
+            <span class="cf">if</span> cout_min <span class="op">==</span> <span class="va">None</span> <span class="op">or</span> c <span class="op">&lt;</span> cout_min:
+                cout_min <span class="op">=</span> c
+                index_min <span class="op">=</span> k
+    <span class="cf">return</span> index_min
+    
+<span class="co">&quot;&quot;&quot;</span>
+<span class="co">In [26]: sommet_de_cout_min([1, 0, 0, 0, 1, 0, 2, 2, 2])</span>
+<span class="co">Out[26]: 8</span>
+<span class="co">&quot;&quot;&quot;</span></code></pre></div>
+<ul>
+<li><p>Question 4 :</p>
+<p>La complexité de la fonction <code>sommet_de_cout_min</code> est <strong>quadratique</strong> en <span class="math inline">\(3n \times O(n) = O(n^{2})\)</span>.</p></li>
+<li><p>Question 5 : fonction <code>minimal</code></p></li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="kw">def</span> minimal():
+    m <span class="op">=</span> <span class="bu">len</span>(conflit)
+    n <span class="op">=</span> m<span class="op">//</span><span class="dv">3</span>
+    etat_sommet <span class="op">=</span> [<span class="dv">2</span>]<span class="op">*</span>m
+    regulation <span class="op">=</span> [<span class="dv">0</span>]<span class="op">*</span>n
+    <span class="cf">for</span> k <span class="op">in</span> <span class="bu">range</span>(n):
+        indexmin <span class="op">=</span> sommet_de_cout_min(etat_sommet)        
+        q <span class="op">=</span> indexmin <span class="op">//</span> <span class="dv">3</span>
+        regulation[q] <span class="op">=</span> indexmin<span class="op">%</span><span class="dv">3</span>
+        <span class="cf">for</span> j <span class="op">in</span> <span class="bu">range</span>(<span class="dv">3</span>):
+            index <span class="op">=</span> <span class="dv">3</span><span class="op">*</span>q <span class="op">+</span> j
+            <span class="cf">if</span> index <span class="op">!=</span> indexmin:
+                etat_sommet[index] <span class="op">=</span> <span class="dv">0</span>
+            <span class="cf">else</span>:
+                etat_sommet[index] <span class="op">=</span> <span class="dv">1</span>
+    <span class="cf">return</span> regulation
+    
+<span class="co">&quot;&quot;&quot;</span>
+<span class="co">In [28]: minimal()</span>
+<span class="co">Out[28]: [1, 0, 1]</span>
+
+<span class="co">In [29]: cout_regulation([1, 0, 1])</span>
+<span class="co">Out[29]: 0</span>
+<span class="co">&quot;&quot;&quot;</span></code></pre></div>
+<ul>
+<li><p>Question 6 :</p>
+<p>La complexité de la fonction <code>minimal</code> est de <span class="math inline">\(n \times O(n^{2})=O(n^{3})\)</span> en fonction du nombre <span class="math inline">\(n\)</span> de sommets du graphe.</p></li>
+</ul>
+<h2 id="exo-19-recuit-simulé">Exo 19 : <strong>Recuit simulé</strong></h2>
+<ul>
+<li>Question 1 :</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="im">import</span> random, math
+
+<span class="kw">def</span> recuit(regulation):
+    T <span class="op">=</span> <span class="dv">1000</span>
+    m <span class="op">=</span> <span class="bu">len</span>(conflit)
+    n <span class="op">=</span> m<span class="op">//</span><span class="dv">3</span>
+    cout <span class="op">=</span> cout_regulation(regulation)
+    <span class="cf">while</span> T <span class="op">&gt;=</span> <span class="dv">1</span>:        
+        k <span class="op">=</span> random.randint(<span class="dv">0</span>, n <span class="op">-</span> <span class="dv">1</span>)
+        rk <span class="op">=</span> regulation[k]
+        mk <span class="op">=</span> [<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">2</span>]
+        <span class="kw">del</span>(mk[rk])
+        newrk <span class="op">=</span> mk[random.randint(<span class="dv">0</span>, <span class="dv">1</span>)]
+        regulation[k] <span class="op">=</span> newrk
+        newcout <span class="op">=</span> cout_regulation(regulation)
+        deltac <span class="op">=</span> newcout <span class="op">-</span> cout
+        <span class="co"># mise à jour du cout minimal si le nouveau cout est inférieur</span>
+        <span class="co"># sinon on rétablit l&#39;ancienne version </span>
+        <span class="cf">if</span> newcout <span class="op">&lt;</span> cout <span class="op">or</span> random.random() <span class="op">&lt;</span> math.exp(<span class="op">-</span>deltac<span class="op">/</span>T):
+            cout <span class="op">=</span> newcout   
+        <span class="cf">else</span>:
+            regulation[k] <span class="op">=</span> rk
+        T <span class="op">=</span> T <span class="op">*</span> <span class="fl">0.99</span>    <span class="co">#on diminue T de 1 %        </span>
+    <span class="cf">return</span> regulation
+    
+<span class="co">&quot;&quot;&quot;</span>
+<span class="co">In [38]: recuit([0,0,0])</span>
+<span class="co">Out[38]: [0, 2, 0]</span>
+
+<span class="co">In [39]: cout_regulation([0, 2, 0])</span>
+<span class="co">Out[39]: 0</span>
+
+<span class="co">In [40]: sum([cout_regulation(recuit([0,0,0])) for i in range(100)])/100</span>
+<span class="co">Out[40]: 0.0</span>
+<span class="co">&quot;&quot;&quot;</span></code></pre></div>
+</div>
+<div id="un-peu-de-programmation-dynamique" class="slide section level1">
+<h1>Un peu de programmation dynamique</h1>
+<h2 id="exo-20-projet-euler-problème-15">Exo 20, Projet Euler problème 15</h2>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">
+<span class="kw">def</span> routes(n):
+    <span class="co">&#39;&#39;&#39;Probleme  15 projet Euler  https://projecteuler.net/problems&#39;&#39;&#39;</span>
+    <span class="co">#on place des 1 sur les bords supérieurs et gauches du tableau</span>
+    tab <span class="op">=</span> [[<span class="dv">0</span><span class="op">+</span><span class="bu">int</span>(i<span class="op">==</span><span class="dv">0</span> <span class="op">or</span> j<span class="op">==</span><span class="dv">0</span>) <span class="cf">for</span> i <span class="op">in</span> <span class="bu">range</span>(n<span class="dv">+1</span>)] <span class="cf">for</span> j <span class="op">in</span> <span class="bu">range</span>(n<span class="dv">+1</span>)]
+    <span class="cf">for</span> line <span class="op">in</span> <span class="bu">range</span>(<span class="dv">1</span>,n<span class="dv">+1</span>):
+        <span class="cf">for</span> col <span class="op">in</span> <span class="bu">range</span>(<span class="dv">1</span>,n<span class="dv">+1</span>):
+            tab[line][col] <span class="op">=</span> tab[line<span class="dv">-1</span>][col]<span class="op">+</span>tab[line][col<span class="dv">-1</span>]
+    <span class="cf">return</span> tab
+
+<span class="co">&quot;&quot;&quot;</span>
+<span class="co">&gt;&gt;&gt; routes(2)[-1][-1]</span>
+<span class="co">6</span>
+<span class="co">&gt;&gt;&gt; routes(20)[-1][-1]</span>
+<span class="co">137846528820</span>
+<span class="co">&quot;&quot;&quot;</span></code></pre></div>
+<h2 id="exo-21-project-euler-problème-67-recupération-du-triangle">Exo 21 Project Euler problème 67, recupération du triangle</h2>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">
+<span class="kw">def</span> exo21(fichier):
+    triangle <span class="op">=</span> []
+    f  <span class="op">=</span> <span class="bu">open</span>(fichier,<span class="st">&#39;r&#39;</span>)
+    <span class="cf">for</span> ligne <span class="op">in</span> f:
+        row <span class="op">=</span> ligne.rstrip().split(<span class="st">&#39; &#39;</span>)
+        row <span class="op">=</span> <span class="bu">list</span>(<span class="bu">map</span>(<span class="bu">int</span>, row))
+        triangle.append(row)
+    f.close()
+    <span class="cf">return</span> triangle
+    
+<span class="co">&quot;&quot;&quot;</span>
+<span class="co">&gt;&gt;&gt; triangle = exo21(&#39;triangle.txt&#39;)</span>
+<span class="co">&gt;&gt;&gt; len(triangle)</span>
+<span class="co">100</span>
+<span class="co">&gt;&gt;&gt; triangle[0][0]</span>
+<span class="co">59</span>
+<span class="co">&quot;&quot;&quot;</span>
+    </code></pre></div>
+<h2 id="exo-22-project-euler-problème-67-chemin-minimal">Exo 22 Project Euler problème 67, chemin minimal</h2>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">
+<span class="kw">def</span> exo22(triangle):
+    tab <span class="op">=</span> [[(triangle[<span class="dv">0</span>][<span class="dv">0</span>], <span class="va">None</span>)]]
+    <span class="cf">for</span> i <span class="op">in</span> <span class="bu">range</span>(<span class="dv">1</span>, <span class="bu">len</span>(triangle)):
+        newline <span class="op">=</span> [(tab[i <span class="op">-</span> <span class="dv">1</span>][<span class="dv">0</span>][<span class="dv">0</span>] <span class="op">+</span> triangle[i][<span class="dv">0</span>], <span class="dv">0</span>)]
+        longlignepreced <span class="op">=</span> <span class="bu">len</span>(triangle[i]) <span class="op">-</span> <span class="dv">1</span>    
+        <span class="cf">for</span> j <span class="op">in</span> <span class="bu">range</span>(<span class="dv">1</span>, longlignepreced):
+            valcourant <span class="op">=</span> triangle[i][j]
+            maxi, indexmaxi <span class="op">=</span> tab[i <span class="op">-</span> <span class="dv">1</span>][j <span class="op">-</span><span class="dv">1</span>][<span class="dv">0</span>] <span class="op">+</span> valcourant, j <span class="op">-</span> <span class="dv">1</span>
+            maxpreced <span class="op">=</span> tab[i <span class="op">-</span> <span class="dv">1</span>][j][<span class="dv">0</span>]
+            <span class="cf">if</span> maxpreced <span class="op">+</span> valcourant <span class="op">&gt;</span> maxi:
+                maxi, indexmaxi <span class="op">=</span> maxpreced <span class="op">+</span> valcourant, j
+            newline.append((maxi, indexmaxi))
+        newline.append((tab[i <span class="op">-</span> <span class="dv">1</span>][<span class="op">-</span><span class="dv">1</span>][<span class="dv">0</span>] <span class="op">+</span> triangle[i][<span class="op">-</span> <span class="dv">1</span>], longlignepreced))
+        tab.append(newline)
+    tab[<span class="op">-</span><span class="dv">1</span>].sort(key<span class="op">=</span><span class="kw">lambda</span> t : t[<span class="dv">0</span>])
+    <span class="cf">return</span> (tab[<span class="op">-</span><span class="dv">1</span>][<span class="op">-</span><span class="dv">1</span>][<span class="dv">0</span>])
+
+<span class="co">&quot;&quot;&quot;</span>
+<span class="co">&gt;&gt;&gt; exo22(triangle)</span>
+<span class="co">7273</span>
+<span class="co">&quot;&quot;&quot;</span></code></pre></div>
+<h2 id="exo-23-projet-euler-81-récupération-de-la-matrice">Exo 23 Projet Euler 81, récupération de la matrice</h2>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">
+<span class="kw">def</span> exo23(fichier):
+    <span class="co">&#39;&#39;&#39;Retourne la matrice carrée de taille 80*80 contenue dans fichier </span>
+<span class="co">    sous la forme d&#39;une liste de listes&#39;&#39;&#39;</span>
+    f <span class="op">=</span> <span class="bu">open</span>(fichier,<span class="st">&#39;r&#39;</span>)
+    mat <span class="op">=</span> [[<span class="bu">int</span>(i) <span class="cf">for</span> i <span class="op">in</span> ligne.rstrip().split(<span class="st">&#39;,&#39;</span>)] <span class="cf">for</span> ligne <span class="op">in</span> f]
+    f.close()
+    <span class="cf">return</span> mat
+
+<span class="co">&quot;&quot;&quot;</span>
+<span class="co">&gt;&gt;&gt; matrice = exo23(&#39;matrix.txt&#39;)</span>
+<span class="co">&gt;&gt;&gt; len(matrice)</span>
+<span class="co">80</span>
+<span class="co">&gt;&gt;&gt; len(matrice[0])</span>
+<span class="co">80</span>
+<span class="co">&gt;&gt;&gt; matrice[0][0]</span>
+<span class="co">4445</span>
+<span class="co">&quot;&quot;&quot;</span></code></pre></div>
+<h2 id="exo-24-projet-euler-81-chemin-minimal">Exo 24 Projet Euler 81, chemin minimal</h2>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">
+<span class="kw">def</span> exo24(mat):
+    <span class="co">&#39;&#39;&#39;Retourne le chemin minimal selon la définition du problème 81 du </span>
+<span class="co">    projet Euler , pour lma matrice mat (liste de listes)&#39;&#39;&#39;</span>
+    nrow,ncols <span class="op">=</span> <span class="bu">len</span>(mat),<span class="bu">len</span>(mat[<span class="dv">0</span>])
+    <span class="co">#matpoids[i][j]  est le poids du cheminpour atteindre mat[i][j]</span>
+    <span class="co">#mat[0][i] est le cumul des mat[0][j] avec j&lt;=i</span>
+    matpoids <span class="op">=</span> [[mat[<span class="dv">0</span>][<span class="dv">0</span>]]]
+    <span class="cf">for</span> k <span class="op">in</span> <span class="bu">range</span>(<span class="dv">1</span>,ncols):
+        matpoids[<span class="dv">0</span>].append(matpoids[<span class="dv">0</span>][<span class="op">-</span><span class="dv">1</span>]<span class="op">+</span>mat[<span class="dv">0</span>][k])
+    <span class="cf">for</span> i <span class="op">in</span> <span class="bu">range</span>(<span class="dv">1</span>,nrow):
+        <span class="co">#mat[i][0] est le cumul des mat[j][0] avec j&lt;=i</span>
+        matpoids.append([matpoids[i<span class="dv">-1</span>][<span class="dv">0</span>]<span class="op">+</span>mat[i][<span class="dv">0</span>]])
+        <span class="cf">for</span> j <span class="op">in</span> <span class="bu">range</span>(<span class="dv">1</span>,ncols):
+            matpoids[i].append(mat[i][j]<span class="op">+</span><span class="bu">min</span>(matpoids[i][<span class="op">-</span><span class="dv">1</span>],matpoids[i<span class="dv">-1</span>][j]))
+    <span class="cf">return</span> matpoids[<span class="op">-</span><span class="dv">1</span>][<span class="op">-</span><span class="dv">1</span>]
+        
+<span class="co">&quot;&quot;&quot;</span>
+<span class="co">&gt;&gt;&gt; exo24(matrice)</span>
+<span class="co">427337</span>
+<span class="co">&quot;&quot;&quot;</span></code></pre></div>
+</div>
+</body>
+</html>
