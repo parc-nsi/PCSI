@@ -1,0 +1,651 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+ "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <meta name="author" content="Chenevois-Jouhet-Junier" />
+  <title>Corrigé du TP 9 Intégration - Méthode d'Euler</title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+  </style>
+  <link rel="stylesheet" type="text/css" media="screen, projection, print"
+    href="http://www.w3.org/Talks/Tools/Slidy2/styles/slidy.css" />
+  <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+  <script src="http://www.w3.org/Talks/Tools/Slidy2/scripts/slidy.js"
+    charset="utf-8" type="text/javascript"></script>
+</head>
+<body>
+<div class="slide titlepage">
+  <h1 class="title">Corrigé du TP 9 Intégration - Méthode d'Euler</h1>
+  <p class="author">
+Chenevois-Jouhet-Junier
+  </p>
+</div>
+<div class="slide section level1">
+
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"></code></pre></div>
+</div>
+<div id="outils" class="slide section level1">
+<h1>Outils</h1>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">
+<span class="co">#imports des modules</span>
+<span class="im">import</span> math,time
+<span class="im">import</span> numpy <span class="im">as</span> np
+<span class="im">import</span> scipy.integrate
+<span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt
+<span class="co">#le module test contient les fonctions de test, il doit etre dans le meme repertoire</span>
+<span class="co">#son contenu est donné ci-dessous</span>
+<span class="im">from</span> test <span class="im">import</span> <span class="op">*</span> </code></pre></div>
+</div>
+<div id="contenu-du-module-test" class="slide section level1">
+<h1>Contenu du module test</h1>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co">#tableau des arguments f, a, b, nom_fonction </span>
+<span class="co">#pour tester les méthodes d&#39;intégration</span>
+ 
+BENCH <span class="op">=</span> [(<span class="kw">lambda</span> t : t,<span class="dv">0</span>,<span class="dv">1</span>, <span class="st">&#39;t-&gt;t&#39;</span>), (<span class="kw">lambda</span> t : t<span class="op">**</span><span class="dv">2</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="st">&#39;t-&gt;t**2&#39;</span>), 
+(<span class="kw">lambda</span> t : t<span class="op">**</span><span class="dv">3</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="st">&#39;t-&gt;t**3&#39;</span>), (<span class="kw">lambda</span> t:t<span class="op">**</span><span class="dv">10</span>,<span class="dv">0</span>,<span class="dv">1</span>, <span class="st">&#39;t-&gt;t**10&#39;</span>),
+(math.cos,<span class="dv">0</span>,math.pi<span class="op">/</span><span class="dv">2</span>,<span class="st">&#39;t-&gt;cos(t)&#39;</span>), (math.exp,<span class="op">-</span><span class="dv">3</span>,<span class="dv">3</span>, <span class="st">&#39;t-&gt;exp(t)&#39;</span>)]
+    
+
+<span class="kw">def</span> testeur(methode, benchmark):
+    <span class="co">&#39;&#39;&#39;Teste une méthode d&#39;intégration methode(f,a,b,n) avec le tableau</span>
+<span class="co">    benchmark  d&#39;arguments f, a, b, nom &#39;&#39;&#39;</span>
+    <span class="cf">for</span> args <span class="op">in</span> benchmark:
+        f, a, b, nom <span class="op">=</span> args
+        <span class="co">#fonction methode2 d&#39;un seul parametre n avec f,a, b  fixés</span>
+        methode2 <span class="op">=</span> <span class="kw">lambda</span> n : methode(f, a, b, n)
+        <span class="cf">for</span> n <span class="op">in</span> [<span class="dv">10</span>,<span class="dv">10</span><span class="op">**</span><span class="dv">2</span>,<span class="dv">10</span><span class="op">**</span><span class="dv">3</span>]:
+            resint <span class="op">=</span> methode2(n)
+            <span class="bu">print</span>(<span class="st">&#39;Intégrale de </span><span class="sc">%s</span><span class="st"> sur [</span><span class="sc">%.3f</span><span class="st">;</span><span class="sc">%.3f</span><span class="st">]&#39;</span><span class="op">%</span>(nom, a, b),
+            <span class="co">&#39;avec %s subdivisions : %.10f&#39;</span><span class="op">%</span>(n, resint))
+        <span class="bu">print</span>(<span class="st">&#39;Avec  scipy.integrate.quad&#39;</span>,
+        <span class="co">&#39;: %.10f \n&#39;</span><span class="op">%</span>(scipy.integrate.quad(f, a, b)[<span class="dv">0</span>]))
+        
+
+<span class="kw">def</span> chrono(function, valexacte):
+    <span class="kw">def</span> function2(<span class="op">*</span>args,<span class="op">**</span>kwargs):
+        debut <span class="op">=</span> time.perf_counter()
+        res <span class="op">=</span> function(<span class="op">*</span>args,<span class="op">**</span>kwargs)
+        fin <span class="op">=</span> time.perf_counter()
+        <span class="cf">return</span> res,<span class="st">&#39;</span><span class="sc">%s</span><span class="st"> en </span><span class="sc">%s</span><span class="st"> secondes avec </span><span class="sc">%d</span><span class="st"> décimales justes&#39;</span><span class="op">%</span>(res,fin<span class="op">-</span>debut,
+        <span class="bu">round</span>(math.log(<span class="bu">abs</span>(res<span class="op">-</span>valexacte))<span class="op">/</span>math.log(<span class="dv">10</span>)))
+    <span class="cf">return</span> function2</code></pre></div>
+</div>
+<div id="trois-méthodes-dintégration-numérique" class="slide section level1">
+<h1>Trois méthodes d'intégration numérique</h1>
+<h2 id="exo-1-méthode-des-rectangles-12">Exo 1 Méthode des rectangles (1/2)</h2>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">
+<span class="kw">def</span> rectangles(f, a, b, n):
+    <span class="co">&#39;&#39;&#39;fonction prenant en entrée une fonction, deux bornes et </span>
+<span class="co">    un nombre de pas n, et renvoyant l’approximation Rn de</span>
+<span class="co">    l’intégrale de la fonction&#39;&#39;&#39;</span>
+    x <span class="op">=</span> a
+    pas <span class="op">=</span> <span class="bu">float</span>((b<span class="op">-</span>a))<span class="op">/</span>n
+    r <span class="op">=</span> f(x)
+    <span class="cf">for</span> i <span class="op">in</span> <span class="bu">range</span>(<span class="dv">1</span>,n):
+         x <span class="op">+=</span> pas
+         r <span class="op">+=</span> f(x)
+    <span class="cf">return</span> r<span class="op">*</span>pas
+</code></pre></div>
+<h2 id="exo-2-méthode-des-rectangles-22">Exo 2 Méthode des rectangles (2/2)</h2>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co">&quot;&quot;&quot;</span>
+<span class="co">&gt;&gt;&gt; testeur(rectangles, BENCH)</span>
+<span class="co">Intégrale de t-&gt;t sur [0.000;1.000] avec 10 subdivisions : 0.4500000000</span>
+<span class="co">Intégrale de t-&gt;t sur [0.000;1.000] avec 100 subdivisions : 0.4950000000</span>
+<span class="co">Intégrale de t-&gt;t sur [0.000;1.000] avec 1000 subdivisions : 0.4995000000</span>
+<span class="co">Avec  scipy.integrate.quad : 0.5000000000 </span>
+
+<span class="co">Intégrale de t-&gt;t**2 sur [0.000;1.000] avec 10 subdivisions : 0.2850000000</span>
+<span class="co">Intégrale de t-&gt;t**2 sur [0.000;1.000] avec 100 subdivisions : 0.3283500000</span>
+<span class="co">Intégrale de t-&gt;t**2 sur [0.000;1.000] avec 1000 subdivisions : 0.3328335000</span>
+<span class="co">Avec  scipy.integrate.quad : 0.3333333333 </span>
+
+<span class="co">Intégrale de t-&gt;t**3 sur [0.000;1.000] avec 10 subdivisions : 0.2025000000</span>
+<span class="co">Intégrale de t-&gt;t**3 sur [0.000;1.000] avec 100 subdivisions : 0.2450250000</span>
+<span class="co">Intégrale de t-&gt;t**3 sur [0.000;1.000] avec 1000 subdivisions : 0.2495002500</span>
+<span class="co">Avec  scipy.integrate.quad : 0.2500000000 </span>
+
+<span class="co">Intégrale de t-&gt;t**10 sur [0.000;1.000] avec 10 subdivisions : 0.0491434192</span>
+<span class="co">Intégrale de t-&gt;t**10 sur [0.000;1.000] avec 100 subdivisions : 0.0859924142</span>
+<span class="co">Intégrale de t-&gt;t**10 sur [0.000;1.000] avec 1000 subdivisions : 0.0904099242</span>
+<span class="co">Avec  scipy.integrate.quad : 0.0909090909 </span>
+
+<span class="co">Intégrale de t-&gt;cos(t) sur [0.000;1.571] avec 10 subdivisions : 1.0764828027</span>
+<span class="co">Intégrale de t-&gt;cos(t) sur [0.000;1.571] avec 100 subdivisions : 1.0078334199</span>
+<span class="co">Intégrale de t-&gt;cos(t) sur [0.000;1.571] avec 1000 subdivisions : 1.0007851925</span>
+<span class="co">Avec  scipy.integrate.quad : 1.0000000000 </span>
+
+<span class="co">Intégrale de t-&gt;exp(t) sur [-3.000;3.000] avec 10 subdivisions : 14.6225215956</span>
+<span class="co">Intégrale de t-&gt;exp(t) sur [-3.000;3.000] avec 100 subdivisions : 19.4406877235</span>
+<span class="co">Intégrale de t-&gt;exp(t) sur [-3.000;3.000] avec 1000 subdivisions : 19.9757027125</span>
+<span class="co">Avec  scipy.integrate.quad : 20.0357498548</span>
+<span class="co">&quot;&quot;&quot;</span></code></pre></div>
+<p>La différence avec la valeur réelle de l'intégrale semble être majorée par <span class="math inline">\(\frac{1}{n}\)</span> ce que confirme le théorème suivant si <span class="math inline">\(f\)</span> est suffisamment dérivable.</p>
+<p><strong>Théorème :</strong> Soit <span class="math inline">\(f\)</span> une fonction <span class="math inline">\(\mathcal{C}^{1}\)</span> sur un intervalle <span class="math inline">\([a;b]\)</span>, soit <span class="math inline">\(n\)</span> points uniformément répartis dans <span class="math inline">\([a;b]\)</span> avec <span class="math inline">\(\sigma_k=a+k\frac{b-a}{n}\)</span>, pour <span class="math inline">\(0\leqslant k\leqslant n-1\)</span>.</p>
+<p>Si on note <span class="math inline">\(R_n^{(g)}=\frac{b-a}{n}\sum_{k=0}^{n-1}f(\sigma_k)\)</span> la somme des aires des rectangles à gauche et <span class="math inline">\(R_n^{(d)}=\frac{b-a}{n}\sum_{k=1}^{n}f(\sigma_k)\)</span> la somme des aires des rectangles à droite et <span class="math inline">\(\mu_{1}= \text {sup}_{[a;b]} \vert \, f&#39; \vert\)</span> alors :</p>
+\begin{equation*}
+\left \vert \, \int_a^bf(t)dt - R_{n}^{(g)} \, \right \vert \leqslant \mu_{1} \frac{(b-a)^2}{2n} \qquad \text{et} \qquad \left \vert \, \int_a^bf(t)dt - R_{n}^{(d)} \, \right \vert \leqslant \mu_{1} \frac{(b-a)^2}{2n}
+\end{equation*}
+<h2 id="exo-3-méthode-des-trapèzes">Exo 3 Méthode des trapèzes</h2>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">
+<span class="kw">def</span> trapeze(f,a,b,n):
+    <span class="cf">return</span> rectangles(f,a,b,n) <span class="op">+</span> (f(b)<span class="op">-</span>f(a))<span class="op">*</span>(b<span class="op">-</span>a)<span class="op">/</span>(<span class="dv">2</span>.<span class="op">*</span>n)
+
+<span class="co">&quot;&quot;&quot;</span>
+<span class="co">&gt;&gt;&gt; testeur(trapeze, BENCH)</span>
+<span class="co">Intégrale de t-&gt;t sur [0.000;1.000] avec 10 subdivisions : 0.5000000000</span>
+<span class="co">Intégrale de t-&gt;t sur [0.000;1.000] avec 100 subdivisions : 0.5000000000</span>
+<span class="co">Intégrale de t-&gt;t sur [0.000;1.000] avec 1000 subdivisions : 0.5000000000</span>
+<span class="co">Avec  scipy.integrate.quad : 0.5000000000 </span>
+
+<span class="co">Intégrale de t-&gt;t**2 sur [0.000;1.000] avec 10 subdivisions : 0.3350000000</span>
+<span class="co">Intégrale de t-&gt;t**2 sur [0.000;1.000] avec 100 subdivisions : 0.3333500000</span>
+<span class="co">Intégrale de t-&gt;t**2 sur [0.000;1.000] avec 1000 subdivisions : 0.3333335000</span>
+<span class="co">Avec  scipy.integrate.quad : 0.3333333333 </span>
+
+<span class="co">Intégrale de t-&gt;t**3 sur [0.000;1.000] avec 10 subdivisions : 0.2525000000</span>
+<span class="co">Intégrale de t-&gt;t**3 sur [0.000;1.000] avec 100 subdivisions : 0.2500250000</span>
+<span class="co">Intégrale de t-&gt;t**3 sur [0.000;1.000] avec 1000 subdivisions : 0.2500002500</span>
+<span class="co">Avec  scipy.integrate.quad : 0.2500000000 </span>
+
+<span class="co">Intégrale de t-&gt;t**10 sur [0.000;1.000] avec 10 subdivisions : 0.0991434192</span>
+<span class="co">Intégrale de t-&gt;t**10 sur [0.000;1.000] avec 100 subdivisions : 0.0909924142</span>
+<span class="co">Intégrale de t-&gt;t**10 sur [0.000;1.000] avec 1000 subdivisions : 0.0909099242</span>
+<span class="co">Avec  scipy.integrate.quad : 0.0909090909 </span>
+
+<span class="co">Intégrale de t-&gt;cos(t) sur [0.000;1.571] avec 10 subdivisions : 0.9979429864</span>
+<span class="co">Intégrale de t-&gt;cos(t) sur [0.000;1.571] avec 100 subdivisions : 0.9999794382</span>
+<span class="co">Intégrale de t-&gt;cos(t) sur [0.000;1.571] avec 1000 subdivisions : 0.9999997944</span>
+<span class="co">Avec  scipy.integrate.quad : 1.0000000000 </span>
+
+<span class="co">Intégrale de t-&gt;exp(t) sur [-3.000;3.000] avec 10 subdivisions : 20.6332465521</span>
+<span class="co">Intégrale de t-&gt;exp(t) sur [-3.000;3.000] avec 100 subdivisions : 20.0417602192</span>
+<span class="co">Intégrale de t-&gt;exp(t) sur [-3.000;3.000] avec 1000 subdivisions : 20.0358099620</span>
+<span class="co">Avec  scipy.integrate.quad : 20.0357498548</span>
+<span class="co">&quot;&quot;&quot;</span></code></pre></div>
+<p>La méthode des Trapèzes est exacte pour les fonctions affines. La différence avec la valeur réelle de l'intégrale semble être majorée par <span class="math inline">\(\frac{1}{n^2}\)</span> ce que confirme le théorème suivant si <span class="math inline">\(f\)</span> est suffisamment dérivable.</p>
+<p><strong>Théorème :</strong> Soit <span class="math inline">\(f\)</span> une fonction <span class="math inline">\(\mathcal{C}^{2}\)</span> sur un intervalle <span class="math inline">\([a;b]\)</span>, soit <span class="math inline">\(n\)</span> points uniformément répartis dans <span class="math inline">\([a;b]\)</span> avec <span class="math inline">\(\sigma_k=a+k\frac{b-a}{n}\)</span>, pour <span class="math inline">\(0\leqslant k\leqslant n-1\)</span>.</p>
+<p>Si on note <span class="math inline">\(T_n=\frac{b-a}{2n}\sum_{k=0}^{n-1}\, {f(\sigma_k)+f(\sigma_{k+1})}=\frac{R_{n}^{(g)} + R_{n}^{(d)}}{2}\)</span> la somme des aires des trapèzes construits sur les sommets des rectangles à gauche et à droite et <span class="math inline">\(\mu_{2}= \text {sup}_{[a;b]} \vert \, f&#39;&#39; \vert\)</span> alors :</p>
+\begin{equation*}
+\left \vert \, \int_a^bf(t)dt - T_{n} \, \right \vert \leqslant \mu_{2} \frac{(b-a)^3}{12n^2}
+\end{equation*}
+<h2 id="exo-4-méthode-de-simpson">Exo 4 Méthode de Simpson</h2>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">
+<span class="kw">def</span> simpson(f,a,b,n):
+    pas <span class="op">=</span> <span class="bu">float</span>(b<span class="op">-</span>a)<span class="op">/</span>n
+    x,y <span class="op">=</span> a,a<span class="op">+</span>pas
+    m <span class="op">=</span> (x<span class="op">+</span>y)<span class="op">/</span><span class="dv">2</span>.
+    fx,fy,fm <span class="op">=</span> f(x),f(y),f(m)
+    s <span class="op">=</span> fx <span class="op">+</span> <span class="dv">4</span><span class="op">*</span>fm <span class="op">+</span> fy
+    <span class="cf">for</span> i <span class="op">in</span> <span class="bu">range</span>(<span class="dv">1</span>,n):
+        x, y, m <span class="op">=</span> y, y<span class="op">+</span>pas, m<span class="op">+</span>pas
+        fx, fy, fm <span class="op">=</span> fy,f(y),f(m)
+        s <span class="op">+=</span> fx <span class="op">+</span> <span class="dv">4</span><span class="op">*</span>fm  <span class="op">+</span> fy
+    <span class="cf">return</span> s<span class="op">*</span>pas<span class="op">/</span><span class="dv">6</span>.
+        
+<span class="co">&quot;&quot;&quot;</span>
+<span class="co">&gt;&gt;&gt; testeur(simpson, BENCH)</span>
+<span class="co">Intégrale de t-&gt;t sur [0.000;1.000] avec 10 subdivisions : 0.5000000000</span>
+<span class="co">Intégrale de t-&gt;t sur [0.000;1.000] avec 100 subdivisions : 0.5000000000</span>
+<span class="co">Intégrale de t-&gt;t sur [0.000;1.000] avec 1000 subdivisions : 0.5000000000</span>
+<span class="co">Avec  scipy.integrate.quad : 0.5000000000 </span>
+
+<span class="co">Intégrale de t-&gt;t**2 sur [0.000;1.000] avec 10 subdivisions : 0.3333333333</span>
+<span class="co">Intégrale de t-&gt;t**2 sur [0.000;1.000] avec 100 subdivisions : 0.3333333333</span>
+<span class="co">Intégrale de t-&gt;t**2 sur [0.000;1.000] avec 1000 subdivisions : 0.3333333333</span>
+<span class="co">Avec  scipy.integrate.quad : 0.3333333333 </span>
+
+<span class="co">Intégrale de t-&gt;t**3 sur [0.000;1.000] avec 10 subdivisions : 0.2500000000</span>
+<span class="co">Intégrale de t-&gt;t**3 sur [0.000;1.000] avec 100 subdivisions : 0.2500000000</span>
+<span class="co">Intégrale de t-&gt;t**3 sur [0.000;1.000] avec 1000 subdivisions : 0.2500000000</span>
+<span class="co">Avec  scipy.integrate.quad : 0.2500000000 </span>
+
+<span class="co">Intégrale de t-&gt;t**10 sur [0.000;1.000] avec 10 subdivisions : 0.0909337800</span>
+<span class="co">Intégrale de t-&gt;t**10 sur [0.000;1.000] avec 100 subdivisions : 0.0909090934</span>
+<span class="co">Intégrale de t-&gt;t**10 sur [0.000;1.000] avec 1000 subdivisions : 0.0909090909</span>
+<span class="co">Avec  scipy.integrate.quad : 0.0909090909 </span>
+
+<span class="co">Intégrale de t-&gt;cos(t) sur [0.000;1.571] avec 10 subdivisions : 1.0000002115</span>
+<span class="co">Intégrale de t-&gt;cos(t) sur [0.000;1.571] avec 100 subdivisions : 1.0000000000</span>
+<span class="co">Intégrale de t-&gt;cos(t) sur [0.000;1.571] avec 1000 subdivisions : 1.0000000000</span>
+<span class="co">Avec  scipy.integrate.quad : 1.0000000000 </span>
+
+<span class="co">Intégrale de t-&gt;exp(t) sur [-3.000;3.000] avec 10 subdivisions : 20.0366418939</span>
+<span class="co">Intégrale de t-&gt;exp(t) sur [-3.000;3.000] avec 100 subdivisions : 20.0357499450</span>
+<span class="co">Intégrale de t-&gt;exp(t) sur [-3.000;3.000] avec 1000 subdivisions : 20.0357498548</span>
+<span class="co">Avec  scipy.integrate.quad : 20.0357498548</span>
+<span class="co">&quot;&quot;&quot;</span></code></pre></div>
+<p>La méthode de Simpson est exacte pour les fonctions affines (en considérant les fonctions affines comme des trinomes dégénérés) et naturellement pour les trinomes.</p>
+<p>Elle semble être aussi exacte pour les polynômes de degré 3.</p>
+<p>On peut démontrer, si <span class="math inline">\(f\)</span> est <span class="math inline">\(\mathcal{C}^4\)</span>, que la différence avec la valeur réelle de l'intégrale a un majorant en <span class="math inline">\(\frac{1}{n^4}\)</span>.</p>
+<p><strong>Théorème :</strong> Soit <span class="math inline">\(f\)</span> une fonction <span class="math inline">\(\mathcal{C}^{4}\)</span> sur un intervalle <span class="math inline">\([a;b]\)</span>, soit <span class="math inline">\(n\)</span> points uniformément répartis dans <span class="math inline">\([a;b]\)</span> avec <span class="math inline">\(\sigma_k=a+k\frac{b-a}{n}\)</span>, pour <span class="math inline">\(0\leqslant k\leqslant n-1\)</span>.</p>
+<p>Si on remplace sur chaque intervalle <span class="math inline">\([\sigma_{k};\sigma_{k+1}]\)</span> la fonction <span class="math inline">\(f\)</span> par la fonction polynôme du second degré prenant les mêmes valeurs en <span class="math inline">\(\sigma_{k}\)</span>, <span class="math inline">\(\frac{\sigma_{k}+\sigma_{k+1}}{2}\)</span> et <span class="math inline">\(\sigma_{k+1}\)</span> alors la méthode de Simpson approche <span class="math inline">\(\int_a^bf(t)dt\)</span> par la somme :</p>
+\begin{equation*}
+P_{n}= \frac{b-a}{n} \left [ \frac{1}{6}f(\sigma_{0}) + \frac{1}{3} \sum_{k=1}^{n-1}f(\sigma_{k}) + \frac{2}{3} \sum_{k=0}^{n-1} f\left(\frac{\sigma_{k}+\sigma_{k+1}}{2}\right) +  \frac{1}{6}f(\sigma_{n}) \right ]
+\end{equation*}
+<p>Si on note <span class="math inline">\(\mu_{4}= \text {sup}_{[a;b]} \vert \, f^{(4)} \vert\)</span> alors :</p>
+\begin{equation*}
+\left \vert \, \int_a^bf(t)dt - P_{n} \, \right \vert \leqslant \mu_{4} \frac{(b-a)^5}{2880n^4}
+\end{equation*}
+<h2 id="exo5-estimation-de-la-complexité-en-temps">Exo5 Estimation de la complexité en temps</h2>
+<ul>
+<li><p>Pour <span class="math inline">\(R_n\)</span> (méthode des rectangles) : <span class="math inline">\(n\)</span> évaluations</p></li>
+<li><p>Pour <span class="math inline">\(T_n\)</span> (méthode des trapèzes) : <span class="math inline">\(2n\)</span> évaluations; <span class="math inline">\(n+2\)</span> voire <span class="math inline">\(n+1\)</span> en finassant</p></li>
+<li><p>Pour <span class="math inline">\(P_n\)</span> (méthode de Simpson) : <span class="math inline">\(3n\)</span> évaluations; <span class="math inline">\(2n+2\)</span> voire <span class="math inline">\(2n+1\)</span> en finassant</p></li>
+</ul>
+<p>Dans les trois cas, la complexité est de l'ordre de <span class="math inline">\(n\)</span>.</p>
+<h2 id="exo-6-comparaison-des-méthodes-dintégration">Exo 6 Comparaison des méthodes d'intégration</h2>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">
+<span class="kw">def</span> exo6():
+    a, b, f <span class="op">=</span> <span class="dv">0</span>,math.pi<span class="op">/</span><span class="dv">2</span>.,math.cos
+    <span class="cf">for</span> n <span class="op">in</span> [<span class="dv">10</span><span class="op">**</span><span class="dv">2</span>,<span class="dv">10</span><span class="op">**</span><span class="dv">4</span>,<span class="dv">10</span><span class="op">**</span><span class="dv">6</span>]:
+        <span class="bu">print</span>(<span class="st">&#39;Pour </span><span class="sc">%s</span><span class="st"> subdivisions&#39;</span><span class="op">%</span>n)
+        <span class="bu">print</span>(<span class="st">&#39;Méthode des rectangles : </span><span class="ch">\n</span><span class="st">&#39;</span>, chrono(rectangles, <span class="dv">1</span>)(f,a,b,n))
+        <span class="bu">print</span>(<span class="st">&#39;Méthode des trapezes : </span><span class="ch">\n</span><span class="st">&#39;</span>, chrono(trapeze, <span class="dv">1</span>)(f,a,b,n))
+        <span class="bu">print</span>(<span class="st">&#39;Méthode de Simpson : </span><span class="ch">\n</span><span class="st">&#39;</span>,chrono(simpson, <span class="dv">1</span>)(f,a,b,n))
+        <span class="bu">print</span>()
+        
+<span class="co">&quot;&quot;&quot;</span>
+<span class="co">&gt;&gt;&gt; exo6()</span>
+<span class="co">Pour 100 subdivisions</span>
+<span class="co">Méthode des rectangles : </span>
+<span class="co">1.0078334198735823 en 5.91278076171875e-05 secondes avec 2 décimales justes</span>
+<span class="co">Méthode des trapezes : </span>
+<span class="co">0.9999794382396079 en 5.698204040527344e-05 secondes avec 5 décimales justes</span>
+<span class="co">Méthode de Simpson : </span>
+<span class="co">1.0000000000211398 en 0.00014400482177734375 secondes avec 11 décimales justes</span>
+
+<span class="co">Pour 10000 subdivisions</span>
+<span class="co">Méthode des rectangles : </span>
+<span class="co">1.0000785377600803 en 0.003718137741088867 secondes avec 4 décimales justes</span>
+<span class="co">Méthode des trapezes : </span>
+<span class="co">0.9999999979437405 en 0.0032684803009033203 secondes avec 9 décimales justes</span>
+<span class="co">Méthode de Simpson : </span>
+<span class="co">0.9999999999999089 en 0.008365869522094727 secondes avec 13 décimales justes</span>
+
+<span class="co">Pour 1000000 subdivisions</span>
+<span class="co">Méthode des rectangles : </span>
+<span class="co">1.0000007854017243 en 0.2927272319793701 secondes avec 6 décimales justes</span>
+<span class="co">Méthode des trapezes : </span>
+<span class="co">1.000000000003561 en 0.28957509994506836 secondes avec 11 décimales justes</span>
+<span class="co">Méthode de Simpson : </span>
+<span class="co">1.000000000003723 en 0.7962665557861328 secondes avec 11 décimales justes</span>
+<span class="co">&quot;&quot;&quot;</span></code></pre></div>
+<p>Notez que les problèmes d'approximation des réels par des flottants avec une précision d'environ 16 décimales font que la différence de précision entre la méthode de Simpson et la méthode des trapèzes n'est plus visible lorsque le nombre de subdivisions est assez grand.</p>
+</div>
+<div id="méthode-deuler-pour-lintégration-numérique-dune-équation-différentielle" class="slide section level1">
+<h1>Méthode d'Euler pour l'intégration numérique d'une équation différentielle</h1>
+<h2 id="exo-7-schéma-deuler-pour-intégrer-yfty">Exo 7 Schéma d'Euler pour intégrer <span class="math inline">\(y&#39;=F(t,y)\)</span></h2>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">
+<span class="kw">def</span> euler(F,a,y0,b,n):
+    <span class="co">&#39;&#39;&#39;renvoie les n+1 valeurs approchées de y solution de y&#39;(t)=F(t,y(t))</span>
+<span class="co">    et y(a)=y0 aux temps tk=a+k(b-a)/n</span>
+<span class="co">    &#39;&#39;&#39;</span>
+    les_yk <span class="op">=</span> [y0] <span class="co">#initialisation de la valeur</span>
+    t, h <span class="op">=</span> a, <span class="bu">float</span>(b<span class="op">-</span>a)<span class="op">/</span>n <span class="co">#initialisation du temps et du pas</span>
+    <span class="cf">for</span> i <span class="op">in</span> <span class="bu">range</span>(n):
+        yk <span class="op">=</span> les_yk[<span class="op">-</span><span class="dv">1</span>]  
+        les_yk.append(yk <span class="op">+</span> F(t,yk)<span class="op">*</span>h) <span class="co">#mise à jour de la liste de valeurs</span>
+        t <span class="op">+=</span> h  <span class="co">#mise à jour du temps</span>
+    <span class="cf">return</span> les_yk
+    </code></pre></div>
+<h2 id="exo-8-schéma-deuler-pour-la-fonction-exponentielle-sur-01">Exo 8 Schéma d'Euler pour la fonction exponentielle sur <span class="math inline">\([0;1]\)</span></h2>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">
+<span class="kw">def</span> f0(t,y):
+    <span class="cf">return</span> y</code></pre></div>
+<p>Approximation de la fonction exponentielle par la méthode d'Euler sur [0;1].</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co">&quot;&quot;&quot;</span>
+<span class="co">&gt;&gt;&gt; euler(f0,0,1,1,10)</span>
+<span class="co">[1, 1.1, 1.2100000000000002, 1.3310000000000002, 1.4641000000000002, 1.61051, </span>
+<span class="co">1.7715610000000002, 1.9487171, 2.1435888100000002, 2.357947691, 2.5937424601]</span>
+<span class="co">&quot;&quot;&quot;</span>
+
+<span class="kw">def</span> exo8():
+    <span class="co">&#39;&#39;&#39;représentation graphique de l&#39;approximation de la fonction exponentielle</span>
+<span class="co">    par la méthode d&#39;Euler sur $[0;1]$</span>
+<span class="co">    &#39;&#39;&#39;</span>
+    <span class="co">#tracé de l&#39;approximation</span>
+    x <span class="op">=</span> np.linspace(<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">11</span>) <span class="co">#10 subdivision donc 11 bornes</span>
+    y <span class="op">=</span> euler(f0,<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">10</span>)
+    plt.plot(x,y,<span class="st">&#39;-o&#39;</span>,color<span class="op">=</span><span class="st">&#39;red&#39;</span>)
+    <span class="co">#tracé de la courbe de la fonction exponentielle</span>
+    x <span class="op">=</span> np.linspace(<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">1000</span>)
+    y <span class="op">=</span> np.exp(x)
+    plt.plot(x,y,<span class="st">&#39;b-&#39;</span>)
+    plt.legend([<span class="st">&#39;Euler&#39;</span>,<span class="st">&#39;Solution exacte&#39;</span>], loc<span class="op">=</span><span class="st">&#39;upper left&#39;</span>)
+    plt.title(<span class="st">&quot;Méthode d&#39;Euler pour y&#39;=y&quot;</span>)
+    plt.savefig(<span class="st">&#39;expo10.pdf&#39;</span>)
+    plt.show()
+    <span class="co">#plt.clf()</span></code></pre></div>
+<h2 id="exo-9">Exo 9</h2>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">
+<span class="kw">def</span> f3(t, y):
+    [a,b] <span class="op">=</span> y
+    <span class="cf">return</span> np.array([b, <span class="op">-</span>a])
+
+
+<span class="co">&quot;&quot;&quot;</span>
+<span class="co">&gt;&gt;&gt; Y100 = euler(f3,0,np.array([0,1]),np.pi*4,100)</span>
+<span class="co">&gt;&gt;&gt; Y100[:3]</span>
+<span class="co">[array([0, 1]), array([ 0.12566371,  1.   ]), array([ 0.25132741,  0.98420863])]</span>
+<span class="co">&quot;&quot;&quot;</span></code></pre></div>
+<h2 id="exo-10-schéma-deuler-vectorialisé-pour-intégrer-yfty-y">Exo 10 Schéma d'Euler vectorialisé pour intégrer <span class="math inline">\(y&#39;&#39;=F(t,y , y&#39;)\)</span></h2>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">
+<span class="kw">def</span> exo10():
+    <span class="co">&#39;&#39;&#39;représentation graphique de l&#39;approximation de la fonction sinus </span>
+<span class="co">    solution de y&quot;=-y et y(0)=0 sur [0;4*pi] par la méthode d&#39;Euler</span>
+<span class="co">    Théoriquement la courbe paramétrée par (y, y&#39;) = (sin, cos) est un cercle </span>
+<span class="co">    &#39;&#39;&#39;</span>
+    <span class="co">#solution approchée par la méthode d&#39;Euler</span>
+    Y100 <span class="op">=</span> np.array(euler(f3,<span class="dv">0</span>,np.array([<span class="dv">0</span>,<span class="dv">1</span>]),np.pi<span class="op">*</span><span class="dv">4</span>,<span class="dv">100</span>))
+    <span class="co">#premier graphique : courbe approchée </span>
+    plt.subplot(<span class="dv">211</span>)
+    <span class="co">#tracé de l&#39;approximation</span>
+    x <span class="op">=</span> np.linspace(<span class="dv">0</span>,<span class="dv">4</span><span class="op">*</span>np.pi,<span class="dv">101</span>)
+    y <span class="op">=</span> Y100[:,<span class="dv">0</span>]
+    plt.plot(x,y,<span class="st">&#39;-o&#39;</span>,color<span class="op">=</span><span class="st">&#39;red&#39;</span>)
+    <span class="co">#tracé de la courbe de la fonction sinus</span>
+    x <span class="op">=</span> np.linspace(<span class="dv">0</span>,<span class="dv">4</span><span class="op">*</span>np.pi,<span class="dv">1000</span>)
+    y <span class="op">=</span> np.sin(x)
+    plt.plot(x,y,<span class="st">&#39;b-&#39;</span>)
+    plt.legend([<span class="st">&#39;Euler&#39;</span>,<span class="st">&#39;Solution exacte&#39;</span>], loc<span class="op">=</span><span class="st">&#39;upper left&#39;</span>)
+    plt.title(<span class="vs">r&quot;Méthode d&#39;Euler pour $y&#39;&#39;=-y$ avec n=100&quot;</span>)
+    <span class="co">#deuxième graphique : portraits de phases des solutions approchées</span>
+    <span class="co">#pour des découpages en n=100, n=10*3 ou n=10**4 sous-intervalles</span>
+    <span class="co">#c&#39;est la courbe paramétrée reliant les (yk,y&#39;k)</span>
+    <span class="co">#comme y&#39;&#39;=-y et y(0)=1 le portrait de phase de la solution exacte </span>
+    <span class="co">#sur [0;4*pi] devrait etre un cercle de rayon 1</span>
+    plt.subplot(<span class="dv">212</span>)
+    <span class="co">#pour tracer les axes </span>
+    plt.axhline(color<span class="op">=</span><span class="st">&#39;black&#39;</span>)
+    plt.axvline(color<span class="op">=</span><span class="st">&#39;black&#39;</span>)
+    <span class="cf">for</span> (n,col,style, lab) <span class="op">in</span> [(<span class="dv">100</span>,<span class="st">&#39;red&#39;</span>,<span class="st">&#39;-&#39;</span>, <span class="vs">r&#39;$n=100$&#39;</span>),
+    (<span class="dv">10</span><span class="op">**</span><span class="dv">3</span>,<span class="st">&#39;blue&#39;</span>,<span class="st">&#39;--&#39;</span>, <span class="vs">r&#39;$n=10^3$&#39;</span>),(<span class="dv">10</span><span class="op">**</span><span class="dv">4</span>,<span class="st">&#39;green&#39;</span>,<span class="st">&#39;-.&#39;</span>, <span class="vs">r&#39;$n=10^4$&#39;</span>)]:
+        Y <span class="op">=</span> np.array(euler(f3,<span class="dv">0</span>,np.array([<span class="dv">0</span>,<span class="dv">1</span>]),np.pi<span class="op">*</span><span class="dv">4</span>,n))
+        x,y <span class="op">=</span> Y[:,<span class="dv">0</span>],Y[:,<span class="dv">1</span>]
+        plt.plot(x,y,style,color<span class="op">=</span>col, label<span class="op">=</span>lab)
+    plt.legend(loc<span class="op">=</span><span class="st">&#39;upper left&#39;</span>)
+    plt.title(<span class="st">&quot;Portrait de phase pour $y&#39;&#39;=-y$&quot;</span>)
+    plt.savefig(<span class="st">&#39;sinus10.pdf&#39;</span>)
+    plt.show()</code></pre></div>
+</div>
+<div id="extrait-du-sujet-posé-au-concours-centrale-2015" class="slide section level1">
+<h1>Extrait du sujet posé au concours Centrale 2015</h1>
+Soit <span class="math inline">\(y\)</span> une fonction de classe <span class="math inline">\(\mathcal{C}^{2}\)</span> sur <span class="math inline">\(\mathbb{R}\)</span> et <span class="math inline">\(t_{\text{min}}\)</span> et <span class="math inline">\(t_{\text{max}}\)</span> deux réels tels que <span class="math inline">\(t_{\text{min}}&lt;t_{\text{max}}\)</span>. On note <span class="math inline">\(I\)</span> l'intervalle <span class="math inline">\(\left[t_{\text{min}}\, , \, t_{\text{max}}\right]\)</span>. On considère une équation différentielle <span class="math inline">\(\mathcal{E}_{1}\)</span> du second ordre de la forme:
+\begin{equation*}
+\forall t \in I, \qquad y&#39;&#39;(t)=f(y(t))
+\end{equation*}
+<p>où <span class="math inline">\(f\)</span> est une fonction donnée, continue sur <span class="math inline">\(\mathbb{R}\)</span>.</p>
+Les conditions initiales sont <span class="math inline">\(y_{0}=y\left(t_{\text{min}}\right)\)</span> et <span class="math inline">\(z_{0}=y&#39;\left(t_{\text{min}}\right)\)</span>. On suppose que le système physique étudié est conservatif : il existe une quantité indépendante du temps (énergie, quantité de mouvement, ), notée <span class="math inline">\(E\)</span> , qui vérifie l'équation où <span class="math inline">\(g&#39;=-f\)</span>.
+\begin{equation*}
+\forall t \in I, \qquad \frac{1}{2}y&#39;(t)^{2}+g(y(t))=E
+\end{equation*}
+<p>On introduit la fonction <span class="math inline">\(z:I \rightarrow \mathbb{R}\)</span> définie par <span class="math inline">\(\forall t \in I, \, z(t)=y&#39;(t)\)</span>.</p>
+<h2 id="exo-11-mise-en-forme-du-problème">Exo 11 Mise en forme du problème</h2>
+<ul>
+<li><p>Question 1 :</p>
+<p>L'équation <span class="math inline">\(\mathcal{E}_{1}\)</span> équivaut au système différentiel du premier ordre : <span class="math inline">\((S)\begin{cases} y&#39;(t) = z(t) \\ z&#39;(t) = f(y(t)) \end{cases}\)</span>.</p></li>
+<li><p>Question 2 :</p>
+<p>Soit <span class="math inline">\(n\)</span> un entier strictement supérieur à <span class="math inline">\(1\)</span> et <span class="math inline">\(J_{n}=[[0 \, , \, n - 1 ]]\)</span>.</p>
+<p>On pose <span class="math inline">\(h=\frac{t_{\text{max}}-t_{\text{min}}}{n-1}\)</span> et <span class="math inline">\(\forall i \in J_{n}, \, t_{i}=t_{\text{min}}+ih\)</span>. Pour tout entier <span class="math inline">\(0 \leqslant i \leqslant n - 2\)</span> on a :</p>
+\begin{align*}
+y(t_{i+1}) - y(t_{i}) &amp;= \int_{t_{i}}^{t_{i+1}} \, y&#39;(t) \, \text{d}t = \int_{t_{i}}^{t_{i+1}} \, z(t) \, \text{d}t \\
+ z(t_{i+1}) - z(t_{i}) &amp;= \int_{t_{i}}^{t_{i+1}} \, z&#39;(t) \, \text{d}t = \int_{t_{i}}^{t_{i+1}} \, y&#39;&#39;(t) \, \text{d}t = \int_{t_{i}}^{t_{i+1}} \, f(y(t)) \, \text{d}t 
+\end{align*}</li>
+</ul>
+<h2 id="exo-12-schéma-deuler-explicite">Exo 12 Schéma d'Euler explicite</h2>
+<ul>
+<li><p>Question 1 :</p>
+<p>Les équations ci-dessus permettent de définir deux suites <span class="math inline">\(\left(y_{i}\right)_{i \in J_{n}}\)</span> et <span class="math inline">\(\left(z_{i}\right)_{i \in J_{n}}\)</span> où <span class="math inline">\(y_{i}\)</span> et <span class="math inline">\(z_{i}\)</span> sont des valeurs approchées de <span class="math inline">\(y(t_{i})\)</span> et <span class="math inline">\(z(t_{i})\)</span>.</p>
+<p><span class="math inline">\(\begin{cases}y_{0} = y(t_{min}) \\y_ {i+1}=y_{i}+hz_{i} \end{cases}\)</span> et <span class="math inline">\(\begin{cases} z_{0} = y&#39;(t_{min}) \\ z_ {i+1}=z_{i}+hf(y_{i}) \end{cases}\)</span></p></li>
+<li><p>Question 2 :</p></li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="kw">def</span> euler(f, n , tmin, tmax, ytmin, yptmin):
+    h  <span class="op">=</span> (tmax <span class="op">-</span> tmin)<span class="op">/</span>(n <span class="op">-</span> <span class="dv">1</span>)
+    ypreced <span class="op">=</span> ytmin
+    zpreced <span class="op">=</span> yptmin
+    yy <span class="op">=</span> [ypreced]
+    zz <span class="op">=</span> [zpreced]
+    <span class="cf">for</span> k <span class="op">in</span> <span class="bu">range</span>(n <span class="op">-</span> <span class="dv">1</span>):
+        (ynouveau, znouveau) <span class="op">=</span> (ypreced <span class="op">+</span> h<span class="op">*</span>zpreced, zpreced <span class="op">+</span> h<span class="op">*</span>f(ypreced))
+        yy.append(ynouveau)
+        zz.append(znouveau)
+        (ypreced, zpreced) <span class="op">=</span> (ynouveau, znouveau)
+    <span class="cf">return</span> (yy, zz)</code></pre></div>
+<ul>
+<li><p>Question 3</p>
+<ul>
+<li><p>Question 3 a) :</p>
+En intégrant l'équation différentielle <span class="math inline">\(y&#39;&#39;(t) = - \omega^2y(t)\)</span> on obtient une équation de conservation :
+\begin{equation*}
+(y&#39;(t))^{2}+\omega^{2}y^{2}(t)=E=(y&#39;(0))^{2}+\omega^{2}y^{2}(0)
+\end{equation*}</li>
+<li><p>Question 3 b ) :</p>
+<p>On note <span class="math inline">\(E_{i}\)</span> la valeur approchée de <span class="math inline">\(E\)</span> à l'instant <span class="math inline">\(t_{i}, \, i \in J_{n}\)</span>, calculée en utilisant les valeurs approchées de <span class="math inline">\(y(t_{i})\)</span> et <span class="math inline">\(z(t_{i})\)</span> obtenues à la question <span class="math inline">\(\mathrm{1.}\)</span>.</p>
+\begin{align*}
+E_{i+1}-E_{i} &amp;= z_{i+1}^{2}+ \omega^{2}y_{i+1}^{2} - z_{i}^{2}- \omega^{2}y_{i}^{2} \\
+E_{i+1}-E_{i} &amp;= (z_{i}-h\omega^{2}y_{i})^{2}+ \omega^{2}(y_{i}+hz_{i})^{2} - z_{i}^{2}- \omega^{2}y_{i}^{2} \\
+E_{i+1}-E_{i} &amp;= -2hz_{i}\omega^{2}y_{i}+h^{2}\omega^{4}y_{i}^{2}+ 2 \omega^{2}hy_{i}z_{i}+\omega^{2}h^{2}z_{i}^{2} \\
+E_{i+1}-E_{i} &amp;= h^{2}\omega^{2} (z_{i}^{2} + \omega^{2}y_{i}^{2}) \\
+E_{i+1}-E_{i} &amp;= h^{2}\omega^{2} E_{i}^{2}
+\end{align*}</li>
+<li><p>Question 3 c ) :</p>
+<p>Un schéma numérique qui satisfait à la conservation de <span class="math inline">\(E\)</span> serait tel que pour tout entier <span class="math inline">\(0 \leqslant i \leqslant n - 2 \, , E_{i+1}-E_{i}=0\)</span>.</p>
+<p>Pour le schéma d'Euler explicite, c'est impossible car on aurait pour tout <span class="math inline">\(i \in J_{n}\)</span>, <span class="math inline">\(E_{i}=0\)</span> d'après l'égalité précédente c'est-à-dire <span class="math inline">\(y_{i}=0\)</span> et <span class="math inline">\(z_{i}=0\)</span>, ce qui est absurde.</p></li>
+<li><p>Question 3 d ) :</p>
+<p>En portant les valeurs de <span class="math inline">\(y_{i}\)</span> sur l'axe des abscisses et de <span class="math inline">\(z_{i}\)</span> sur l'axe des ordonnées, le graphe d'un schéma respectant la conservation de <span class="math inline">\(E\)</span> serait tel que pour tout entier <span class="math inline">\(i \in J_{n}\)</span>, <span class="math inline">\(z_{i}^2+\omega^{2}y_{i}^{2}=E\)</span>. On reconnaît l'équation d'une ellipse.</p></li>
+<li><p>Question 3 e ) :</p>
+<p>Des relations de récurrence <span class="math inline">\(\begin{cases}y_{0} = y(t_{min}) \\y_ {i+1}=y_{i}+hz_{i} \end{cases}\)</span> et <span class="math inline">\(\begin{cases} z_{0} = y&#39;(t_{min}) \\ z_ {i+1}=z_{i}+hf(y_{i}) \end{cases}\)</span>, avec <span class="math inline">\(f(y_{i}) = - \omega^{2} y_{i}\)</span>, on déduit que <span class="math inline">\(y_{i}&gt;0 \Leftrightarrow z_{i+1}&lt;z_{i}\)</span> et <span class="math inline">\(z_{i}&gt;0 \Leftrightarrow y_{i+1} &gt; y_{i}\)</span>.</p>
+<p>De plus lorsque <span class="math inline">\(y&#39;(t_{i}) \approx z_{i}\)</span> est positif alors <span class="math inline">\(y_{i} \approx y(t_{i})\)</span> augmente et lorsque <span class="math inline">\(y&#39;(t_{i}) \approx z_{i}\)</span> est négatif alors <span class="math inline">\(y_{i} \approx y(t_{i})\)</span> diminue.</p>
+<p>On en déduit que le nuage de points de coordonnées <span class="math inline">\((x_{i} \,, y_{i})_{i \in J_{n}}\)</span> a l'allure d'une <strong>spirale</strong>.</p>
+<p>Par ailleurs pour tout entier <span class="math inline">\(i \in J_{n}\)</span>, <span class="math inline">\(E_{i+1}-E_{i} = h^{2}\omega^{2} E_{i}^{2}\)</span> avec <span class="math inline">\(E_{i}&gt;0\)</span> par conséquent la suite <span class="math inline">\((E_{i})\)</span> est strictement croissante ainsi la suite <span class="math inline">\((z_{i}^2+\omega^{2}y_{i}^{2})\)</span> est strictement croissante ce qui se traduit par une divergence de la spirale (la distance du point de coordonnées <span class="math inline">\((\omega y_{i}, z_{i})\)</span> à l'origine tend vers <span class="math inline">\(+\infty\)</span> donc celle de <span class="math inline">\((y_{i}, z_{i})\)</span> à l'origine tend vers <span class="math inline">\(+\infty\)</span> également puisque la multiplication par <span class="math inline">\(\omega\)</span> de <span class="math inline">\(y_{i}\)</span> correspond simplement à une dilatation selon l'axe des abscisses).</p></li>
+</ul></li>
+</ul>
+<h2 id="exo-13-schéma-dintégration-de-verlet">Exo 13 Schéma d'intégration de Verlet</h2>
+<ul>
+<li><p>Question 1 :</p>
+Pour tout entier <span class="math inline">\(i \in J_{n}\)</span> on a :
+\begin{align*}
+y_{i+1} &amp;=y_{i}+hz_{i}+\frac{h^2}{2}f_{i} \text{ avec } f_{i}=f(y_{i}) \\
+y_{i+1} &amp;=y_{i}(1-\frac{\omega^{2}h^2}{2})+hz_{i} \\
+z_{i+1} &amp;=z_{i}+\frac{h}{2}\left(f_{i}+f_{i+1}\right) \text{ avec } f_{i+1}=f(y_{i+1}) \\
+z_{i+1} &amp;=z_{i}-\frac{h\omega^{2}}{2}(y_{i} + y_{i+1}) \\
+z_{i+1} &amp;= z_{i}-\frac{h\omega^{2}}{2}(y_{i}(2-\frac{\omega^{2}h^2}{2})+hz_{i})
+\end{align*}</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="kw">def</span> verlet(f, n , tmin, tmax, ytmin, yptmin):
+    h  <span class="op">=</span> (tmax <span class="op">-</span> tmin)<span class="op">/</span>(n <span class="op">-</span> <span class="dv">1</span>)
+    ypreced <span class="op">=</span> ytmin
+    zpreced <span class="op">=</span> yptmin
+    fpreced <span class="op">=</span> f(ypreced)
+    yy <span class="op">=</span> [ypreced]
+    zz <span class="op">=</span> [zpreced]
+    <span class="cf">for</span> k <span class="op">in</span> <span class="bu">range</span>(n <span class="op">-</span> <span class="dv">1</span>):
+        ynouveau <span class="op">=</span> ypreced <span class="op">+</span> h<span class="op">*</span>zpreced <span class="op">+</span> h<span class="op">**</span><span class="dv">2</span><span class="op">/</span><span class="dv">2</span><span class="op">*</span>fpreced
+        fnouveau <span class="op">=</span> f(ynouveau)
+        znouveau <span class="op">=</span> zpreced <span class="op">+</span> h<span class="op">/</span><span class="dv">2</span><span class="op">*</span>(fnouveau <span class="op">+</span> fpreced)
+        yy.append(ynouveau)
+        zz.append(znouveau)
+        (ypreced, zpreced, fpreced) <span class="op">=</span> (ynouveau, znouveau, fnouveau)
+    <span class="cf">return</span> (yy, zz)
+<span class="co">&quot;&quot;&quot;</span>
+<span class="co">In [4]: yy, zz = verlet(lambda y : -(2*np.pi)**2*y, 100, 0, 3, 3, 0)</span>
+
+<span class="co">In [5]: yy[-3:], zz[-3:]</span>
+<span class="co">Out[5]: </span>
+<span class="co">([2.8152395363671467, 2.9606719372849324, 2.998774087394971],</span>
+<span class="co"> [6.483226837453586, 3.028320091959096, -0.5363692846006165])</span>
+<span class="co">&quot;&quot;&quot;</span></code></pre></div>
+<ul>
+<li><p>Question 2 :</p>
+<ul>
+<li><p>Question 2 a) : pour tout entier <span class="math inline">\(i \in J_{n}\)</span> on a :</p>
+\begin{align*}
+E_{i+1}-E_{i} &amp;= z_{i+1}^{2}+ \omega^{2}y_{i+1}^{2} - z_{i}^{2}- \omega^{2}y_{i}^{2} \\
+E_{i+1}-E_{i} &amp;= \left(z_{i}-\frac{h\omega^{2}}{2}(y_{i}(2-\frac{\omega^{2}h^2}{2})+hz_{i})\right)^2 + \omega^{2} \left(y_{i}(1-\frac{\omega^{2}h^2}{2})+hz_{i}\right)^2 -z_{i}^{2}- \omega^{2}y_{i}^{2}\\
+E_{i+1}-E_{i} &amp;= \left(z_{i}(1-\frac{h^2\omega^2}{2})+y_{i}(\frac{\omega^{4}h^3}{4}-h\omega^{2})\right)^2 + \omega^{2} \left(y_{i}(1-\frac{\omega^{2}h^2}{2})+hz_{i}\right)^2 -z_{i}^{2}- \omega^{2}y_{i}^{2}\\
+E_{i+1}-E_{i} &amp;=-\frac{1}{4}y_{i}^{2}h^4\omega^{6} + y_{i}^{2}h^{6}\frac{\omega^8}{16}+z_{i}^2h^{4}\frac{\omega^{4}}{4}+2z_{i}y_{i}(1-\frac{h^2\omega^{2}}{2})\frac{\omega^{4}h^{3}}{4}
+\end{align*}
+<p>On en déduit que pour le schéma de Verlet on a pour tout <span class="math inline">\(i \in J_{n}, \, E_{i+1}-E_{i}=O(h^3)\)</span>.</p></li>
+<li><p>Question 2 b) :</p>
+<p>Le nuage de points de coordonnées <span class="math inline">\((x_{i} \,, y_{i})_{i \in J_{n}}\)</span> obtenu avec le schéma numérique de Verlet est beaucoup plus proche de l'ellipse attendue, d'équation <span class="math inline">\((y&#39;(t))^{2}+\omega^{2}y^{2}(t)=E\)</span>, qui traduit la conservation de l'énergie pour la solution théorique de l'équation différentielle <span class="math inline">\(\forall t \in I,\, y&#39;&#39;(t)=-\omega^{2}y(t)\)</span>.</p></li>
+<li><p>Question 2 c) :</p>
+<p>On en déduit que le schéma de Verlet traduit mieux la conservation de l'énergie que le schéma d'Euler (car pour tout <span class="math inline">\(i \in J_{n}, \, E_{i+1}-E_{i}=O(h^3)\)</span>) et que c'est un schéma d'intégration plus précis.</p></li>
+</ul></li>
+</ul>
+</div>
+<div id="pour-ceux-qui-sennuient" class="slide section level1">
+<h1>Pour ceux qui s'ennuient</h1>
+<h2 id="exo-14">Exo 14</h2>
+<p>Résolution de <span class="math inline">\(y&#39;&#39;=y&#39;+6y\)</span> avec les conditions initiales <span class="math inline">\(y(0)= -1\)</span> et <span class="math inline">\(y&#39;(0)=2\)</span>.</p>
+<p>Les solutions de l'équation sans conditions initiales sont les <span class="math inline">\(t \mapsto K_{1} \text{e}^{-2t}+K_2 \text{e}^{3t}\)</span>. L'unique solution avec les conditions initiales est l'application <span class="math inline">\(t \mapsto -\text{e}^{-2t}\)</span>.</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">
+<span class="kw">def</span> f4(t, y):
+    [a,b] <span class="op">=</span> y
+    <span class="cf">return</span> np.array([b, b <span class="op">+</span> <span class="dv">6</span><span class="op">*</span>a])
+
+<span class="kw">def</span> exo14():
+    t1 <span class="op">=</span> np.linspace(<span class="dv">0</span>, <span class="dv">10</span>, <span class="dv">1001</span>)
+    Y1 <span class="op">=</span> euler(f4, <span class="dv">0</span>, np.array([<span class="op">-</span><span class="dv">1</span>,<span class="dv">2</span>]), <span class="dv">10</span>, <span class="dv">1000</span>)
+    y1 <span class="op">=</span> np.array(Y1)[:, <span class="dv">0</span>]
+    
+    
+    plt.plot(t1, y1)
+    plt.axhline(color<span class="op">=</span><span class="st">&#39;black&#39;</span>)
+    plt.savefig(<span class="st">&#39;exo11-converge.pdf&#39;</span>)
+    <span class="co">#plt.show()</span>
+    plt.clf()
+
+    t2 <span class="op">=</span> np.linspace(<span class="dv">0</span>, <span class="dv">20</span>, <span class="dv">2001</span>)
+    Y2 <span class="op">=</span> euler(f4, <span class="dv">0</span>, np.array([<span class="op">-</span><span class="dv">1</span>,<span class="dv">2</span>]), <span class="dv">20</span>, <span class="dv">2000</span>)
+    y2 <span class="op">=</span> np.array(Y2)[:, <span class="dv">0</span>]
+    
+    plt.plot(t2, y2)
+    plt.axhline(color<span class="op">=</span><span class="st">&#39;black&#39;</span>)
+    plt.savefig(<span class="st">&#39;exo11-diverge.pdf&#39;</span>)
+    <span class="co">#plt.show()</span>
+    plt.clf()
+    <span class="cf">return</span> Y1, Y2
+    </code></pre></div>
+<p>On récupère en Y1 le tableau des valeurs approchées de Y pour le schéma d'Euler sur [0;10] avec <span class="math inline">\(n = 1000\)</span> et en Y2 le tableau des valeurs approchées de <span class="math inline">\(y\)</span> pour le schéma d'Euler sur [0;20] avec <span class="math inline">\(n = 2000\)</span>.</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co">&quot;&quot;&quot;</span>
+<span class="co">&gt;&gt;&gt; Y1,Y2 = exo14()</span>
+<span class="co">&quot;&quot;&quot;</span></code></pre></div>
+<p>Pour les deux schémas, les valeurs initiales et le pas <span class="math inline">\(10/1000\)</span> sont les memes donc les valeurs approchées sont les memes pour les <span class="math inline">\(1000\)</span> premières valeurs.</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co">&quot;&quot;&quot;</span>
+<span class="co">&gt;&gt;&gt; Y1[999:]</span>
+<span class="co">[array([  7.12899523e-06,   2.13955722e-05]), array([  7.34295095e-06, </span>
+<span class="co">2.20372677e-05])]</span>
+<span class="co">&gt;&gt;&gt; Y2[999:1001]</span>
+<span class="co">[array([  7.12899523e-06,   2.13955722e-05]), array([  7.34295095e-06, </span>
+<span class="co">2.20372677e-05])]</span>
+<span class="co">&quot;&quot;&quot;</span></code></pre></div>
+<p>Mais au-delà de 1 (la millième valeur) les composantes de <span class="math inline">\(Y(k) = \begin{pmatrix} y(k) \\ y&#39;(k) \end{pmatrix}\)</span> sont strictement positives.</p>
+<p>Avec <span class="math inline">\(Y(k+1) = Y(k) + h \times \begin{pmatrix} y&#39;(k) \\ y&#39;(k)+6 \times y(k)\end{pmatrix}\)</span> entre <span class="math inline">\(k=1000\)</span> et <span class="math inline">\(k=2000\)</span>, les composantes de <span class="math inline">\(Y(k)\)</span> sont deux suites strictement croissantes et tendant vers <span class="math inline">\(+\infty\)</span>.</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co">&quot;&quot;&quot;</span>
+<span class="co">&gt;&gt;&gt; Y2[2000]</span>
+<span class="co">array([  5.04887779e+07,   1.51466334e+08])</span>
+<span class="co">&quot;&quot;&quot;</span></code></pre></div>
+<p>Plus on s'éloigne de la valeur initiale exacte, plus l'accumulation des erreurs dues aux approximations successives est importante.</p>
+<h2 id="exo-15">Exo 15</h2>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">
+
+<span class="kw">def</span> f5(t, y):
+    <span class="cf">return</span> <span class="op">-</span><span class="dv">3</span><span class="op">*</span>y
+
+<span class="kw">def</span> exo15():
+    tmax <span class="op">=</span> <span class="dv">3</span>.
+    les_n <span class="op">=</span> [<span class="dv">30</span>, <span class="dv">5</span>, <span class="dv">4</span>, <span class="dv">3</span>]
+    <span class="cf">for</span> n <span class="op">in</span> les_n:
+        t <span class="op">=</span> np.linspace(<span class="dv">0</span>, tmax, <span class="dv">1</span><span class="op">+</span>n)
+        y <span class="op">=</span> euler(f5, <span class="dv">0</span>, <span class="dv">1</span>, tmax, n)
+        plt.plot(t, y, label<span class="op">=</span><span class="st">&#39;</span><span class="sc">%s</span><span class="st">&#39;</span><span class="op">%</span>n)
+    
+    plt.axhline(color<span class="op">=</span><span class="st">&#39;black&#39;</span>)
+    plt.title(<span class="vs">r&quot;Schéma d&#39;Euler pour $y&#39;=-3y$ et $y(0)=1$&quot;</span>)
+    plt.legend(loc<span class="op">=</span><span class="st">&#39;lower left&#39;</span>)
+    plt.savefig(<span class="st">&#39;exo12.pdf&#39;</span>)
+    <span class="co">#plt.show()</span>
+    plt.clf()</code></pre></div>
+<p>Pour <span class="math inline">\(h= \frac{t_{max}}{n} &gt; \frac{2}{3}\)</span>, la solution «diverge» : la distance à la solution réelle tend vers l'infini quand <span class="math inline">\(t_{max}\)</span> en fait autant. Le lecteur pourra calculer à la main les différents termes de la méthode d'Euler et comprendra ainsi le seuil des <span class="math inline">\(\frac{2}{3}\)</span>.</p>
+<h2 id="exo-16">Exo 16</h2>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">
+<span class="im">from</span> scipy.optimize <span class="im">import</span> fsolve
+
+<span class="kw">def</span> EulerRetro(F, a, y0, b, n):
+    y <span class="op">=</span> y0
+    t <span class="op">=</span> a
+    h <span class="op">=</span> <span class="bu">float</span>(b <span class="op">-</span> a)<span class="op">/</span>n
+    les_y <span class="op">=</span> [y0]
+    <span class="cf">for</span> k <span class="op">in</span> <span class="bu">range</span>(n):
+        yk <span class="op">=</span> les_y[<span class="op">-</span><span class="dv">1</span>]
+        y <span class="op">=</span> fsolve(<span class="kw">lambda</span> z:z<span class="op">-</span>yk<span class="op">-</span>h<span class="op">*</span>F(t<span class="op">+</span>h,z),yk) 
+        t <span class="op">+=</span> h
+        les_y.append(y)
+    <span class="cf">return</span> les_y
+
+
+<span class="kw">def</span> exo16():
+    Y <span class="op">=</span> EulerRetro(<span class="kw">lambda</span> t,y:<span class="op">-</span><span class="dv">3</span><span class="op">*</span>y, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">3</span>)
+    t <span class="op">=</span> np.linspace(<span class="dv">0</span>, <span class="dv">3</span>, <span class="dv">4</span>)
+    plt.plot(t,Y,<span class="st">&#39;o-&#39;</span>)
+    
+    Y <span class="op">=</span> EulerRetro(<span class="kw">lambda</span> t,y:<span class="op">-</span><span class="dv">3</span><span class="op">*</span>y, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">4</span>)
+    t <span class="op">=</span> np.linspace(<span class="dv">0</span>, <span class="dv">3</span>, <span class="dv">5</span>)
+    plt.plot(t,Y,linewidth<span class="op">=</span><span class="dv">3</span>)
+    
+    Y <span class="op">=</span> EulerRetro(<span class="kw">lambda</span> t,y:<span class="op">-</span><span class="dv">3</span><span class="op">*</span>y, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">10</span>)
+    t <span class="op">=</span> np.linspace(<span class="dv">0</span>, <span class="dv">3</span>, <span class="dv">11</span>)
+    plt.plot(t,Y,<span class="st">&#39;o-&#39;</span>)
+    
+    t <span class="op">=</span> np.linspace(<span class="dv">0</span>, <span class="dv">3</span>, <span class="dv">100</span>)
+    f <span class="op">=</span> <span class="kw">lambda</span> x : np.exp(<span class="op">-</span><span class="dv">3</span><span class="op">*</span>x)
+    y <span class="op">=</span> f(t)
+    plt.plot(t, y)
+    plt.legend([<span class="vs">r&#39;$h=1$&#39;</span>,<span class="vs">r&#39;$h=0.75$&#39;</span>,<span class="vs">r&#39;$h=0.3$&#39;</span>, <span class="vs">r&#39;$y=\exp(-3x)$&#39;</span>])
+    plt.title(<span class="vs">r&quot;Euler Rétrograde&quot;</span>)
+    
+    plt.savefig(<span class="st">&#39;exo13-euler-retro.pdf&#39;</span>)
+    <span class="co">#plt.show()</span>
+    plt.clf()</code></pre></div>
+</div>
+</body>
+</html>
