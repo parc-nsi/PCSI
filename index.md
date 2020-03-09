@@ -91,7 +91,6 @@ Sujets réalisés par Stéphane Gonnord/Laurent Jouhet/Frédéric Junier/Stépha
   
 * TP 9 :
   - [énoncé](TP9/sujet/I1-TP-09-Integration-Euler-sujet.pdf)
-  - [corrigé version markdown HTML](TP9/corrige/I1-TP-08-Dichotomie-Newton-corrige-git.md)
   - [corrigé version pdf](TP9/corrige/I1-TP-09-Integration-Euler-corrige.pdf)
   - [corrigé version diaporama HTML](TP9/corrige/I1-TP-09-Integration-Euler-corrige.html)
   - [corrigé version python](TP9/corrige/I1-TP-09-Integration-Euler-corrige.py)
