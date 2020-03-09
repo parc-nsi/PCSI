@@ -72,7 +72,7 @@ Sujets réalisés par Stéphane Gonnord/Laurent Jouhet/Frédéric Junier/Stépha
   - [cadeau.py](TP7/eleves/cadeau.py)
   - [archive des ressources](TP7/eleves/ressources.zip)
   
-* TP 8 Révisions :
+* TP  Révisions :
   - [énoncé](TP-revisions/sujet/I1-TP-Revisions-Janvier3-sujet.pdf)
   - [corrigé HTML](TP-revisions/corrige/I1-TP-Revisions-Janvier3-corrige.html)
   - [corrigé pdf](TP-revisions/corrige/I1-TP-Revisions-Janvier3-corrige.pdf)
@@ -81,12 +81,21 @@ Sujets réalisés par Stéphane Gonnord/Laurent Jouhet/Frédéric Junier/Stépha
 
 
   
-* TP 9 :
+* TP 8 :
   - [énoncé](TP8/sujet/I1-TP-08-Dichotomie-Newton-sujet.pdf)
   - [corrigé version markdown HTML](TP8/corrige/I1-TP-08-Dichotomie-Newton-corrige-git.md)
   - [corrigé version pdf](TP8/corrige/I1-TP-08-Dichotomie-Newton-corrige-.pdf)
   - [corrigé version diaporama HTML](TP8/corrige/I1-TP-08-Dichotomie-Newton-corrige-slidy.html)
   - [corrigé version python](TP8/corrige/I1-TP-08-Dichotomie-Newton-corrige.py)
+  
+  
+* TP 9 :
+  - [énoncé](TP9/sujet/I1-TP-09-Integration-Euler-sujet.pdf)
+  - [corrigé version markdown HTML](TP9/corrige/I1-TP-08-Dichotomie-Newton-corrige-git.md)
+  - [corrigé version pdf](TP9/corrige/I1-TP-09-Integration-Euler-corrige.pdf)
+  - [corrigé version diaporama HTML](TP9/corrige/I1-TP-09-Integration-Euler-corrige.html)
+  - [corrigé version python](TP9/corrige/I1-TP-09-Integration-Euler-corrige.py)
+  
   
 * TP 10:
   - [QCM sur les listes/tableau](https://genumsi.inria.fr/qcm.php?h=7b8eb974bcf4e7349c793267fdf5b6b4) et [corrigé du QCM](https://genumsi.inria.fr/qcm-corrige.php?cle=MTUwOzE5NzsyODE7MzAzOzMwNzszMzk7Mzk5OzQyNjszNzk=), merci au site [Genumsi](https://genumsi.inria.fr/)
