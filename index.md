@@ -72,7 +72,7 @@ Sujets réalisés par Stéphane Gonnord/Laurent Jouhet/Frédéric Junier/Stépha
   - [cadeau.py](TP7/eleves/cadeau.py)
   - [archive des ressources](TP7/eleves/ressources.zip)
   
-* TP Révisions :
+* TP 8 Révisions :
   - [énoncé](TP-revisions/sujet/I1-TP-Revisions-Janvier3-sujet.pdf)
   - [corrigé HTML](TP-revisions/corrige/I1-TP-Revisions-Janvier3-corrige.html)
   - [corrigé pdf](TP-revisions/corrige/I1-TP-Revisions-Janvier3-corrige.pdf)
@@ -81,9 +81,17 @@ Sujets réalisés par Stéphane Gonnord/Laurent Jouhet/Frédéric Junier/Stépha
 
 
   
-* TP 8 :
+* TP 9 :
   - [énoncé](TP8/sujet/I1-TP-08-Dichotomie-Newton-sujet.pdf)
   - [corrigé version markdown HTML](TP8/corrige/I1-TP-08-Dichotomie-Newton-corrige-git.md)
   - [corrigé version pdf](TP8/corrige/I1-TP-08-Dichotomie-Newton-corrige-.pdf)
   - [corrigé version diaporama HTML](TP8/corrige/I1-TP-08-Dichotomie-Newton-corrige-slidy.html)
   - [corrigé version python](TP8/corrige/I1-TP-08-Dichotomie-Newton-corrige.py)
+  
+* TP 10:
+  - [énoncé](TP10/sujet/I1-TP-10-Listes_de_Listes-sujet.pdf)
+  - [ressources](TP10/ressources)
+  - [corrigé version pdf](TP10/corrige/I1-TP-10-Listes_de_Listes-corrige.pdf)
+  - [corrigé version diaporama HTML](TP10/corrige/I1-TP-10-Listes_de_Listes-corrige.html)
+  - [corrigé version python](TP10/corrige/I1-TP-10-Listes_de_Listes-corrige.py)
+  
