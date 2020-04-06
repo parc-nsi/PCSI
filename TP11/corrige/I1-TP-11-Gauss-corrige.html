@@ -1,0 +1,694 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+ "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <meta name="author" content="Chenevois-Jouhet-Junier" />
+  <title>Corrigé du TP 11 Pivot de Gauss</title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+  </style>
+  <link rel="stylesheet" type="text/css" media="screen, projection, print"
+    href="http://www.w3.org/Talks/Tools/Slidy2/styles/slidy.css" />
+  <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+  <script src="http://www.w3.org/Talks/Tools/Slidy2/scripts/slidy.js"
+    charset="utf-8" type="text/javascript"></script>
+</head>
+<body>
+<div class="slide titlepage">
+  <h1 class="title">Corrigé du TP 11 Pivot de Gauss</h1>
+  <p class="author">
+Chenevois-Jouhet-Junier
+  </p>
+</div>
+<div class="slide section level1">
+
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"></code></pre></div>
+</div>
+<div id="exercices-12-et-3" class="slide section level1">
+<h1>Exercices 1,2 et 3:</h1>
+<p>Voici les résolutions des systèmes 1, 2 et 3 avec le module de calcul formel sympy (il est intégré dans Pyzo). Attention, lancer la commande <code>x, y, z, t = sympy.symbols('x y z t')</code> avant chaque résolution de système avec <code>sympy</code> car les noms <code>x y  z t</code> seront écrasés entre temps par les fonctions de résolution de système linéaire que vous allez écrire.</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">
+<span class="im">import</span> sympy
+x, y, z, t <span class="op">=</span> sympy.symbols(<span class="st">&#39;x y z t&#39;</span>)
+</code></pre></div>
+<ul>
+<li><p>Résolution du système 1</p>
+<pre><code>In [14]: sympy.solve([2*x + 3*y - 5, 5*x-2*y + 16], [x, y])
+Out [14]: {y: 3, x: -2}</code></pre></li>
+<li><p>Résolution du système 2</p>
+<pre><code>In [15]: sympy.solve([2*x + 2*y  -3*z - 2, y - 6*z + 3, z -4 ], [x, y, z])
+Out [15]: {z: 4, y: 21, x: -14}</code></pre></li>
+<li><p>Résolution du système 3</p>
+<pre><code>In [16]: sympy.solve([2*x + 2*y - 3*z - 2, -2*x - 3*z + 5, 6*x + 4*y + 4*z - 16], [x, y, z])
+Out [16]: {z: 1, y: 3/2, x: 1}</code></pre></li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">
+</code></pre></div>
+</div>
+<div id="exercice-4" class="slide section level1">
+<h1>Exercice 4</h1>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">
+
+<span class="kw">def</span> echange_ligne(A, i, j):
+    <span class="co">&quot;&quot;&quot;Il suffit d&#39;échanger les pointeurs&quot;&quot;&quot;</span>
+    A[i], A[j] <span class="op">=</span> A[j], A[i]
+
+<span class="kw">def</span> echange_ligne2(A, i, j):
+    <span class="co">&quot;&quot;&quot;Pour garder les memes pointeurs et copier les elements&quot;&quot;&quot;</span>
+    <span class="cf">for</span> k <span class="op">in</span> <span class="bu">range</span>(<span class="bu">len</span>(A[i])):
+        A[i][k], A[j][k] <span class="op">=</span> A[j][k], A[i][k]
+        
+<span class="kw">def</span> transvection(A, i, j, mu):
+    <span class="co">&quot;&quot;&quot;Transvection Li &lt;- Li + mu*Lj&quot;&quot;&quot;</span>
+    <span class="cf">for</span> k <span class="op">in</span> <span class="bu">range</span>(<span class="bu">len</span>(A[i])):
+        A[i][k] <span class="op">+=</span> mu<span class="op">*</span>A[j][k]
+
+<span class="co">&quot;&quot;&quot;</span>
+<span class="co">&gt;&gt;&gt; A = [[4, 5, 6], [1, 2, 3]]</span>
+<span class="co">&gt;&gt;&gt; echange_ligne(A, 0, 1)</span>
+<span class="co">&gt;&gt;&gt; A</span>
+<span class="co">[[1, 2, 3], [4, 5, 6]]</span>
+<span class="co">&gt;&gt;&gt; transvection(A, 1, 0, -4)</span>
+<span class="co">&gt;&gt;&gt; A</span>
+<span class="co">[[1, 2, 3], [0, -3, -6]]</span>
+<span class="co">&quot;&quot;&quot;</span></code></pre></div>
+</div>
+<div id="exercice-5" class="slide section level1">
+<h1>Exercice 5</h1>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">
+<span class="kw">def</span> pivot_partiel(A, j0):
+    <span class="co">&quot;&quot;&quot;Recherche du pivot de module maximal dans la colonne j0 de</span>
+<span class="co">    la matrice A, parmi les lignes d&#39;index &gt;= j0&quot;&quot;&quot;</span>
+    i <span class="op">=</span> j0 <span class="co">#ligne du maximum provisoire</span>
+    modulepivot <span class="op">=</span> <span class="bu">abs</span>(A[i][j0])
+    <span class="cf">for</span> k <span class="op">in</span> <span class="bu">range</span>(j0<span class="dv">+1</span>, <span class="bu">len</span>(A)):
+        <span class="cf">if</span> <span class="bu">abs</span>(A[k][j0]) <span class="op">&gt;</span> modulepivot:
+            i, modulepivot <span class="op">=</span> k, <span class="bu">abs</span>(A[k][j0])
+    <span class="cf">return</span> i
+
+<span class="co">&quot;&quot;&quot;</span>
+<span class="co">&gt;&gt;&gt; A = [[1, 2, 3, 4], [0, 1, 3, 5], [0, -4, 1, 0], [0, 3, 0, 0]]</span>
+<span class="co">&gt;&gt;&gt; pivot_partiel(A, 1)</span>
+<span class="co">2</span>
+<span class="co">&quot;&quot;&quot;</span></code></pre></div>
+</div>
+<div id="exercice-6" class="slide section level1">
+<h1>Exercice 6</h1>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">
+<span class="kw">def</span> copie(m):
+    <span class="co">&quot;&quot;&quot;retourne une copie de la matrice m&quot;&quot;&quot;</span>
+    nlines,ncols <span class="op">=</span> <span class="bu">len</span>(m),<span class="bu">len</span>(m[<span class="dv">0</span>])
+    cp <span class="op">=</span> [[<span class="dv">0</span>]<span class="op">*</span>ncols <span class="cf">for</span> _ <span class="op">in</span> <span class="bu">range</span>(nlines)]
+    <span class="cf">for</span> i <span class="op">in</span> <span class="bu">range</span>(nlines):
+        <span class="cf">for</span> j <span class="op">in</span> <span class="bu">range</span>(ncols):
+            cp[i][j]<span class="op">=</span>m[i][j]
+    <span class="cf">return</span>  cp
+    
+<span class="kw">def</span> resolution_systeme(A0, y0, verbose<span class="op">=</span><span class="va">False</span>):
+    <span class="co">&quot;&quot;&quot;Resolution d&#39;un systeme de Cramer par la methode du pivot</span>
+<span class="co">    de Gauss. Si le booleen verbose vaut True, les etapes intermediaires</span>
+<span class="co">    de la mise sous forme triangulaire sont affichees&quot;&quot;&quot;</span>
+    A <span class="op">=</span> copie(A0) <span class="co">#copie de A</span>
+    y <span class="op">=</span> copie(y0) <span class="co">#copie de y</span>
+    n <span class="op">=</span> <span class="bu">len</span>(A) <span class="co">#nombre de lignes</span>
+    <span class="cf">if</span> verbose: <span class="co">#affichage facultatif des etapes</span>
+            <span class="bu">print</span>(<span class="st">&#39;Matrice=&#39;</span>, A)
+            <span class="bu">print</span>(<span class="st">&#39;Ordonnees =&#39;</span>,y, end<span class="op">=</span><span class="st">&#39;</span><span class="ch">\n\n</span><span class="st">&#39;</span>)
+    <span class="co">#phase de mise sous forme triangulaire</span>
+    <span class="cf">for</span> i <span class="op">in</span> <span class="bu">range</span>(n<span class="dv">-1</span>):
+        <span class="co">#recherche du pivot partiel dans la colonne i</span>
+        j <span class="op">=</span> pivot_partiel(A, i)
+        <span class="co">#echange de la ligne i  de A et de celle du pivot partiel</span>
+        <span class="cf">if</span> i <span class="op">!=</span> j:
+            echange_ligne(A, i, j)
+            <span class="co">#idem pour les inconnues</span>
+            echange_ligne(y, i, j)
+        <span class="co">#transvections dans la colonne i pour mettre des zeros</span>
+        pivot <span class="op">=</span> A[i][i]
+        <span class="cf">for</span> k <span class="op">in</span> <span class="bu">range</span>(i<span class="dv">+1</span>, n):
+            <span class="co">#ATTENTION à bien stocker le coefficient de transvection</span>
+            mu <span class="op">=</span> <span class="op">-</span>A[k][i]<span class="op">/</span><span class="bu">float</span>(pivot) 
+            transvection(A, k, i, mu)
+            <span class="co">#si on utilise -A[k][i]/float(pivot) au lieu de mu</span>
+            <span class="co">#c&#39;est faux car A[k][i] a été modifié</span>
+            transvection(y, k, i, mu)
+        <span class="cf">if</span> verbose: <span class="co">#affichage facultatif des etapes</span>
+            <span class="bu">print</span>(<span class="st">&#39;Etape </span><span class="sc">%d</span><span class="st"> :&#39;</span><span class="op">%</span>(i<span class="dv">+1</span>), <span class="st">&#39;pivot = </span><span class="sc">%.3f</span><span class="st">&#39;</span><span class="op">%</span>pivot)
+            <span class="bu">print</span>(<span class="st">&#39;Matrice=&#39;</span>, A)
+            <span class="bu">print</span>(<span class="st">&#39;Ordonnees =&#39;</span>, y, end<span class="op">=</span><span class="st">&#39;</span><span class="ch">\n\n</span><span class="st">&#39;</span>)
+    x <span class="op">=</span> [[<span class="dv">0</span>] <span class="cf">for</span> i <span class="op">in</span> <span class="bu">range</span>(n)]
+    <span class="co">#phase de remontée</span>
+    <span class="cf">for</span> i <span class="op">in</span> <span class="bu">range</span>(n<span class="dv">-1</span>, <span class="op">-</span><span class="dv">1</span>, <span class="op">-</span><span class="dv">1</span>):
+        x[i] <span class="op">=</span> [<span class="dv">1</span><span class="op">/</span><span class="bu">float</span>(A[i][i])<span class="op">*</span>(y[i][<span class="dv">0</span>] <span class="op">-</span> <span class="bu">sum</span>(A[i][k]<span class="op">*</span>x[k][<span class="dv">0</span>] <span class="cf">for</span> k <span class="op">in</span> <span class="bu">range</span>(i<span class="dv">+1</span>, n)))]
+    <span class="cf">return</span> x
+
+<span class="co">&quot;&quot;&quot;</span>
+<span class="co">In [10]: resolution_systeme([[2, 3], [5, -2]], [[5], [-16]])</span>
+<span class="co">Out[10]: [[-2.0], [3.0]]</span>
+<span class="co">&quot;&quot;&quot;</span></code></pre></div>
+</div>
+<div id="exercice-7" class="slide section level1">
+<h1>Exercice 7</h1>
+<p>Test de la fonction de résolution maison sur les systemes de l'exercice 2</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co">&quot;&quot;&quot;</span>
+<span class="co">#systeme 1</span>
+<span class="co">In [10]: resolution_systeme([[2, 3], [5, -2]], [[5], [-16]])</span>
+<span class="co">Out[10]: [[-2.0], [3.0]]</span>
+
+<span class="co">#systeme 2</span>
+<span class="co">In [11]: resolution_systeme([[2, 2, -3],[0, 1, -6], [0, 0, 1]],[[2], [-3], [4]])</span>
+<span class="co">Out[11]: [[-14.0], [21.0], [4.0]]</span>
+
+<span class="co">#systeme 3</span>
+
+<span class="co">In [12]: resolution_systeme([[2,2,-3],[-2,-1,-3 ],[6,4,4]],[[2],[-5], [16]], verbose=True)</span>
+<span class="co">Matrice= [[2, 2, -3], [-2, -1, -3], [6, 4, 4]]</span>
+<span class="co">Ordonnees = [[2], [-5], [16]]</span>
+
+<span class="co">Etape 1 : pivot = 6.000</span>
+<span class="co">Matrice= [[6, 4, 4], [0.0, 0.33333333333333326, -1.6666666666666667], </span>
+<span class="co">[0.0, 0.6666666666666667, -4.333333333333333]]</span>
+<span class="co">Ordonnees = [[16], [0.33333333333333304], [-3.333333333333333]]</span>
+
+<span class="co">Etape 2 : pivot = 0.667</span>
+<span class="co">Matrice= [[6, 4, 4], [0.0, 0.6666666666666667, -4.333333333333333], [0.0, 0.0, 0.4999999999999989]]</span>
+<span class="co">Ordonnees = [[16], [-3.333333333333333], [1.9999999999999991]]</span>
+
+<span class="co">Out[12]: [[-14.000000000000036], [21.000000000000046], [4.000000000000007]]</span>
+<span class="co">&quot;&quot;&quot;</span></code></pre></div>
+</div>
+<div id="exercice-8-comparaison-de-la-fonction-de-résolution-maison-et-de-numpy.linalg.solve" class="slide section level1">
+<h1>Exercice 8 Comparaison de la fonction de résolution maison et de <code>numpy.linalg.solve</code></h1>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">
+<span class="im">import</span> numpy <span class="im">as</span> np
+
+<span class="co">&quot;&quot;&quot;</span>
+<span class="co">&gt;&gt;&gt; import numpy as np</span>
+<span class="co">&gt;&gt;&gt; help(np.linalg.solve) #pour obtenir la documentation de cette fonction</span>
+<span class="co">...</span>
+<span class="co">&quot;&quot;&quot;</span></code></pre></div>
+<ul>
+<li><p>Résolution du système 1</p>
+<pre><code>In [10]: np.linalg.solve([[2, 3],[5,-2]],[[5], [-16]])
+
+Out[10]: array([[-2.],[ 3.]])</code></pre></li>
+<li><p>Résolution du système 2</p>
+<pre><code>In [11]: np.linalg.solve([[2, 2, -3],[0, 1, -6], [0, 0, 1]],[[2], [-3], [4]])
+
+Out[11]: array([[-14.],[ 21.],[  4.]])</code></pre></li>
+<li><p>Résolution du système 3</p>
+<pre><code>In [12]: x = np.linalg.solve([[2,2,-3],[-2,-1,-3 ],[6,4,4]],[[2],[-5], [16]])
+
+In [13]: x
+
+Out[13]: array([[-14.], [ 21.], [ 4.]])
+
+In [14]: x[0][0]
+
+Out[14]: -14.000000000000023</code></pre></li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"></code></pre></div>
+<p>La précision avec les fonctions de <code>numpy</code> n'est pas meilleure que celle obtenue avec la fonction <code>resolution_systeme</code> maison. Les flottants du vecteur solution sont d'un type spécifique à <code>numpy</code>.</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">
+<span class="co">&quot;&quot;&quot;</span>
+<span class="co">In [15]: type(x[0][0])</span>
+<span class="co">Out[15]: numpy.float64</span>
+<span class="co">&quot;&quot;&quot;</span></code></pre></div>
+</div>
+<div id="exercice-9-tests-avec-des-systèmes-qui-ne-sont-pas-de-cramer" class="slide section level1">
+<h1>Exercice 9 Tests avec des systèmes qui ne sont pas de Cramer</h1>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"></code></pre></div>
+<ul>
+<li>Le systeme <span class="math inline">\(\begin{cases}x+2y=1\\2x+4y=1\end{cases}\)</span> n'a pas de solutions</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co">&quot;&quot;&quot;</span>
+<span class="co">In [23]: sympy.solve([x+2*y-1, 2*x + 4*y - 1], [x, y])</span>
+<span class="co">Out[23]: []</span>
+
+<span class="co">In [24]: resolution_systeme([[1, 2], [2, 4]], [[1], [1]])</span>
+<span class="co">---------------------------------------------------------------------------</span>
+<span class="co">ZeroDivisionError                         Traceback (most recent call last)</span>
+
+<span class="co">In [25]: np.linalg.solve([[1, 2], [2, 4]], [[1], [1]])</span>
+<span class="co">---------------------------------------------------------------------------</span>
+<span class="co">numpy.linalg.linalg.LinAlgError: Singular matrix</span>
+<span class="co">&quot;&quot;&quot;</span></code></pre></div>
+<p>Le systeme <span class="math inline">\(\begin{cases} x+2y=1 \\ 2x+4y=2 \end{cases}\)</span> a une infinité de couples solutions de la forme <span class="math inline">\((1-2y, y)\)</span>.</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">
+
+<span class="co">&quot;&quot;&quot;</span>
+<span class="co">In [26]: sympy.solve([x+2*y-1, 2*x + 4*y - 2], [x, y])</span>
+<span class="co">Out[26]: {x: -2*y + 1}</span>
+
+<span class="co">In [27]: resolution_systeme([[1, 2], [2, 4]], [[1], [2]])</span>
+<span class="co">---------------------------------------------------------------------------</span>
+<span class="co">ZeroDivisionError: float division by zerox</span>
+
+<span class="co">In [28]: np.linalg.solve([[1, 2], [2, 4]], [[1], [2]])</span>
+
+<span class="co">LinAlgError: Singular matrix</span>
+<span class="co">&quot;&quot;&quot;</span></code></pre></div>
+</div>
+<div id="exercice-10-problemes-posés-par-les-flottants" class="slide section level1">
+<h1>Exercice 10 Problemes posés par les flottants</h1>
+<ul>
+<li>Premier systeme <code>A1.X = Y1</code></li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">
+A1 <span class="op">=</span> [[<span class="dv">1</span>, <span class="dv">1</span><span class="op">/</span><span class="dv">4</span>., <span class="dv">1</span>], [<span class="dv">1</span>, <span class="dv">1</span><span class="op">/</span><span class="dv">3</span>., <span class="dv">2</span>], [<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">12</span>]]
+Y1 <span class="op">=</span> [[<span class="dv">0</span>], [<span class="dv">0</span>], [<span class="dv">1</span>]]
+
+<span class="co">&quot;&quot;&quot;</span>
+<span class="co">In [33]: sympy.solve([x+y, x/4 + y/3 + z, x + 2*y + 12*z - 1], [x, y, z])</span>
+<span class="co">Out[33]: []</span>
+
+
+<span class="co">In [32]: resolution_systeme(A1 ,Y1, verbose=True)</span>
+<span class="co">Matrice= [[1, 0.25, 1], [1, 0.3333333333333333, 2], [0, 1, 12]]</span>
+<span class="co">Ordonnees = [[0], [0], [1]]</span>
+
+<span class="co">Etape 1 : pivot = 1.000</span>
+<span class="co">Matrice= [[1, 0.25, 1], [0.0, 0.08333333333333331, 1.0], [0.0, 1.0, 12.0]]</span>
+<span class="co">Ordonnees = [[0], [0.0], [1.0]]</span>
+
+<span class="co">Etape 2 : pivot = 1.000</span>
+<span class="co">Matrice= [[1, 0.25, 1], [0.0, 1.0, 12.0], [0.0, 0.0, 2.220446049250313e-16]]</span>
+<span class="co">Ordonnees = [[0], [1.0], [-0.08333333333333331]]</span>
+
+<span class="co">Out[32]: [[-750599937895082.8], [4503599627370496.0], [-375299968947541.25]]</span>
+<span class="co">&quot;&quot;&quot;</span></code></pre></div>
+<p>Le premier système n'a pas de solution (comme on peut le vérifier avec <code>sympy.solve</code>).</p>
+<p>Et pourtant la fonction de résolution maison retourne un triplet solution : <code>[-750599937895082.8, 4503599627370496.0, -375299968947541.25]</code>.</p>
+<p>L'erreur se produit lors de la dernière étape de mise sous forme triangulaire : <code>2.220446049250313e-16</code> apparaît en <code>Matrice[2][2]</code> alors qu'on devrait avoir 0 et donc une équation d'incompatibilité 0 = 1 pour la dernière ligne du système.</p>
+<p>L'erreur est due à la représentation approchée sous forme de flottant de <span class="math inline">\(1/3\)</span> par <span class="math inline">\(0.333\)</span> ... puis de <span class="math inline">\(1/3-1/4= 1/12\)</span> par <span class="math inline">\(0.08333333\)</span> ... Le coefficient de la dernière ligne devrait être <span class="math inline">\(1 - 1/12 \times 12=0\)</span> , mais c'est <span class="math inline">\(1- (1/3. - 1/4.)\times12\)</span> or en représentation flottante on a :</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">
+<span class="co">&quot;&quot;&quot;</span>
+<span class="co">In [34]: 1- (1/3. - 1/4.)*12</span>
+<span class="co">Out[34]: 2.220446049250313e-16</span>
+<span class="co">&quot;&quot;&quot;</span></code></pre></div>
+<p>Ainsi les calculs approchés avec des flottants font apparaître des termes infinitésimaux très petits à la place de zéro et transforment en systèmes de Cramer des systèmes qui n'ont pas cette propriété.</p>
+<p>De plus si un de ces infinitésimaux est pris comme pivot, alors des termes très grands (et faux) apparaissent, comme avec la fonction de bibliothèque de <code>numpy</code> :</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co">&quot;&quot;&quot;</span>
+<span class="co">In [35]: np.linalg.solve(A1, Y1)</span>
+<span class="co">Out[35]: </span>
+<span class="co">array([[ -7.50599938e+14],[  4.50359963e+15],[ -3.75299969e+14]])</span>
+<span class="co">&quot;&quot;&quot;</span></code></pre></div>
+<ul>
+<li>Deuxième système <code>A2.X = Y2</code></li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">A2 <span class="op">=</span> [[<span class="dv">1</span>, <span class="dv">10</span><span class="op">**</span><span class="dv">15</span>, <span class="dv">1</span>], [<span class="dv">1</span>, <span class="dv">10</span><span class="op">**</span>(<span class="op">-</span><span class="dv">2</span>), <span class="dv">2</span>], [<span class="dv">0</span>, <span class="dv">10</span><span class="op">**</span><span class="dv">15</span>, <span class="op">-</span><span class="dv">1</span>]]
+Y2 <span class="op">=</span> [[<span class="dv">1</span>], [<span class="dv">0</span>], [<span class="dv">0</span>]]
+
+<span class="co">&quot;&quot;&quot;</span>
+<span class="co">In [38]: sympy.solve([x + y - 1, 10**15*x + sympy.Rational(1, 10**2)*y + 10**15*z, x + 2*y - z], [x, y, z])</span>
+<span class="co">Out[38]: {y: -200000000000000000, x: 200000000000000001, z: -199999999999999999}</span>
+
+<span class="co">In [39]: resolution_systeme(A2 ,Y2, verbose=True)</span>
+<span class="co">Matrice= [[1, 1000000000000000, 1], [1, 0.01, 2], [0, 1000000000000000, -1]]</span>
+<span class="co">Ordonnees = [[1], [0], [0]]</span>
+
+<span class="co">Etape 1 : pivot = 1.000</span>
+<span class="co">Matrice= [[1, 1000000000000000, 1], [0.0, -1000000000000000.0, 1.0], [0.0, 1000000000000000.0, -1.0]]</span>
+<span class="co">Ordonnees = [[1], [-1.0], [0.0]]</span>
+
+<span class="co">Etape 2 : pivot = -1000000000000000.000</span>
+<span class="co">Matrice= [[1, 1000000000000000, 1], [0.0, -1000000000000000.0, 1.0], [0.0, 0.0, 0.0]]</span>
+<span class="co">Ordonnees = [[1], [-1.0], [-1.0]]</span>
+
+<span class="co">ZeroDivisionError: float division by zero</span>
+<span class="co">&quot;&quot;&quot;</span></code></pre></div>
+<p>Dans ce cas, les erreurs d'approximation par des flottants enlèvent la propriété de Cramer au système alors que ce système est de Cramer et a pour unique solution <code>[1 + 2*10**17, -2*10**17, -2*10**17 + 1]</code>, comme on peut le vérifier avec <code>sympy.solve</code>.</p>
+<p>L'erreur de division par 0 s'est produite lors de la première étape de la phase de remontée puisque le système n'est plus de Cramer.</p>
+<p>L'erreur d'approximation s'est produite lors de la première étape de la mise sous forme triangulaire au cours de la transvection qui a transformé la deuxième ligne en :</p>
+<pre><code>    [0.0, -1000000000000000.0, 1.0] </code></pre>
+<p>au lieu de <code>[0.0, -999999999999999.99, 1.0]</code></p>
+<p>En effet Python calcule ainsi :</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co">&quot;&quot;&quot;</span>
+<span class="co">In [44]: 10**-2-10**15</span>
+<span class="co">Out[44]: -1000000000000000.0 #-&gt; c&#39;est faux phenomene d&#39;absorption</span>
+<span class="co">&quot;&quot;&quot;</span></code></pre></div>
+<p>Ainsi la deuxième et la troisième ligne de la matrice sont devenues proportionnelles alors que les ordonnées ne le sont pas et le système obtenu par équivalence n'est plus de Cramer.</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"></code></pre></div>
+<p>La fonction de bibliothèque de numpy ne fait pas mieux :</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">
+<span class="co">&quot;&quot;&quot;</span>
+<span class="co">In [45]: np.linalg.solve(A2, Y2)</span>
+<span class="co">---------------------------------------------------------------------------</span>
+<span class="co">...</span>
+<span class="co">LinAlgError: Singular matrix</span>
+<span class="co">&quot;&quot;&quot;</span></code></pre></div>
+</div>
+<div id="exercice-11-inversion-de-matrice" class="slide section level1">
+<h1>Exercice 11 Inversion de matrice</h1>
+<p>On utilise la <em>méthode du miroir</em>.</p>
+<ul>
+<li><p>On applique la phase de mise sous forme triangulaire puis de remontée, en parallèle à la matrice de coefficients <code>A</code> et à la matrice identité.</p></li>
+<li><p>On part de A.X=Y Lors la phase de mise sous forme triangulaire on multiplie à gauche A par des matrices élémentaires d'opérations sur les lignes : triangulaires inférieures (transvection) ou matrices de permutation (échange de ligne) et on obtient :</p>
+<pre><code>L(1)..L(N).A.X=L(1)..L(N).Y .</code></pre></li>
+<li><p>Lors la phase de remontée on multiplie à gauche par des matrices de transvection (triangulaires supérieures) ou de dilatation (notées S, elles permutent avec les autres car elles sont diagonales) et on a :</p>
+<pre><code>S(1)...S(M).L(1)...L(P).A.X = S(1)...S(M).L(1)...L(P).Y</code></pre>
+<p>où le membre de gauche vaut exactement X et donc <code>S(1)...S(M)L(1)...L(P)</code> produit de toutes les matrices élémentaires d'opérations sur les lignes est l'inverse de A.</p></li>
+<li><p>Pour obtenir cette matrice inverse, il suffit d'appliquer les mêmes opérations élémentaires sur les lignes à partir de la matrice identité :</p>
+<pre><code>inv(A).I= inv(A)</code></pre></li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="kw">def</span> identite1(n):
+    <span class="co">&quot;&quot;&quot;Retourne une matrice carree identite de dimensions n*n&quot;&quot;&quot;</span>
+    <span class="cf">return</span> [[<span class="dv">0</span>]<span class="op">*</span>i <span class="op">+</span> [<span class="dv">1</span>] <span class="op">+</span> [<span class="dv">0</span>]<span class="op">*</span>(n <span class="op">-</span> i <span class="op">-</span><span class="dv">1</span> ) <span class="cf">for</span> i <span class="op">in</span> <span class="bu">range</span>(n)]
+
+<span class="kw">def</span> dilatation(A, i, mu):
+    <span class="co">&quot;&quot;&quot;Li &lt;- Li*mu si mu non nul&quot;&quot;&quot;</span>
+    <span class="cf">assert</span> mu <span class="op">!=</span> <span class="dv">0</span>
+    <span class="co">#A[i] = [A[i][k]*mu for k in range(len(A[i])]</span>
+    <span class="cf">for</span> k <span class="op">in</span> <span class="bu">range</span>(<span class="bu">len</span>(A[i])):
+        A[i][k] <span class="op">*=</span> mu
+        
+<span class="kw">def</span> inversion(A0):
+    <span class="co">&quot;&quot;&quot;Inversion de la matrice A0 par la methode du miroir&quot;&quot;&quot;</span>
+    A <span class="op">=</span> copie(A0) <span class="co">#copie de A</span>
+    n <span class="op">=</span> <span class="bu">len</span>(A) <span class="co">#nombre de lignes</span>
+    I <span class="op">=</span> identite1(n)
+    <span class="cf">for</span> i <span class="op">in</span> <span class="bu">range</span>(n<span class="dv">-1</span>):        
+        j <span class="op">=</span> pivot_partiel(A, i)        
+        <span class="cf">if</span> i <span class="op">!=</span> j:
+            echange_ligne(A, i, j)
+            echange_ligne(I, i, j)
+        <span class="co">#transvections dans la colonne i pour mettre des zeros</span>
+        pivot <span class="op">=</span> A[i][i]
+        <span class="cf">for</span> k <span class="op">in</span> <span class="bu">range</span>(i<span class="dv">+1</span>, n):
+            mu <span class="op">=</span> <span class="op">-</span>A[k][i]<span class="op">/</span><span class="bu">float</span>(pivot) 
+            transvection(A, k, i, mu)
+            transvection(I, k, i, mu)
+    <span class="co">#phase de remontée</span>
+    <span class="cf">for</span> i <span class="op">in</span> <span class="bu">range</span>(n<span class="dv">-1</span>, <span class="op">-</span><span class="dv">1</span>, <span class="op">-</span><span class="dv">1</span>):
+        <span class="co">#transvections</span>
+        <span class="cf">for</span> k <span class="op">in</span> <span class="bu">range</span>(i<span class="dv">+1</span>, n):
+            mu <span class="op">=</span> <span class="op">-</span>A[i][k]
+            transvection(I, i, k, mu)
+        <span class="co">#x[i] = 1/float(A[i][i])</span>
+        dilatation(I, i, <span class="dv">1</span><span class="op">/</span><span class="bu">float</span>(A[i][i]))
+    <span class="cf">return</span> I
+<span class="co">&quot;&quot;&quot;</span>
+<span class="co">&gt;&gt;&gt; inversion([[1,2],[0,3]])</span>
+<span class="co">[[1.0, -0.6666666666666666], [0.0, 0.3333333333333333]]</span>
+<span class="co">&gt;&gt;&gt; inversion([[1,2],[3,5]])</span>
+<span class="co">[[-4.999999999999997, 1.9999999999999993], [2.9999999999999987, -0.9999999999999996]]</span>
+<span class="co">&gt;&gt;&gt; inversion([[1,2],[3,4]])</span>
+<span class="co">[[-1.9999999999999996, 0.9999999999999998], [1.4999999999999998, -0.4999999999999999]]</span>
+<span class="co">&gt;&gt;&gt; inversion([[2,2,-3],[0,1,-6],[0,0,1]])</span>
+<span class="co">[[0.5, -1.0, -4.5], [0.0, 1.0, 6.0], [0.0, 0.0, 1.0]]</span>
+<span class="co">&gt;&gt;&gt; inversion([[2,2,-3],[-2,-1,-3],[6,4,4]])</span>
+<span class="co">[[4.000000000000008, -10.000000000000021, -4.500000000000009], </span>
+<span class="co">[-5.000000000000011, 13.000000000000027, 6.000000000000012],</span>
+<span class="co"> [-1.0000000000000018, 2.0000000000000044, 1.000000000000002]]</span>
+<span class="co">&quot;&quot;&quot;</span></code></pre></div>
+</div>
+<div class="slide section level1">
+
+<ul>
+<li>On peut aussi utiliser la fonction <code>inv</code> de la bibliotheque <code>numpy.linalg</code> :</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co">&quot;&quot;&quot;</span>
+<span class="co">&gt;&gt;&gt; import numpy as np</span>
+<span class="co">&gt;&gt;&gt; numpy.linalg.inv([[2,2,-3],[-2,-1,-3],[6,4,4]])</span>
+<span class="co">array([[  4. , -10. ,  -4.5],</span>
+<span class="co">       [ -5. ,  13. ,   6. ],</span>
+<span class="co">       [ -1. ,   2. ,   1. ]])</span>
+<span class="co">&quot;&quot;&quot;</span></code></pre></div>
+<ul>
+<li>Et on peut vérifier les méthodes numériques avec le module de calcul formel <code>sympy</code> :</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">
+<span class="co">&quot;&quot;&quot;</span>
+<span class="co">In [49]:  A = sympy.Matrix([[2,2,-3],[-2,-1,-3],[6,4,4]])</span>
+
+<span class="co">In [50]: A**(-1)</span>
+<span class="co">Out[50]: </span>
+<span class="co">Matrix([[ 4, -10, -9/2],[-5,  13,    6],[-1,   2,    1]])</span>
+
+<span class="co">In [51]: A.det()</span>
+<span class="co">Out[51]: 2</span>
+
+<span class="co">&quot;&quot;&quot;</span></code></pre></div>
+<p>Plus généralement on peut programmer une fonction <code>pivot_gauss(B)</code> qui applique l'algorithme du pivot de Gauss à une matrice, puis envelopper cette fonction dans des fonctions de résolution de système ou d'inversion.</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="kw">def</span> pivot_gauss(B):
+    <span class="co">&quot;&quot;&quot;Pivot de Gauss appliqué à une matrice B&quot;&quot;&quot;</span>
+    n <span class="op">=</span> <span class="bu">len</span>(B)
+    A <span class="op">=</span> [ B[k][:]  <span class="cf">for</span> k <span class="op">in</span> <span class="bu">range</span>(n)]  <span class="co">#Copie de B</span>
+    <span class="cf">for</span> i <span class="op">in</span> <span class="bu">range</span>(n <span class="op">-</span> <span class="dv">1</span>):
+        j <span class="op">=</span> pivot_partiel(A, i)  <span class="co">#recherche de la ligne du pivot partiel</span>
+        echange_ligne(A, i, j)
+        pivot <span class="op">=</span> A[i][i]
+        <span class="cf">for</span> k <span class="op">in</span> <span class="bu">range</span>(i <span class="op">+</span> <span class="dv">1</span>, n):
+            transvection(A, k, i, <span class="op">-</span> A[k][i]<span class="op">/</span>pivot)
+    <span class="cf">for</span> i <span class="op">in</span> <span class="bu">range</span>(n <span class="op">-</span> <span class="dv">1</span>, <span class="op">-</span><span class="dv">1</span>, <span class="op">-</span><span class="dv">1</span>):
+        <span class="co">#l&#39;ordre des transvections n&#39;a pas d&#39;importance</span>
+        <span class="co"># car il y a des zeros après les pivots dans les lignes déjà traitées</span>
+        <span class="cf">for</span> j <span class="op">in</span> <span class="bu">range</span>(i <span class="op">+</span> <span class="dv">1</span>, n, <span class="dv">1</span>): 
+            transvection(A, i, j, <span class="op">-</span>A[i][j]<span class="op">/</span>A[j][j])
+        dilatation(A, i, <span class="dv">1</span><span class="op">/</span>A[i][i])
+    <span class="cf">return</span> A            
+
+<span class="kw">def</span> resolution_systeme2(A0, y0):
+    matricePlus <span class="op">=</span> [ A0[k][:] <span class="op">+</span> y0[k][:] <span class="cf">for</span> k <span class="op">in</span> <span class="bu">range</span>(<span class="bu">len</span>(A0))] 
+    A <span class="op">=</span> pivot_gauss(matricePlus)
+    <span class="cf">return</span> [Ligne[<span class="op">-</span><span class="dv">1</span>] <span class="cf">for</span> Ligne <span class="op">in</span> A]
+
+<span class="kw">def</span> inversion2(A0):
+    n <span class="op">=</span> <span class="bu">len</span>(A0)
+    matricePlus <span class="op">=</span> [ A0[k][:] <span class="op">+</span> [ <span class="dv">1</span> <span class="cf">if</span> j <span class="op">==</span> k <span class="cf">else</span> <span class="dv">0</span> <span class="cf">for</span> j <span class="op">in</span> <span class="bu">range</span>(n)] <span class="cf">for</span> k <span class="op">in</span> <span class="bu">range</span>(n)]
+    A <span class="op">=</span> pivot_gauss(matricePlus)
+    <span class="cf">return</span> [Ligne[n:] <span class="cf">for</span> Ligne <span class="op">in</span> A]</code></pre></div>
+</div>
+<div id="exercice-13-inversion-de-matrice-et-problèmes-avec-les-flottants" class="slide section level1">
+<h1>Exercice 13 Inversion de matrice et problèmes avec les flottants</h1>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">
+A3 <span class="op">=</span> [[<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>], [<span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>], [<span class="dv">7</span>, <span class="dv">8</span>, <span class="dv">9</span>]]
+A4 <span class="op">=</span> [[<span class="dv">1</span>, <span class="dv">1</span>.<span class="op">/</span><span class="dv">4</span>, <span class="dv">1</span>], [<span class="dv">1</span>, <span class="dv">1</span>.<span class="op">/</span><span class="dv">3</span>, <span class="dv">2</span>], [<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">12</span>]]
+A5 <span class="op">=</span> [[<span class="dv">1</span>,<span class="dv">1</span>.<span class="op">+</span><span class="dv">10</span><span class="op">**</span><span class="dv">5</span>,<span class="dv">1</span>],[<span class="dv">1</span>,<span class="dv">1+10</span><span class="op">**</span>(<span class="op">-</span><span class="dv">5</span>),<span class="dv">2</span>],[<span class="dv">0</span>,<span class="dv">10</span><span class="op">**</span><span class="dv">5</span>,<span class="op">-</span><span class="dv">1</span>]]
+A6 <span class="op">=</span> [[<span class="dv">1</span>,<span class="dv">10</span><span class="op">**</span><span class="dv">15</span>,<span class="dv">1</span>],[<span class="dv">1</span>,<span class="dv">10</span><span class="op">**</span>(<span class="op">-</span><span class="dv">2</span>),<span class="dv">2</span>],[<span class="dv">0</span>,<span class="dv">10</span><span class="op">**</span><span class="dv">15</span>,<span class="op">-</span><span class="dv">1</span>]]</code></pre></div>
+<ul>
+<li><p>La matrice <code>A3</code> est non inversible alors que les fonctions d'inversion numérique (maison et de bibliothèque) la considèrent comme inversible:</p>
+<pre><code>A3[2] - A3[1] = A3[1] - A3[0] = [3, 3, 3]</code></pre></li>
+</ul>
+<p>donc <code>A3[2] = 2*A3[1] - A3[0]</code> donc les lignes de <code>A3</code> sont liées donc A3 pas inversible</p>
+<p>ou encore <code>det(A3) = 1*5*9 + 2*6*7 + 4*8*3 - 3*5*7 - 2*4*9 - 6*8*1 = 0</code></p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co">&quot;&quot;&quot;</span>
+<span class="co">In [57]: inversion(A3)</span>
+<span class="co">Out[57]: </span>
+<span class="co">[[-4503599627370498.0, 9007199254740992.0, -4503599627370494.5],</span>
+<span class="co"> [9007199254740996.0, -1.8014398509481984e+16, 9007199254740990.0],</span>
+<span class="co"> [-4503599627370498.0, 9007199254740992.0, -4503599627370495.5]]</span>
+
+<span class="co">In [58]: A3bis = sympy.Matrix(A3)</span>
+
+<span class="co">In [59]: A3bis.det()</span>
+<span class="co">Out[59]: 0</span>
+
+<span class="co">In [60]: A3bis**(-1)</span>
+<span class="co">---------------------------------------------------------------------------</span>
+
+<span class="co">ValueError: Matrix det == 0; not invertible.</span>
+
+<span class="co">In [63]: np.linalg.inv(A3)</span>
+<span class="co">Out[63]: </span>
+<span class="co">array([[  3.15221191e+15,  -6.30442381e+15,   3.15221191e+15],</span>
+<span class="co">       [ -6.30442381e+15,   1.26088476e+16,  -6.30442381e+15],</span>
+<span class="co">       [  3.15221191e+15,  -6.30442381e+15,   3.15221191e+15]])</span>
+<span class="co">&quot;&quot;&quot;</span></code></pre></div>
+<p>Explication : à l'étape 2 de la phase de mise sous forme triangulaire la dernière ligne comporte deux infinitésimaux au lieu de zéros :</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co">&quot;&quot;&quot;</span>
+<span class="co">&gt;&gt;&gt; resolution_systeme(A3, [[1],[0], [0]], verbose=True)</span>
+<span class="co">Matrice= [[1, 2, 3], [4, 5, 6], [7, 8, 9]]</span>
+<span class="co">Ordonnees = [1, 0, 0]</span>
+
+<span class="co">Etape 1 : pivot = 7.000</span>
+<span class="co">Matrice= [[7, 8, 9], [0.0, 0.4285714285714288, 0.8571428571428577],</span>
+<span class="co"> [0.0, 0.8571428571428572, 1.7142857142857144]]</span>
+<span class="co">Ordonnees = [0, 0.0, 1.0]</span>
+
+<span class="co">Etape 2 : pivot = 0.857</span>
+<span class="co">Matrice= [[7, 8, 9], [0.0, 0.8571428571428572, 1.7142857142857144], </span>
+<span class="co">[0.0, 5.551115123125783e-17, 1.1102230246251565e-16]]</span>
+<span class="co">Ordonnees = [0, 1.0, -0.5000000000000002]</span>
+
+<span class="co">&quot;&quot;&quot;</span></code></pre></div>
+<ul>
+<li>La matrice <code>A4</code> est non inversible alors que les fonctions numériques la considèrent comme inversible (voir l'exo 10 pour l'explication par erreurs d'approximations).</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co">&quot;&quot;&quot;</span>
+<span class="co">In [65]: inversion(A4)</span>
+<span class="co">Out[65]: [[-9007199254740992.0, 9007199254740992.0, -750599937895082.8], </span>
+<span class="co">[5.404319552844595e+16, -5.404319552844595e+16, 4503599627370496.0], </span>
+<span class="co">[-4503599627370496.0, 4503599627370496.0, -375299968947541.25]]</span>
+
+<span class="co">In [66]: np.linalg.inv(A4)</span>
+<span class="co">Out[66]: array([[ -9.00719925e+15,   9.00719925e+15,  -7.50599938e+14],</span>
+<span class="co">       [  5.40431955e+16,  -5.40431955e+16,   4.50359963e+15],</span>
+<span class="co">       [ -4.50359963e+15,   4.50359963e+15,  -3.75299969e+14]])</span>
+
+<span class="co">In [67]: A4bis = sympy.Matrix([[1,sympy.Rational(1,4), 1], [1, sympy.Rational(1,3), 2], [0, 1, 12]])</span>
+
+<span class="co">In [68]: A4bis**(-1)</span>
+
+<span class="co">ValueError: Matrix det == 0; not invertible.</span>
+
+<span class="co">In [69]: A4bis.det()</span>
+<span class="co">Out[69]: 0       </span>
+<span class="co">  </span>
+<span class="co">&quot;&quot;&quot;</span></code></pre></div>
+<ul>
+<li><p>La matrice <code>A5</code> est inversible :</p>
+<pre><code>det(A5) = -(1+10**(-5)) + 10**5 - 2*10**5 + (1 + 10**5) = -10**(-5)</code></pre></li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">
+<span class="co">&quot;&quot;&quot;</span>
+<span class="co">&gt;&gt;&gt; inversion(A5)</span>
+<span class="co">[[20000098346.184444, -20000098345.184444, -20000098344.184444],</span>
+<span class="co"> [-99999.9917259636, 99999.9917259636, 99999.9917259636],</span>
+<span class="co">  [-9999999172.59636, 9999999172.59636, 9999999171.59636]]</span>
+
+<span class="co">&gt;&gt;&gt; np.linalg.inv(A5)</span>
+<span class="co">array([[  2.00001206e+10,  -2.00001205e+10,  -2.00001205e+10],</span>
+<span class="co">[ -1.00000103e+05,   1.00000103e+05,   1.00000103e+05],</span>
+<span class="co">[ -1.00000103e+10,   1.00000103e+10,   1.00000103e+10]])</span>
+
+<span class="co">In [74]: A5bis = sympy.Matrix([[1,1+10**5,1],[1,1+Rational(1,10**5),2],[0,10**5,-1]])</span>
+
+<span class="co">In [75]: A5bis.det()</span>
+<span class="co">Out[75]: -1/100000</span>
+
+<span class="co">In [76]: A5bis**(-1)</span>
+<span class="co">Out[76]: </span>
+<span class="co">Matrix([[ 20000100001, -20000100000, -20000099999],[-100000, 100000, 100000],</span>
+<span class="co"> [-10000000000,  10000000000,   9999999999]])</span>
+<span class="co">&quot;&quot;&quot;</span></code></pre></div>
+<ul>
+<li>La matrice <code>A6</code> est inversible alors que les fonctions numériques la considerent comme non inversible. (voir l'exo 10 pour l'explication par erreurs d'approximations)</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">
+<span class="co">&quot;&quot;&quot;</span>
+<span class="co">In [85]: inversion(A6)</span>
+<span class="co">Traceback (most recent call last):</span>
+<span class="co">  .....</span>
+<span class="co">ZeroDivisionError: float division by zero</span>
+
+<span class="co">In [86]: np.linalg.inv(A6)</span>
+<span class="co">Traceback (most recent call last):</span>
+<span class="co">numpy.linalg.linalg.LinAlgError: Singular matrix</span>
+
+<span class="co">In [87]: A6bis = sympy.Matrix([[1,10**15,1],[1,Rational(1,10**2),2],[0,10**15,-1]])</span>
+
+<span class="co">In [88]: A6bis.det()</span>
+<span class="co">Out[88]: -1/100</span>
+
+<span class="co">In [89]: A6bis**(-1)</span>
+<span class="co">Out[89]: Matrix([[ 200000000000000001, -200000000000000000, -199999999999999999],</span>
+<span class="co">[ -100, 100,100],[-100000000000000000,  100000000000000000,   99999999999999999]])</span>
+<span class="co">&quot;&quot;&quot;</span></code></pre></div>
+</div>
+<div id="exercice-14-comparaison-entre-fonctions-maisons-et-fonctions-de-bibliothèques-sur-les-matrices-de-virginie" class="slide section level1">
+<h1>Exercice 14 Comparaison entre fonctions maisons et fonctions de bibliothèques sur les matrices de Virginie</h1>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">
+<span class="kw">def</span> virginie1(n):
+    <span class="co">&quot;&quot;&quot;Retourne une matrice de Virginie de dimensions  nxn&quot;&quot;&quot;</span>
+    <span class="cf">assert</span> <span class="bu">str</span>(<span class="bu">type</span>(n))<span class="op">==</span><span class="st">&quot;&lt;class &#39;int&#39;&gt;&quot;</span> <span class="op">and</span> n<span class="op">&gt;=</span><span class="dv">2</span>,<span class="st">&quot;n doit etre un entier &gt;=2&quot;</span>
+    V <span class="op">=</span> []
+    <span class="cf">for</span> i <span class="op">in</span> <span class="bu">range</span>(n):
+        ligne <span class="op">=</span> []
+        <span class="cf">for</span> j <span class="op">in</span> <span class="bu">range</span>(n):
+            <span class="cf">if</span> j <span class="op">&lt;</span> i<span class="dv">-1</span> <span class="op">or</span> j <span class="op">&gt;</span> i<span class="dv">+1</span>:
+                ligne.append(<span class="dv">0</span>)
+            <span class="cf">elif</span> j <span class="op">==</span> i<span class="dv">-1</span> <span class="op">or</span> j <span class="op">==</span> i<span class="dv">+1</span>:
+                ligne.append(<span class="op">-</span><span class="dv">1</span>)
+            <span class="cf">else</span>:
+                ligne.append(<span class="dv">2</span>)
+        V.append(ligne)
+    <span class="cf">return</span> V
+    
+<span class="kw">def</span> virginie2(n):
+    <span class="co">&quot;&quot;&quot;Retourne une matrice de Virginie de dimensions  nxn</span>
+<span class="co">    Voir le fichier cadeau.py pour une explication sur l&#39;expression</span>
+<span class="co">    booleenne utilisee&quot;&quot;&quot;</span>
+    <span class="cf">assert</span> <span class="bu">str</span>(<span class="bu">type</span>(n))<span class="op">==</span><span class="st">&quot;&lt;class &#39;int&#39;&gt;&quot;</span> <span class="op">and</span> n<span class="op">&gt;=</span><span class="dv">2</span>,<span class="st">&quot;n doit etre un entier &gt;=2&quot;</span>
+    <span class="cf">return</span> [[(i <span class="op">==</span> j<span class="dv">-1</span> <span class="op">and</span> <span class="op">-</span><span class="dv">1</span>) <span class="op">or</span> (i <span class="op">==</span> j <span class="op">and</span> <span class="dv">2</span>) <span class="op">or</span> (i <span class="op">==</span> j<span class="dv">+1</span> <span class="op">and</span> <span class="op">-</span><span class="dv">1</span>) <span class="op">or</span> <span class="dv">0</span> 
+            <span class="cf">for</span> j <span class="op">in</span> <span class="bu">range</span>(n)] <span class="cf">for</span> i <span class="op">in</span> <span class="bu">range</span>(n)]
+
+<span class="co">&quot;&quot;&quot;</span>
+<span class="co">&gt;&gt;&gt; virginie1(4)</span>
+<span class="co">[[2, -1, 0, 0], [-1, 2, -1, 0], [0, -1, 2, -1], [0, 0, -1, 2]]</span>
+<span class="co">&gt;&gt;&gt; virginie2(4)</span>
+<span class="co">[[2, -1, 0, 0], [-1, 2, -1, 0], [0, -1, 2, -1], [0, 0, -1, 2]]</span>
+<span class="co">&quot;&quot;&quot;</span>
+
+<span class="kw">def</span> exo14():
+    <span class="im">import</span> time, numpy    
+    tabvirginie <span class="op">=</span> [(n,virginie1(n)) <span class="cf">for</span>  n <span class="op">in</span> [<span class="dv">50</span>,<span class="dv">100</span>,<span class="dv">200</span>,<span class="dv">400</span>]]
+    <span class="bu">print</span>(<span class="st">&quot;Temps pour inverser des matrices de Virginie avec la fonction inversion maison : &quot;</span>)
+    <span class="cf">for</span> v <span class="op">in</span> tabvirginie:
+        t0 <span class="op">=</span> time.time()
+        inversion(v[<span class="dv">1</span>])
+        <span class="bu">print</span>(<span class="st">&#39;Pour la matrice de Virginie de taille </span><span class="sc">%s</span><span class="st"> : </span><span class="sc">%s</span><span class="st">&#39;</span><span class="op">%</span>(v[<span class="dv">0</span>],time.time()<span class="op">-</span>t0))
+    <span class="bu">print</span>(<span class="st">&quot;Temps pour inverser des matrices de Virginie avec \</span>
+<span class="st">            la fonction inversion inv de numpy.linalg : &quot;</span>)
+    <span class="cf">for</span> v <span class="op">in</span> tabvirginie:
+        t0 <span class="op">=</span> time.time()
+        numpy.linalg.inv(v[<span class="dv">1</span>])
+        <span class="bu">print</span>(<span class="st">&#39;Pour la matrice de Virginie de taille </span><span class="sc">%s</span><span class="st"> : </span><span class="sc">%s</span><span class="st">&#39;</span><span class="op">%</span>(v[<span class="dv">0</span>],time.time()<span class="op">-</span>t0))
+        </code></pre></div>
+<p>Les fonctions de <code>numpy</code> sont beaucoup plus rapides (facteur 100) !</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">
+<span class="co">&quot;&quot;&quot;</span>
+<span class="co">&gt;&gt;&gt; exo14()</span>
+<span class="co">Temps pour inverser des matrices de Virginie avec la fonction inversion maison : </span>
+<span class="co">Pour la matrice de Virginie de taille 50 : 0.04155135154724121</span>
+<span class="co">Pour la matrice de Virginie de taille 100 : 0.28409647941589355</span>
+<span class="co">Pour la matrice de Virginie de taille 200 : 2.1560568809509277</span>
+<span class="co">Pour la matrice de Virginie de taille 400 : 18.00588893890381</span>
+<span class="co">Temps pour inverser des matrices de Virginie avec la fonction inversion inv de numpy.linalg : </span>
+<span class="co">Pour la matrice de Virginie de taille 50 : 0.00042176246643066406</span>
+<span class="co">Pour la matrice de Virginie de taille 100 : 0.0014603137969970703</span>
+<span class="co">Pour la matrice de Virginie de taille 200 : 0.006672382354736328</span>
+<span class="co">Pour la matrice de Virginie de taille 400 : 0.04255509376525879</span>
+<span class="co">&quot;&quot;&quot;</span></code></pre></div>
+</div>
+</body>
+</html>
