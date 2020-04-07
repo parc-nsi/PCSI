@@ -12589,7 +12589,7 @@ div#notebook {
 
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[4]:</div>
+<div class="prompt input_prompt">In&nbsp;[7]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">random</span> <span class="k">import</span> <span class="n">randint</span>
@@ -12610,7 +12610,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[10]:</div>
+<div class="prompt input_prompt">In&nbsp;[8]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">dimensions</span><span class="p">(</span><span class="n">M</span><span class="p">):</span>
@@ -12629,10 +12629,10 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[6]:</div>
+<div class="prompt input_prompt">In&nbsp;[9]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">dimensions</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">],[</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">]])</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">dimensions</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">],[</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">]])</span>
 </pre></div>
 
 </div>
@@ -12645,24 +12645,15 @@ div#notebook {
 
 <div class="output_area">
 
-<div class="prompt"></div>
+<div class="prompt output_prompt">Out[9]:</div>
 
 
-<div class="output_subarea output_text output_error">
-<pre>
-<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
-<span class="ansi-red-fg">AssertionError</span>                            Traceback (most recent call last)
-<span class="ansi-green-fg">&lt;ipython-input-6-cea84803df16&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span>
-<span class="ansi-green-fg">----&gt; 1</span><span class="ansi-red-fg"> </span>dimensions<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">[</span><span class="ansi-blue-fg">[</span><span class="ansi-cyan-fg">1</span><span class="ansi-blue-fg">,</span><span class="ansi-cyan-fg">2</span><span class="ansi-blue-fg">,</span><span class="ansi-cyan-fg">3</span><span class="ansi-blue-fg">]</span><span class="ansi-blue-fg">,</span><span class="ansi-blue-fg">[</span><span class="ansi-cyan-fg">4</span><span class="ansi-blue-fg">,</span><span class="ansi-cyan-fg">5</span><span class="ansi-blue-fg">]</span><span class="ansi-blue-fg">]</span><span class="ansi-blue-fg">)</span>
 
-<span class="ansi-green-fg">&lt;ipython-input-5-16c2f578a969&gt;</span> in <span class="ansi-cyan-fg">dimensions</span><span class="ansi-blue-fg">(M)</span>
-<span class="ansi-green-intense-fg ansi-bold">      4</span>     lignes <span class="ansi-blue-fg">=</span> len<span class="ansi-blue-fg">(</span>M<span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">      5</span>     colonnes <span class="ansi-blue-fg">=</span> len<span class="ansi-blue-fg">(</span>M<span class="ansi-blue-fg">[</span><span class="ansi-cyan-fg">0</span><span class="ansi-blue-fg">]</span><span class="ansi-blue-fg">)</span>
-<span class="ansi-green-fg">----&gt; 6</span><span class="ansi-red-fg">     </span><span class="ansi-green-fg">assert</span> all<span class="ansi-blue-fg">(</span>len<span class="ansi-blue-fg">(</span>ligne<span class="ansi-blue-fg">)</span> <span class="ansi-blue-fg">==</span> colonnes <span class="ansi-green-fg">for</span> ligne <span class="ansi-green-fg">in</span> M<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">&#34;M n&#39;est pas une matrice&#34;</span>
-<span class="ansi-green-intense-fg ansi-bold">      7</span>     <span class="ansi-green-fg">return</span> <span class="ansi-blue-fg">(</span>lignes<span class="ansi-blue-fg">,</span> colonnes<span class="ansi-blue-fg">)</span>
 
-<span class="ansi-red-fg">AssertionError</span>: M n&#39;est pas une matrice</pre>
+<div class="output_text output_subarea output_execute_result">
+<pre>(2, 3)</pre>
 </div>
+
 </div>
 
 </div>
@@ -12671,20 +12662,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">dimensions</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">],[</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">]])</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[8]:</div>
+<div class="prompt input_prompt">In&nbsp;[10]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">matrice_nulle</span><span class="p">(</span><span class="n">lignes</span><span class="p">,</span> <span class="n">colonnes</span><span class="p">):</span>
@@ -12698,7 +12676,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[11]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">matrice_nulle</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
@@ -12708,10 +12686,30 @@ div#notebook {
 </div>
 </div>
 
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[11]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>[[0, 0, 0], [0, 0, 0], [0, 0, 0], [0, 0, 0]]</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[9]:</div>
+<div class="prompt input_prompt">In&nbsp;[12]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">copie_matrice</span><span class="p">(</span><span class="n">M</span><span class="p">):</span>
@@ -12730,7 +12728,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[16]:</div>
+<div class="prompt input_prompt">In&nbsp;[13]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">echange_ligne</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">):</span>
@@ -12745,7 +12743,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[17]:</div>
+<div class="prompt input_prompt">In&nbsp;[14]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">transvection</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">mu</span><span class="p">):</span>
@@ -12764,7 +12762,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[15]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">M</span> <span class="o">=</span> <span class="p">[[</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">)]</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">)]</span>
@@ -12775,10 +12773,30 @@ div#notebook {
 </div>
 </div>
 
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[15]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>[[0, 0, 0, 1], [1, 0, 0, 1], [1, 1, 1, 0]]</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[16]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">transvection</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
@@ -12789,10 +12807,30 @@ div#notebook {
 </div>
 </div>
 
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[16]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>[[2, 0, 0, 3], [1, 0, 0, 1], [1, 1, 1, 0]]</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[17]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">transvection</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
@@ -12803,10 +12841,30 @@ div#notebook {
 </div>
 </div>
 
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[17]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>[[4, 0, 0, 5], [1, 0, 0, 1], [1, 1, 1, 0]]</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[18]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">dilatation</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">coef</span><span class="p">):</span>
@@ -12829,37 +12887,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">pivot_gauss</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">):</span>
-    <span class="p">(</span><span class="n">lignes</span><span class="p">,</span> <span class="n">colonnes</span><span class="p">)</span> <span class="o">=</span> <span class="n">dimensions</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
-    <span class="n">A2</span> <span class="o">=</span> <span class="n">copie_matrice</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
-    <span class="n">B2</span> <span class="o">=</span> <span class="n">copie_matrice</span><span class="p">(</span><span class="n">B</span><span class="p">)</span>
-    <span class="c1">#application des transvections pour diagonaliser la matrice</span>
-    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">colonnes</span><span class="p">):</span>
-        <span class="n">pivot</span> <span class="o">=</span> <span class="n">A2</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="n">j</span><span class="p">]</span>
-        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">lignes</span><span class="p">):</span>
-            <span class="k">if</span> <span class="n">i</span> <span class="o">!=</span> <span class="n">j</span><span class="p">:</span>
-                <span class="n">mu</span> <span class="o">=</span> <span class="o">-</span> <span class="n">A2</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span><span class="o">/</span> <span class="n">pivot</span> <span class="c1">#coefficient de transvection</span>
-                <span class="n">transvection</span><span class="p">(</span><span class="n">A2</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">mu</span><span class="p">)</span>
-                <span class="n">transvection</span><span class="p">(</span><span class="n">B2</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">mu</span><span class="p">)</span>
-    <span class="c1">#application des dilatations pour transformer A2 en matrice identité</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">lignes</span><span class="p">):</span>
-        <span class="n">coef</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span> <span class="n">A2</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="c1">#coefficient de dilatation</span>
-        <span class="n">dilatation</span><span class="p">(</span><span class="n">A2</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">coef</span><span class="p">)</span>
-        <span class="n">dilatation</span><span class="p">(</span><span class="n">B2</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">coef</span><span class="p">)</span>
-    <span class="k">return</span> <span class="p">(</span><span class="n">A2</span><span class="p">,</span><span class="n">B2</span><span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[20]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">pivot_gauss</span><span class="p">([[</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="o">-</span><span class="mi">3</span><span class="p">],[</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">3</span> <span class="p">],[</span><span class="mi">6</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">4</span><span class="p">]],[[</span><span class="mi">2</span><span class="p">],[</span><span class="o">-</span><span class="mi">5</span><span class="p">],</span> <span class="p">[</span><span class="mi">16</span><span class="p">]])</span>
@@ -12869,16 +12897,56 @@ div#notebook {
 </div>
 </div>
 
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[20]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>([[1.0, 0.0, 0.0], [0.0, 1.0, 0.0], [0.0, 0.0, 1.0]], [[-14.0], [21.0], [4.0]])</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[21]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">pivot_gauss</span><span class="p">([[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">3</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">6</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]],[[</span><span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">4</span><span class="p">]])</span>
 </pre></div>
 
 </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[21]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>([[1.0, 0.0, 0.0], [0.0, 1.0, 0.0], [0.0, 0.0, 1.0]], [[-14.0], [21.0], [4.0]])</pre>
+</div>
+
+</div>
+
 </div>
 </div>
 
@@ -12893,7 +12961,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[14]:</div>
+<div class="prompt input_prompt">In&nbsp;[22]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">pivot_partiel</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="n">j</span><span class="p">):</span>
@@ -12913,7 +12981,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[23]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">pivot_gauss_complet</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">):</span>
@@ -12926,6 +12994,7 @@ div#notebook {
         <span class="n">ipivot</span> <span class="o">=</span> <span class="n">pivot_partiel</span><span class="p">(</span><span class="n">A2</span><span class="p">,</span> <span class="n">j</span><span class="p">)</span>
         <span class="n">echange_ligne</span><span class="p">(</span><span class="n">A2</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">ipivot</span><span class="p">)</span>
         <span class="n">echange_ligne</span><span class="p">(</span><span class="n">B2</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">ipivot</span><span class="p">)</span>
+        <span class="n">pivot</span> <span class="o">=</span> <span class="n">A2</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="n">j</span><span class="p">]</span>
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">lignes</span><span class="p">):</span>
             <span class="k">if</span> <span class="n">i</span> <span class="o">!=</span> <span class="n">j</span><span class="p">:</span>
                 <span class="n">mu</span> <span class="o">=</span> <span class="o">-</span> <span class="n">A2</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span><span class="o">/</span> <span class="n">pivot</span> <span class="c1">#coefficient de transvection</span>
@@ -12954,7 +13023,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[19]:</div>
+<div class="prompt input_prompt">In&nbsp;[24]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">pivot_gauss_complique</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">):</span>
@@ -12993,7 +13062,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[20]:</div>
+<div class="prompt input_prompt">In&nbsp;[25]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">pivot_gauss_complique</span><span class="p">([[</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="o">-</span><span class="mi">3</span><span class="p">],[</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">3</span> <span class="p">],[</span><span class="mi">6</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">4</span><span class="p">]],[[</span><span class="mi">2</span><span class="p">],[</span><span class="o">-</span><span class="mi">5</span><span class="p">],</span> <span class="p">[</span><span class="mi">16</span><span class="p">]])</span>
@@ -13020,13 +13089,250 @@ div#notebook {
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[20]:</div>
+<div class="prompt output_prompt">Out[25]:</div>
 
 
 
 
 <div class="output_text output_subarea output_execute_result">
 <pre>[[-14.000000000000036], [21.000000000000046], [4.000000000000007]]</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[54]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">copie</span><span class="p">(</span><span class="n">m</span><span class="p">):</span>
+    <span class="n">n</span><span class="p">,</span><span class="n">p</span> <span class="o">=</span> <span class="n">dimensions</span> <span class="p">(</span><span class="n">m</span><span class="p">)</span>
+    <span class="n">sol</span> <span class="o">=</span> <span class="n">matrice_nulle</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">p</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span> <span class="p">(</span><span class="n">n</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span> <span class="p">(</span><span class="n">p</span><span class="p">):</span>
+            <span class="n">sol</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">m</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">sol</span>
+
+<span class="k">def</span> <span class="nf">pivot_partiel</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="n">j</span><span class="p">):</span>
+    <span class="n">imax</span>  <span class="o">=</span> <span class="n">j</span>
+    <span class="n">pivot</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">M</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="n">j</span><span class="p">])</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">j</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">M</span><span class="p">)):</span>
+        <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">M</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">])</span> <span class="o">&gt;</span> <span class="n">pivot</span><span class="p">:</span>
+            <span class="n">pivot</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">M</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">])</span>
+            <span class="n">imax</span> <span class="o">=</span> <span class="n">i</span>
+    <span class="k">return</span> <span class="n">imax</span>
+
+<span class="k">def</span> <span class="nf">pivotpartiel</span><span class="p">(</span><span class="n">m</span><span class="p">,</span><span class="n">j</span><span class="p">):</span>
+    <span class="n">maximum</span> <span class="o">=</span><span class="n">m</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="n">j</span><span class="p">]</span>
+    <span class="n">indice</span> <span class="o">=</span> <span class="n">j</span>
+    <span class="n">n</span><span class="p">,</span> <span class="n">p</span> <span class="o">=</span> <span class="n">dimensions</span> <span class="p">(</span><span class="n">m</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span> <span class="p">(</span><span class="n">n</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">m</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">])</span> <span class="o">&gt;</span> <span class="n">maximum</span> <span class="p">:</span>
+            <span class="n">maximum</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">m</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">])</span>
+            <span class="n">indice</span> <span class="o">=</span> <span class="n">i</span>
+    <span class="k">return</span> <span class="n">indice</span>
+            
+<span class="k">def</span> <span class="nf">echange_ligne</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Procédure qui échange les lignes M[i] et M[j] de la matrice M&quot;&quot;&quot;</span>
+    <span class="n">M</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">M</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">M</span><span class="p">[</span><span class="n">j</span><span class="p">],</span> <span class="n">M</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+    
+<span class="k">def</span> <span class="nf">pivot_gauss_complet</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">):</span>
+    <span class="p">(</span><span class="n">lignes</span><span class="p">,</span> <span class="n">colonnes</span><span class="p">)</span> <span class="o">=</span> <span class="n">dimensions</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+    <span class="c1">#copie des matrices A et B</span>
+    <span class="n">A2</span> <span class="o">=</span> <span class="n">copie_matrice</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+    <span class="n">B2</span> <span class="o">=</span> <span class="n">copie_matrice</span><span class="p">(</span><span class="n">B</span><span class="p">)</span>
+    <span class="c1">#application des transvections pour diagonaliser la matrice</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">colonnes</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">A2</span><span class="p">,</span> <span class="n">B2</span><span class="p">)</span>
+        <span class="n">ipivot</span> <span class="o">=</span> <span class="n">pivot_partiel</span><span class="p">(</span><span class="n">A2</span><span class="p">,</span> <span class="n">j</span><span class="p">)</span>
+        <span class="n">echange_ligne</span><span class="p">(</span><span class="n">A2</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">ipivot</span><span class="p">)</span>
+        <span class="n">echange_ligne</span><span class="p">(</span><span class="n">B2</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">ipivot</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">ipivot</span><span class="p">)</span>
+        <span class="n">pivot</span> <span class="o">=</span> <span class="n">A2</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="n">j</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">lignes</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">i</span> <span class="o">!=</span> <span class="n">j</span><span class="p">:</span>
+                <span class="n">mu</span> <span class="o">=</span> <span class="o">-</span> <span class="n">A2</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span><span class="o">/</span> <span class="n">pivot</span> <span class="c1">#coefficient de transvection</span>
+                <span class="n">transvection</span><span class="p">(</span><span class="n">A2</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">mu</span><span class="p">)</span>
+                <span class="n">transvection</span><span class="p">(</span><span class="n">B2</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">mu</span><span class="p">)</span>
+    <span class="c1">#application des dilatations pour transformer A2 en matrice identité</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">lignes</span><span class="p">):</span>
+        <span class="n">coef</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span> <span class="n">A2</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="c1">#coefficient de dilatation</span>
+        <span class="n">dilatation</span><span class="p">(</span><span class="n">A2</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">coef</span><span class="p">)</span>
+        <span class="n">dilatation</span><span class="p">(</span><span class="n">B2</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">coef</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">A2</span><span class="p">,</span><span class="n">B2</span><span class="p">)</span>
+    
+<span class="k">def</span> <span class="nf">gauss</span><span class="p">(</span><span class="n">Ain</span><span class="p">,</span><span class="n">Bin</span><span class="p">):</span>
+    <span class="n">A</span><span class="p">,</span><span class="n">B</span> <span class="o">=</span> <span class="n">copie</span><span class="p">(</span><span class="n">Ain</span><span class="p">),</span> <span class="n">copie</span><span class="p">(</span><span class="n">Bin</span><span class="p">)</span>
+    <span class="n">n</span><span class="p">,</span><span class="n">p</span> <span class="o">=</span> <span class="n">dimensions</span> <span class="p">(</span><span class="n">A</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span> <span class="p">(</span><span class="n">p</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">)</span>
+        <span class="n">h</span> <span class="o">=</span> <span class="n">pivotpartiel</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="n">j</span><span class="p">)</span>
+        <span class="n">echange_ligne</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="n">j</span><span class="p">,</span><span class="n">h</span><span class="p">)</span>
+        <span class="n">echange_ligne</span><span class="p">(</span><span class="n">B</span><span class="p">,</span><span class="n">j</span><span class="p">,</span><span class="n">h</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">h</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span> <span class="p">(</span><span class="n">n</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">i</span> <span class="o">!=</span> <span class="n">j</span> <span class="p">:</span>                              <span class="c1">#si on est pas sur la diagonale#</span>
+                <span class="n">coef</span> <span class="o">=</span> <span class="o">-</span><span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span><span class="o">/</span><span class="n">A</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="n">j</span><span class="p">]</span>             <span class="c1"># le coef est - la valeur de la case, sur la valeur de la case de la diagonale</span>
+                <span class="n">transvection</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">,</span><span class="n">coef</span><span class="p">)</span>
+                <span class="n">transvection</span><span class="p">(</span><span class="n">B</span><span class="p">,</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">,</span><span class="n">coef</span><span class="p">)</span>
+    
+    <span class="c1">#maintenant on divise chaque ligne pour avoir des 1 sur la diagonale#</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span> <span class="p">(</span><span class="n">n</span><span class="p">):</span>
+        <span class="n">coef</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">i</span><span class="p">]</span>
+        <span class="n">dilatation</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="n">i</span><span class="p">,</span><span class="n">coef</span><span class="p">)</span>
+        <span class="n">dilatation</span><span class="p">(</span><span class="n">B</span><span class="p">,</span><span class="n">i</span><span class="p">,</span><span class="n">coef</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">A</span><span class="p">,</span><span class="n">B</span>
+    <span class="c1"># et après on prie pour que ça fonction un minima#</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[56]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">gauss</span><span class="p">([[</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="o">-</span><span class="mi">3</span><span class="p">],[</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">3</span> <span class="p">],[</span><span class="mi">6</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">4</span><span class="p">]],[[</span><span class="mi">2</span><span class="p">],[</span><span class="o">-</span><span class="mi">5</span><span class="p">],</span> <span class="p">[</span><span class="mi">16</span><span class="p">]])</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>[[2, 2, -3], [-2, -1, -3], [6, 4, 4]] [[2], [-5], [16]]
+2
+[[6, 4, 4], [0.0, 0.33333333333333326, -1.6666666666666667], [0.0, 0.6666666666666667, -4.333333333333333]] [[16], [0.33333333333333304], [-3.333333333333333]]
+0
+[[-0.4999999999999999, 0.0, -2.0], [6, 4, 4], [-1.0, 0.0, -5.0]] [[-1.0], [16], [-6.0]]
+2
+[[-0.09999999999999987, 0.0, 0.0], [5.2, 4.0, 0.0], [-1.0, 0.0, -5.0]] [[1.4000000000000004], [11.2], [-6.0]]
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[56]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>([[1.0, -0.0, -0.0], [1.3, 1.0, 0.0], [0.2, -0.0, 1.0]],
+ [[-14.000000000000023], [2.8], [1.2000000000000002]])</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[55]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">pivot_gauss_complet</span><span class="p">([[</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="o">-</span><span class="mi">3</span><span class="p">],[</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">3</span> <span class="p">],[</span><span class="mi">6</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">4</span><span class="p">]],[[</span><span class="mi">2</span><span class="p">],[</span><span class="o">-</span><span class="mi">5</span><span class="p">],</span> <span class="p">[</span><span class="mi">16</span><span class="p">]])</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>[[2, 2, -3], [-2, -1, -3], [6, 4, 4]] [[2], [-5], [16]]
+2
+[[6, 4, 4], [0.0, 0.33333333333333326, -1.6666666666666667], [0.0, 0.6666666666666667, -4.333333333333333]] [[16], [0.33333333333333304], [-3.333333333333333]]
+2
+[[6.0, 0.0, 29.999999999999993], [0.0, 0.6666666666666667, -4.333333333333333], [0.0, 0.0, 0.4999999999999989]] [[36.0], [-3.333333333333333], [1.9999999999999991]]
+2
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[55]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>([[1.0, 0.0, 0.0], [0.0, 1.0, 0.0], [0.0, 0.0, 1.0]],
+ [[-14.00000000000003], [21.000000000000046], [4.000000000000007]])</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[48]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">gauss</span><span class="p">([[</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">],[</span><span class="mi">5</span><span class="p">,</span><span class="o">-</span><span class="mi">2</span><span class="p">]],[[</span><span class="mi">5</span><span class="p">],[</span><span class="o">-</span><span class="mi">16</span><span class="p">]])</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>[[5.0, -2.220446049250313e-16], [0.0, 3.8]] [[-10.0], [11.4]]
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[48]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>([[1.0, -4.4408920985006264e-17], [0.0, 0.9999999999999999]], [[-2.0], [3.0]])</pre>
 </div>
 
 </div>
