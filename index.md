@@ -118,5 +118,6 @@ Sujets réalisés par Stéphane Gonnord/Laurent Jouhet/Frédéric Junier/Stépha
   - [corrigé version diaporama HTML](TP12/corrige/I1-TP-12-Euler-Rk4-corrige.html)
   - [corrigé version python](TP12/corrige/I1-TP-12-Euler-Rk4-corrige.py)
   - [Animation schémas d'intégration de $y'=y ; y(0)=1$ sur (0;1)](TP12/ressources/schemas-0-1.mp4)
-  
+  - [Animation schémas d'intégration de $y'=y ; y(0)=1$ sur (0;4)](TP12/ressources/schemas-0-4.mp4)
+  - [Jupyer Notebook avec schémas numériques]((https://mybinder.org/v2/gh/frederic-junier/PCSI/master?filepath=TP12/ressources/Schema_Numerique_2020.ipynb)
   
