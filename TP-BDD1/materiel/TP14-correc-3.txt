@@ -1,0 +1,113 @@
+Exo 3 : Nombre total de triangles 
+
+SELECT COUNT(*) FROM triangles
+
+(100000)
+
+----------------------------------------------------------------------
+
+Exo 3 : Tous les triangles dont le périmètre est 100 
+
+SELECT * FROM triangles WHERE ab+ac+bc=100
+
+(471, 47, 50, 3)
+(607, 35, 32, 33)
+... (226 de plus)
+----------------------------------------------------------------------
+
+Exo 3 : Tous les produits des cotes des triangles de périmètre >= 100 
+
+SELECT ab*ac*bc FROM triangles WHERE ab+ac+bc>=100
+
+(12187500)
+(50150)
+... (91627 de plus)
+----------------------------------------------------------------------
+
+Exo 3 : Insertion d'une ligne supplémentaire 
+
+INSERT INTO triangles VALUES (100001,1, 99, 1)
+
+
+----------------------------------------------------------------------
+
+Exo 3 : Insertion d'une ligne supplémentaire 
+
+INSERT INTO triangles VALUES (100002,99, 1, 1)
+
+
+----------------------------------------------------------------------
+
+Exo 3 : Tous les triangles équilatéraux 
+
+SELECT * FROM triangles WHERE ab = ac AND ab = bc
+
+(15, 31, 31, 31)
+(2045, 6, 6, 6)
+... (17 de plus)
+----------------------------------------------------------------------
+
+Exo 3 : Tous les triangles rectangles en A 
+
+SELECT  * FROM triangles  WHERE bc*bc=ab*ab+ac*ac
+
+(0, 125, 325, 300)
+(127, 70, 74, 24)
+... (64 de plus)
+----------------------------------------------------------------------
+
+Exo 3 : Le nombre de triangles rectangles en A 
+
+SELECT  COUNT(*)  FROM triangles  WHERE bc*bc=ab*ab+ac*ac
+
+(66)
+
+----------------------------------------------------------------------
+
+Exo 3 : Le maximum des périmètres des triangles rectangles en A 
+
+SELECT MAX(ab+bc+ac) FROM triangles  WHERE bc*bc=ab*ab+ac*ac
+
+(1400)
+
+----------------------------------------------------------------------
+
+Exo 3 : La plus petite valeur des produits AB.AC.BC, pour les
+ triangles ABC de périmètre supérieur ou égal à 100 
+
+SELECT MIN(ab*bc*ac) FROM triangles  WHERE  ab+ac+bc>=100
+
+(99)
+
+----------------------------------------------------------------------
+
+Exo 3 : Les longueurs correspondants au(x) triangle(s) pour
+   le(s)quel(s) le minimum précédent est atteint 
+
+SELECT ab,ac,bc ,ab*ac*bc AS produit FROM triangles 
+	WHERE  ab+ac+bc>=100  AND ab*ac*bc=(
+		SELECT  MIN(ab*ac*bc) 	 FROM triangles
+		 	WHERE ab+ac+bc>=100
+		)
+
+(1, 1, 99, 99)
+(99, 1, 1, 99)
+
+----------------------------------------------------------------------
+
+Exo 3 : Ensemble des triangles plats 
+
+SELECT * FROM triangles WHERE ab+ac=bc OR ab+bc=ac OR ac+bc=ab
+
+(20, 16, 55, 39)
+(38, 45, 97, 52)
+... (2877 de plus)
+----------------------------------------------------------------------
+
+Exo 3 : Suppression des lignes insérées en 2) 
+
+DELETE FROM triangles WHERE idt > 100000
+
+
+----------------------------------------------------------------------
+

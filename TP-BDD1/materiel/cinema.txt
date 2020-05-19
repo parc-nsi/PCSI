@@ -1,0 +1,4 @@
+1	Pathé	Bellecour
+2	UGC	Part-Dieu
+3	Astoria	Cours Vitton
+4	Comedia	Avenue Berthelot

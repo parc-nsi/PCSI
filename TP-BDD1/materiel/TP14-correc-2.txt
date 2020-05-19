@@ -1,0 +1,107 @@
+Exo 2 : Toutes les lignes avec toutes les colonnes de la table personne 
+
+SELECT * FROM personne
+
+(1, Kidman, Nicole)
+(2, Bettany, Paul)
+(3, Watson, Emily)
+(4, Skarsgard, Stellan)
+... (18 de plus)
+----------------------------------------------------------------------
+
+Exo 2 : Tous les prenoms de la table personne dans l'ordre croissant des 
+prenoms 
+
+SELECT prenom FROM personne ORDER BY prenom ASC
+
+(Angelina)
+(Bruce)
+(Clint)
+(David)
+... (18 de plus)
+----------------------------------------------------------------------
+
+Exo 2 : Tous les prenoms de la table personne avec supression des doublons
+Donne le meme resultat que
+SELECT DISTINCT prenom FROM personne ORDER BY prenom ASC 
+
+SELECT DISTINCT prenom FROM personne
+
+(Nicole)
+(Paul)
+(Emily)
+(Stellan)
+... (15 de plus)
+----------------------------------------------------------------------
+
+Exo 2 : Toutes les lignes de la table personne qui contiennent le prenom
+ 'John' 
+
+SELECT * FROM personne WHERE prenom = 'John'
+
+(5, Travolta, John)
+(12, Wayne, John)
+(18, Glen, John)
+
+----------------------------------------------------------------------
+
+Exo 2 : Récupère l'idp de Lars von Trier 
+
+SELECT idp FROM personne 
+	WHERE nom = 'von Trier' AND prenom = 'Lars'
+
+(13)
+
+----------------------------------------------------------------------
+
+Exo 2 : Liste des titres de films réalisés par Lars von Trier 
+
+SELECT titre FROM film 
+	WHERE idr = (SELECT idp FROM personne 
+		WHERE personne.nom = 'von Trier'
+			AND personne.prenom = 'Lars')
+
+(Breaking the waves)
+(Dogville)
+
+----------------------------------------------------------------------
+
+Exo 2 : Déterminer les titres de films dont le genre est Drame 
+
+SELECT titre FROM film WHERE genre = 'Drame'
+
+(Crash)
+(Breaking the waves)
+(Dogville)
+... (3 de plus)
+----------------------------------------------------------------------
+
+Exo 2 : Déterminer les titres des films réalisés dans les années 80 
+
+SELECT titre FROM film
+	WHERE  1980 <= annee AND annee <= 1990
+
+(Faux-Semblants)
+(Dangereusement vôtre)
+... (1 de plus)
+----------------------------------------------------------------------
+
+Exo 2 : Déterminer le nombre de projections de films 
+
+SELECT COUNT(*) FROM projection
+
+(25)
+
+----------------------------------------------------------------------
+
+Exo 2 : Déterminer les rôles joués par Kevin Spacey 
+
+SELECT role FROM jouer
+	WHERE ida = (SELECT idp FROM personne
+			WHERE nom = 'Spacey' AND prenom = 'Kevin')
+
+(Jim Williams)
+(Lester Burnham)
+
+----------------------------------------------------------------------
+

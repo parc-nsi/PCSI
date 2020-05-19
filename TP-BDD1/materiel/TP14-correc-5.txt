@@ -1,0 +1,62 @@
+Exo 5 : Jointure entre les tables communes et departements 
+
+SELECT c.nom, d.nom
+FROM communes AS c JOIN departements AS d 
+ON c.dep = d.id
+
+(L'Abergement-Clémenciat, Ain)
+(L'Abergement-de-Varey, Ain)
+... (36703 de plus)
+----------------------------------------------------------------------
+
+Exo 5 : Liste de toutes  les communes avec pour chacune,
+ son département, sa région et sa population 
+
+SELECT  c.nom, d.nom, r.nom, c.pop
+FROM  communes  AS c JOIN departements AS d JOIN regions AS r
+ON c.dep=d.id AND d.reg=r.id
+
+
+(L'Abergement-Clémenciat, Ain, Rhône-Alpes, 784)
+(L'Abergement-de-Varey, Ain, Rhône-Alpes, 221)
+... (36703 de plus)
+----------------------------------------------------------------------
+
+Exo 5 : Liste des villes de plus de 100000 habitants, ainsi  que leur
+ population et leur région 
+
+SELECT  c.nom, r.nom, c.pop
+FROM  communes  AS c JOIN departements AS d JOIN regions AS r
+ON c.dep=d.id AND d.reg=r.id
+WHERE c.pop >= 100000
+ORDER BY c.pop DESC
+
+(Paris, Île-de-France, 2243833)
+(Marseille, Provence-Alpes-Côte d'Azur, 850726)
+... (39 de plus)
+----------------------------------------------------------------------
+
+Exo 5 : Liste des communes (nom et population)
+dont le nom commence par 'Pa' et se 
+ finit par 'is' 
+
+SELECT  c.nom, r.nom, c.pop
+FROM  communes  AS c JOIN departements AS d JOIN regions AS r
+ON c.dep=d.id AND d.reg=r.id
+WHERE c.nom LIKE 'Pa%is'
+
+(Pargny-les-Bois, Picardie, 136)
+(Passy-en-Valois, Picardie, 164)
+... (4 de plus)
+----------------------------------------------------------------------
+
+Exo 5 : Liste des communes qui ont strictement plus de lettres dans leur
+ nom  que leur nombre d'habitants 
+
+SELECT  nom, pop FROM communes WHERE  LENGTH(nom )>pop
+
+(Majastres, 2)
+(Saint-Martin-lès-Seyne, 18)
+... (52 de plus)
+----------------------------------------------------------------------
+

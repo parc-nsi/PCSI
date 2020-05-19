@@ -1,0 +1,555 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+ "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <meta name="author" content="Chenevois-Jouhet-Junier" />
+  <title>Corrigé du TP 14 Base de Données n° 1</title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+  </style>
+  <link rel="stylesheet" type="text/css" media="screen, projection, print"
+    href="http://www.w3.org/Talks/Tools/Slidy2/styles/slidy.css" />
+  <script src="http://www.w3.org/Talks/Tools/Slidy2/scripts/slidy.js"
+    charset="utf-8" type="text/javascript"></script>
+</head>
+<body>
+<div class="slide titlepage">
+  <h1 class="title">Corrigé du TP 14 Base de Données n° 1</h1>
+  <p class="author">
+Chenevois-Jouhet-Junier
+  </p>
+</div>
+<div class="slide section level1">
+
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"></code></pre></div>
+</div>
+<div id="exercice-2-partie-a" class="slide section level1">
+<h1>Exercice 2 Partie A</h1>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">
+<span class="kw">def</span> lecture(fichier):
+    <span class="co">&quot;&quot;&quot;Ouvre un fichier texte où chaque ligne est constituee de champs</span>
+<span class="co">    separes par des tabulations et se termine par un saut de ligne.</span>
+<span class="co">    Lit le fichier ligne par ligne et collecte les differents champs dans</span>
+<span class="co">    un tuple puis insere ce tuple dans une liste&quot;&quot;&quot;</span>
+    f <span class="op">=</span> <span class="bu">open</span>(fichier)
+    collecteur <span class="op">=</span> []
+    <span class="cf">for</span> ligne <span class="kw">in</span> f:
+        champs <span class="op">=</span> <span class="bu">tuple</span>(ligne.rstrip().split(<span class="st">&#39;</span><span class="ch">\t</span><span class="st">&#39;</span>))
+        collecteur.append(champs)
+    f.close()
+    <span class="cf">return</span> collecteur
+        
+film <span class="op">=</span> lecture(<span class="st">&#39;film.txt&#39;</span>)
+jouer <span class="op">=</span> lecture(<span class="st">&#39;jouer.txt&#39;</span>)
+projection <span class="op">=</span> lecture(<span class="st">&#39;projection.txt&#39;</span>)
+personne <span class="op">=</span> lecture(<span class="st">&#39;personne.txt&#39;</span>)
+
+<span class="co">&quot;&quot;&quot;</span>
+<span class="co">In [1]: film[0]</span>
+<span class="co">Out[1]: (&#39;01&#39;, &#39;15&#39;, &#39;Crash&#39;, &#39;Drame&#39;, &#39;1996&#39;)</span>
+
+<span class="co">In [2]: jouer[0]</span>
+<span class="co">Out[2]: (&#39;01&#39;, &#39;05&#39;, &#39;Grace&#39;)</span>
+
+<span class="co">In [3]: projection[0]</span>
+<span class="co">Out[3]: (&#39;02&#39;, &#39;05&#39;, &#39;01-05-2002&#39;)</span>
+
+<span class="co">In [4]: personne[0]</span>
+<span class="co">Out[4]: (&#39;01&#39;, &#39;Kidman&#39;, &#39;Nicole&#39;)</span>
+<span class="co">&quot;&quot;&quot;</span>
+
+<span class="kw">def</span> requete1():
+    <span class="co">&quot;&quot;&quot;Retourne la liste des personnes dont le prenom est John&quot;&quot;&quot;</span>
+    t <span class="op">=</span> []
+    <span class="cf">for</span> p <span class="kw">in</span> personne:
+        <span class="cf">if</span> p[<span class="op">-</span><span class="dv">1</span>] <span class="op">==</span> <span class="st">&#39;John&#39;</span>:
+            t.append(p)
+    <span class="cf">return</span> t
+
+<span class="co">&quot;&quot;&quot;</span>
+<span class="co">In [8]: requete1()</span>
+<span class="co">Out[8]: [(&#39;05&#39;, &#39;Travolta&#39;, &#39;John&#39;), (&#39;12&#39;, &#39;Wayne&#39;, &#39;John&#39;), </span>
+<span class="co">(&#39;18&#39;, &#39;Glen&#39;, &#39;John&#39;)]</span>
+<span class="co">&quot;&quot;&quot;</span>
+
+<span class="kw">def</span> requete2():
+    <span class="co">&quot;&quot;&quot;Retourne la liste de tous les prenoms dans l&#39;ordre alphabetique&quot;&quot;&quot;</span>
+    prenom <span class="op">=</span> []
+    <span class="cf">for</span> p <span class="kw">in</span> personne:
+        prenom.append(p[<span class="op">-</span><span class="dv">1</span>])
+    prenom.sort()
+    <span class="cf">return</span> prenom
+    
+<span class="co">&quot;&quot;&quot;</span>
+<span class="co">In [14]: requete2()</span>
+<span class="co">Out[14]: </span>
+<span class="co">[&#39;Angelina&#39;, &#39;Bruce&#39;,... ,&#39;Stellan&#39;]</span>
+<span class="co"> &quot;&quot;&quot;</span>
+<span class="kw">def</span> requete3():
+    <span class="co">&quot;&quot;&quot;Retourne la liste de tous les prenoms dans l&#39;ordre alphabetique</span>
+<span class="co">    sans doublons&quot;&quot;&quot;</span>
+    prenom <span class="op">=</span> requete2()
+    newprenom <span class="op">=</span> [prenom[<span class="dv">0</span>]]
+    <span class="co">#on utilise le fait que prenom est deja dans l&#39;ordre alphabetique</span>
+    <span class="cf">for</span> p <span class="kw">in</span> prenom[<span class="dv">1</span>:]:
+        <span class="cf">if</span> p <span class="op">!=</span> newprenom[<span class="op">-</span><span class="dv">1</span>]:
+            newprenom.append(p)
+    <span class="cf">return</span> newprenom
+
+<span class="co">&quot;&quot;&quot;</span>
+<span class="co">In [2]: len(requete2())</span>
+<span class="co">Out[2]: 22</span>
+
+<span class="co">In [3]: len(requete3())</span>
+<span class="co">Out[3]: 19</span>
+<span class="co">&quot;&quot;&quot;</span>
+    
+<span class="kw">def</span> requete4():
+    <span class="co">&quot;&quot;&quot;Retourne la liste de tous les films realises par Lars Von trier&quot;&quot;&quot;</span>
+    <span class="co">#recherche de l&#39;identifiant de Lars Von Trier</span>
+    <span class="cf">for</span> p <span class="kw">in</span> personne:
+        <span class="cf">if</span> p[<span class="dv">1</span>] <span class="op">==</span> <span class="st">&#39;von Trier&#39;</span>:
+            <span class="bu">id</span> <span class="op">=</span> p[<span class="dv">0</span>]
+            <span class="cf">break</span>
+    filmTrier <span class="op">=</span> []
+    <span class="cf">for</span> f <span class="kw">in</span> film:
+        <span class="cf">if</span> f[<span class="dv">1</span>] <span class="op">==</span> <span class="bu">id</span>:
+            filmTrier.append(f[<span class="dv">2</span>])
+    <span class="cf">return</span> filmTrier
+
+<span class="co">&quot;&quot;&quot;</span>
+<span class="co">In [17]: requete4()</span>
+<span class="co">Out[17]: [&#39;Breaking the waves&#39;, &#39;Dogville&#39;]</span>
+<span class="co">&quot;&quot;&quot;</span></code></pre></div>
+</div>
+<div id="exercice-2-partie-b-base-cinema843.db" class="slide section level1">
+<h1>Exercice 2 Partie B Base : <code>cinema843.db</code></h1>
+<div class="figure">
+<img src="images/recap-cinema.png" alt="Schéma relationnel de la table cinema843.db" />
+<p class="caption">Schéma relationnel de la table <code>cinema843.db</code></p>
+</div>
+</div>
+<div class="slide section level1">
+
+<p>Exo 2 : Toutes les lignes avec toutes les colonnes de la table personne</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">
+SELECT <span class="op">*</span> FROM personne
+
+(<span class="dv">1</span>, Kidman, Nicole)
+(<span class="dv">2</span>, Bettany, Paul)
+(<span class="dv">3</span>, Watson, Emily)
+(<span class="dv">4</span>, Skarsgard, Stellan)
+... (<span class="dv">18</span> de plus)
+</code></pre></div>
+<p>Exo 2 : Tous les prenoms de la table personne dans l'ordre croissant des prenoms</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">
+SELECT prenom FROM personne ORDER BY prenom ASC
+
+(Angelina)
+(Bruce)
+(Clint)
+(David)
+... (<span class="dv">18</span> de plus)</code></pre></div>
+<p>Exo 2 : Tous les prenoms de la table personne avec supression des doublons. Les deux requetes donnent le meme resultat.</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">
+SELECT DISTINCT prenom FROM personne ORDER BY prenom ASC 
+
+SELECT DISTINCT prenom FROM personne
+
+(Nicole)
+(Paul)
+(Emily)
+(Stellan)
+... (<span class="dv">15</span> de plus)</code></pre></div>
+<p>Exo 2 : Toutes les lignes de la table personne qui contiennent le prenom 'John'</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">
+SELECT <span class="op">*</span> FROM personne WHERE prenom <span class="op">=</span> <span class="st">&#39;John&#39;</span>
+
+(<span class="dv">5</span>, Travolta, John)
+(<span class="dv">12</span>, Wayne, John)
+(<span class="dv">18</span>, Glen, John)</code></pre></div>
+<p>Exo 2 : Récupère l'idp de Lars von Trier</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">
+SELECT idp FROM personne 
+    WHERE nom <span class="op">=</span> <span class="st">&#39;von Trier&#39;</span> AND prenom <span class="op">=</span> <span class="st">&#39;Lars&#39;</span>
+
+(<span class="dv">13</span>)</code></pre></div>
+<p>Exo 2 : Liste des titres de films réalisés par Lars von Trier</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">
+SELECT titre FROM film 
+    WHERE idr <span class="op">=</span> (SELECT idp FROM personne 
+        WHERE personne.nom <span class="op">=</span> <span class="st">&#39;von Trier&#39;</span>
+            AND personne.prenom <span class="op">=</span> <span class="st">&#39;Lars&#39;</span>)
+
+(Breaking the waves)
+(Dogville)</code></pre></div>
+<p>Exo 2 : Déterminer les titres de films dont le genre est Drame</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">
+SELECT titre FROM film WHERE genre <span class="op">=</span> <span class="st">&#39;Drame&#39;</span>
+
+(Crash)
+(Breaking the waves)
+(Dogville)
+... (<span class="dv">3</span> de plus)</code></pre></div>
+<p>Exo 2 : Déterminer les titres des films réalisés dans les années 80</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">
+SELECT titre FROM film
+    WHERE  <span class="dv">1980</span> <span class="op">&lt;=</span> annee AND annee <span class="op">&lt;=</span> <span class="dv">1990</span>
+
+(Faux<span class="op">-</span>Semblants)
+(Dangereusement vôtre)
+... (<span class="dv">1</span> de plus)</code></pre></div>
+<p>Exo 2 : Déterminer le nombre de projections de films</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">
+SELECT COUNT(<span class="op">*</span>) FROM projection
+
+(<span class="dv">25</span>)</code></pre></div>
+<p>Exo 2 : Déterminer les rôles joués par Kevin Spacey</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">
+SELECT role FROM jouer
+    WHERE ida <span class="op">=</span> (SELECT idp FROM personne
+            WHERE nom <span class="op">=</span> <span class="st">&#39;Spacey&#39;</span> AND prenom <span class="op">=</span> <span class="st">&#39;Kevin&#39;</span>)
+
+(Jim Williams)
+(Lester Burnham)
+</code></pre></div>
+</div>
+<div id="exercice-3-base-base_triangles.db" class="slide section level1">
+<h1>Exercice 3 Base : <code>base_triangles.db</code></h1>
+<p>Exo 3 : Nombre total de triangles</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">
+SELECT COUNT(<span class="op">*</span>) FROM triangles
+
+(<span class="dv">100000</span>)</code></pre></div>
+<p>Exo 3 : Tous les triangles dont le périmètre est 100</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">
+SELECT <span class="op">*</span> FROM triangles WHERE ab<span class="op">+</span>ac<span class="op">+</span>bc<span class="op">=</span><span class="dv">100</span>
+
+(<span class="dv">471</span>, <span class="dv">47</span>, <span class="dv">50</span>, <span class="dv">3</span>)
+(<span class="dv">607</span>, <span class="dv">35</span>, <span class="dv">32</span>, <span class="dv">33</span>)
+... (<span class="dv">226</span> de plus)</code></pre></div>
+<p>Exo 3 : Tous les produits des cotes des triangles de périmètre &gt;= 100</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">
+SELECT ab<span class="op">*</span>ac<span class="op">*</span>bc FROM triangles WHERE ab<span class="op">+</span>ac<span class="op">+</span>bc<span class="op">&gt;=</span><span class="dv">100</span>
+
+(<span class="dv">12187500</span>)
+(<span class="dv">50150</span>)
+... (<span class="dv">91627</span> de plus)</code></pre></div>
+<p>Exo 3 : Insertion d'une ligne supplémentaire</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">
+INSERT INTO triangles VALUES (<span class="dv">100001</span>,<span class="dv">1</span>, <span class="dv">99</span>, <span class="dv">1</span>)
+</code></pre></div>
+<p>Exo 3 : Insertion d'une ligne supplémentaire</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">
+INSERT INTO triangles VALUES (<span class="dv">100002</span>,<span class="dv">99</span>, <span class="dv">1</span>, <span class="dv">1</span>)
+</code></pre></div>
+<p>Exo 3 : Tous les triangles équilatéraux</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">
+SELECT <span class="op">*</span> FROM triangles WHERE ab <span class="op">=</span> ac AND ab <span class="op">=</span> bc
+
+(<span class="dv">15</span>, <span class="dv">31</span>, <span class="dv">31</span>, <span class="dv">31</span>)
+(<span class="dv">2045</span>, <span class="dv">6</span>, <span class="dv">6</span>, <span class="dv">6</span>)
+... (<span class="dv">17</span> de plus)</code></pre></div>
+<p>Exo 3 : Tous les triangles rectangles en A</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">
+SELECT  <span class="op">*</span> FROM triangles  WHERE bc<span class="op">*</span>bc<span class="op">=</span>ab<span class="op">*</span>ab<span class="op">+</span>ac<span class="op">*</span>ac
+
+(<span class="dv">0</span>, <span class="dv">125</span>, <span class="dv">325</span>, <span class="dv">300</span>)
+(<span class="dv">127</span>, <span class="dv">70</span>, <span class="dv">74</span>, <span class="dv">24</span>)
+... (<span class="dv">64</span> de plus)</code></pre></div>
+<p>Exo 3 : Le nombre de triangles rectangles en A</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">
+SELECT  COUNT(<span class="op">*</span>)  FROM triangles  WHERE bc<span class="op">*</span>bc<span class="op">=</span>ab<span class="op">*</span>ab<span class="op">+</span>ac<span class="op">*</span>ac
+
+(<span class="dv">66</span>)</code></pre></div>
+<p>Exo 3 : Le maximum des périmètres des triangles rectangles en A</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">
+SELECT MAX(ab<span class="op">+</span>bc<span class="op">+</span>ac) FROM triangles  WHERE bc<span class="op">*</span>bc<span class="op">=</span>ab<span class="op">*</span>ab<span class="op">+</span>ac<span class="op">*</span>ac
+
+(<span class="dv">1400</span>)</code></pre></div>
+<p>Exo 3 : La plus petite valeur des produits AB.AC.BC, pour les triangles ABC de périmètre supérieur ou égal à 100</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">
+SELECT MIN(ab<span class="op">*</span>bc<span class="op">*</span>ac) FROM triangles  WHERE  ab<span class="op">+</span>ac<span class="op">+</span>bc<span class="op">&gt;=</span><span class="dv">100</span>
+
+(<span class="dv">2450</span>)</code></pre></div>
+<p>Exo 3 : Les longueurs correspondants au(x) triangle(s) pour le(s)quel(s) le minimum précédent est atteint</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">
+SELECT ab,ac,bc ,ab<span class="op">*</span>ac<span class="op">*</span>bc AS produit FROM triangles 
+    WHERE  ab<span class="op">+</span>ac<span class="op">+</span>bc<span class="op">&gt;=</span><span class="dv">100</span>  AND ab<span class="op">*</span>ac<span class="op">*</span>bc<span class="op">=</span>(
+        SELECT  MIN(ab<span class="op">*</span>ac<span class="op">*</span>bc)    FROM triangles
+            WHERE ab<span class="op">+</span>ac<span class="op">+</span>bc<span class="op">&gt;=</span><span class="dv">100</span>
+        )
+
+(<span class="dv">50</span>, <span class="dv">1</span>, <span class="dv">49</span>, <span class="dv">2450</span>)</code></pre></div>
+<p>Exo 3 : Ensemble des triangles plats</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">
+SELECT <span class="op">*</span> FROM triangles WHERE ab<span class="op">+</span>ac<span class="op">=</span>bc OR ab<span class="op">+</span>bc<span class="op">=</span>ac OR ac<span class="op">+</span>bc<span class="op">=</span>ab
+
+(<span class="dv">20</span>, <span class="dv">16</span>, <span class="dv">55</span>, <span class="dv">39</span>)
+(<span class="dv">38</span>, <span class="dv">45</span>, <span class="dv">97</span>, <span class="dv">52</span>)
+... (<span class="dv">2877</span> de plus)</code></pre></div>
+<p>Exo 3 : Suppression des lignes insérées en 2)</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">
+DELETE FROM triangles WHERE idt <span class="op">&gt;</span> <span class="dv">100000</span>
+</code></pre></div>
+</div>
+<div id="exercice-4-base-base_triangles.db" class="slide section level1">
+<h1>Exercice 4 Base : <code>base_triangles.db</code></h1>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">
+<span class="im">import</span> sqlite3
+base <span class="op">=</span> sqlite3.<span class="ex">connect</span>(<span class="st">&#39;base_triangles.db&#39;</span>)
+curseur <span class="op">=</span> base.cursor()
+res <span class="op">=</span> curseur.execute(<span class="st">&quot;&quot;&quot;SELECT * FROM triangles WHERE ab+bc+ac=100&quot;&quot;&quot;</span>)
+foo <span class="op">=</span> res.fetchall()
+curseur.close()
+base.close()
+<span class="bu">print</span>(<span class="st">&#39;res=&#39;</span>,res,end<span class="op">=</span><span class="st">&#39;</span><span class="ch">\n\n</span><span class="st">&#39;</span>)
+<span class="bu">print</span>(<span class="st">&#39;foo=&#39;</span>,foo,end<span class="op">=</span><span class="st">&#39;</span><span class="ch">\n\n</span><span class="st">&#39;</span>)
+<span class="bu">print</span>(<span class="bu">len</span>(foo),end<span class="op">=</span><span class="st">&#39;</span><span class="ch">\n\n</span><span class="st">&#39;</span>)
+
+<span class="co">&quot;&quot;&quot;</span>
+<span class="co">res= &lt;sqlite3.Cursor object at 0xb44a09e0&gt;</span>
+
+<span class="co">foo= [(24, 51, 12, 37), ..., (99955, 24, 72, 4)]</span>
+
+<span class="co">474</span>
+<span class="co">&quot;&quot;&quot;</span></code></pre></div>
+</div>
+<div id="exercice-5-base-communes-regions-departements.db" class="slide section level1">
+<h1>Exercice 5 Base : <code>communes-regions-departements.db</code></h1>
+<p>Exo 5 : Jointure entre les tables communes et departements</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">
+SELECT c.nom, d.nom
+FROM communes AS c JOIN departements AS d 
+ON c.dep <span class="op">=</span> d.<span class="bu">id</span>
+
+(L<span class="st">&#39;Abergement-Clémenciat, Ain)</span>
+<span class="st">(L&#39;</span>Abergement<span class="op">-</span>de<span class="op">-</span>Varey, Ain)
+... (<span class="dv">36703</span> de plus)</code></pre></div>
+<p>Exo 5 : Liste de toutes les communes avec pour chacune, son département, sa région et sa population</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">
+SELECT  c.nom, d.nom, r.nom, c.pop
+FROM  communes  AS c JOIN departements AS d JOIN regions AS r
+ON c.dep<span class="op">=</span>d.<span class="bu">id</span> AND d.reg<span class="op">=</span>r.<span class="bu">id</span>
+
+
+(L<span class="st">&#39;Abergement-Clémenciat, Ain, Rhône-Alpes, 784)</span>
+<span class="st">(L&#39;</span>Abergement<span class="op">-</span>de<span class="op">-</span>Varey, Ain, Rhône<span class="op">-</span>Alpes, <span class="dv">221</span>)
+... (<span class="dv">36703</span> de plus)</code></pre></div>
+<p>Exo 5 : Liste des villes de plus de 100000 habitants, ainsi que leur population et leur région</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">
+SELECT  c.nom, r.nom, c.pop
+FROM  communes  AS c JOIN departements AS d JOIN regions AS r
+ON c.dep<span class="op">=</span>d.<span class="bu">id</span> AND d.reg<span class="op">=</span>r.<span class="bu">id</span>
+WHERE c.pop <span class="op">&gt;=</span> <span class="dv">100000</span>
+ORDER BY c.pop DESC
+
+(Paris, Île<span class="op">-</span>de<span class="op">-</span>France, <span class="dv">2243833</span>)
+(Marseille, Provence<span class="op">-</span>Alpes<span class="op">-</span>Côte d<span class="st">&#39;Azur, 850726)</span>
+<span class="st">... (39 de plus)</span></code></pre></div>
+<p>Exo 5 : Liste des communes (nom et population) dont le nom commence par 'Pa' et se finit par 'is'</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">
+SELECT  c.nom, r.nom, c.pop
+FROM  communes  AS c JOIN departements AS d JOIN regions AS r
+ON c.dep<span class="op">=</span>d.<span class="bu">id</span> AND d.reg<span class="op">=</span>r.<span class="bu">id</span>
+WHERE c.nom LIKE <span class="st">&#39;Pa</span><span class="sc">%i</span><span class="st">s&#39;</span>
+
+(Pargny<span class="op">-</span>les<span class="op">-</span>Bois, Picardie, <span class="dv">136</span>)
+(Passy<span class="op">-</span>en<span class="op">-</span>Valois, Picardie, <span class="dv">164</span>)
+... (<span class="dv">4</span> de plus)</code></pre></div>
+<p>Exo 5 : Liste des communes qui ont strictement plus de lettres dans leur nom que leur nombre d'habitants</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">
+SELECT  nom, pop FROM communes WHERE  LENGTH(nom )<span class="op">&gt;</span>pop
+
+(Majastres, <span class="dv">2</span>)
+(Saint<span class="op">-</span>Martin<span class="op">-</span>lès<span class="op">-</span>Seyne, <span class="dv">18</span>)
+... (<span class="dv">52</span> de plus)</code></pre></div>
+</div>
+<div id="exercice-6-base-cinema843.db" class="slide section level1">
+<h1>Exercice 6 Base : <code>cinema843.db</code></h1>
+<p>Exo 6 : Quels sont les titres des films réalisés par Lars von Trier ?</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">
+SELECT film.titre FROM film 
+    JOIN personne
+        ON personne.idp <span class="op">=</span> film.idr
+            WHERE personne.nom <span class="op">=</span> <span class="st">&#39;von Trier&#39;</span> AND personne.prenom <span class="op">=</span> <span class="st">&#39;Lars&#39;</span>
+
+(Breaking the waves)
+(Dogville)</code></pre></div>
+<p>Exo 6 : Quels sont les titres des films où Kevin Spacey a joué ?</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">
+SELECT film.titre FROM personne 
+    JOIN jouer ON personne.idp <span class="op">=</span> jouer.ida 
+        JOIN film ON jouer.idf <span class="op">=</span> film.idf
+        WHERE personne.prenom <span class="op">=</span> <span class="st">&#39;Kevin&#39;</span> AND personne.nom <span class="op">=</span> <span class="st">&#39;Spacey&#39;</span>
+
+(Minuit dans le jardin du bien et du mal)
+(American Beauty)</code></pre></div>
+<p>Exo 6 : Quels sont les drames que l'on a pu voir après le 1er janvier 2002 ?</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">
+SELECT film.titre, film.genre, projection.jour
+    FROM film JOIN projection
+        ON film.idf <span class="op">=</span> projection.idf
+            WHERE film.genre <span class="op">=</span> <span class="st">&#39;Drame&#39;</span>
+                AND projection.jour <span class="op">&gt;=</span> <span class="st">&#39;2002-01-01&#39;</span>
+
+(Dogville, Drame, <span class="dv">2002-05-01</span>)
+(Dogville, Drame, <span class="dv">2002-05-02</span>)
+... (<span class="dv">2</span> de plus)</code></pre></div>
+<p>Exo 6 : Quels sont les noms et prénoms des personnes qui sont des acteurs ? Ordonner la liste par ordre alphabétique croissant des noms.</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">
+SELECT DISTINCT personne.nom, personne.prenom
+    FROM personne JOIN jouer
+        ON personne.idp <span class="op">=</span> jouer.ida     
+            ORDER BY personne.nom
+
+(Arquette, Rosanna)
+(Bettany, Paul)
+... (<span class="dv">12</span> de plus)
+</code></pre></div>
+<p>Exo 6 : Quels sont les noms et prénoms des personnes qui sont des réalisateurs ?</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">
+SELECT DISTINCT personne.nom, personne.prenom
+    FROM personne JOIN film
+        ON personne.idp <span class="op">=</span> film.idr
+
+(Wayne, John)
+(von Trier, Lars)
+... (<span class="dv">5</span> de plus)</code></pre></div>
+<p>Exo 6 : Quels sont les noms et prénoms des personnes qui sont à la fois des acteurs et des réalisateurs ?</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">
+SELECT DISTINCT personne.nom, personne.prenom
+    FROM personne JOIN jouer
+        ON personne.idp <span class="op">=</span> jouer.ida     
+INTERSECT
+SELECT DISTINCT personne.nom, personne.prenom
+    FROM personne JOIN film
+        ON personne.idp <span class="op">=</span> film.idr
+
+
+(Eastwood, Clint)
+</code></pre></div>
+<p>Exo 6 : Quels sont les noms et prénoms des acteurs qui ne sont pas des réalisateurs ?</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">
+SELECT DISTINCT personne.nom, personne.prenom
+    FROM personne JOIN jouer
+        ON personne.idp <span class="op">=</span> jouer.ida     
+EXCEPT
+SELECT DISTINCT personne.nom, personne.prenom
+    FROM personne JOIN film
+        ON personne.idp <span class="op">=</span> film.idr
+
+(Arquette, Rosanna)
+(Bettany, Paul)
+... (<span class="dv">11</span> de plus)</code></pre></div>
+<p>Exo 6 : Noms et prénoms des réalisateurs qui ont réalisé des films policier.</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">
+SELECT DISTINCT personne.nom, personne.prenom
+    FROM personne JOIN film
+        ON personne.idp <span class="op">=</span> film.idr
+            WHERE genre <span class="op">=</span> <span class="st">&#39;Policier&#39;</span>
+
+(Tarantino, Quentin)
+(Eastwood, Clint)</code></pre></div>
+<p>Exo 6 : Noms et prénoms des réalisateurs qui ont réalisé des films policier et des films dramatiques.</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">
+SELECT DISTINCT personne.nom, personne.prenom
+    FROM personne JOIN film
+        ON personne.idp <span class="op">=</span> film.idr
+            WHERE genre <span class="op">=</span> <span class="st">&#39;Policier&#39;</span>
+INTERSECT
+SELECT DISTINCT personne.nom, personne.prenom
+    FROM personne JOIN film
+        ON personne.idp <span class="op">=</span> film.idr
+            WHERE genre <span class="op">=</span> <span class="st">&#39;Drame&#39;</span>
+
+(Eastwood, Clint)</code></pre></div>
+<p>Exo 6 : Liste de toutes les interprétations possibles en précisant le nom et le prénom de l'acteur ainsi que le role et le titre du film</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">
+SELECT personne.nom, personne.prenom, film.titre, jouer.role
+    FROM personne JOIN jouer ON personne.idp <span class="op">=</span> jouer.ida
+        JOIN film ON jouer.idf <span class="op">=</span> film.idf
+            ORDER BY personne.nom DESC
+
+(Willis, Bruce, Pulp Fiction, Butch Coolidge)
+(Watson, Emily, Breaking the waves, Bess)
+... (<span class="dv">14</span> de plus)</code></pre></div>
+<p>Exo 6 : Titres des films réalisés par David Cronenberg qui ont été projetés au cinéma UGC</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">
+SELECT film.titre, personne.nom, personne.prenom, cinema.nom, projection.jour
+    FROM personne JOIN film ON personne.idp <span class="op">=</span> film.idr
+            JOIN projection ON film.idf <span class="op">=</span> projection.idf
+                JOIN cinema ON projection.idc <span class="op">=</span> cinema.idc
+                    WHERE personne.nom <span class="op">=</span> <span class="st">&#39;Cronenberg&#39;</span>
+                        AND personne.prenom <span class="op">=</span> <span class="st">&#39;David&#39;</span>
+                            AND cinema.nom <span class="op">=</span> <span class="st">&#39;UGC&#39;</span>
+
+(Faux<span class="op">-</span>Semblants, Cronenberg, David, UGC, <span class="dv">1990-12-08</span>)
+(Crash, Cronenberg, David, UGC, <span class="dv">1997-05-11</span>)</code></pre></div>
+<p>Exo 6 : Acteurs qui ont joué dans des films projetés au cinéma UGC depuis l'an 2000</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">
+SELECT  DISTINCT personne.nom, personne.prenom
+    FROM personne JOIN jouer JOIN film JOIN projection JOIN cinema
+        ON personne.idp <span class="op">=</span> jouer.ida AND jouer.idf <span class="op">=</span> film.idf
+        AND film.idf <span class="op">=</span> projection.idc AND projection.idc <span class="op">=</span> cinema.idc
+            WHERE  projection.jour <span class="op">&gt;=</span> <span class="st">&#39;2000-01-01&#39;</span> 
+            AND cinema.nom <span class="op">=</span> <span class="st">&#39;UGC&#39;</span>
+
+(Irons, Jeremy)</code></pre></div>
+<p>Exo 6 : Titres des films où Stellan Skarsgard a joué un role et qui ont été projetés au cinéma UGC</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">
+SELECT DISTINCT film.titre, personne.nom, personne.prenom
+    FROM personne JOIN jouer ON personne.idp <span class="op">=</span> jouer.ida
+        JOIN film ON jouer.idf <span class="op">=</span> film.idf
+            JOIN projection ON jouer.idf <span class="op">=</span> projection.idf
+                JOIN cinema ON projection.idc <span class="op">=</span> cinema.idc 
+                    WHERE personne.nom <span class="op">=</span> <span class="st">&#39;Skarsgard&#39;</span>
+                        AND personne.prenom <span class="op">=</span> <span class="st">&#39;Stellan&#39;</span>
+                            AND cinema.nom <span class="op">=</span> <span class="st">&#39;UGC&#39;</span>
+                                ORDER BY film.titre
+
+(Breaking the waves, Skarsgard, Stellan)
+(Dogville, Skarsgard, Stellan)</code></pre></div>
+</div>
+</body>
+</html>
