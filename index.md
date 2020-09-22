@@ -31,9 +31,10 @@ Sujets réalisés par Stéphane Gonnord/Laurent Jouhet/Frédéric Junier/Stépha
 
 ## Plateformes d'entraînement
 
+[![Prologin](prologin.jpg "logo prologin")](https://prologin.org/)
+
 * Entraînez-vous à résoudre des problèmes d'algorithmique sur les sites suivants :
   - [Concours Prologin](https://prologin.org/train/) 
-    [![Prologin](prologin.jpg "logo prologin")](https://prologin.org/)
   - [France IOI](http://www.france-ioi.org/)
   - [Codin Game](https://www.codingame.com) : l'inscription est libre, une orientation plus ludique mais attention ce  site comporte des publicités.
 
