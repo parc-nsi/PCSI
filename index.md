@@ -5,15 +5,37 @@ Documents et ressources TP d'Informatique pour tous en PCSI au lycée du Parc an
 Professeur référent : Laurent Jouhet
 Sujets réalisés par Stéphane Gonnord/Laurent Jouhet/Frédéric Junier/Stéphane Chenevois
 
-## Conférence de Judicael Courant : "Une brève histoire des langages de programmation"
+## Ressources
+
+### Langages et programmation
+
+* Conférence de Judicael Courant : "Une brève histoire des langages de programmation"
 
 [Captation vidéo de la conférence](https://tube.ac-lyon.fr/videos/watch/2f7065e3-13c7-432c-80cc-94e769d38272)
 
-## Concours Prologin 
+* [Conférence de Gérard Berry sur l'importance des langages en informatique (à partie de la minute 12)](https://www.college-de-france.fr/site/gerard-berry/course-2015-11-04-16h00.htm)
+
+### Ordinateur et calcul
+
+* Conférence de Gérard Berry : "Penser, modéliser et maîtriser le calcul informatique"
+
+    [Captation vidéo de la conférence](https://www.college-de-france.fr/site/gerard-berry/inaugural-lecture-2009-11-19-18h00.htm)
+    
+### Informatique et simulation
+    
+* [Conférence de Gérard Berry sur la révolution informatique dans les sciences](https://www.college-de-france.fr/site/gerard-berry/course-2015-01-28-16h00.htm)
+
+> "Qu'est-ce que la simulation ? La simulation c'est remplacer l'énergie et la matière par de l'information".
+
+
+
+## Plateformes d'entraînement
 
 * Entraînez-vous à résoudre des problèmes d'algorithmique sur les sites suivants :
-  - [Concours Prologin](https://prologin.org/train/)
+  - [Concours Prologin](https://prologin.org/train/) 
+    [![Prologin](prologin.jpg "logo prologin")](https://prologin.org/)
   - [France IOI](http://www.france-ioi.org/)
+  - [Codin Game](https://www.codingame.com) : l'inscription est libre, une orientation plus ludique mais attention ce  site comporte des publicités.
 
 ## Ressources Python :
 
@@ -37,6 +59,7 @@ Sujets réalisés par Stéphane Gonnord/Laurent Jouhet/Frédéric Junier/Stépha
   - [corrigé pdf](TP-01-02/I1-TP-01-02-Introduction-corrige.pdf)
   - [corrigé python](TP-01-02/I1-TP-01-02-Introduction-corrige.py)
 
+<!--
 * TP3 :
   - [énoncé](TP3/sujet/I1-TP-03-Boucles-sujet.pdf)
   - [corrigé HTML](TP3/corrige/I1-TP-03-Boucles-corrige.html)
@@ -120,4 +143,8 @@ Sujets réalisés par Stéphane Gonnord/Laurent Jouhet/Frédéric Junier/Stépha
   - [Animation schémas d'intégration de $y'=y ; y(0)=1$ sur (0;1)](TP12/ressources/schemas-0-1.mp4)
   - [Animation schémas d'intégration de $y'=y ; y(0)=1$ sur (0;4)](TP12/ressources/schemas-0-4.mp4)
   - [Jupyter Notebook avec schémas numériques](https://mybinder.org/v2/gh/frederic-junier/PCSI/master?filepath=TP12/ressources/Schema_Numerique_2020.ipynb)
+  
+* TP BDD 1 : 
+  * [Énoncé et corrigé](https://codi-lyon.beta.education.fr/s/GdHWcZ8ik#)
+  -->
   
