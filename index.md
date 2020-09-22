@@ -37,6 +37,7 @@ Sujets réalisés par Stéphane Gonnord/Laurent Jouhet/Frédéric Junier/Stépha
   - [corrigé pdf](TP-01-02/I1-TP-01-02-Introduction-corrige.pdf)
   - [corrigé python](TP-01-02/I1-TP-01-02-Introduction-corrige.py)
 
+<!--
 * TP3 :
   - [énoncé](TP3/sujet/I1-TP-03-Boucles-sujet.pdf)
   - [corrigé HTML](TP3/corrige/I1-TP-03-Boucles-corrige.html)
@@ -123,4 +124,5 @@ Sujets réalisés par Stéphane Gonnord/Laurent Jouhet/Frédéric Junier/Stépha
   
 * TP BDD 1 : 
   * [Énoncé et corrigé](https://codi-lyon.beta.education.fr/s/GdHWcZ8ik#)
+  -->
   
