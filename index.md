@@ -5,7 +5,7 @@ Documents et ressources TP d'Informatique pour tous en PCSI au lycée du Parc an
 Professeur référent : Laurent Jouhet
 Sujets réalisés par Stéphane Gonnord/Laurent Jouhet/Frédéric Junier/Stéphane Chenevois
 
-## Ressources
+## Culture informatique
 
 ### Langages et programmation
 
