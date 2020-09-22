@@ -5,9 +5,29 @@ Documents et ressources TP d'Informatique pour tous en PCSI au lycée du Parc an
 Professeur référent : Laurent Jouhet
 Sujets réalisés par Stéphane Gonnord/Laurent Jouhet/Frédéric Junier/Stéphane Chenevois
 
-## Conférence de Judicael Courant : "Une brève histoire des langages de programmation"
+## Ressources
+
+### Langages et programmation
+
+* Conférence de Judicael Courant : "Une brève histoire des langages de programmation"
 
 [Captation vidéo de la conférence](https://tube.ac-lyon.fr/videos/watch/2f7065e3-13c7-432c-80cc-94e769d38272)
+
+* [Conférence de Gérard Berry sur l'importance des langages en informatique (à partie de la minute 12)](https://www.college-de-france.fr/site/gerard-berry/course-2015-11-04-16h00.htm)
+
+### Ordinateur et calcul
+
+* Conférence de Gérard Berry : "Penser, modéliser et maîtriser le calcul informatique"
+
+    [Captation vidéo de la conférence](https://www.college-de-france.fr/site/gerard-berry/inaugural-lecture-2009-11-19-18h00.htm)
+    
+### Informatique et simulation
+    
+* [Conférence de Gérard Berry sur la révolution informatique dans les sciences](https://www.college-de-france.fr/site/gerard-berry/course-2015-01-28-16h00.htm)
+
+> "Qu'est-ce que la simulation ? La simulation c'est remplacer l'énergie et la matière par de l'information".
+
+
 
 ## Concours Prologin 
 
