@@ -65,7 +65,7 @@ Sujets réalisés par Stéphane Gonnord/Laurent Jouhet/Frédéric Junier/Stépha
       * Corrigé : <https://genumsi.inria.fr/qcm-corrige.php?cle=MTg7MTExOzEzNTsxMjE7MTM4MjsxMzgz>
     * QCM bilan sur les constructions élémentaires (affectations, tests, boucles) :
         * Énoncé : <https://genumsi.inria.fr/qcm.php?h=74f0a61998145ab12b8d2824c13d1e1a>
-    * Corrigé : <https://genumsi.inria.fr/qcm-corrige.php?cle=MTg7MTk7MjM7MjQ7MjU7MjY7Mjc7NDQ7NDU7NDY7NTQ7MTIxOzEzNjsxNDA7MTgyOzIxMjszNjY7MzgzOzM4NDszODU=>
+        * Corrigé : <https://genumsi.inria.fr/qcm-corrige.php?cle=MTg7MTk7MjM7MjQ7MjU7MjY7Mjc7NDQ7NDU7NDY7NTQ7MTIxOzEzNjsxNDA7MTgyOzIxMjszNjY7MzgzOzM4NDszODU=>
 
 <!--
 * TP3 :
