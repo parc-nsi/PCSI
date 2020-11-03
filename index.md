@@ -67,13 +67,15 @@ Sujets réalisés par Stéphane Gonnord/Laurent Jouhet/Frédéric Junier/Stépha
         * Énoncé : <https://genumsi.inria.fr/qcm.php?h=74f0a61998145ab12b8d2824c13d1e1a>
         * Corrigé : <https://genumsi.inria.fr/qcm-corrige.php?cle=MTg7MTk7MjM7MjQ7MjU7MjY7Mjc7NDQ7NDU7NDY7NTQ7MTIxOzEzNjsxNDA7MTgyOzIxMjszNjY7MzgzOzM4NDszODU=>
 
-<!--
 * TP3 :
   - [énoncé](TP3/sujet/I1-TP-03-Boucles-sujet.pdf)
+  - [fichier cadeau](TP3/sujet/cadeau_tp_boucles)
   - [corrigé HTML](TP3/corrige/I1-TP-03-Boucles-corrige.html)
   - [corrigé pdf](TP3/corrige/I1-TP-03-Boucles-corrige.pdf)
   - [corrigé python](TP3/corrige/I1-TP-03-Boucles-corrige.py)
 
+
+<!--
 * TP4 :
   - [énoncé](TP4/sujet/I1-TP-04-Fonctions-Suites-sujet.pdf)
   - [corrigé HTML](TP4/corrige/I1-TP-04-Fonctions-Suites-corrige.html)
