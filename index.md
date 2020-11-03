@@ -69,7 +69,7 @@ Sujets réalisés par Stéphane Gonnord/Laurent Jouhet/Frédéric Junier/Stépha
 
 * TP3 :
   - [énoncé](TP3/sujet/I1-TP-03-Boucles-sujet.pdf)
-  - [fichier cadeau](TP3/sujet/cadeau_tp_boucles)
+  - [fichier cadeau](TP3/sujet/cadeau_tp_boucles.py)
   - [corrigé HTML](TP3/corrige/I1-TP-03-Boucles-corrige.html)
   - [corrigé pdf](TP3/corrige/I1-TP-03-Boucles-corrige.pdf)
   - [corrigé python](TP3/corrige/I1-TP-03-Boucles-corrige.py)
