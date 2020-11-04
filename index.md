@@ -51,6 +51,7 @@ Sujets réalisés par Stéphane Gonnord/Laurent Jouhet/Frédéric Junier/Stépha
 * Interpréteurs en ligne :
   - [repl.it](https://repl.it/languages/python3)  => nécessite de se créer un compte
   - [basthon](https://python.infobrisson.fr/) => très bien car on peut téléverser un script, télécharger ou partager en lien et sans créer de compte !
+  - [basthon version notebook](https://notebook.basthon.fr/) => comme basthon mais pour les notebook jupyter !
   - [Pythontutor](http://pythontutor.com/)  => indispensable, permet de visualiser l'évolution des variables
 
 
