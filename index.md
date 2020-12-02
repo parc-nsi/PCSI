@@ -99,7 +99,7 @@ Sujets réalisés par Stéphane Gonnord/Laurent Jouhet/Frédéric Junier/Stépha
     *  Énoncé : <https://genumsi.inria.fr/qcm.php?h=66f6a8ff3099844f78f411bd489183ba>
     *  Corrigé : <https://genumsi.inria.fr/qcm-corrige.php?cle=MTE4OzExOTsxNDE7MTQ3OzIxNzsyNjY7Mjc2OzMwMjszMDY7MzIzOzMyNTszMjY7NDMxOzQzMjs0MzM7NDM0OzQzNTs0MzY7NDM3OzQ0MDsxMzc2>
   
- <!--
+<!--
 * TP6 :
   - [énoncé](TP6/sujet/I1-TP-06-Recherche-Cribles-sujet.pdf)
   - [corrigé HTML](TP6/corrige/I1-TP-06-Recherche-Cribles-corrige.html)
