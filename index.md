@@ -99,7 +99,7 @@ Sujets réalisés par Stéphane Gonnord/Laurent Jouhet/Frédéric Junier/Stépha
         *  Énoncé : <https://genumsi.inria.fr/qcm.php?h=66f6a8ff3099844f78f411bd489183ba>
         *  Corrigé : <https://genumsi.inria.fr/qcm-corrige.php?cle=MTE4OzExOTsxNDE7MTQ3OzIxNzsyNjY7Mjc2OzMwMjszMDY7MzIzOzMyNTszMjY7NDMxOzQzMjs0MzM7NDM0OzQzNTs0MzY7NDM3OzQ0MDsxMzc2>
   
-<!--
+
 * TP6 :
   - [énoncé](TP6/sujet/I1-TP-06-Recherche-Cribles-sujet.pdf)
   - [corrigé HTML](TP6/corrige/I1-TP-06-Recherche-Cribles-corrige.html)
@@ -108,6 +108,8 @@ Sujets réalisés par Stéphane Gonnord/Laurent Jouhet/Frédéric Junier/Stépha
   - [fichier cadeau](TP6/eleves/cadeau_06.py)
   - [exercice Tas de Graine  du Castor Informatique 2017](https://concours.castor-informatique.fr/index.php?team=castor2017)
   
+  
+<!--
 * TP7 :
   - [énoncé](TP7/sujet/I1-TP-07-Fichiers-Matplotlib-sujet.pdf)
   - [corrigé HTML](TP7/corrige/I1-TP-07-Fichiers-Matplotlib-corrige.html)
