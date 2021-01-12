@@ -106,10 +106,10 @@ Sujets réalisés par Stéphane Gonnord/Laurent Jouhet/Frédéric Junier/Stépha
   - [corrigé pdf](TP6/corrige/I1-TP-06-Recherche-Cribles-corrige.pdf)
   - [corrigé python](TP6/corrige/I1-TP-06-Recherche-Cribles-corrige.py)
   - [fichier cadeau](TP6/eleves/cadeau_06.py)
+  - Visualisation de la recherche de motif dans une chaîne :   <http://whocouldthat.be/visualizing-string-matching/>
   - [exercice Tas de Graine  du Castor Informatique 2017](https://concours.castor-informatique.fr/index.php?team=castor2017)
   
-  
-<!--
+
 * TP7 :
   - [énoncé](TP7/sujet/I1-TP-07-Fichiers-Matplotlib-sujet.pdf)
   - [corrigé HTML](TP7/corrige/I1-TP-07-Fichiers-Matplotlib-corrige.html)
@@ -118,46 +118,39 @@ Sujets réalisés par Stéphane Gonnord/Laurent Jouhet/Frédéric Junier/Stépha
   - [cadeau.py](TP7/eleves/cadeau.py)
   - [archive des ressources](TP7/eleves/ressources.zip)
   
+  
+<!--
 * TP  Révisions :
   - [énoncé](TP-revisions/sujet/I1-TP-Revisions-Janvier3-sujet.pdf)
   - [corrigé HTML](TP-revisions/corrige/I1-TP-Revisions-Janvier3-corrige.html)
   - [corrigé pdf](TP-revisions/corrige/I1-TP-Revisions-Janvier3-corrige.pdf)
   - [corrigé python](TP-revisions/corrige/I1-TP-Revisions-Janvier3-corrige.py)
-  - [cadeau.py](TP-revisions/ressources/cadeau.py)
-
-
-  
+  - [cadeau.py](TP-revisions/ressources/cadeau.py)  
 * TP 8 :
   - [énoncé](TP8/sujet/I1-TP-08-Dichotomie-Newton-sujet.pdf)
   - [corrigé version markdown HTML](TP8/corrige/I1-TP-08-Dichotomie-Newton-corrige-git.md)
   - [corrigé version pdf](TP8/corrige/I1-TP-08-Dichotomie-Newton-corrige-.pdf)
   - [corrigé version diaporama HTML](TP8/corrige/I1-TP-08-Dichotomie-Newton-corrige-slidy.html)
-  - [corrigé version python](TP8/corrige/I1-TP-08-Dichotomie-Newton-corrige.py)
-  
-  
+  - [corrigé version python](TP8/corrige/I1-TP-08-Dichotomie-Newton-corrige.py)  
 * TP 9 :
   - [énoncé](TP9/sujet/I1-TP-09-Integration-Euler-sujet.pdf)
   - [corrigé version pdf](TP9/corrige/I1-TP-09-Integration-Euler-corrige.pdf) 
   - [corrigé version diaporama HTML](TP9/corrige/I1-TP-09-Integration-Euler-corrige.html)
-  - [corrigé version python](TP9/corrige/I1-TP-09-Integration-Euler-corrige.py)
-  
-  
+  - [corrigé version python](TP9/corrige/I1-TP-09-Integration-Euler-corrige.py)  
 * TP 10:
   - [QCM sur les listes/tableau](https://genumsi.inria.fr/qcm.php?h=7b8eb974bcf4e7349c793267fdf5b6b4) et [corrigé du QCM](https://genumsi.inria.fr/qcm-corrige.php?cle=MTUwOzE5NzsyODE7MzAzOzMwNzszMzk7Mzk5OzQyNjszNzk=), merci au site [Genumsi](https://genumsi.inria.fr/)
   - [énoncé](TP10/sujet/I1-TP-10-Listes_de_Listes-sujet.pdf)
   - [ressources](TP10/ressources)
   - [corrigé version pdf](TP10/corrige/I1-TP-10-Listes_de_Listes-corrige.pdf)
   - [corrigé version diaporama HTML](TP10/corrige/I1-TP-10-Listes_de_Listes-corrige.html)
-  - [corrigé version python](TP10/corrige/I1-TP-10-Listes_de_Listes-corrige.py)
-  
+  - [corrigé version python](TP10/corrige/I1-TP-10-Listes_de_Listes-corrige.py)  
 * TP 11:
   - [énoncé](TP11/sujet/I1-TP-11-Gauss-sujet.pdf)
   - [corrigé version pdf](TP11/corrige/I1-TP-11-Gauss-corrige.pdf)
   - [corrigé version diaporama HTML](TP11/corrige/I1-TP-11-Gauss-corrige.html)
   - [corrigé version python](TP11/corrige/I1-TP-11-Gauss-corrige.py)
   - [énoncé simplifié](TP11/gauss-simple.pdf)
-  - [corrigé énoncé simplifié](TP11/TP_Gauss_Simple.html)
-  
+  - [corrigé énoncé simplifié](TP11/TP_Gauss_Simple.html)  
 * TP 12:
   - [énoncé](TP12/sujet/I1-TP-12-Euler-Rk4-sujet.pdf)
   - [corrigé version pdf](TP12/corrige/I1-TP-12-Euler-Rk4-corrige.pdf)
@@ -165,8 +158,7 @@ Sujets réalisés par Stéphane Gonnord/Laurent Jouhet/Frédéric Junier/Stépha
   - [corrigé version python](TP12/corrige/I1-TP-12-Euler-Rk4-corrige.py)
   - [Animation schémas d'intégration de $y'=y ; y(0)=1$ sur (0;1)](TP12/ressources/schemas-0-1.mp4)
   - [Animation schémas d'intégration de $y'=y ; y(0)=1$ sur (0;4)](TP12/ressources/schemas-0-4.mp4)
-  - [Jupyter Notebook avec schémas numériques](https://mybinder.org/v2/gh/frederic-junier/PCSI/master?filepath=TP12/ressources/Schema_Numerique_2020.ipynb)
-  
+  - [Jupyter Notebook avec schémas numériques](https://mybinder.org/v2/gh/frederic-junier/PCSI/master?filepath=TP12/ressources/Schema_Numerique_2020.ipynb)  
 * TP BDD 1 : 
   * [Énoncé et corrigé](https://codi-lyon.beta.education.fr/s/GdHWcZ8ik#)
   -->
