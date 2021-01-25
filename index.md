@@ -119,13 +119,14 @@ Sujets réalisés par Stéphane Gonnord/Laurent Jouhet/Frédéric Junier/Stépha
   - [archive des ressources](TP7/eleves/ressources.zip)
   
   
-<!--
+
 * TP  Révisions :
   - [énoncé](TP-revisions/sujet/I1-TP-Revisions-Janvier3-sujet.pdf)
   - [corrigé HTML](TP-revisions/corrige/I1-TP-Revisions-Janvier3-corrige.html)
   - [corrigé pdf](TP-revisions/corrige/I1-TP-Revisions-Janvier3-corrige.pdf)
   - [corrigé python](TP-revisions/corrige/I1-TP-Revisions-Janvier3-corrige.py)
   - [cadeau.py](TP-revisions/ressources/cadeau.py)  
+ <!--
 * TP 8 :
   - [énoncé](TP8/sujet/I1-TP-08-Dichotomie-Newton-sujet.pdf)
   - [corrigé version markdown HTML](TP8/corrige/I1-TP-08-Dichotomie-Newton-corrige-git.md)
