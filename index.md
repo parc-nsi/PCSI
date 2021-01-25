@@ -126,13 +126,15 @@ Sujets réalisés par Stéphane Gonnord/Laurent Jouhet/Frédéric Junier/Stépha
   - [corrigé pdf](TP-revisions/corrige/I1-TP-Revisions-Janvier3-corrige.pdf)
   - [corrigé python](TP-revisions/corrige/I1-TP-Revisions-Janvier3-corrige.py)
   - [cadeau.py](TP-revisions/ressources/cadeau.py)  
- <!--
+
 * TP 8 :
   - [énoncé](TP8/sujet/I1-TP-08-Dichotomie-Newton-sujet.pdf)
   - [corrigé version markdown HTML](TP8/corrige/I1-TP-08-Dichotomie-Newton-corrige-git.md)
   - [corrigé version pdf](TP8/corrige/I1-TP-08-Dichotomie-Newton-corrige-.pdf)
   - [corrigé version diaporama HTML](TP8/corrige/I1-TP-08-Dichotomie-Newton-corrige-slidy.html)
   - [corrigé version python](TP8/corrige/I1-TP-08-Dichotomie-Newton-corrige.py)  
+  
+ <!--
 * TP 9 :
   - [énoncé](TP9/sujet/I1-TP-09-Integration-Euler-sujet.pdf)
   - [corrigé version pdf](TP9/corrige/I1-TP-09-Integration-Euler-corrige.pdf) 
