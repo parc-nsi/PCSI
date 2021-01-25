@@ -128,6 +128,7 @@ Sujets réalisés par Stéphane Gonnord/Laurent Jouhet/Frédéric Junier/Stépha
   - [cadeau.py](TP-revisions/ressources/cadeau.py)  
 
 * TP 8 :
+  - Question : On choisit un nombre entier (par exemple 14, ou 25, etc.). On le décompose en somme de plusieurs entiers, par exemple 14 = 5+9 ou 14 = 3+7+4 (et bien d’autres) et on fait le produit de ces nombres, ici 5 × 9 = 45, 3 × 7 x 4 = 84. Ecrire en Python une fonction qui pour un entier n renvoie  le plus grand produit parmi toutes les décompositions de n.
   - [énoncé](TP8/sujet/I1-TP-08-Dichotomie-Newton-sujet.pdf)
   - [corrigé version markdown HTML](TP8/corrige/I1-TP-08-Dichotomie-Newton-corrige-git.md)
   - [corrigé version pdf](TP8/corrige/I1-TP-08-Dichotomie-Newton-corrige-.pdf)
