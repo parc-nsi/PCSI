@@ -140,13 +140,14 @@ Sujets réalisés par Stéphane Gonnord/Laurent Jouhet/Frédéric Junier/Stépha
   - [énoncé](TP9/sujet/I1-TP-09-Integration-Euler-sujet.pdf)
   - [corrigé version pdf](TP9/corrige/I1-TP-09-Integration-Euler-corrige.pdf) 
   - [corrigé version diaporama HTML](TP9/corrige/I1-TP-09-Integration-Euler-corrige.html)
-  - [corrigé version python](TP9/corrige/I1-TP-09-Integration-Euler-corrige.py)  
+  - [corrigé version python](TP9/corrige/I1-TP-09-Integration-Euler-corrige.py) 
+  - [Schéma d'Euler : animation Python](TP9/ressources/euler-approximation-exponentielle.mp4) 
   - Vidéos de l'EPFL : 
         - [Schéma d'Euler progressif](https://youtu.be/sqytArbVQuA?list=PLf6uhfdo14rFAXf8Ixab_tMOlrfTdLRTZ)
         - [Schéma d'Euler rétrograde](https://youtu.be/dyu013m2A4E?list=PLf6uhfdo14rFAXf8Ixab_tMOlrfTdLRTZ)
         - [Stabilité des schémas d'Euler](https://youtu.be/ENcFvy7-wfQ?list=PLf6uhfdo14rFAXf8Ixab_tMOlrfTdLRTZ)
 
-   ![Schéma d'Euler](TP9/schema_euler_progressif.png)
+   ![Schéma d'Euler](TP9/ressources/schema_euler_progressif.png)
 
  <!--
 * TP 10:
