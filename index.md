@@ -148,6 +148,8 @@ Sujets réalisés par Stéphane Gonnord/Laurent Jouhet/Frédéric Junier/Stépha
         - [Stabilité des schémas d'Euler](https://youtu.be/ENcFvy7-wfQ?list=PLf6uhfdo14rFAXf8Ixab_tMOlrfTdLRTZ)
 
    ![Schéma d'Euler](TP9/ressources/schema_euler_progressif.png)
+   
+   ![Schéma d'Euler](TP9/ressources/stabilité_schéma_euler.png)
 
  <!--
 * TP 10:
