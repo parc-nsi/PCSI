@@ -146,6 +146,8 @@ Sujets réalisés par Stéphane Gonnord/Laurent Jouhet/Frédéric Junier/Stépha
         - [Schéma d'Euler rétrograde](https://youtu.be/dyu013m2A4E?list=PLf6uhfdo14rFAXf8Ixab_tMOlrfTdLRTZ)
         - [Stabilité des schémas d'Euler](https://youtu.be/ENcFvy7-wfQ?list=PLf6uhfdo14rFAXf8Ixab_tMOlrfTdLRTZ)
 
+   ![Schéma d'Euler](TP9/schema_euler_progressif.png)
+
  <!--
 * TP 10:
   - [QCM sur les listes/tableau](https://genumsi.inria.fr/qcm.php?h=7b8eb974bcf4e7349c793267fdf5b6b4) et [corrigé du QCM](https://genumsi.inria.fr/qcm-corrige.php?cle=MTUwOzE5NzsyODE7MzAzOzMwNzszMzk7Mzk5OzQyNjszNzk=), merci au site [Genumsi](https://genumsi.inria.fr/)
