@@ -151,7 +151,6 @@ Sujets réalisés par Stéphane Gonnord/Laurent Jouhet/Frédéric Junier/Stépha
    
    ![Schéma d'Euler](TP9/ressources/stabilité_schéma_euler.png)
 
- <!--
 * TP 10:
   - [QCM sur les listes/tableau](https://genumsi.inria.fr/qcm.php?h=7b8eb974bcf4e7349c793267fdf5b6b4) et [corrigé du QCM](https://genumsi.inria.fr/qcm-corrige.php?cle=MTUwOzE5NzsyODE7MzAzOzMwNzszMzk7Mzk5OzQyNjszNzk=), merci au site [Genumsi](https://genumsi.inria.fr/)
   - [énoncé](TP10/sujet/I1-TP-10-Listes_de_Listes-sujet.pdf)
@@ -159,6 +158,9 @@ Sujets réalisés par Stéphane Gonnord/Laurent Jouhet/Frédéric Junier/Stépha
   - [corrigé version pdf](TP10/corrige/I1-TP-10-Listes_de_Listes-corrige.pdf)
   - [corrigé version diaporama HTML](TP10/corrige/I1-TP-10-Listes_de_Listes-corrige.html)
   - [corrigé version python](TP10/corrige/I1-TP-10-Listes_de_Listes-corrige.py)  
+
+
+<!--
 * TP 11:
   - [énoncé](TP11/sujet/I1-TP-11-Gauss-sujet.pdf)
   - [corrigé version pdf](TP11/corrige/I1-TP-11-Gauss-corrige.pdf)
