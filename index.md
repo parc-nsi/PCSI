@@ -163,6 +163,7 @@ Sujets réalisés par Stéphane Gonnord/Laurent Jouhet/Frédéric Junier/Stépha
 
 * TP 11:
   - [énoncé](TP11/sujet/I1-TP-11-Gauss-sujet.pdf)
+  - [cadeau.py](TP11/sujet/cadeau.py)
   - [corrigé version pdf](TP11/corrige/I1-TP-11-Gauss-corrige.pdf)
   - [corrigé version diaporama HTML](TP11/corrige/I1-TP-11-Gauss-corrige.html)
   - [corrigé version python](TP11/corrige/I1-TP-11-Gauss-corrige.py)
